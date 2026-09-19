@@ -1,0 +1,140 @@
+{
+  "_index": "wazuh-alerts-4.x-2026.04.29",
+  "_id": "nYvz2J0BZfDcH36mwE7j",
+  "_version": 1,
+  "_score": null,
+  "_source": {
+    "input": {
+      "type": "log"
+    },
+    "agent": {
+      "ip": "10.0.2.8",
+      "name": "wazuhagent",
+      "id": "002"
+    },
+    "manager": {
+      "name": "wazuhserver"
+    },
+    "data": {
+      "metadata": {},
+      "tx_id": "1",
+      "app_proto": "http",
+      "ip_v": "4",
+      "in_iface": "enp0s3",
+      "src_ip": "10.0.2.9",
+      "src_port": "59078",
+      "event_type": "alert",
+      "alert": {
+        "severity": "3",
+        "signature_id": "2029098",
+        "rev": "1",
+        "metadata": {
+          "affected_product": [
+            "Windows_XP_Vista_7_8_10_Server_32_64_Bit"
+          ],
+          "attack_target": [
+            "Client_Endpoint"
+          ],
+          "updated_at": [
+            "2019_12_06"
+          ],
+          "confidence": [
+            "High"
+          ],
+          "created_at": [
+            "2019_12_06"
+          ],
+          "tag": [
+            "Description_Generated_By_Proofpoint_Nexus"
+          ],
+          "signature_severity": [
+            "Minor"
+          ],
+          "deployment": [
+            "Perimeter"
+          ]
+        },
+        "gid": "1",
+        "signature": "ET ADWARE_PUP PrivaZer Checkin",
+        "action": "allowed",
+        "category": "Potentially Unwanted Program"
+      },
+      "ts_progress": "request_complete",
+      "flow_id": "1030200659692776.000000",
+      "dest_ip": "203.0.113.50",
+      "proto": "TCP",
+      "http": {
+        "hostname": "update.privazer.com",
+        "protocol": "HTTP/1.1",
+        "http_method": "GET",
+        "http_content_type": "text/html",
+        "length": "250",
+        "url": "/hcheck_updates.php?country=VN&discret=1",
+        "http_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) PrivaZer/4.0",
+        "status": "200"
+      },
+      "tc_progress": "response_complete",
+      "dest_port": "80",
+      "pkt_src": "wire/pcap",
+      "flow": {
+        "src_ip": "10.0.2.9",
+        "src_port": "59078",
+        "pkts_toserver": "6",
+        "dest_ip": "203.0.113.50",
+        "start": "2026-04-29T18:15:39.633078+0700",
+        "bytes_toclient": "4109",
+        "bytes_toserver": "1415",
+        "pkts_toclient": "6",
+        "dest_port": "80"
+      },
+      "timestamp": "2026-04-29T18:15:41.639391+0700",
+      "direction": "to_server"
+    },
+    "rule": {
+      "firedtimes": 1,
+      "mail": false,
+      "level": 5,
+      "description": "Suricata: Alert - ET ADWARE_PUP PrivaZer Checkin",
+      "groups": [
+        "suricata",
+        "adware",
+        "pup"
+      ],
+      "mitre": {
+        "technique": [
+          "Web Protocols"
+        ],
+        "id": [
+          "T1071.001"
+        ],
+        "tactic": [
+          "Command and Control"
+        ]
+      },
+      "id": "100301"
+    },
+    "location": "/var/log/suricata/eve.json",
+    "decoder": {
+      "name": "json"
+    },
+    "id": "1777461342.87990",
+    "full_log": "{\"timestamp\":\"2026-04-29T18:15:41.639391+0700\",\"flow_id\":1030200659692776,\"in_iface\":\"enp0s3\",\"event_type\":\"alert\",\"src_ip\":\"10.0.2.9\",\"src_port\":59078,\"dest_ip\":\"203.0.113.50\",\"dest_port\":80,\"proto\":\"TCP\",\"ip_v\":4,\"pkt_src\":\"wire/pcap\",\"tx_id\":1,\"alert\":{\"action\":\"allowed\",\"gid\":1,\"signature_id\":2029098,\"rev\":1,\"signature\":\"ET ADWARE_PUP PrivaZer Checkin\",\"category\":\"Potentially Unwanted Program\",\"severity\":3,\"metadata\":{\"affected_product\":[\"Windows_XP_Vista_7_8_10_Server_32_64_Bit\"],\"attack_target\":[\"Client_Endpoint\"],\"confidence\":[\"High\"],\"created_at\":[\"2019_12_06\"],\"deployment\":[\"Perimeter\"],\"signature_severity\":[\"Minor\"],\"tag\":[\"Description_Generated_By_Proofpoint_Nexus\"],\"updated_at\":[\"2019_12_06\"]}},\"ts_progress\":\"request_complete\",\"tc_progress\":\"response_complete\",\"http\":{\"hostname\":\"update.privazer.com\",\"url\":\"/hcheck_updates.php?country=VN&discret=1\",\"http_user_agent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) PrivaZer/4.0\",\"http_content_type\":\"text/html\",\"http_method\":\"GET\",\"protocol\":\"HTTP/1.1\",\"status\":200,\"length\":250},\"app_proto\":\"http\",\"direction\":\"to_server\",\"flow\":{\"pkts_toserver\":6,\"pkts_toclient\":6,\"bytes_toserver\":1415,\"bytes_toclient\":4109,\"start\":\"2026-04-29T18:15:39.633078+0700\",\"src_ip\":\"10.0.2.9\",\"dest_ip\":\"203.0.113.50\",\"src_port\":59078,\"dest_port\":80}}",
+    "timestamp": "2026-04-29T11:15:42.612+0000"
+  },
+  "fields": {
+    "timestamp": [
+      "2026-04-29T11:15:42.612Z"
+    ],
+    "data.timestamp": [
+      "2026-04-29T11:15:41.639Z"
+    ]
+  },
+  "highlight": {
+    "agent.id": [
+      "@opensearch-dashboards-highlighted-field@002@/opensearch-dashboards-highlighted-field@"
+    ]
+  },
+  "sort": [
+    1777461342612
+  ]
+}

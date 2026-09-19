@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.soc/schemas/normalized_alert.schema.json",
+  "title": "Normalized IDS alert",
+  "type": "object",
+  "required": ["schema_version", "producer", "event", "derived"],
+  "properties": {
+    "producer": {
+      "type": "object",
+      "required": ["rule_name"],
+      "properties": {"rule_name": {"type": "string", "minLength": 1}}
+    },
+    "event": {"type": "object"},
+    "derived": {
+      "type": "object",
+      "required": ["retrieval_text", "renderer_version"],
+      "properties": {
+        "retrieval_text": {"type": "string", "minLength": 1},
+        "renderer_version": {"type": "string", "minLength": 1}
+      }
+    }
+  },
+  "additionalProperties": true
+}

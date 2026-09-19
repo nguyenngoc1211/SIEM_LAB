@@ -1,0 +1,42 @@
+# Local assistant/tooling state
+.agents/
+.codex/
+
+# Secrets and local environment files
+**/.env
+**/.env.*
+!**/.env.example
+!**/.env.production.example
+!**/*-integration.env.example
+
+# Runtime data and downloaded models
+data/n8n/
+data/qdrant/
+data/tei/
+soc-lab-handoff-v1.0.0/runtime/
+soc-lab-handoff-v1.0.0/temp_Notion/
+
+# Upstream checkout; project-specific overrides are kept in wazuh-custom/
+wazuh-docker/
+
+# Python, logs, databases, backups, and credentials
+**/__pycache__/
+*.py[cod]
+*.log
+*.sqlite
+*.sqlite3
+*.db
+*.backup
+*.backup.*
+*.bak
+*.pem
+*.key
+*.p12
+*.pfx
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+

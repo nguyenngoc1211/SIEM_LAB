@@ -1,0 +1,90 @@
+[
+  {
+    "normalized_alert": {
+      "schema_version": "1.0",
+      "alert_id": "1786460523.27106",
+      "event_time": "2026-08-11T15:02:02.213800+0000",
+      "producer": {
+        "type": "nids",
+        "name": "suricata",
+        "rule_id": "2024364",
+        "rule_name": "ET SCAN Possible Nmap User-Agent Observed"
+      },
+      "data_source": {
+        "category": "application",
+        "subcategory": "network_ids"
+      },
+      "event": {
+        "type": "application_attack",
+        "action": "inject_web_input",
+        "outcome": "unknown",
+        "disposition": "allowed"
+      },
+      "source": {
+        "type": "host",
+        "ip": "172.19.0.4",
+        "port": 52966,
+        "hostname": null,
+        "user": null,
+        "process": null
+      },
+      "target": {
+        "type": "application",
+        "ip": "172.19.0.3",
+        "port": 3000,
+        "hostname": "soc_gateway",
+        "resource": "/"
+      },
+      "severity": {
+        "source_value": "1",
+        "source_scale": "suricata",
+        "normalized": 0
+      },
+      "network": {
+        "transport_protocol": "tcp",
+        "application_protocol": "http",
+        "direction": "to_server",
+        "flow_id": "829365042804492.000000",
+        "interface": "eth0",
+        "packet_source": "wire/pcap",
+        "packets_to_target": 4,
+        "packets_to_source": 3,
+        "bytes_to_target": 502,
+        "bytes_to_source": 440,
+        "flow_start": "2026-08-11T15:02:02.193101+0000"
+      },
+      "http": {
+        "method": "OPTIONS",
+        "scheme": "http",
+        "version": "HTTP/1.1",
+        "host": "soc_gateway",
+        "path": "/",
+        "query": null,
+        "query_decoded": null,
+        "status_code": 204,
+        "content_type": null,
+        "user_agent": "Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)",
+        "referrer": null,
+        "response_length": 0,
+        "request_complete": false,
+        "response_complete": false
+      },
+      "derived": {
+        "retrieval_text": "rule ET SCAN Possible Nmap User-Agent Observed data source application network ids event application attack action inject web input outcome unknown disposition allowed target application target hostname soc gateway target port 3000 target resource / http method OPTIONS http path / http status 204 protocol http direction to server",
+        "renderer_version": "n8n-wazuh-suricata-1.0",
+        "external_hints": {
+          "wazuh_mitre": null,
+          "wazuh_alert_tags": [],
+          "wazuh_rule_groups": [
+            "ids",
+            "suricata"
+          ]
+        }
+      },
+      "raw_reference": {
+        "source_system": "wazuh-opensearch",
+        "raw_event_id": "1786460523.27106"
+      }
+    }
+  }
+]

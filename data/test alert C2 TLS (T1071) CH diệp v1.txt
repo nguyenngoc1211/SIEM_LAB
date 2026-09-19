@@ -1,0 +1,102 @@
+[
+  {
+    "normalized_alert": {
+      "schema_version": "1.0",
+      "alert_id": "1777461184.75529",
+      "event_time": "2026-04-29T18:13:04.487841+0700",
+      "producer": {
+        "type": "nids",
+        "name": "suricata",
+        "rule_id": "2031399",
+        "rule_name": "ET MALWARE Observed AridViper CnC Domain in TLS SNI"
+      },
+      "data_source": {
+        "category": "network_traffic",
+        "subcategory": "network_ids"
+      },
+      "event": {
+        "type": "network_activity",
+        "action": "network_alert",
+        "outcome": "unknown",
+        "disposition": "allowed"
+      },
+      "source": {
+        "type": "host",
+        "ip": "10.0.2.9",
+        "port": 54182,
+        "hostname": null,
+        "user": null,
+        "process": null
+      },
+      "target": {
+        "type": "host",
+        "ip": "10.0.2.10",
+        "port": 443,
+        "hostname": null,
+        "resource": null
+      },
+      "severity": {
+        "source_value": "2",
+        "source_scale": "suricata",
+        "normalized": 3
+      },
+      "network": {
+        "transport_protocol": "tcp",
+        "application_protocol": "tls",
+        "direction": "to_server",
+        "flow_id": "13126018128749.000000",
+        "interface": "enp0s3",
+        "packet_source": "wire/pcap",
+        "packets_to_target": 4,
+        "packets_to_source": 4,
+        "bytes_to_target": 894,
+        "bytes_to_source": 2118,
+        "flow_start": "2026-04-29T18:13:04.461808+0700"
+      },
+      "http": {
+        "method": null,
+        "scheme": "http",
+        "version": null,
+        "host": null,
+        "path": null,
+        "query": null,
+        "query_decoded": null,
+        "status_code": null,
+        "content_type": null,
+        "user_agent": null,
+        "referrer": null,
+        "response_length": null,
+        "request_complete": true,
+        "response_complete": true
+      },
+      "derived": {
+        "retrieval_text": "rule ET MALWARE Observed AridViper CnC Domain in TLS SNI data source network traffic network ids event network activity action network alert outcome unknown disposition allowed target host target port 443 protocol tls direction to server",
+        "renderer_version": "n8n-wazuh-suricata-1.0",
+        "external_hints": {
+          "wazuh_mitre": {
+            "technique": [
+              "Application Layer Protocol"
+            ],
+            "id": [
+              "T1071"
+            ],
+            "tactic": [
+              "Command And Control"
+            ]
+          },
+          "wazuh_alert_tags": [],
+          "wazuh_rule_groups": [
+            "suricata",
+            "malware",
+            "c2_communication",
+            "critical_alerts"
+          ]
+        }
+      },
+      "raw_reference": {
+        "source_system": "wazuh-opensearch",
+        "raw_event_id": "1777461184.75529"
+      }
+    }
+  }
+]

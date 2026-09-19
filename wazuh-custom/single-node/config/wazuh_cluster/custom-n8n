@@ -1,0 +1,3 @@
+#!/bin/sh
+# Wazuh invokes custom integrations as: <alert_file> <api_key> <hook_url>
+exec /var/ossec/framework/python/bin/python3 /var/ossec/integrations/custom-n8n.py "$@"

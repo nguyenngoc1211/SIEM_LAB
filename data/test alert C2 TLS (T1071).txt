@@ -1,0 +1,151 @@
+{
+  "_index": "wazuh-alerts-4.x-2026.04.29",
+  "_id": "lovx2J0BZfDcH36mY05K",
+  "_version": 1,
+  "_score": null,
+  "_source": {
+    "input": {
+      "type": "log"
+    },
+    "agent": {
+      "ip": "10.0.2.8",
+      "name": "wazuhagent",
+      "id": "002"
+    },
+    "manager": {
+      "name": "wazuhserver"
+    },
+    "data": {
+      "tx_id": "0",
+      "app_proto": "tls",
+      "ip_v": "4",
+      "in_iface": "enp0s3",
+      "src_ip": "10.0.2.9",
+      "src_port": "54182",
+      "event_type": "alert",
+      "alert": {
+        "severity": "2",
+        "signature_id": "2031399",
+        "rev": "3",
+        "metadata": {
+          "mitre_tactic_id": [
+            "TA0011"
+          ],
+          "affected_product": [
+            "Windows_XP_Vista_7_8_10_Server_32_64_Bit"
+          ],
+          "attack_target": [
+            "Client_Endpoint"
+          ],
+          "updated_at": [
+            "2024_04_13"
+          ],
+          "confidence": [
+            "High"
+          ],
+          "created_at": [
+            "2020_12_16"
+          ],
+          "mitre_technique_id": [
+            "T1071"
+          ],
+          "mitre_technique_name": [
+            "Application_Layer_Protocol"
+          ],
+          "mitre_tactic_name": [
+            "Command_And_Control"
+          ],
+          "signature_severity": [
+            "Major"
+          ],
+          "deployment": [
+            "Perimeter"
+          ]
+        },
+        "gid": "1",
+        "signature": "ET MALWARE Observed AridViper CnC Domain in TLS SNI",
+        "action": "allowed",
+        "category": "Domain C2"
+      },
+      "ts_progress": "request_complete",
+      "flow_id": "13126018128749.000000",
+      "dest_ip": "10.0.2.10",
+      "proto": "TCP",
+      "tls": {
+        "sni": "baldwin-gonzalez.live",
+        "version": "TLSv1.3",
+        "subject": "CN=baldwin-gonzalez.live",
+        "issuerdn": "CN=Let's Encrypt Authority X3, O=Let's Encrypt, C=US"
+      },
+      "tc_progress": "response_complete",
+      "dest_port": "443",
+      "pkt_src": "wire/pcap",
+      "flow": {
+        "src_ip": "10.0.2.9",
+        "src_port": "54182",
+        "pkts_toserver": "4",
+        "dest_ip": "10.0.2.10",
+        "start": "2026-04-29T18:13:04.461808+0700",
+        "bytes_toclient": "2118",
+        "bytes_toserver": "894",
+        "pkts_toclient": "4",
+        "dest_port": "443"
+      },
+      "timestamp": "2026-04-29T18:13:04.487841+0700",
+      "direction": "to_server"
+    },
+    "rule": {
+      "firedtimes": 1,
+      "mail": true,
+      "level": 12,
+      "pci_dss": [
+        "11.4"
+      ],
+      "description": "CRITICAL: Malware C2 Connection Detected - Suricata: Alert - ET MALWARE Observed AridViper CnC Domain in TLS SNI",
+      "groups": [
+        "suricata",
+        "malware",
+        "c2_communication",
+        "critical_alerts"
+      ],
+      "mitre": {
+        "technique": [
+          "Application Layer Protocol"
+        ],
+        "id": [
+          "T1071"
+        ],
+        "tactic": [
+          "Command And Control"
+        ]
+      },
+      "id": "100401",
+      "gdpr": [
+        "IV_35.7.d"
+      ]
+    },
+    "location": "/var/log/suricata/eve.json",
+    "decoder": {
+      "name": "json"
+    },
+    "id": "1777461184.75529",
+    "full_log": "{\"timestamp\":\"2026-04-29T18:13:04.487841+0700\",\"flow_id\":13126018128749,\"in_iface\":\"enp0s3\",\"event_type\":\"alert\",\"src_ip\":\"10.0.2.9\",\"src_port\":54182,\"dest_ip\":\"10.0.2.10\",\"dest_port\":443,\"proto\":\"TCP\",\"ip_v\":4,\"pkt_src\":\"wire/pcap\",\"tx_id\":0,\"alert\":{\"action\":\"allowed\",\"gid\":1,\"signature_id\":2031399,\"rev\":3,\"signature\":\"ET MALWARE Observed AridViper CnC Domain in TLS SNI\",\"category\":\"Domain C2\",\"severity\":1,\"metadata\":{\"affected_product\":[\"Windows_XP_Vista_7_8_10_Server_32_64_Bit\"],\"attack_target\":[\"Client_Endpoint\"],\"confidence\":[\"High\"],\"created_at\":[\"2020_12_16\"],\"deployment\":[\"Perimeter\"],\"mitre_tactic_id\":[\"TA0011\"],\"mitre_tactic_name\":[\"Command_And_Control\"],\"mitre_technique_id\":[\"T1071\"],\"mitre_technique_name\":[\"Application_Layer_Protocol\"],\"signature_severity\":[\"Major\"],\"updated_at\":[\"2024_04_13\"]}},\"ts_progress\":\"request_complete\",\"tc_progress\":\"response_complete\",\"tls\":{\"sni\":\"baldwin-gonzalez.live\",\"version\":\"TLSv1.3\",\"subject\":\"CN=baldwin-gonzalez.live\",\"issuerdn\":\"CN=Let's Encrypt Authority X3, O=Let's Encrypt, C=US\"},\"app_proto\":\"tls\",\"direction\":\"to_server\",\"flow\":{\"pkts_toserver\":4,\"pkts_toclient\":4,\"bytes_toserver\":894,\"bytes_toclient\":2118,\"start\":\"2026-04-29T18:13:04.461808+0700\",\"src_ip\":\"10.0.2.9\",\"dest_ip\":\"10.0.2.10\",\"src_port\":54182,\"dest_port\":443}}",
+    "timestamp": "2026-04-29T11:13:04.777+0000"
+  },
+  "fields": {
+    "timestamp": [
+      "2026-04-29T11:13:04.777Z"
+    ],
+    "data.timestamp": [
+      "2026-04-29T11:13:04.487Z"
+    ]
+  },
+  "highlight": {
+    "agent.id": [
+      "@opensearch-dashboards-highlighted-field@002@/opensearch-dashboards-highlighted-field@"
+    ]
+  },
+  "sort": [
+    1777461184777
+  ]
+}

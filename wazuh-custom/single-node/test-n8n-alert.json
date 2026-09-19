@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-08-13T02:30:00.000+0000",
+  "rule": {
+    "level": 5,
+    "description": "SOC integration test: repeated failed login attempts",
+    "id": "100099",
+    "groups": ["authentication_failed", "soc_integration_test"]
+  },
+  "agent": {
+    "id": "000",
+    "name": "wazuh-manager"
+  },
+  "manager": {
+    "name": "wazuh-manager"
+  },
+  "data": {
+    "srcip": "192.0.2.10",
+    "dstip": "192.0.2.20",
+    "srcport": "49152",
+    "dstport": "22",
+    "protocol": "ssh",
+    "action": "failed-login"
+  },
+  "location": "soc-integration-test"
+}

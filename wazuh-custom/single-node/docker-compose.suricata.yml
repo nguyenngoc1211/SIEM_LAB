@@ -1,0 +1,14 @@
+services:
+  wazuh.manager:
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/suricata-logs"
+        target: /var/log/suricata
+        read_only: true
+
+  wazuh.indexer:
+    restart: unless-stopped
+
+  wazuh.dashboard:
+    restart: unless-stopped

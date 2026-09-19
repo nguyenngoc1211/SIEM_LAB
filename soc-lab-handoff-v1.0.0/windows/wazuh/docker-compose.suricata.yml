@@ -1,0 +1,14 @@
+services:
+  wazuh.manager:
+    restart: unless-stopped
+    volumes:
+      - type: bind
+        source: ${SOC_SURICATA_LOGS}
+        target: /var/log/suricata
+        read_only: true
+
+  wazuh.indexer:
+    restart: unless-stopped
+
+  wazuh.dashboard:
+    restart: unless-stopped

@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "alert_id": "1777461184.75529",
+  "event_time": "2026-04-29T18:13:04.487841+07:00",
+
+  "producer": {
+    "type": "nids",
+    "name": "Suricata",
+    "rule_id": "2006446",
+    "rule_name": "ET WEB_SERVER Possible SQL Injection Attempt UNION SELECT in HTTP URI"
+  },
+
+  "data_source": {
+    "category": "network_traffic",
+    "subcategory": "http"
+  },
+
+  "event": {
+    "type": "web_attack",
+    "action": "sql_injection",
+    "outcome": "unknown",
+    "disposition": "allowed"
+  },
+
+  "source": {
+    "type": "host",
+    "ip": "10.0.2.9",
+    "port": 54182,
+    "hostname": null,
+    "user": null,
+    "process": null
+  },
+
+  "target": {
+    "type": "application",
+    "ip": "10.0.2.10",
+    "port": 80,
+    "hostname": "10.0.2.10",
+    "resource": "/DVWA/vulnerabilities/sqli/"
+  },
+
+  "severity": {
+    "source_value": 2,
+    "source_scale": "suricata_alert_severity",
+    "normalized": 3
+  },
+
+  "network": {
+    "transport_protocol": "tcp",
+    "application_protocol": "http",
+    "direction": "to_server",
+    "flow_id": "13126018128749.000000",
+    "ip_version": 4,
+    "interface": "enp0s3",
+    "packet_source": "wire",
+    "packets_to_target": 4,
+    "packets_to_source": 4,
+    "bytes_to_target": 894,
+    "bytes_to_source": 2118,
+    "flow_start": "2026-04-29T18:13:04.461808+07:00"
+  },
+
+  "http": {
+    "method": "GET",
+    "scheme": "http",
+    "version": "HTTP/1.1",
+    "host": "10.0.2.10",
+    "path": "/DVWA/vulnerabilities/sqli/",
+    "query": "id=%27+UNION+SELECT+%22Hello%22%2C%22Hello+Again%22%3B--+-&Submit=Submit",
+    "status_code": 200,
+    "content_type": "text/html",
+    "user_agent": "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0",
+    "referrer": "http://10.0.2.10/DVWA/vulnerabilities/sqli/?id=+%27+UNION+SELECT+%22Hello%22%2C%22Hello+Again%22%3B--+-&Submit=Submit",
+    "forwarded_for": null,
+    "response_length": 1494,
+    "transaction_id": "0",
+    "request_complete": true,
+    "response_complete": true
+  },
+
+  "derived": {
+    "retrieval_text": "IDS rule: ET WEB_SERVER Possible SQL Injection Attempt UNION SELECT in HTTP URI.\nEvent type: web attack.\nAction: SQL injection.\nOutcome: unknown.\nDisposition: allow.\nData source: network_ids.\nTarget type: web application.\nProtocol: HTTP.\nHTTP method: GET.\nHTTP path: /DVWA/vulnerabilities/sqli/.\nHTTP status: 200.\nAttack pattern: one source IP sends a UNION SELECT SQL injection payload to a web application.",
+    "renderer_version": "retrieval-text-renderer-1.0"
+  },
+
+  "raw_reference": {
+    "source_system": "wazuh",
+    "raw_event_id": "1777461184.75529"
+  }
+}

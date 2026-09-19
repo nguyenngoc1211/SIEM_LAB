@@ -1,0 +1,110 @@
+{
+  "T1046": {
+    "behavioral_indicators": [
+      "internal host or service enumeration after an adversary has gained access",
+      "port and service probes across hosts inside the victim environment",
+      "lateral network scanning used to identify reachable systems and services",
+      "Nmap or another scanner enumerating open ports from an internal source"
+    ],
+    "retrieval_keywords": [
+      "network service discovery",
+      "internal port scan",
+      "internal service scan",
+      "lateral scan",
+      "post-compromise scanning",
+      "service enumeration",
+      "open port discovery",
+      "nmap internal network"
+    ],
+    "required_evidence": [],
+    "positive_evidence": [
+      {
+        "rule_id": "T1046-POS-001",
+        "field": "event.type",
+        "operator": "equals",
+        "value": "network_scan",
+        "weight": 0.4,
+        "reason": "The normalized event is a network scan.",
+        "source": "manual_override"
+      },
+      {
+        "rule_id": "T1046-POS-002",
+        "field": "network.direction",
+        "operator": "equals",
+        "value": "lateral",
+        "weight": 0.4,
+        "reason": "Lateral traffic supports post-compromise discovery.",
+        "source": "manual_override"
+      },
+      {
+        "rule_id": "T1046-POS-003",
+        "field": "event.action",
+        "operator": "in",
+        "value": ["scan", "probe", "discover"],
+        "weight": 0.2,
+        "reason": "The action represents active service enumeration.",
+        "source": "manual_override"
+      },
+      {
+        "rule_id": "T1046-POS-004",
+        "field": "producer.rule_name",
+        "operator": "contains_any",
+        "value": [
+          "internal port scan",
+          "internal service discovery",
+          "lateral service scan",
+          "post-compromise scanning",
+          "network service discovery"
+        ],
+        "weight": 0.4,
+        "reason": "Rule-name terminology explicitly supports this technique, but signature text and tool names are positive evidence rather than a required gate.",
+        "source": "manual_override"
+      }
+    ],
+    "negative_evidence": [
+      {
+        "rule_id": "T1046-NEG-001",
+        "field": "network.direction",
+        "operator": "equals",
+        "value": "inbound",
+        "weight": -0.4,
+        "reason": "Inbound pre-compromise scanning is more consistent with T1595.",
+        "source": "manual_override"
+      },
+      {
+        "rule_id": "T1046-NEG-002",
+        "field": "producer.rule_name",
+        "operator": "contains_any",
+        "value": ["external scan", "active reconnaissance", "suspicious inbound traffic"],
+        "weight": -0.4,
+        "reason": "The signature frames the activity as external reconnaissance.",
+        "source": "manual_override"
+      }
+    ],
+    "exclusion_indicators": [
+      {
+        "rule_id": "T1046-EXC-001",
+        "field": "event.type",
+        "operator": "in",
+        "value": ["authentication", "data_transfer"],
+        "reason": "This event type does not establish service discovery.",
+        "source": "manual_override"
+      }
+    ],
+    "confusable_techniques": [
+      {
+        "technique_id": "T1595",
+        "name": "Active Scanning",
+        "hard_negative": true,
+        "distinction": {
+          "current_technique_when": ["The scan is internal, lateral, or explicitly post-compromise."],
+          "other_technique_when": ["The scan is inbound external reconnaissance before access."]
+        }
+      }
+    ],
+    "retrieval_text": "Technique: T1046 Network Service Discovery. Internal or lateral port and service enumeration after access. Detect internal port scans, service probes, Nmap activity, and post-compromise discovery. Distinguish from T1595 Active Scanning, which is inbound pre-compromise reconnaissance."
+  },
+  "T1595": {
+    "required_evidence": []
+  }
+}

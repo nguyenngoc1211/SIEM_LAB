@@ -1,0 +1,6 @@
+<!-- Chèn block này bên trong phần tử <ossec_config> của Wazuh manager. -->
+<localfile>
+  <log_format>json</log_format>
+  <location>/var/log/suricata/eve.json</location>
+  <label key="integration">suricata-soc-lab</label>
+</localfile>

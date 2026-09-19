@@ -1,0 +1,8 @@
+admin@example.com
+root@example.com
+test@example.com
+demo@example.com
+manager@example.com
+support@example.com
+security@example.com
+dev@example.com

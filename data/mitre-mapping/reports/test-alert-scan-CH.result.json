@@ -1,0 +1,260 @@
+{
+  "mapping_status": "mapped",
+  "primary_mapping": {
+    "technique_id": "T1595",
+    "name": "Active Scanning",
+    "confidence": 0.980645
+  },
+  "supporting_evidence": [
+    {
+      "rule_id": "T1595-REQ-001",
+      "field": "producer.rule_name",
+      "value": "ET SCAN Suspicious inbound traffic",
+      "weight": 1.0,
+      "reason": "The IDS signature explicitly identifies reconnaissance-oriented active scanning."
+    },
+    {
+      "rule_id": "T1595-POS-001",
+      "field": "data_source.category",
+      "value": "network_traffic",
+      "weight": 0.1,
+      "reason": "Active scanning is directly observable through network traffic in the current NIDS-only project."
+    },
+    {
+      "rule_id": "T1595-POS-002",
+      "field": "event.action",
+      "value": "scan",
+      "weight": 0.6,
+      "reason": "The alert describes an active interaction used to probe victim infrastructure."
+    },
+    {
+      "rule_id": "T1595-POS-003",
+      "field": "event.type",
+      "value": "network_scan",
+      "weight": 0.6,
+      "reason": "The normalized alert must represent active scanning rather than an unrelated network event."
+    },
+    {
+      "rule_id": "T1595-POS-005",
+      "field": "target.type",
+      "value": "service",
+      "weight": 0.1,
+      "reason": "Active scanning commonly targets externally reachable hosts, services, applications, or cloud resources."
+    }
+  ],
+  "contradictory_evidence": [],
+  "alternative_candidates": [
+    {
+      "technique_id": "T1595.002",
+      "name": "Vulnerability Scanning",
+      "confidence": 0.312509,
+      "rejection_reason": "Required evidence is missing: A single NIDS alert must explicitly identify vulnerability assessment, fingerprinting, or a vulnerability-scanner pattern."
+    },
+    {
+      "technique_id": "T1557",
+      "name": "Adversary-in-the-Middle",
+      "confidence": 0.282693,
+      "rejection_reason": "Required evidence is missing: Mapping T1557 from a single NIDS alert requires the signature to explicitly identify malicious interception, redirection, relay, poisoning, or an equivalent AiTM mechanism."
+    },
+    {
+      "technique_id": "T1557.003",
+      "name": "DHCP Spoofing",
+      "confidence": 0.24939,
+      "rejection_reason": "Required evidence is missing: Selecting this sub-technique from a single NIDS alert requires evidence of a rogue DHCP server or malicious DHCP configuration response."
+    },
+    {
+      "technique_id": "T1046",
+      "name": "Network Service Discovery",
+      "confidence": 0.24263,
+      "rejection_reason": "Required evidence is missing: A single alert must explicitly establish internal or post-compromise service discovery."
+    }
+  ],
+  "candidate_trace": [
+    {
+      "technique_id": "T1595",
+      "name": "Active Scanning",
+      "bm25_score": 1.0,
+      "dense_score": 1.0,
+      "fusion_score": 1.0,
+      "matched_terms": [
+        "attack",
+        "inbound",
+        "ip",
+        "network",
+        "port",
+        "scan",
+        "scanning",
+        "target",
+        "traffic"
+      ],
+      "rank_before_rerank": 1,
+      "reranker_raw_score": 0.25184,
+      "reranker_score": 1.0,
+      "rank_after_rerank": 1,
+      "required_passed": true,
+      "excluded": false,
+      "evidence_score": 0.903226,
+      "candidate_score": 0.980645,
+      "fallback_from": null,
+      "rejection_reason": ""
+    },
+    {
+      "technique_id": "T1595.002",
+      "name": "Vulnerability Scanning",
+      "bm25_score": 0.422664,
+      "dense_score": 0.398424,
+      "fusion_score": 0.40812,
+      "matched_terms": [
+        "network",
+        "scan",
+        "scanning",
+        "server",
+        "target"
+      ],
+      "rank_before_rerank": 15,
+      "reranker_raw_score": 0.040953,
+      "reranker_score": 0.161964,
+      "rank_after_rerank": 2,
+      "required_passed": false,
+      "excluded": false,
+      "evidence_score": 0.545455,
+      "candidate_score": 0.312509,
+      "fallback_from": null,
+      "rejection_reason": "Required evidence is missing: A single NIDS alert must explicitly identify vulnerability assessment, fingerprinting, or a vulnerability-scanner pattern."
+    },
+    {
+      "technique_id": "T1557",
+      "name": "Adversary-in-the-Middle",
+      "bm25_score": 0.258963,
+      "dense_score": 0.965235,
+      "fusion_score": 0.682726,
+      "matched_terms": [
+        "destination",
+        "network",
+        "server",
+        "traffic",
+        "web"
+      ],
+      "rank_before_rerank": 3,
+      "reranker_raw_score": 0.005837,
+      "reranker_score": 0.022417,
+      "rank_after_rerank": 5,
+      "required_passed": false,
+      "excluded": false,
+      "evidence_score": 0.333333,
+      "candidate_score": 0.282693,
+      "fallback_from": null,
+      "rejection_reason": "Required evidence is missing: Mapping T1557 from a single NIDS alert requires the signature to explicitly identify malicious interception, redirection, relay, poisoning, or an equivalent AiTM mechanism."
+    },
+    {
+      "technique_id": "T1557.003",
+      "name": "DHCP Spoofing",
+      "bm25_score": 0.230475,
+      "dense_score": 0.656737,
+      "fusion_score": 0.486232,
+      "matched_terms": [
+        "ids",
+        "network",
+        "server",
+        "traffic"
+      ],
+      "rank_before_rerank": 10,
+      "reranker_raw_score": 0.012033,
+      "reranker_score": 0.047041,
+      "rank_after_rerank": 3,
+      "required_passed": false,
+      "excluded": false,
+      "evidence_score": 0.4,
+      "candidate_score": 0.24939,
+      "fallback_from": null,
+      "rejection_reason": "Required evidence is missing: Selecting this sub-technique from a single NIDS alert requires evidence of a rogue DHCP server or malicious DHCP configuration response."
+    },
+    {
+      "technique_id": "T1046",
+      "name": "Network Service Discovery",
+      "bm25_score": 0.562736,
+      "dense_score": 0.679453,
+      "fusion_score": 0.632767,
+      "matched_terms": [
+        "ip",
+        "network",
+        "port",
+        "scan",
+        "scanning",
+        "source"
+      ],
+      "rank_before_rerank": 6,
+      "reranker_raw_score": 0.006638,
+      "reranker_score": 0.025599,
+      "rank_after_rerank": 4,
+      "required_passed": false,
+      "excluded": false,
+      "evidence_score": 0.2,
+      "candidate_score": 0.24263,
+      "fallback_from": null,
+      "rejection_reason": "Required evidence is missing: A single alert must explicitly establish internal or post-compromise service discovery."
+    }
+  ],
+  "normalized_alert": {
+    "schema_version": "1.0",
+    "alert_id": "test-alert-001",
+    "event_time": "2026-07-17T16:00:00+07:00",
+    "producer": {
+      "type": "nids",
+      "name": "Suricata",
+      "rule_id": null,
+      "rule_name": "ET SCAN Suspicious inbound traffic"
+    },
+    "data_source": {
+      "category": "network_traffic",
+      "subcategory": "network_scan"
+    },
+    "event": {
+      "type": "network_scan",
+      "action": "scan",
+      "outcome": "unknown",
+      "disposition": "unknown"
+    },
+    "source": {
+      "type": "host",
+      "ip": "192.168.56.100",
+      "port": 4444,
+      "hostname": null,
+      "user": null,
+      "process": null
+    },
+    "target": {
+      "type": "service",
+      "ip": "192.168.56.10",
+      "port": 80,
+      "hostname": null,
+      "resource": "web_server"
+    },
+    "severity": {
+      "source_value": 1,
+      "source_scale": "suricata_alert_severity",
+      "normalized": 4
+    },
+    "network": {
+      "flow_id": "123456"
+    },
+    "derived": {
+      "retrieval_text": "IDS rule: ET SCAN Suspicious inbound traffic.\nEvent type: network scan.\nAction: scan.\nOutcome: unknown.\nDisposition: unknown.\nData source: network_ids.\nTarget type: web server.\nSource port: 4444.\nDestination port: 80.\nAttack pattern: one source IP scanning one web server.",
+      "renderer_version": "retrieval-text-renderer-1.0"
+    },
+    "raw_reference": {
+      "source_system": "wazuh",
+      "raw_event_id": "test-alert-001"
+    }
+  },
+  "pipeline": {
+    "retriever_version": "hybrid-bm25-attackbert-1.0.0",
+    "reranker_version": "cross-encoder/ms-marco-MiniLM-L-6-v2@c5ee24cb16019beea0893ab7796b1df96625c6b8",
+    "rule_engine_version": "1.0.0",
+    "attack_index_version": "1.0.0",
+    "attack_final_sha256": "d42bd453d4bfaefb224b04bf559bec53c85c62bc11eec0b3cbb26a14e2325943",
+    "collection": "attack_techniques_v1",
+    "degraded_modes": [],
+    "latency_ms": 1653.273
+  }
+}

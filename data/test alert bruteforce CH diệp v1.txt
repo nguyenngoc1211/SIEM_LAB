@@ -1,0 +1,90 @@
+[
+  {
+    "normalized_alert": {
+      "schema_version": "1.0",
+      "alert_id": "1784391125.23089",
+      "event_time": "2026-07-18T16:12:04.449523+0000",
+      "producer": {
+        "type": "nids",
+        "name": "suricata",
+        "rule_id": "1000006",
+        "rule_name": "SOC LAB repeated Juice Shop login attempts"
+      },
+      "data_source": {
+        "category": "application",
+        "subcategory": "network_ids"
+      },
+      "event": {
+        "type": "application_activity",
+        "action": "http_activity",
+        "outcome": "unknown",
+        "disposition": "allowed"
+      },
+      "source": {
+        "type": "host",
+        "ip": "172.19.0.3",
+        "port": 50602,
+        "hostname": null,
+        "user": null,
+        "process": null
+      },
+      "target": {
+        "type": "application",
+        "ip": "172.19.0.2",
+        "port": 3000,
+        "hostname": "127.0.0.1",
+        "resource": "/rest/user/login"
+      },
+      "severity": {
+        "source_value": "1",
+        "source_scale": "suricata",
+        "normalized": 0
+      },
+      "network": {
+        "transport_protocol": "tcp",
+        "application_protocol": "http",
+        "direction": "to_server",
+        "flow_id": "1323259603808494.000000",
+        "interface": "eth0",
+        "packet_source": "wire/pcap",
+        "packets_to_target": 4,
+        "packets_to_source": 3,
+        "bytes_to_target": 627,
+        "bytes_to_source": 591,
+        "flow_start": "2026-07-18T16:12:04.439167+0000"
+      },
+      "http": {
+        "method": "POST",
+        "scheme": "http",
+        "version": "HTTP/1.1",
+        "host": "127.0.0.1",
+        "path": "/rest/user/login",
+        "query": null,
+        "query_decoded": null,
+        "status_code": 401,
+        "content_type": "text/html",
+        "user_agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.22621.4249",
+        "referrer": null,
+        "response_length": 26,
+        "request_complete": false,
+        "response_complete": false
+      },
+      "derived": {
+        "retrieval_text": "rule SOC LAB repeated Juice Shop login attempts data source application network ids event application activity action http activity outcome unknown disposition allowed target application target hostname 127.0.0.1 target port 3000 target resource /rest/user/login http method POST http path /rest/user/login http status 401 protocol http direction to server",
+        "renderer_version": "n8n-wazuh-suricata-1.0",
+        "external_hints": {
+          "wazuh_mitre": null,
+          "wazuh_alert_tags": [],
+          "wazuh_rule_groups": [
+            "ids",
+            "suricata"
+          ]
+        }
+      },
+      "raw_reference": {
+        "source_system": "wazuh-opensearch",
+        "raw_event_id": "1784391125.23089"
+      }
+    }
+  }
+]

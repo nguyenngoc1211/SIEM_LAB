@@ -1,0 +1,19 @@
+{
+  "database_path": "artifacts/attack/attack_final.mapping.json",
+  "documents_path": "artifacts/retrieval/technique_documents.jsonl",
+  "bm25_path": "artifacts/retrieval/bm25_index.json",
+  "manifest_path": "artifacts/attack/index_manifest.json",
+  "qdrant_url": "http://localhost:6333",
+  "embedding_url": "http://localhost:8080",
+  "reranker_url": "http://localhost:8081",
+  "collection_name": "attack_techniques_v1",
+  "request_timeout": 60,
+  "dense_weight": 0.6,
+  "sparse_weight": 0.4,
+  "retrieval_weight": 0.3,
+  "reranker_weight": 0.5,
+  "evidence_weight": 0.2,
+  "decision_threshold": 0.55,
+  "uncertainty_margin": 0.07,
+  "local_fallback": true
+}

@@ -1,0 +1,155 @@
+{
+  "_index": "wazuh-alerts-4.x-2026.04.29",
+  "_id": "nYvz2J0BZfDcH36mwE7j",
+  "_version": 1,
+  "_score": null,
+  "_source": {
+    "input": {
+      "type": "log"
+    },
+    "agent": {
+      "ip": "10.0.2.8",
+      "name": "wazuhagent",
+      "id": "002"
+    },
+    "manager": {
+      "name": "wazuhserver"
+    },
+    "data": {
+      "metadata": {
+        "flowbits": [
+          "http.dottedquadhost"
+        ]
+      },
+      "tx_id": "1",
+      "app_proto": "http",
+      "ip_v": "4",
+      "in_iface": "enp0s3",
+      "src_ip": "10.0.2.9",
+      "src_port": "59078",
+      "event_type": "alert",
+      "alert": {
+        "severity": "1",
+        "signature_id": "2009714",
+        "rev": "8",
+        "metadata": {
+          "affected_product": [
+            "Web_Server_Applications"
+          ],
+          "attack_target": [
+            "Web_Server"
+          ],
+          "updated_at": [
+            "2020_08_20"
+          ],
+          "confidence": [
+            "Medium"
+          ],
+          "created_at": [
+            "2010_07_30"
+          ],
+          "tag": [
+            "Cross_Site_Scripting",
+            "XSS"
+          ],
+          "signature_severity": [
+            "Major"
+          ],
+          "deployment": [
+            "Datacenter"
+          ]
+        },
+        "gid": "1",
+        "signature": "ET WEB_SERVER Script tag in URI Possible Cross Site Scripting Attempt",
+        "action": "allowed",
+        "category": "Web Application Attack"
+      },
+      "ts_progress": "request_complete",
+      "flow_id": "1030200659692776.000000",
+      "dest_ip": "10.0.2.10",
+      "proto": "TCP",
+      "http": {
+        "hostname": "10.0.2.10",
+        "protocol": "HTTP/1.1",
+        "http_method": "GET",
+        "http_content_type": "text/html",
+        "http_refer": "http://10.0.2.10/DVWA/vulnerabilities/xss_r/",
+        "length": "1492",
+        "url": "/DVWA/vulnerabilities/xss_r/?name=%3Cscript%3Ealert%28%22Hello%22%29%3B%3C%2Fscript%3E",
+        "http_user_agent": "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0",
+        "status": "200"
+      },
+      "tc_progress": "response_complete",
+      "dest_port": "80",
+      "pkt_src": "wire/pcap",
+      "flow": {
+        "src_ip": "10.0.2.9",
+        "src_port": "59078",
+        "pkts_toserver": "6",
+        "dest_ip": "10.0.2.10",
+        "start": "2026-04-29T18:15:39.633078+0700",
+        "bytes_toclient": "4109",
+        "bytes_toserver": "1415",
+        "pkts_toclient": "6",
+        "dest_port": "80"
+      },
+      "timestamp": "2026-04-29T18:15:41.639391+0700",
+      "direction": "to_server"
+    },
+    "rule": {
+      "firedtimes": 1,
+      "mail": true,
+      "level": 13,
+      "pci_dss": [
+        "6.5.7"
+      ],
+      "description": "CRITICAL: XSS Attack Detected - Suricata: Alert - ET WEB_SERVER Script tag in URI Possible Cross Site Scripting Attempt",
+      "groups": [
+        "suricata",
+        "sql_injection",
+        "xss",
+        "critical_alerts",
+        "xss",
+        "web_attack"
+      ],
+      "mitre": {
+        "technique": [
+          "JavaScript"
+        ],
+        "id": [
+          "T1059.007"
+        ],
+        "tactic": [
+          "Execution"
+        ]
+      },
+      "id": "100300",
+      "gpg13": [
+        "4.13"
+      ]
+    },
+    "location": "/var/log/suricata/eve.json",
+    "decoder": {
+      "name": "json"
+    },
+    "id": "1777461342.87990",
+    "full_log": "{\"timestamp\":\"2026-04-29T18:15:41.639391+0700\",\"flow_id\":1030200659692776,\"in_iface\":\"enp0s3\",\"event_type\":\"alert\",\"src_ip\":\"10.0.2.9\",\"src_port\":59078,\"dest_ip\":\"10.0.2.10\",\"dest_port\":80,\"proto\":\"TCP\",\"ip_v\":4,\"pkt_src\":\"wire/pcap\",\"metadata\":{\"flowbits\":[\"http.dottedquadhost\"]},\"tx_id\":1,\"alert\":{\"action\":\"allowed\",\"gid\":1,\"signature_id\":2009714,\"rev\":8,\"signature\":\"ET WEB_SERVER Script tag in URI Possible Cross Site Scripting Attempt\",\"category\":\"Web Application Attack\",\"severity\":1,\"metadata\":{\"affected_product\":[\"Web_Server_Applications\"],\"attack_target\":[\"Web_Server\"],\"confidence\":[\"Medium\"],\"created_at\":[\"2010_07_30\"],\"deployment\":[\"Datacenter\"],\"signature_severity\":[\"Major\"],\"tag\":[\"Cross_Site_Scripting\",\"XSS\"],\"updated_at\":[\"2020_08_20\"]}},\"ts_progress\":\"request_complete\",\"tc_progress\":\"response_complete\",\"http\":{\"hostname\":\"10.0.2.10\",\"url\":\"/DVWA/vulnerabilities/xss_r/?name=%3Cscript%3Ealert%28%22Hello%22%29%3B%3C%2Fscript%3E\",\"http_user_agent\":\"Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0\",\"http_content_type\":\"text/html\",\"http_refer\":\"http://10.0.2.10/DVWA/vulnerabilities/xss_r/\",\"http_method\":\"GET\",\"protocol\":\"HTTP/1.1\",\"status\":200,\"length\":1492},\"app_proto\":\"http\",\"direction\":\"to_server\",\"flow\":{\"pkts_toserver\":6,\"pkts_toclient\":6,\"bytes_toserver\":1415,\"bytes_toclient\":4109,\"start\":\"2026-04-29T18:15:39.633078+0700\",\"src_ip\":\"10.0.2.9\",\"dest_ip\":\"10.0.2.10\",\"src_port\":59078,\"dest_port\":80}}",
+    "timestamp": "2026-04-29T11:15:42.612+0000"
+  },
+  "fields": {
+    "timestamp": [
+      "2026-04-29T11:15:42.612Z"
+    ],
+    "data.timestamp": [
+      "2026-04-29T11:15:41.639Z"
+    ]
+  },
+  "highlight": {
+    "agent.id": [
+      "@opensearch-dashboards-highlighted-field@002@/opensearch-dashboards-highlighted-field@"
+    ]
+  },
+  "sort": [
+    1777461342612
+  ]
+}

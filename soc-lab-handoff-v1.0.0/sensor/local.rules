@@ -1,0 +1,17 @@
+# Rules dành riêng cho lab. SID 1000001-1000099 được giữ cho project này.
+
+alert http any any -> any any (msg:"SOC LAB HTTP probe request"; flow:established,to_server; http.uri; content:"/__soc_probe__"; nocase; classtype:misc-activity; sid:1000001; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB possible SQL injection in URI"; flow:established,to_server; http.uri; content:"union"; nocase; content:"select"; nocase; distance:0; within:160; classtype:web-application-attack; sid:1000002; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB possible XSS payload in URI"; flow:established,to_server; http.uri.raw; pcre:"/(?:<|%3[cC])script/i"; classtype:web-application-attack; sid:1000003; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB possible path traversal in URI"; flow:established,to_server; http.uri.raw; content:"../"; classtype:web-application-attack; sid:1000004; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB sqlmap user-agent observed"; flow:established,to_server; http.user_agent; content:"sqlmap"; nocase; classtype:web-application-attack; sid:1000005; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB repeated Juice Shop login attempts"; flow:established,to_server; http.method; content:"POST"; http.uri; content:"/rest/user/login"; nocase; threshold:type both, track by_src, count 5, seconds 60; classtype:attempted-admin; sid:1000006; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB possible command injection in URI"; flow:established,to_server; http.uri.raw; pcre:"/(?:\x3b|\x26|\x7c|%3[bB]|%26|%7[cC])(?:id|whoami|uname|cat)(?:\x20|%20|\x2b|%2[bB]|$)/i"; classtype:web-application-attack; sid:1000007; rev:2;)
+
+alert http any any -> any any (msg:"SOC LAB time-delay SQL injection in URI"; flow:established,to_server; http.uri; pcre:"/(?:pg_)?sleep\s*\(|waitfor\s+delay/i"; classtype:web-application-attack; sid:1000008; rev:1;)

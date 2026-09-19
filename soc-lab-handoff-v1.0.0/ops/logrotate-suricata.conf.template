@@ -1,0 +1,16 @@
+# Thay /opt/soc-lab bằng đường dẫn tuyệt đối của project.
+/opt/soc-lab/runtime/suricata-logs/eve.json
+/opt/soc-lab/runtime/suricata-logs/fast.log
+/opt/soc-lab/runtime/suricata-logs/stats.log {
+    daily
+    rotate 14
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 root root
+    sharedscripts
+    postrotate
+        /usr/bin/docker exec soc_suricata sh -c 'test -s /run/suricata.pid && kill -HUP "$(cat /run/suricata.pid)"' >/dev/null 2>&1 || true
+    endscript
+}

@@ -1,0 +1,19 @@
+* text=auto
+
+# Linux/Docker entrypoints must keep LF line endings on Windows checkouts.
+*.sh text eol=lf
+Dockerfile text eol=lf
+Dockerfile.* text eol=lf
+Makefile text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Native Windows scripts.
+*.ps1 text eol=crlf
+*.psd1 text eol=crlf
+*.cmd text eol=crlf
+
+# Binary research assets.
+*.png binary
+*.pdf binary
+*.docx binary

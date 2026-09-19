@@ -1,0 +1,71 @@
+services:
+  juice-shop:
+    image: ${JUICE_SHOP_IMAGE:-bkimminich/juice-shop:latest}
+    container_name: soc_juice_shop
+    restart: unless-stopped
+    expose:
+      - "3000"
+    networks:
+      soc_backend:
+      soc_shared:
+        aliases:
+          - juice-shop
+
+  gateway:
+    image: ${NGINX_IMAGE:-nginx:alpine}
+    container_name: soc_gateway
+    restart: unless-stopped
+    depends_on:
+      - juice-shop
+    ports:
+      - "${LAB_BIND_IP:-127.0.0.1}:${LAB_PORT:-8081}:80"
+    volumes:
+      - ./gateway/nginx.conf:/etc/nginx/conf.d/default.conf:ro
+    networks:
+      # Pin the monitored backend network to eth0. Suricata shares this
+      # network namespace and captures SURICATA_INTERFACE=eth0.
+      soc_backend:
+        interface_name: eth0
+      soc_shared:
+        interface_name: eth1
+        aliases:
+          - gateway
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/__gateway_health__ >/dev/null 2>&1 || exit 1"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+  suricata:
+    build:
+      context: ./sensor
+      args:
+        SURICATA_IMAGE: ${SURICATA_IMAGE:-jasonish/suricata:7.0}
+    container_name: soc_suricata
+    restart: unless-stopped
+    depends_on:
+      gateway:
+        condition: service_healthy
+    # Chia sẻ network namespace với Nginx để Suricata quan sát traffic proxy.
+    network_mode: "service:gateway"
+    cap_add:
+      - NET_ADMIN
+      - NET_RAW
+      - SYS_NICE
+    environment:
+      SURICATA_INTERFACE: ${SURICATA_INTERFACE:-eth0}
+      RULE_UPDATE_INTERVAL: ${RULE_UPDATE_INTERVAL:-86400}
+    volumes:
+      - ./runtime/suricata-logs:/var/log/suricata
+      - suricata_state:/var/lib/suricata
+
+networks:
+  soc_backend:
+    name: soc_backend
+    driver: bridge
+  soc_shared:
+    external: true
+
+volumes:
+  suricata_state:
+    name: soc_suricata_state

@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "alert_id": "1777461184.75529",
+  "event_time": "2026-04-29T18:13:04.487841+07:00",
+
+  "producer": {
+    "type": "nids",
+    "name": "Suricata",
+    "rule_id": "2031399",
+    "rule_name": "ET MALWARE Observed AridViper CnC Domain in TLS SNI"
+  },
+
+  "data_source": {
+    "category": "network_traffic",
+    "subcategory": "tls"
+  },
+
+  "event": {
+    "type": "command_and_control",
+    "action": "c2_communication",
+    "outcome": "unknown",
+    "disposition": "allowed"
+  },
+
+  "source": {
+    "type": "host",
+    "ip": "10.0.2.9",
+    "port": 54182,
+    "hostname": null,
+    "user": null,
+    "process": null
+  },
+
+  "target": {
+    "type": "service",
+    "ip": "10.0.2.10",
+    "port": 443,
+    "hostname": "baldwin-gonzalez.live",
+    "resource": "baldwin-gonzalez.live"
+  },
+
+  "severity": {
+    "source_value": 2,
+    "source_scale": "suricata_alert_severity",
+    "normalized": 3
+  },
+
+  "network": {
+    "transport_protocol": "tcp",
+    "application_protocol": "tls",
+    "direction": "to_server",
+    "flow_id": "13126018128749.000000",
+    "ip_version": 4,
+    "interface": "enp0s3",
+    "packet_source": "wire",
+    "packets_to_target": 4,
+    "packets_to_source": 4,
+    "bytes_to_target": 894,
+    "bytes_to_source": 2118,
+    "flow_start": "2026-04-29T18:13:04.461808+07:00"
+  },
+
+  "derived": {
+    "retrieval_text": "IDS rule: ET MALWARE Observed AridViper CnC Domain in TLS SNI.\nEvent type: command and control.\nAction: C2 communication.\nOutcome: unknown.\nDisposition: allow.\nData source: network_ids.\nTarget type: remote service.\nProtocol: TLS.\nTLS version: TLSv1.3.\nTLS SNI: baldwin-gonzalez.live.\nAttack pattern: one source IP connects to a known command-and-control domain.",
+    "renderer_version": "retrieval-text-renderer-1.0"
+  },
+
+  "raw_reference": {
+    "source_system": "wazuh",
+    "raw_event_id": "1777461184.75529"
+  }
+}

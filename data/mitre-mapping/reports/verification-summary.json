@@ -1,0 +1,28 @@
+{
+  "verified_at": "2026-08-04",
+  "docker_project": "data",
+  "legacy_mapping_project_containers": 0,
+  "database_validation_errors": 0,
+  "unit_tests": {"passed": 8, "failed": 0},
+  "qdrant": {
+    "collection": "attack_techniques_v1",
+    "status": "green",
+    "points": 21,
+    "dense_vector_size": 768,
+    "sparse_method": "bm25"
+  },
+  "services": {
+    "mapper_api": "healthy",
+    "reranker_api": "healthy",
+    "indexer_exit_code": 0,
+    "n8n_to_mapper_network_check": "passed"
+  },
+  "test_alert": {
+    "file": "../test alert scan CH.txt",
+    "mapping_status": "mapped",
+    "technique_id": "T1595",
+    "name": "Active Scanning",
+    "confidence": 0.980645,
+    "degraded_modes": []
+  }
+}

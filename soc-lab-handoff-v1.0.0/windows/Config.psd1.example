@@ -1,0 +1,16 @@
+@{
+    # Thu muc goc cua project SOC, noi co docker-compose.yml.
+    SocProjectPath   = 'C:\path\to\soc-lab-handoff-v1.2.0'
+
+    # Thu muc official Wazuh single-node, noi co docker-compose.yml.
+    WazuhProjectPath = 'C:\path\to\wazuh-docker\single-node'
+
+    # Ten Scheduled Task tao boi Install-All.ps1.
+    TaskName         = 'SOC Lab AutoStart'
+
+    # So giay toi da cho Docker Engine san sang.
+    DockerWaitSeconds = 240
+
+    # Khong pull image khi Windows dang khoi dong.
+    PullPolicy       = 'never'
+}

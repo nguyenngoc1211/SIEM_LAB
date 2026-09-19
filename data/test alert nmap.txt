@@ -1,0 +1,105 @@
+{
+  "agent": {
+    "name": "wazuh.manager",
+    "id": "000"
+  },
+  "manager": {
+    "name": "wazuh.manager"
+  },
+  "data": {
+    "tx_id": "0",
+    "app_proto": "http",
+    "in_iface": "eth0",
+    "src_ip": "172.19.0.4",
+    "src_port": "52966",
+    "event_type": "alert",
+    "alert": {
+      "severity": "1",
+      "signature_id": "2024364",
+      "rev": "5",
+      "metadata": {
+        "performance_impact": [
+          "Low"
+        ],
+        "affected_product": [
+          "Any"
+        ],
+        "attack_target": [
+          "Client_and_Server"
+        ],
+        "updated_at": [
+          "2024_03_07"
+        ],
+        "confidence": [
+          "Medium"
+        ],
+        "reviewed_at": [
+          "2024_05_06"
+        ],
+        "created_at": [
+          "2017_06_08"
+        ],
+        "signature_severity": [
+          "Informational"
+        ],
+        "deployment": [
+          "Perimeter"
+        ]
+      },
+      "gid": "1",
+      "signature": "ET SCAN Possible Nmap User-Agent Observed",
+      "action": "allowed",
+      "category": "Web Application Attack"
+    },
+    "flow_id": "829365042804492.000000",
+    "dest_ip": "172.19.0.3",
+    "proto": "TCP",
+    "http": {
+      "hostname": "soc_gateway",
+      "protocol": "HTTP/1.1",
+      "http_method": "OPTIONS",
+      "length": "0",
+      "xff": "172.19.0.2",
+      "url": "/",
+      "http_user_agent": "Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)",
+      "status": "204"
+    },
+    "dest_port": "3000",
+    "pkt_src": "wire/pcap",
+    "flow": {
+      "src_ip": "172.19.0.4",
+      "src_port": "52966",
+      "pkts_toserver": "4",
+      "dest_ip": "172.19.0.3",
+      "start": "2026-08-11T15:02:02.193101+0000",
+      "bytes_toclient": "440",
+      "bytes_toserver": "502",
+      "pkts_toclient": "3",
+      "dest_port": "3000"
+    },
+    "timestamp": "2026-08-11T15:02:02.213800+0000",
+    "direction": "to_server"
+  },
+  "rule": {
+    "firedtimes": 24,
+    "mail": false,
+    "level": 3,
+    "description": "Suricata: Alert - ET SCAN Possible Nmap User-Agent Observed",
+    "groups": [
+      "ids",
+      "suricata"
+    ],
+    "id": "86601"
+  },
+  "decoder": {
+    "name": "json"
+  },
+  "input": {
+    "type": "log"
+  },
+  "@timestamp": "2026-08-11T15:02:03.991Z",
+  "location": "/var/log/suricata/eve.json",
+  "id": "1786460523.27106",
+  "timestamp": "2026-08-11T15:02:03.991+0000",
+  "_id": "I69Y8Z8B6tGpyHFiW-Eh"
+}

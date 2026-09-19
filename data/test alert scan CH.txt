@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "alert_id": "test-alert-001",
+  "event_time": "2026-07-17T16:00:00+07:00",
+
+  "producer": {
+    "type": "nids",
+    "name": "Suricata",
+    "rule_id": null,
+    "rule_name": "ET SCAN Suspicious inbound traffic"
+  },
+
+  "data_source": {
+    "category": "network_traffic",
+    "subcategory": "network_scan"
+  },
+
+  "event": {
+    "type": "network_scan",
+    "action": "scan",
+    "outcome": "unknown",
+    "disposition": "unknown"
+  },
+
+  "source": {
+    "type": "host",
+    "ip": "192.168.56.100",
+    "port": 4444,
+    "hostname": null,
+    "user": null,
+    "process": null
+  },
+
+  "target": {
+    "type": "service",
+    "ip": "192.168.56.10",
+    "port": 80,
+    "hostname": null,
+    "resource": "web_server"
+  },
+
+  "severity": {
+    "source_value": 1,
+    "source_scale": "suricata_alert_severity",
+    "normalized": 4
+  },
+
+  "network": {
+    "flow_id": "123456"
+  },
+
+  "derived": {
+    "retrieval_text": "IDS rule: ET SCAN Suspicious inbound traffic.\nEvent type: network scan.\nAction: scan.\nOutcome: unknown.\nDisposition: unknown.\nData source: network_ids.\nTarget type: web server.\nSource port: 4444.\nDestination port: 80.\nAttack pattern: one source IP scanning one web server.",
+    "renderer_version": "retrieval-text-renderer-1.0"
+  },
+
+  "raw_reference": {
+    "source_system": "wazuh",
+    "raw_event_id": "test-alert-001"
+  }
+}

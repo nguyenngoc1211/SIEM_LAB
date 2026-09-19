@@ -1,0 +1,106 @@
+[
+  {
+    "normalized_alert": {
+      "schema_version": "1.0",
+      "alert_id": "1777461184.75529",
+      "event_time": "2026-04-29T18:13:04.487841+0700",
+      "producer": {
+        "type": "nids",
+        "name": "suricata",
+        "rule_id": "2006446",
+        "rule_name": "ET WEB_SERVER Possible SQL Injection Attempt UNION SELECT in HTTP URI"
+      },
+      "data_source": {
+        "category": "application",
+        "subcategory": "network_ids"
+      },
+      "event": {
+        "type": "application_attack",
+        "action": "inject_web_input",
+        "outcome": "unknown",
+        "disposition": "allowed"
+      },
+      "source": {
+        "type": "host",
+        "ip": "10.0.2.9",
+        "port": 54182,
+        "hostname": null,
+        "user": null,
+        "process": null
+      },
+      "target": {
+        "type": "application",
+        "ip": "10.0.2.10",
+        "port": 80,
+        "hostname": "10.0.2.10",
+        "resource": "/DVWA/vulnerabilities/sqli/"
+      },
+      "severity": {
+        "source_value": "2",
+        "source_scale": "suricata",
+        "normalized": 3
+      },
+      "network": {
+        "transport_protocol": "tcp",
+        "application_protocol": "http",
+        "direction": "to_server",
+        "flow_id": "13126018128749.000000",
+        "interface": "enp0s3",
+        "packet_source": "wire/pcap",
+        "packets_to_target": 4,
+        "packets_to_source": 4,
+        "bytes_to_target": 894,
+        "bytes_to_source": 2118,
+        "flow_start": "2026-04-29T18:13:04.461808+0700"
+      },
+      "http": {
+        "method": "GET",
+        "scheme": "http",
+        "version": "HTTP/1.1",
+        "host": "10.0.2.10",
+        "path": "/DVWA/vulnerabilities/sqli/",
+        "query": "id=%27+UNION+SELECT+%22Hello%22%2C%22Hello+Again%22%3B--+-&Submit=Submit",
+        "query_decoded": "id=' UNION SELECT \"Hello\",\"Hello Again\";-- -&Submit=Submit",
+        "status_code": 200,
+        "content_type": "text/html",
+        "user_agent": "Mozilla/5.0 (X11; Linux x86_64; rv:140.0) Gecko/20100101 Firefox/140.0",
+        "referrer": "http://10.0.2.10/DVWA/vulnerabilities/sqli/?id=+%27+UNION+SELECT+%22Hello%22%2C%22Hello+Again%22%3B--+-&Submit=Submit",
+        "response_length": 1494,
+        "request_complete": true,
+        "response_complete": true
+      },
+      "derived": {
+        "retrieval_text": "rule ET WEB SERVER Possible SQL Injection Attempt UNION SELECT in HTTP URI data source application network ids event application attack action inject web input outcome unknown disposition allowed target application target hostname 10.0.2.10 target port 80 target resource /DVWA/vulnerabilities/sqli/ http method GET http path /DVWA/vulnerabilities/sqli/ http query id=' UNION SELECT \"Hello\",\"Hello Again\";-- -&Submit=Submit http status 200 protocol http direction to server tags SQL Injection",
+        "renderer_version": "n8n-wazuh-suricata-1.0",
+        "external_hints": {
+          "wazuh_mitre": {
+            "technique": [
+              "Exploit Public-Facing Application"
+            ],
+            "id": [
+              "T1190"
+            ],
+            "tactic": [
+              "Initial Access"
+            ]
+          },
+          "wazuh_alert_tags": [
+            "SQL_Injection"
+          ],
+          "wazuh_rule_groups": [
+            "suricata",
+            "sql_injection",
+            "xss",
+            "critical_alerts",
+            "sql_injection",
+            "web_attack"
+          ]
+        }
+      },
+      "raw_reference": {
+        "source_system": "wazuh-opensearch",
+        "raw_event_id": "1777461184.75529"
+      }
+    }
+  }
+]

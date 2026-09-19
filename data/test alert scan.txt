@@ -1,0 +1,32 @@
+{
+  "_source": {
+    "id": "test-alert-001",
+    "timestamp": "2026-07-17T16:00:00+07:00",
+    "rule": {
+      "level": 12
+    },
+    "agent": {
+      "name": "victim-ubuntu"
+    },
+    "data": {
+      "flow_id": "123456",
+      "flow": {
+        "src_ip": "192.168.56.100",
+        "dest_ip": "192.168.56.10",
+        "src_port": 4444,
+        "dest_port": 80
+      },
+      "alert": {
+        "signature": "ET SCAN Suspicious inbound traffic",
+        "category": "Attempted Information Leak",
+        "severity": 1,
+        "metadata": {
+          "signature_severity": ["Critical"],
+          "tag": ["scan"],
+          "affected_product": ["web_server"],
+          "attack_target": ["server"]
+        }
+      }
+    }
+  }
+}

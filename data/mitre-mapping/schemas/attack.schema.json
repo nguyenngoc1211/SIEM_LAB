@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.soc/schemas/attack.schema.json",
+  "title": "Mapping-ready ATT&CK technique database",
+  "type": "array",
+  "minItems": 1,
+  "items": {
+    "type": "object",
+    "required": [
+      "schema_version",
+      "technique_id",
+      "name",
+      "description",
+      "behavioral_indicators",
+      "retrieval_keywords",
+      "required_evidence",
+      "positive_evidence",
+      "negative_evidence",
+      "exclusion_indicators",
+      "source_metadata"
+    ],
+    "properties": {
+      "technique_id": {"type": "string", "pattern": "^T[0-9]{4}(\\.[0-9]{3})?$"},
+      "name": {"type": "string", "minLength": 1},
+      "retrieval_text": {"type": "string"},
+      "required_evidence": {"type": "array"},
+      "positive_evidence": {"type": "array"},
+      "negative_evidence": {"type": "array"},
+      "exclusion_indicators": {"type": "array"}
+    },
+    "additionalProperties": true
+  }
+}

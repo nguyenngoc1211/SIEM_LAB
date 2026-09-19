@@ -1,0 +1,142 @@
+// =========================================================================
+// KHU VỰC KHAI BÁO BIẾN - Đã được thêm Optional Chaining (?.) để chống crash
+// =========================================================================
+
+const inputData = $input.first().json;
+
+const alertTimestamp        = inputData?.body?._source?.data?.timestamp || "N/A";
+
+// Thông tin Alert
+const alertSignature        = inputData?.body?._source?.data?.alert?.signature || "N/A";
+const alertCategory         = inputData?.body?._source?.data?.alert?.category || "N/A";
+const alertTags             = inputData?.body?._source?.data?.alert?.metadata?.tag || "N/A";
+const affectedProduct       = inputData?.body?._source?.data?.alert?.metadata?.affected_product || "N/A";
+const attacktarget          = inputData?.body?._source?.data?.alert?.metadata?.attack_target || "N/A";
+const wazuhSeverityLevel    = inputData?.body?._source?.rule?.level || "N/A"; 
+const suricataSeverityLevel  = inputData?.body?._source?.data?.alert?.severity || "N/A";  
+const ruleSeverity          = inputData?.body?._source?.data?.alert?.metadata?.signature_severity?.[0] || "N/A"; 
+
+// Thông tin Nguồn (Source)
+const flowId                = inputData?.body?._source?.data?.flow_id || "N/A";
+const sourceIp              = inputData?.body?._source?.data?.src_ip || "N/A";
+const sourcePort = $input.first().json.body._source.data.src_port || "N/A"
+const destIp                = inputData?.body?._source?.data?.dest_ip || "N/A";
+const destAgent             = inputData?.body?._source?.agent?.name || "N/A";
+
+
+// =========================================================================
+// BẮT LỖI (TRY - CATCH) CHO SEARCH TECHNIQUE & AI ANALYSIS
+// =========================================================================
+
+// 1. Khởi tạo giá trị mặc định cho dữ liệu làm giàu (Enrichment)
+let techniqueId   = "N/A";
+let techniqueName = "N/A";
+let tacticId      = "N/A";
+let tacticName    = "N/A";
+
+try {
+  // Thử lấy dữ liệu từ node Search Technique
+  const searchNode = $('Search Technique').first().json;
+  
+  techniqueId   = searchNode?.result?.[0]?.payload?.technique_id || "N/A";
+  techniqueName = searchNode?.result?.[0]?.payload?.technique_name || "N/A";
+  tacticId      = searchNode?.result?.[0]?.payload?.tactic_id || "N/A";
+  tacticName    = searchNode?.result?.[0]?.payload?.tactic || "N/A";
+} catch (error) {
+  // Nếu node chưa chạy hoặc lỗi, code sẽ nhảy vào đây và giữ nguyên giá trị "N/A" ban đầu
+}
+
+// 2. Khởi tạo giá trị mặc định cho thông tin AI Phân tích
+let aiSummary             = "N/A";
+let aiConfidenceScore     = "N/A";
+let isFalsePositive       = "N/A";
+let threatLevel           = "N/A";
+let recommendedMitigation = "N/A";
+
+try {
+  aiSummary             = inputData?.summary || "N/A";
+  aiConfidenceScore     = inputData?.confidence || "N/A";
+  threatLevel           = inputData?.threat_level || "N/A";
+  recommendedMitigation = inputData?.recommended_actions || "N/A";
+  
+  // Dùng toán tử ?? để tránh việc biến false thành "N/A"
+  isFalsePositive       = inputData?.is_false_positive ?? "N/A"; 
+} catch (error) {
+  // Phòng hờ lỗi cấu trúc đầu vào từ AI
+}
+
+
+// =========================================================================
+// LOGIC TỰ ĐỘNG TẠO INCIDENT_ID & ĐÓNG GÓI JSON OUTPUT
+// =========================================================================
+
+// Lấy thời gian hiện tại
+const now = new Date();
+const yyyy = now.getFullYear();
+const mm = String(now.getMonth() + 1).padStart(2, '0');
+const dd = String(now.getDate()).padStart(2, '0');
+
+// Tạo số ngẫu nhiên gồm 4 chữ số để tránh trùng ID
+const randomSuffix = String(Math.floor(Math.random() * 10000)).padStart(4, '0');
+
+// Tạo incidentId theo định dạng inc-YYYYMMDD-XXXX
+const incidentId = `inc-${yyyy}${mm}${dd}-${randomSuffix}`;
+
+// Cấu trúc payload đầu ra chuẩn JSON
+const finalPayload = {
+  incident_id: incidentId,
+  created_at: now.toISOString(), // Logic theo mẫu bạn yêu cầu
+  wazuh_alert_id: $input.first().json.body._source.id,
+  timestamp: alertTimestamp,
+  alert: {
+    alert_signature: alertSignature,
+    category: alertCategory,
+    Tags: alertTags,
+    "Affected product": affectedProduct,
+    "Attack target": attacktarget,
+    Wazuh_severity_level: wazuhSeverityLevel,
+    Suricata_severity_level: suricataSeverityLevel,
+    rule_severity: ruleSeverity
+  },
+  source: {
+    flow_id: flowId,
+    source_ip: sourceIp,
+    dest_ip: destIp,
+    dest_agent: destAgent
+  },
+  enrichment_data: {
+    technique_id: techniqueId,
+    technique_name: techniqueName,
+    tactic_id: tacticId,
+    tactic_name: tacticName
+  },
+  ai_analysis: {
+    summary: aiSummary,
+    confidence_score: aiConfidenceScore,
+    is_false_positive: isFalsePositive,
+    threat_level: threatLevel,
+    recommended_mitigration: recommendedMitigation
+  }
+};
+
+// =========================================================================
+// TẠO ADMIN MESSAGE VÀ XUẤT DỮ LIỆU
+// =========================================================================
+
+// Tạo nội dung tin nhắn tự động dựa trên các biến đã trích xuất
+const message = `🚨 Cảnh báo bảo mật [${incidentId}]: ${alertSignature}
+- Mức độ đe doạ theo Suricata: ${suricataSeverityLevel}
+- Mức độ đe dọa theo AI: ${threatLevel}
+- Nguồn: ${sourceIp} -> Đích: ${destIp}
+- Đánh giá AI: ${aiSummary}
+- Hành động khuyến nghị: ${recommendedMitigation}`;
+
+// Trả về kết quả đúng định dạng của n8n, trải dữ liệu finalPayload và thêm admin_message
+return [
+  {
+    json: {
+      ...finalPayload,
+      admin_message: message
+    }
+  }
+];

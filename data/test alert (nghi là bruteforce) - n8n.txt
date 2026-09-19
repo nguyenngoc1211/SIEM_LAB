@@ -1,0 +1,84 @@
+{
+"_source": {
+    "timestamp": "2026-07-18T16:12:05.191+0000",
+    "rule": {
+      "level": 3,
+      "description": "Suricata: Alert - SOC LAB repeated Juice Shop login attempts",
+      "id": "86601",
+      "firedtimes": 2,
+      "mail": false,
+      "groups": [
+        "ids",
+        "suricata"
+      ]
+    },
+    "agent": {
+      "id": "000",
+      "name": "wazuh.manager"
+    },
+    "manager": {
+      "name": "wazuh.manager"
+    },
+    "id": "1784391125.23089",
+    "decoder": {
+      "name": "json"
+    },
+    "data": {
+      "timestamp": "2026-07-18T16:12:04.449523+0000",
+      "flow_id": "1323259603808494.000000",
+      "in_iface": "eth0",
+      "event_type": "alert",
+      "src_ip": "172.19.0.3",
+      "src_port": "50602",
+      "dest_ip": "172.19.0.2",
+      "dest_port": "3000",
+      "proto": "TCP",
+      "pkt_src": "wire/pcap",
+      "tx_id": "0",
+      "alert": {
+        "action": "allowed",
+        "gid": "1",
+        "signature_id": "1000006",
+        "rev": "1",
+        "signature": "SOC LAB repeated Juice Shop login attempts",
+        "category": "Attempted Administrator Privilege Gain",
+        "severity": "1"
+      },
+      "http": {
+        "hostname": "127.0.0.1",
+        "url": "/rest/user/login",
+        "http_user_agent": "Mozilla/5.0 (Windows NT; Windows NT 10.0; en-US) WindowsPowerShell/5.1.22621.4249",
+        "xff": "172.22.0.1",
+        "http_content_type": "text/html",
+        "http_method": "POST",
+        "protocol": "HTTP/1.1",
+        "status": "401",
+        "length": "26"
+      },
+      "files": [
+        {
+          "filename": "/rest/user/login",
+          "gaps": false,
+          "state": "CLOSED",
+          "stored": false,
+          "size": 61,
+          "tx_id": 0
+        }
+      ],
+      "app_proto": "http",
+      "direction": "to_server",
+      "flow": {
+        "pkts_toserver": "4",
+        "pkts_toclient": "3",
+        "bytes_toserver": "627",
+        "bytes_toclient": "591",
+        "start": "2026-07-18T16:12:04.439167+0000",
+        "src_ip": "172.19.0.3",
+        "dest_ip": "172.19.0.2",
+        "src_port": "50602",
+        "dest_port": "3000"
+      }
+    },
+    "location": "/var/log/suricata/eve.json"
+  }
+}
