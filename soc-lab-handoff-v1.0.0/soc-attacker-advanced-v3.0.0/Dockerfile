@@ -1,30 +1,15 @@
-FROM debian:bookworm-slim
+# Reuse the already provisioned v3 tool image (nmap, curl, Python, tini)
+# and replace only the scenario implementation. This keeps v2 builds
+# deterministic and offline in the lab.
+FROM soc-attacker-advanced:v3.0.0
 
-ENV DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        bash \
-        ca-certificates \
-        curl \
-        dnsutils \
-        iputils-ping \
-        jq \
-        netcat-openbsd \
-        nmap \
-        openssl \
-        procps \
-        python3 \
-        tini \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN useradd -r -u 10001 -g nogroup soc
-
+USER root
 WORKDIR /opt/soc
-COPY src/attackctl.py /opt/soc/attackctl.py
+COPY --chmod=0755 src/ /opt/soc/
+COPY scenarios/ /opt/soc/scenarios/
 COPY wordlists/ /opt/soc/wordlists/
-RUN chmod +x /opt/soc/attackctl.py \
-    && ln -s /opt/soc/attackctl.py /usr/local/bin/attackctl
+
+ENV PYTHONPATH=/opt/soc
 
 USER soc
 ENTRYPOINT ["/usr/bin/tini", "--"]

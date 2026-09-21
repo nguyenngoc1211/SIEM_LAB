@@ -1,0 +1,215 @@
+<group name="soc_v2,">
+  <rule id="110100" level="3">
+    <if_group>suricata</if_group>
+    <field name="alert.signature">^SOC LAB V2 </field>
+    <description>SOC Attack Scenarios v2 Suricata event: $(alert.signature)</description>
+    <group>soc_v2_event,</group>
+  </rule>
+
+  <rule id="110101" level="7">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 network service discovery$</field>
+    <description>Network service discovery behavior from one source</description>
+    <mitre><id>T1046</id></mitre>
+    <group>soc_v2_recon,network_scan,</group>
+  </rule>
+
+  <rule id="110102" level="7">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 web resource enumeration burst$</field>
+    <description>Thresholded web resource enumeration behavior</description>
+    <mitre><id>T1595.002</id></mitre>
+    <group>soc_v2_recon,web_enumeration,</group>
+  </rule>
+
+  <rule id="110103" level="6">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 automated scanner fingerprint$</field>
+    <description>Automated scanner HTTP fingerprint</description>
+    <mitre><id>T1595.002</id></mitre>
+    <group>soc_v2_recon,scanner_fingerprint,</group>
+  </rule>
+
+  <rule id="110104" level="8">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 path traversal attempt$</field>
+    <description>Path traversal attempt against a web application</description>
+    <mitre><id>T1190</id></mitre>
+    <group>soc_v2_exploitation,path_traversal,</group>
+  </rule>
+
+  <rule id="110105" level="8">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 Linux LFI attempt$</field>
+    <description>Linux local-file-inclusion attempt</description>
+    <mitre><id>T1190</id></mitre>
+    <group>soc_v2_exploitation,lfi,</group>
+  </rule>
+
+  <rule id="110106" level="8">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature" type="pcre2">^SOC LAB V2 (SQL injection|obfuscated SQL injection)</field>
+    <description>SQL injection progression or normalization-evasion attempt</description>
+    <mitre><id>T1190</id></mitre>
+    <group>soc_v2_exploitation,sqli,</group>
+  </rule>
+
+  <rule id="110107" level="8">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 obfuscated SQL injection$</field>
+    <description>Obfuscated SQL injection normalization test</description>
+    <mitre><id>T1190</id></mitre>
+    <group>soc_v2_exploitation,sqli_obfuscated,</group>
+  </rule>
+
+  <rule id="110108" level="7">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 cross-site scripting attempt$</field>
+    <description>Cross-site scripting attempt</description>
+    <mitre><id>T1190</id></mitre>
+    <group>soc_v2_exploitation,xss,</group>
+  </rule>
+
+  <rule id="110109" level="9">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 command injection attempt$</field>
+    <description>Command injection behavior against the safe simulation endpoint</description>
+    <mitre><id>T1190</id></mitre>
+    <group>soc_v2_exploitation,command_injection,</group>
+  </rule>
+
+  <rule id="110110" level="8">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 prototype pollution attempt$</field>
+    <description>Node.js prototype pollution attempt</description>
+    <mitre><id>T1190</id></mitre>
+    <group>soc_v2_exploitation,prototype_pollution,</group>
+  </rule>
+
+  <rule id="110111" level="7">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 JWT tampering attempt$</field>
+    <description>JWT manipulation or suspicious algorithm attempt</description>
+    <mitre><id>T1190</id></mitre>
+    <group>soc_v2_auth,jwt_tampering,</group>
+  </rule>
+
+  <rule id="110112" level="9">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 brute force behavior$</field>
+    <description>Password guessing: many passwords one account</description>
+    <mitre><id>T1110.001</id></mitre>
+    <group>soc_v2_auth,brute_force,</group>
+  </rule>
+
+  <rule id="110113" level="9">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 password spray behavior$</field>
+    <description>Password spraying: one password many accounts</description>
+    <mitre><id>T1110.003</id></mitre>
+    <group>soc_v2_auth,password_spray,</group>
+  </rule>
+
+  <rule id="110114" level="10">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 SSRF trigger$</field>
+    <description>SSRF trigger against the constrained lab endpoint</description>
+    <mitre><id>T1190</id></mitre>
+    <group>soc_v2_exploitation,soc_v2_ssrf_trigger,</group>
+  </rule>
+
+  <rule id="110119" level="10">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 SSRF internal destination access$</field>
+    <description>Backend HTTP access to an isolated internal sink after SSRF input</description>
+    <mitre><id>T1190</id></mitre>
+    <group>soc_v2_exploitation,soc_v2_ssrf_access,</group>
+  </rule>
+
+  <rule id="110115" level="8">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 suspicious file upload$</field>
+    <description>Suspicious non-executable file upload</description>
+    <mitre><id>T1190</id></mitre>
+    <group>soc_v2_exploitation,file_upload,</group>
+  </rule>
+
+  <rule id="110116" level="10">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature" type="pcre2">^SOC LAB V2 (fake data exfiltration|encoded exfiltration payload)$</field>
+    <description>Fake-data exfiltration to the isolated lab sink</description>
+    <mitre><id>T1041</id><id>T1132.001</id></mitre>
+    <group>soc_v2_post_compromise,exfiltration,</group>
+  </rule>
+
+  <rule id="110117" level="10">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature">^SOC LAB V2 periodic HTTP beacon$</field>
+    <description>Periodic HTTP application-layer beacon behavior</description>
+    <mitre><id>T1071.001</id></mitre>
+    <group>soc_v2_post_compromise,c2_beacon,</group>
+  </rule>
+
+  <rule id="110118" level="8">
+    <if_sid>110100</if_sid>
+    <field name="alert.signature" type="pcre2">^SOC LAB V2 (HTTP framing conflict|duplicate Content-Length framing)</field>
+    <description>Conflicting HTTP message framing headers</description>
+    <mitre><id>T1190</id></mitre>
+    <group>soc_v2_exploitation,http_framing,</group>
+  </rule>
+
+  <rule id="110190" level="12" timeframe="120" ignore="120">
+    <if_group>soc_v2_exploitation</if_group>
+    <if_matched_group>soc_v2_recon</if_matched_group>
+    <same_field>src_ip</same_field>
+    <description>Reconnaissance followed by exploitation from the same source</description>
+    <group>soc_v2_correlation,recon_to_exploitation,high_severity,</group>
+  </rule>
+
+  <rule id="110191" level="12" frequency="3" timeframe="90">
+    <if_matched_sid>110106</if_matched_sid>
+    <same_field>src_ip</same_field>
+    <description>Escalation: repeated SQL injection progression from the same source</description>
+    <mitre><id>T1190</id></mitre>
+    <group>soc_v2_correlation,sqli_escalation,</group>
+  </rule>
+
+  <rule id="110192" level="12" frequency="3" timeframe="60">
+    <if_matched_sid>110112</if_matched_sid>
+    <same_field>src_ip</same_field>
+    <description>Escalation: sustained same-user brute-force behavior</description>
+    <mitre><id>T1110.001</id></mitre>
+    <group>soc_v2_correlation,brute_force_escalation,</group>
+  </rule>
+
+  <rule id="110193" level="12" frequency="3" timeframe="60">
+    <if_matched_sid>110113</if_matched_sid>
+    <same_field>src_ip</same_field>
+    <description>Escalation: sustained multi-user password-spray behavior</description>
+    <mitre><id>T1110.003</id></mitre>
+    <group>soc_v2_correlation,password_spray_escalation,</group>
+  </rule>
+
+  <rule id="110194" level="13" timeframe="60" ignore="60">
+    <if_group>soc_v2_ssrf_access</if_group>
+    <if_matched_group>soc_v2_ssrf_trigger</if_matched_group>
+    <description>Escalation: SSRF trigger followed by observed internal service access</description>
+    <mitre><id>T1190</id></mitre>
+    <group>soc_v2_correlation,ssrf_verified,</group>
+  </rule>
+
+  <rule id="110195" level="13" timeframe="180" ignore="180">
+    <if_group>soc_v2_post_compromise</if_group>
+    <if_matched_group>soc_v2_exploitation</if_matched_group>
+    <description>Escalation: web exploitation followed by exfiltration or beacon activity</description>
+    <group>soc_v2_correlation,post_compromise_chain,</group>
+  </rule>
+
+  <rule id="110196" level="12" timeframe="120" ignore="120">
+    <if_group>soc_v2_auth</if_group>
+    <if_matched_group>soc_v2_recon</if_matched_group>
+    <same_field>src_ip</same_field>
+    <description>Reconnaissance followed by authentication attacks from the same source</description>
+    <group>soc_v2_correlation,recon_to_auth,high_severity,</group>
+  </rule>
+</group>

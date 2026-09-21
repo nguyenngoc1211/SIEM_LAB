@@ -57,4 +57,18 @@ Dashboard: mở `Threat Hunting` hoặc `Security events`, dùng bộ lọc:
 rule.groups:suricata
 ```
 
-Custom SID của project: `1000001` đến `1000007`.
+## SOC Attack Scenarios v2
+
+The evaluation suite now contains 19 behavioral scenarios and four composite chains:
+
+```powershell
+docker exec soc_attacker_v2 attackctl run WEB-06
+docker exec soc_attacker_v2 attackctl run-batch RECON-01 RECON-02 WEB-06 --pause 2
+docker exec soc_attacker_v2 attackctl run-all --pause 2
+docker exec soc_attacker_v2 attackctl run-chain CHAIN-A
+docker exec soc_attacker_v2 attackctl report --output-dir /opt/soc/runtime/reports --mapper-url http://host.docker.internal:8000
+```
+
+See `SCENARIOS_V2.md` and `MIGRATION_V1_TO_V2.md`. V2 custom SIDs use `1001001-1001099`; ET rules are not modified.
+
+Custom SID của SOC Attack Scenarios v2: `1001001` đến `1001099`. Đây là file custom riêng; ET Rules không bị sửa đè.

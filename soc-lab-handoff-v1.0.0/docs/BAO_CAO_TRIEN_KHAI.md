@@ -80,17 +80,7 @@ Wazuh Manager đọc trực tiếp file:
 
 ## 4. Rules và alert
 
-Project giữ SID local trong dải:
-
-| SID | Mục đích |
-|---:|---|
-| 1000001 | Probe kiểm tra pipeline |
-| 1000002 | SQL injection pattern |
-| 1000003 | XSS pattern |
-| 1000004 | Path traversal pattern |
-| 1000005 | sqlmap User-Agent |
-| 1000006 | Nhiều lần đăng nhập thất bại |
-| 1000007 | Command injection pattern |
+SOC Attack Scenarios v2 giữ custom SID trong dải `1001001–1001099`. Các rule này nằm trong `sensor/local.rules`, tách biệt khỏi ET Rules và không dùng scenario marker làm tín hiệu phát hiện. Bảng chi tiết nằm trong `SCENARIOS_V2.md`.
 
 Hai cảnh báo nhiễu đã quan sát:
 
@@ -162,7 +152,7 @@ rule.groups:suricata
 Có thể lọc custom rule:
 
 ```text
-data.alert.signature_id:1000001
+data.alert.signature_id:[1001001 TO 1001099]
 ```
 
 ## 8. Rủi ro và việc cần làm trước prod-like

@@ -6,33 +6,18 @@ param(
 
 $ErrorActionPreference = "Stop"
 $SocLabDir = (Resolve-Path $SocLabDir).Path
-$RulesSource = Join-Path $PSScriptRoot "..\rules\soc-attacker-v3.rules"
 $LocalRules = Join-Path $SocLabDir "sensor\local.rules"
-
-if (!(Test-Path $RulesSource)) { throw "Rules file not found: $RulesSource" }
 if (!(Test-Path $LocalRules)) { throw "SOC lab local.rules not found: $LocalRules" }
 
-$Start = "# --- SOC attacker advanced v3 rules BEGIN ---"
-$End = "# --- SOC attacker advanced v3 rules END ---"
-$Existing = Get-Content $LocalRules -Raw
-$Block = Get-Content $RulesSource -Raw
-$NewBlock = "`n$Start`n$Block`n$End`n"
-
-$Backup = "$LocalRules.bak.$(Get-Date -Format yyyyMMddHHmmss)"
-Copy-Item $LocalRules $Backup
-
-$Pattern = "(?s)`n?# --- SOC attacker advanced v3 rules BEGIN ---.*?# --- SOC attacker advanced v3 rules END ---`n?"
-$Clean = [regex]::Replace($Existing, $Pattern, "`n")
-Set-Content -Path $LocalRules -Value ($Clean.TrimEnd() + $NewBlock) -Encoding ASCII
-
-Write-Host "Installed v3 Suricata rules into: $LocalRules"
-Write-Host "Backup created: $Backup"
+Write-Host "Compatibility wrapper: v2 custom rules are already managed by $LocalRules."
+Write-Host "No ET rule is copied, replaced, or modified."
 
 if ($RestartSuricata) {
   Push-Location $SocLabDir
-  try {
-    docker compose up -d --build --force-recreate suricata
-  } finally {
-    Pop-Location
-  }
+  try { docker compose up -d --build --force-recreate suricata }
+  finally { Pop-Location }
 }
+
+Push-Location $SocLabDir
+try { docker compose exec -T suricata suricata -T -c /etc/suricata/suricata.yaml }
+finally { Pop-Location }

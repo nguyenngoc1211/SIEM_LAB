@@ -26,7 +26,7 @@ Lý do chính: Juice Shop là ứng dụng cố ý chứa lỗ hổng.
 - [ ] Backup cấu hình Wazuh trước triển khai.
 - [ ] Test rollback.
 - [ ] Dashboard dùng TLS và credential đã thay mặc định.
-- [ ] Xác nhận custom SID `1000001–1000007` đi tới Wazuh.
+- [ ] Xác nhận custom SOC v2 SID `1001001–1001099` đi tới Wazuh; không chỉnh sửa ET Rules.
 - [ ] Review/tune SID nhiễu `2200122`, `2200003`.
 - [ ] Phê duyệt kế hoạch nâng Wazuh 4.8.0.
 - [ ] Phê duyệt kế hoạch chuyển Suricata 7 sang 8.

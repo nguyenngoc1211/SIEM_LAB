@@ -1,17 +1,51 @@
-# Rules dành riêng cho lab. SID 1000001-1000099 được giữ cho project này.
+# SOC Attack Scenarios v2 behavioral rules.
+# SID namespace 1001001-1001099 is reserved for v2.
+# Ground-truth headers and /__soc_attack_marker__ are intentionally absent.
 
-alert http any any -> any any (msg:"SOC LAB HTTP probe request"; flow:established,to_server; http.uri; content:"/__soc_probe__"; nocase; classtype:misc-activity; sid:1000001; rev:1;)
+alert tcp any any -> any [22,23,53,443,8080,9200,55000] (msg:"SOC LAB V2 network service discovery"; flags:S; flow:stateless; detection_filter:track by_src,count 4,seconds 10; classtype:network-scan; metadata:mitre_technique_id T1046, mitre_tactic_id TA0007; sid:1001001; rev:2;)
 
-alert http any any -> any any (msg:"SOC LAB possible SQL injection in URI"; flow:established,to_server; http.uri; content:"union"; nocase; content:"select"; nocase; distance:0; within:160; classtype:web-application-attack; sid:1000002; rev:1;)
+alert http any any -> any any (msg:"SOC LAB V2 web resource enumeration burst"; flow:established,to_server; http.uri; pcre:"/^\/(?:admin(?:istrator)?|api(?:\/|$)|swagger|openapi|api-docs|\.env|\.git|backup|config|debug|metrics|server-status|actuator|graphql|database|dump)/i"; detection_filter:track by_src,count 6,seconds 20; classtype:web-application-activity; metadata:mitre_technique_id T1595.002, mitre_tactic_id TA0043; sid:1001002; rev:1;)
 
-alert http any any -> any any (msg:"SOC LAB possible XSS payload in URI"; flow:established,to_server; http.uri.raw; pcre:"/(?:<|%3[cC])script/i"; classtype:web-application-attack; sid:1000003; rev:1;)
+alert http any any -> any any (msg:"SOC LAB V2 automated scanner fingerprint"; flow:established,to_server; http.header; pcre:"/(?:User-Agent\x3a\s*(?:sqlmap|Nikto|Nmap Scripting Engine)|X-Scanner\x3a)/i"; classtype:network-scan; metadata:mitre_technique_id T1595.002, mitre_tactic_id TA0043; sid:1001003; rev:1;)
 
-alert http any any -> any any (msg:"SOC LAB possible path traversal in URI"; flow:established,to_server; http.uri.raw; content:"../"; classtype:web-application-attack; sid:1000004; rev:1;)
+alert http any any -> any any (msg:"SOC LAB V2 path traversal attempt"; flow:established,to_server; http.uri.raw; pcre:"/(?:\.\.\/|%2e%2e(?:%2f|\/)|%252e%252e%252f)/i"; classtype:web-application-attack; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001004; rev:1;)
 
-alert http any any -> any any (msg:"SOC LAB sqlmap user-agent observed"; flow:established,to_server; http.user_agent; content:"sqlmap"; nocase; classtype:web-application-attack; sid:1000005; rev:1;)
+alert http any any -> any any (msg:"SOC LAB V2 Linux LFI attempt"; flow:established,to_server; http.uri.raw; pcre:"/(?:etc(?:\/|%2f|%252f)passwd)/i"; classtype:web-application-attack; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001005; rev:1;)
 
-alert http any any -> any any (msg:"SOC LAB repeated Juice Shop login attempts"; flow:established,to_server; http.method; content:"POST"; http.uri; content:"/rest/user/login"; nocase; threshold:type both, track by_src, count 5, seconds 60; classtype:attempted-admin; sid:1000006; rev:1;)
+alert http any any -> any any (msg:"SOC LAB V2 SQL injection boolean or syntax probe"; flow:established,to_server; http.uri; pcre:"/(?:'\s*(?:or|and)\s*'?\w+|\b(?:or|and)\s+\d+\s*=\s*\d+)/i"; classtype:web-application-attack; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001006; rev:1;)
 
-alert http any any -> any any (msg:"SOC LAB possible command injection in URI"; flow:established,to_server; http.uri.raw; pcre:"/(?:\x3b|\x26|\x7c|%3[bB]|%26|%7[cC])(?:id|whoami|uname|cat)(?:\x20|%20|\x2b|%2[bB]|$)/i"; classtype:web-application-attack; sid:1000007; rev:2;)
+alert http any any -> any any (msg:"SOC LAB V2 SQL injection UNION probe"; flow:established,to_server; http.uri; content:"union"; nocase; content:"select"; nocase; distance:0; within:128; classtype:web-application-attack; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001007; rev:1;)
 
-alert http any any -> any any (msg:"SOC LAB time-delay SQL injection in URI"; flow:established,to_server; http.uri; pcre:"/(?:pg_)?sleep\s*\(|waitfor\s+delay/i"; classtype:web-application-attack; sid:1000008; rev:1;)
+alert http any any -> any any (msg:"SOC LAB V2 SQL injection time-delay probe"; flow:established,to_server; http.uri; pcre:"/(?:sleep\s*\(|pg_sleep\s*\(|waitfor\s+delay)/i"; classtype:web-application-attack; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001008; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB V2 obfuscated SQL injection"; flow:established,to_server; http.uri.raw; pcre:"/(?:%2527.*(?:or|union)|%2f%2a[^?]{0,80}%2a%2f(?:union|select))/i"; classtype:web-application-attack; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001009; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB V2 cross-site scripting attempt"; flow:established,to_server; http.uri.raw; pcre:"/(?:<|%3c)(?:script|svg|img|input)\b|(?:onerror|onload|onfocus)(?:=|%3d)/i"; classtype:web-application-attack; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001010; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB V2 command injection attempt"; flow:established,to_server; http.method; content:"POST"; http.uri; content:"/lab/command"; http.request_body; pcre:"/(?:\x3b|\x7c|&&)\s*(?:whoami|echo)\b/i"; classtype:web-application-attack; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001011; rev:2;)
+
+alert http any any -> any any (msg:"SOC LAB V2 prototype pollution attempt"; flow:established,to_server; http.method; content:"POST"; http.uri; content:"/lab/prototype-merge"; http.request_body; pcre:"/(?:\"__proto__\"|\"constructor\"\s*:\s*\{\s*\"prototype\")/i"; classtype:web-application-attack; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001012; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB V2 JWT tampering attempt"; flow:established,to_server; http.uri; content:"/lab/jwt"; http.header; pcre:"/Authorization\x3a\s*Bearer\s+(?:eyJhbGciOiJub25l|[^\r\n ]+\.(?:modified|invalid-signature))/i"; classtype:web-application-attack; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001013; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB V2 brute force behavior"; flow:established,to_client; http.response_header; content:"X-SOC-Auth-Pattern|3A| brute-force"; nocase; classtype:attempted-admin; metadata:mitre_technique_id T1110.001, mitre_tactic_id TA0006; sid:1001014; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB V2 password spray behavior"; flow:established,to_client; http.response_header; content:"X-SOC-Auth-Pattern|3A| password-spray"; nocase; classtype:attempted-user; metadata:mitre_technique_id T1110.003, mitre_tactic_id TA0006; sid:1001015; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB V2 SSRF trigger"; flow:established,to_server; http.method; content:"POST"; http.uri; content:"/lab/ssrf"; http.request_body; pcre:"/\"destination\"\s*:\s*\"(?:loopback|internal|metadata)\"/i"; classtype:web-application-attack; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001016; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB V2 SSRF internal destination access"; flow:established,to_server; http.uri; pcre:"/^\/__soc_internal__\/(?:internal|metadata)\//i"; http.user_agent; content:"soc-lab-backend/2.0"; nocase; classtype:web-application-attack; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001017; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB V2 suspicious file upload"; flow:established,to_server; http.method; content:"POST"; http.uri; content:"/lab/upload"; http.request_body; pcre:"/filename=\"[^\"]*(?:\.php\.|\.exe\.|webshell)[^\"]*\"/i"; classtype:web-application-attack; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001018; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB V2 fake data exfiltration"; flow:established,to_server; http.method; content:"POST"; http.uri; content:"/__soc_internal__/exfil/collect"; http.user_agent; content:"soc-lab-backend/2.0"; nocase; classtype:policy-violation; metadata:mitre_technique_id T1041, mitre_tactic_id TA0010; sid:1001019; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB V2 encoded exfiltration payload"; flow:established,to_server; http.uri; content:"/__soc_internal__/exfil/collect"; content:"encoding=encoded"; nocase; classtype:policy-violation; metadata:mitre_technique_id T1132.001, mitre_tactic_id TA0011; sid:1001020; rev:1;)
+
+alert http any any -> any any (msg:"SOC LAB V2 periodic HTTP beacon"; flow:established,to_server; http.method; content:"POST"; http.uri; content:"/__soc_internal__/c2/telemetry"; detection_filter:track by_src,count 5,seconds 5; classtype:trojan-activity; metadata:mitre_technique_id T1071.001, mitre_tactic_id TA0011; sid:1001021; rev:1;)
+
+alert tcp any any -> any 80 (msg:"SOC LAB V2 HTTP framing conflict"; flow:established,to_server; content:"Content-Length|3A|"; nocase; content:"Transfer-Encoding|3A|"; nocase; distance:0; within:512; classtype:protocol-command-decode; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001022; rev:1;)
+
+alert tcp any any -> any 80 (msg:"SOC LAB V2 HTTP framing conflict reversed"; flow:established,to_server; content:"Transfer-Encoding|3A|"; nocase; content:"Content-Length|3A|"; nocase; distance:0; within:512; classtype:protocol-command-decode; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001023; rev:1;)
+
+alert tcp any any -> any 80 (msg:"SOC LAB V2 duplicate Content-Length framing"; flow:established,to_server; content:"Content-Length|3A|"; nocase; content:"Content-Length|3A|"; nocase; distance:0; within:128; classtype:protocol-command-decode; metadata:mitre_technique_id T1190, mitre_tactic_id TA0001; sid:1001024; rev:1;)

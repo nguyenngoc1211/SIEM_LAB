@@ -17,6 +17,7 @@ services:
     restart: unless-stopped
     depends_on:
       - juice-shop
+      - lab-backend
     ports:
       - "${LAB_BIND_IP:-127.0.0.1}:${LAB_PORT:-8081}:80"
     volumes:
@@ -30,6 +31,8 @@ services:
         interface_name: eth1
         aliases:
           - gateway
+      soc_internal:
+        interface_name: eth2
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://127.0.0.1/__gateway_health__ >/dev/null 2>&1 || exit 1"]
       interval: 10s
@@ -55,9 +58,153 @@ services:
     environment:
       SURICATA_INTERFACE: ${SURICATA_INTERFACE:-eth0}
       RULE_UPDATE_INTERVAL: ${RULE_UPDATE_INTERVAL:-86400}
+      RULE_UPDATE_ENABLED: ${RULE_UPDATE_ENABLED:-false}
     volumes:
       - ./runtime/suricata-logs:/var/log/suricata
       - suricata_state:/var/lib/suricata
+
+  lab-backend:
+    build:
+      context: ./services/lab-backend
+    image: soc-lab-backend:v2.0.0
+    container_name: soc_lab_backend
+    restart: unless-stopped
+    expose:
+      - 3001
+    environment:
+      INTERNAL_GATEWAY: http://soc_gateway
+      INTERNAL_TOKEN: soc-lab-v2-internal
+    networks:
+      soc_backend:
+        aliases:
+          - lab-backend
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=32m
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    healthcheck:
+      test: [CMD, /nodejs/bin/node, /soc/healthcheck.js]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+
+  internal-sink:
+    build:
+      context: ./services/sink
+    image: soc-lab-sink:v2.0.0
+    container_name: soc_internal_sink
+    restart: unless-stopped
+    environment:
+      SINK_ROLE: internal
+    expose:
+      - 3100
+    networks:
+      soc_internal:
+        aliases:
+          - internal-sink
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=8m
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+  metadata-sim:
+    image: soc-lab-sink:v2.0.0
+    container_name: soc_metadata_sim
+    restart: unless-stopped
+    depends_on:
+      - internal-sink
+    environment:
+      SINK_ROLE: metadata
+    expose:
+      - 3100
+    networks:
+      soc_internal:
+        aliases:
+          - metadata-sim
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+  exfil-sink:
+    image: soc-lab-sink:v2.0.0
+    container_name: soc_exfil_sink
+    restart: unless-stopped
+    depends_on:
+      - internal-sink
+    environment:
+      SINK_ROLE: exfil
+    expose:
+      - 3100
+    networks:
+      soc_internal:
+        aliases:
+          - exfil-sink
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+  c2-sink:
+    image: soc-lab-sink:v2.0.0
+    container_name: soc_c2_sink
+    restart: unless-stopped
+    depends_on:
+      - internal-sink
+    environment:
+      SINK_ROLE: c2
+    expose:
+      - 3100
+    networks:
+      soc_internal:
+        aliases:
+          - c2-sink
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+
+  attacker:
+    build:
+      context: ./soc-attacker-advanced-v3.0.0
+    image: soc-attack-scenarios:v2.0.0
+    container_name: soc_attacker_v2
+    hostname: soc-attacker-v2
+    environment:
+      TARGET: http://soc_gateway
+      TARGET_HOST: soc_gateway
+      TARGET_PORT: 80
+      SAFE_MODE: true
+      GROUND_TRUTH_PATH: /opt/soc/runtime/ground-truth/scenario-runs.jsonl
+      WAZUH_ALERTS_PATH: /var/ossec-logs/alerts/alerts.json
+    networks:
+      - soc_backend
+    volumes:
+      - ./runtime:/opt/soc/runtime
+      - wazuh_logs:/var/ossec-logs:ro
+      - ./runtime/suricata-logs:/opt/soc/telemetry/suricata:ro
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    group_add:
+      - "999"
+    mem_limit: 512m
+    cpus: 0.75
+    pids_limit: 192
+    command: [sleep, infinity]
 
 networks:
   soc_backend:
@@ -65,7 +212,14 @@ networks:
     driver: bridge
   soc_shared:
     external: true
+  soc_internal:
+    name: soc_internal
+    driver: bridge
+    internal: true
 
 volumes:
   suricata_state:
     name: soc_suricata_state
+  wazuh_logs:
+    external: true
+    name: single-node_wazuh_logs

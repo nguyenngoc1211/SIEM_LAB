@@ -18,7 +18,7 @@ for line in path.open(errors="replace"):
         continue
     alert = event.get("alert", {})
     sid = alert.get("signature_id")
-    if isinstance(sid, int) and 1000001 <= sid <= 1000007:
+    if isinstance(sid, int) and 1001001 <= sid <= 1001099:
         rows.append(event)
 for event in rows:
     alert = event["alert"]

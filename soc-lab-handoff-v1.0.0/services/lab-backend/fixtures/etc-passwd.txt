@@ -1,0 +1,2 @@
+root:x:0:0:SOC Lab Root:/root:/bin/false
+soclab:x:10001:10001:SOC Lab User:/nonexistent:/bin/false

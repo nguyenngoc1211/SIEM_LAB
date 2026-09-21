@@ -3,6 +3,7 @@ set -eu
 
 INTERFACE="${SURICATA_INTERFACE:-eth0}"
 UPDATE_INTERVAL="${RULE_UPDATE_INTERVAL:-86400}"
+UPDATE_ENABLED="${RULE_UPDATE_ENABLED:-false}"
 RULE_DIR="/var/lib/suricata/rules"
 ET_RULES="${RULE_DIR}/suricata.rules"
 COMBINED_RULES="${RULE_DIR}/soc-combined.rules"
@@ -21,26 +22,21 @@ case "$UPDATE_INTERVAL" in
         ;;
 esac
 
+case "$UPDATE_ENABLED" in
+    true|false) ;;
+    *)
+        echo "RULE_UPDATE_ENABLED must be true or false." >&2
+        exit 1
+        ;;
+esac
+
 umask 022
 mkdir -p "$RULE_DIR" "$LOG_DIR" /run
 touch "$ET_RULES"
 chmod 0644 "$ET_RULES"
 
-# Bản v1/v2 từng nối local rules trực tiếp vào file ET. Loại bỏ phần cũ để
-# tránh duplicate SID khi dùng lại volume soc_suricata_state.
-clean_legacy_et_rules() {
-    tmp="${ET_RULES}.clean"
-
-    awk -v marker="$LOCAL_MARKER" '
-        $0 == marker { exit }
-        /sid:10000[0-9][0-9];/ { next }
-        { print }
-    ' "$ET_RULES" > "$tmp"
-
-    mv "$tmp" "$ET_RULES"
-    chmod 0644 "$ET_RULES"
-}
-
+# Bản cũ từng nối local rules trực tiếp vào file cache ET. Khi tạo ruleset
+# runtime, lọc phần legacy khỏi bản sao combined để file ET nguồn bất biến.
 build_combined_rules() {
     output="$1"
     tmp="${output}.tmp"
@@ -48,7 +44,13 @@ build_combined_rules() {
     : > "$tmp"
 
     if [ -s "$ET_RULES" ]; then
-        cat "$ET_RULES" >> "$tmp"
+        # Old lab versions appended custom SIDs to this cache. Filter those only
+        # while creating the runtime ruleset; never rewrite or patch ET_RULES.
+        awk -v marker="$LOCAL_MARKER" '
+            $0 == marker { exit }
+            /sid:10000[0-9][0-9];/ { next }
+            { print }
+        ' "$ET_RULES" >> "$tmp"
     fi
 
     printf '\n%s\n' "$LOCAL_MARKER" >> "$tmp"
@@ -69,7 +71,6 @@ validate_rules_file() {
 }
 
 prepare_initial_rules() {
-    clean_legacy_et_rules
     build_combined_rules "$CANDIDATE_RULES"
 
     if validate_rules_file "$CANDIDATE_RULES"; then
@@ -79,8 +80,7 @@ prepare_initial_rules() {
 
     echo "[suricata] Cached ET rules are invalid; starting with local lab rules only." >&2
     cp "$ET_RULES" "${ET_RULES}.invalid" 2>/dev/null || true
-    : > "$ET_RULES"
-    build_combined_rules "$CANDIDATE_RULES"
+    cp "$LOCAL_RULES" "$CANDIDATE_RULES"
     validate_rules_file "$CANDIDATE_RULES"
     mv "$CANDIDATE_RULES" "$COMBINED_RULES"
 }
@@ -102,7 +102,6 @@ update_rules_once() {
         return 1
     fi
 
-    clean_legacy_et_rules
     build_combined_rules "$CANDIDATE_RULES"
 
     if ! validate_rules_file "$CANDIDATE_RULES"; then
@@ -127,6 +126,11 @@ reload_loop() {
         fi
         sleep 5
     done
+
+    if [ "$UPDATE_ENABLED" != "true" ]; then
+        echo "[suricata] Automatic rule updates disabled for isolated lab mode."
+        return 0
+    fi
 
     sleep 15
 

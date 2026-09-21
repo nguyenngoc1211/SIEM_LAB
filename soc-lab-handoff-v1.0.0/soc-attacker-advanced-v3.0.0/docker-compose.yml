@@ -1,12 +1,12 @@
-name: soc-attacker-advanced-v3
+name: soc-attack-scenarios-v2
 
 services:
-  attacker-v3:
+  attacker-v2:
     build:
       context: .
-    image: soc-attacker-advanced:v3.0.0
-    container_name: soc_attacker_v3
-    hostname: soc-attacker-v3
+    image: soc-attack-scenarios:v2.0.0
+    container_name: soc_attacker_v2
+    hostname: soc-attacker-v2
     environment:
       TARGET: ${TARGET:-http://soc_gateway}
       TARGET_HOST: ${TARGET_HOST:-soc_gateway}
@@ -15,6 +15,10 @@ services:
       ALLOW_EXTERNAL_TARGETS: ${ALLOW_EXTERNAL_TARGETS:-false}
       SCENARIO_DELAY: ${SCENARIO_DELAY:-0.05}
       MAX_BURST: ${MAX_BURST:-20}
+      GROUND_TRUTH_PATH: /opt/soc/runtime/ground-truth/scenario-runs.jsonl
+    volumes:
+      - ../runtime:/opt/soc/runtime
+      - ../runtime/suricata-logs:/opt/soc/telemetry/suricata:ro
     networks:
       - soc_backend
     restart: unless-stopped

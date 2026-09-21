@@ -9,7 +9,7 @@
 | `gateway/nginx.conf` | Reverse proxy và health endpoint |
 | `sensor/Dockerfile` | Image Suricata tùy biến |
 | `sensor/entrypoint.sh` | Xây/validate ruleset, capture và update rules |
-| `sensor/local.rules` | Custom SID 1000001–1000007 |
+| `sensor/local.rules` | Custom SOC Attack Scenarios v2 SID 1001001–1001099; ET rules remain separate |
 | `scripts/preflight.sh` | Kiểm tra trước triển khai |
 | `scripts/test-alerts.sh` | Sinh traffic kiểm thử có kiểm soát |
 | `scripts/system-check.sh` | Kiểm tra end-to-end và tự tìm Wazuh container |

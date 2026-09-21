@@ -65,10 +65,10 @@ else
   fail "eve.json không tồn tại hoặc rỗng"
 fi
 TOTAL_ALERTS="$(grep -c '"event_type":"alert"' "$EVE" 2>/dev/null || true)"; TOTAL_ALERTS="${TOTAL_ALERTS:-0}"
-CUSTOM_ALERTS="$(grep -Ec '"signature_id":100000[1-7]' "$EVE" 2>/dev/null || true)"; CUSTOM_ALERTS="${CUSTOM_ALERTS:-0}"
+CUSTOM_ALERTS="$(grep -Ec '"signature_id":10010[0-9][0-9]' "$EVE" 2>/dev/null || true)"; CUSTOM_ALERTS="${CUSTOM_ALERTS:-0}"
 NOISE_ALERTS="$(grep -Ec '"signature_id":2200122|"signature_id":2200003' "$EVE" 2>/dev/null || true)"; NOISE_ALERTS="${NOISE_ALERTS:-0}"
 [[ "$TOTAL_ALERTS" -gt 0 ]] 2>/dev/null && pass "Suricata alerts tổng: $TOTAL_ALERTS" || fail "Suricata alerts tổng: 0"
-[[ "$CUSTOM_ALERTS" -gt 0 ]] 2>/dev/null && pass "Custom SOC LAB alerts: $CUSTOM_ALERTS" || warn "Chưa có custom SID 1000001-1000007; chạy make test"
+[[ "$CUSTOM_ALERTS" -gt 0 ]] 2>/dev/null && pass "Custom SOC LAB V2 alerts: $CUSTOM_ALERTS" || warn "Chưa có custom SID 1001001-1001099; chạy scripts/test-alerts.sh"
 [[ "$NOISE_ALERTS" -gt 0 ]] 2>/dev/null && warn "Truncated-packet alerts: $NOISE_ALERTS (SID 2200122/2200003)" || pass "Không thấy truncated-packet alert"
 
 echo
