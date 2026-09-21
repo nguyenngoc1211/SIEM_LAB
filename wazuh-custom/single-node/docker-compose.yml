@@ -32,7 +32,7 @@ services:
       - SSL_KEY=/etc/ssl/filebeat.key
       - API_USERNAME=wazuh-wui
       - API_PASSWORD=MyS3cr37P450r.*-
-      - N8N_WEBHOOK_URL=${N8N_WEBHOOK_URL:-http://n8n:5678/webhook/soc-alert-analysis}
+      - N8N_WEBHOOK_URL=${N8N_WEBHOOK_URL:-http://mapper-api:8000/webhook/map}
       - N8N_WEBHOOK_TIMEOUT=${N8N_WEBHOOK_TIMEOUT:-120}
     volumes:
       - wazuh_api_configuration:/var/ossec/api/configuration

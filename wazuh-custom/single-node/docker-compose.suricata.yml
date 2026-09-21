@@ -6,6 +6,10 @@ services:
         source: "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/suricata-logs"
         target: /var/log/suricata
         read_only: true
+      - type: bind
+        source: "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/wazuh/rules/soc_v2_rules.xml"
+        target: /var/ossec/etc/rules/soc_v2_rules.xml
+        read_only: true
 
   wazuh.indexer:
     restart: unless-stopped
