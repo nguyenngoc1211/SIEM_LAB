@@ -1,6 +1,8 @@
 # MITRE ATT&CK Mapping for IDS Alerts
 
-Module độc lập xây CSDL retrieval từ `../attack_final.json`, map từng alert IDS/Suricata sang ATT&CK và cung cấp workflow n8n phân tích bằng Gemini:
+Module độc lập xây CSDL retrieval từ bản làm giàu chuẩn tại
+`artifacts/attack/attack_final.mapping.json`, map từng alert IDS/Suricata sang
+ATT&CK và cung cấp workflow n8n phân tích bằng Gemini:
 
 `normalize → BM25 + ATTACK-BERT → fusion → cross-encoder → evidence guard → hierarchy/confusion → abstention`
 
@@ -10,7 +12,7 @@ Quick start từ thư mục `data`:
 
 ```powershell
 docker network inspect soc_shared
-python mitre-mapping\scripts\prepare_database.py --source attack_final.json
+python mitre-mapping\scripts\prepare_database.py
 docker compose -f docker-compose.yaml up -d --build
 python mitre-mapping\scripts\map_alert.py "test alert scan CH.txt" --expect T1595
 ```
@@ -31,6 +33,9 @@ Evidence guard áp dụng policy hiện hành:
   hoặc positive rule khớp;
 - rule name và tool name nằm ở positive/negative/exclusion, không nằm ở
   required.
+- parent nằm ngoài tập technique được hỗ trợ chỉ tạo warning; fallback chỉ xảy
+  ra khi parent thực sự có trong index. Technique không khai báo parent sẽ
+  không có fallback.
 
 Kết quả kiểm thử thật được lưu ở `reports/test-alert-scan-CH.result.json`.
 

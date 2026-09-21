@@ -79,7 +79,7 @@ class RuleEngineTests(unittest.TestCase):
         self.assertFalse(result["required_passed"])
         self.assertFalse(result["valid"])
 
-    def test_unmatched_positive_event_fields_do_not_reject_candidate(self) -> None:
+    def test_candidate_requires_a_matching_event_signal(self) -> None:
         payload = {
             "required_evidence": [],
             "positive_evidence": [
@@ -96,8 +96,30 @@ class RuleEngineTests(unittest.TestCase):
         }
         result = evaluate_evidence(payload, self.alert)
         self.assertTrue(result["required_passed"])
-        self.assertTrue(result["valid"])
+        self.assertFalse(result["event_signal_present"])
+        self.assertFalse(result["valid"])
         self.assertEqual(0.0, result["evidence_score"])
+
+    def test_matching_positive_event_field_opens_candidate_gate(self) -> None:
+        payload = {
+            "required_evidence": [],
+            "positive_evidence": [
+                {
+                    "rule_id": "POS-EVENT-001",
+                    "field": "event.action",
+                    "operator": "equals",
+                    "value": "scan",
+                    "weight": 0.4,
+                }
+            ],
+            "negative_evidence": [],
+            "exclusion_indicators": [],
+        }
+
+        result = evaluate_evidence(payload, self.alert)
+
+        self.assertTrue(result["event_signal_present"])
+        self.assertTrue(result["valid"])
 
     def test_other_required_fields_still_act_as_gates(self) -> None:
         payload = {

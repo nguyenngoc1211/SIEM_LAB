@@ -2,7 +2,7 @@
 
 ## 1. Kết quả đã triển khai
 
-Mã hệ thống nằm trong thư mục `mitre-mapping/`, còn toàn bộ container được quản lý bởi một compose gốc `../docker-compose.yaml` với project duy nhất tên `data`. Các file Python setup cũ không bị sửa; `attack_final.json`, collection `mitre_mitigations`, dữ liệu n8n, `./qdrant` và model trong `./tei` không bị xóa.
+Mã hệ thống nằm trong thư mục `mitre-mapping/`, còn toàn bộ container được quản lý bởi một compose gốc `../docker-compose.yaml` với project duy nhất tên `data`. Bản dữ liệu làm giàu chuẩn nằm tại `artifacts/attack/attack_final.mapping.json`; collection `mitre_mitigations`, dữ liệu n8n, `./qdrant` và model trong `./tei` không bị xóa.
 
 Các phần đã hoàn thành:
 
@@ -14,20 +14,22 @@ Các phần đã hoàn thành:
 6. BM25 và dense chạy độc lập Top 30, chuẩn hóa score, fusion 0.4/0.6 thành Top 20.
 7. Cross-encoder `cross-encoder/ms-marco-MiniLM-L-6-v2` revision `c5ee24cb16019beea0893ab7796b1df96625c6b8` rerank Top 20 thành Top 5; model được cache tại `./tei/reranker`.
 8. Evidence engine hỗ trợ `equals`, `contains_any`, `exists`, `in`, `greater_than_or_equal`, `matches_regex`.
-9. Required, exclusion, positive, negative evidence; confusion guard; fallback sub-technique về parent; ba trạng thái `mapped`, `uncertain`, `insufficient_evidence`.
+9. Required, exclusion, positive, negative evidence; confusion guard; fallback sub-technique về parent khi parent có trong index; ba trạng thái `mapped`, `uncertain`, `insufficient_evidence`.
 10. FastAPI cho CLI, gọi trực tiếp và Webhook/n8n.
 11. Workflow n8n import-ready gồm chuẩn hóa, ATT&CK mapping, Gemini structured analysis, tạo payload analyst và fallback khi API lỗi.
 
 ### Bổ sung CSDL có chủ đích
 
-Master `attack_final.json` hiện đã có retrieval/evidence đầy đủ cho `T1046` và
-`T1595`. File `configs/technique_overrides.json` vẫn được merge khi build
-snapshot để giữ khả năng hiệu chỉnh riêng cho thực nghiệm, nhưng không còn đặt
-rule-name signature làm required gate. Required evidence chỉ là cổng boolean
-cho sub-technique, dựa trên `event.type` hoặc `event.action`, và không cộng vào
+Snapshot `artifacts/attack/attack_final.mapping.json` là nguồn làm giàu chuẩn.
+File `configs/technique_overrides.json` vẫn được merge khi build để giữ khả
+năng hiệu chỉnh riêng cho thực nghiệm, nhưng hiện để rỗng để không ghi đè dữ
+liệu mới. Required evidence chỉ là cổng boolean và không cộng vào
 `evidence_score`.
 
-Database hiện hỗ trợ 21 technique. Một số reference (ví dụ T1078, T1110.002) nằm ngoài subset nên validator ghi warning, không coi là lỗi. Pipeline không tự sinh ATT&CK ID ngoài 21 point đã index.
+Database hiện hỗ trợ 18 technique. Parent, sub-technique hoặc confusable
+reference nằm ngoài subset chỉ tạo warning. Khi parent không có trong index,
+pipeline không tạo fallback; technique không khai báo parent cũng không có
+fallback. Pipeline không tự sinh ATT&CK ID ngoài các point đã index.
 
 ## 2. Cấu trúc quan trọng
 
@@ -86,7 +88,7 @@ docker info
 ### Bước 2 — Build CSDL mapping-ready
 
 ```powershell
-python mitre-mapping\scripts\prepare_database.py --source attack_final.json
+python mitre-mapping\scripts\prepare_database.py
 python mitre-mapping\scripts\validate_attack_final.py
 ```
 
@@ -106,7 +108,7 @@ Kết quả đúng:
 - `reranker-api`: `healthy`;
 - `indexer`: `Exited (0)` sau khi tạo/upsert index;
 - `mapper-api`: `healthy`;
-- `GET http://localhost:6333/collections/attack_techniques_v1`: `green`, 21 point.
+- `GET http://localhost:6333/collections/attack_techniques_v1`: `green`, 18 point.
 
 Lần đầu build reranker tải PyTorch và model nên lâu; các lần sau dùng image/cache đã có.
 
@@ -141,7 +143,7 @@ python mitre-mapping\scripts\map_alert.py "test alert scan CH.txt" `
   --output mitre-mapping\reports\test-alert-scan-CH.result.json
 ```
 
-Kết quả đã xác minh ngày 2026-08-04:
+Kết quả đã xác minh lại với database 18 technique ngày 2026-09-19:
 
 ```json
 {
@@ -149,7 +151,7 @@ Kết quả đã xác minh ngày 2026-08-04:
   "primary_mapping": {
     "technique_id": "T1595",
     "name": "Active Scanning",
-    "confidence": 0.980645
+    "confidence": 0.884473
   },
   "degraded_modes": []
 }
@@ -229,25 +231,20 @@ Workflow gồm tám node: nhận Webhook → chuẩn hóa → mapping → dựng
 
 ## 7. Cập nhật CSDL và rebuild index
 
-Sau khi sửa `attack_final.json` hoặc override:
+Sau khi sửa `artifacts/attack/attack_final.mapping.json` hoặc override:
 
 ```powershell
-python mitre-mapping\scripts\prepare_database.py --source attack_final.json
+python mitre-mapping\scripts\prepare_database.py
 python mitre-mapping\scripts\validate_attack_final.py
 docker compose -f docker-compose.yaml build indexer mapper-api
 docker compose -f docker-compose.yaml run --rm indexer `
-  python scripts/build_qdrant_index.py --wait 300
+  python scripts/build_qdrant_index.py --wait 300 --recreate
 docker compose -f docker-compose.yaml up -d mapper-api
 ```
 
-Nếu thay model làm đổi vector dimension, recreate riêng collection mapping:
-
-```powershell
-docker compose -f docker-compose.yaml run --rm indexer `
-  python scripts/build_qdrant_index.py --wait 300 --recreate
-```
-
-`--recreate` chỉ xóa/tạo lại collection cấu hình `attack_techniques_v1`, không đụng collection `mitre_mitigations`.
+`--recreate` cần dùng khi thay toàn bộ tập technique để point thuộc database cũ
+không còn trong Qdrant. Tùy chọn này chỉ xóa/tạo lại collection cấu hình
+`attack_techniques_v1`, không đụng collection `mitre_mitigations`.
 
 ## 8. Vận hành và xử lý lỗi
 
@@ -264,10 +261,34 @@ Invoke-RestMethod http://localhost:6333/collections/attack_techniques_v1
 - reranker tải model lại: kiểm tra bind mount `./tei/reranker:/models` và quyền ghi.
 - API trả 503: xem `docker compose ... logs mapper-api`; production đã tắt local fallback để lỗi hạ tầng không bị che giấu.
 
-## 9. Giới hạn nghiên cứu hiện tại
+## 9. Vocabulary evidence cần thống nhất ở upstream
+
+Evidence guard yêu cầu ít nhất một `event.*` rule thuộc `required_evidence`
+hoặc `positive_evidence` khớp. Với alert đã chuẩn hóa, upstream cần dùng đúng
+vocabulary của database mới, đặc biệt:
+
+- `event.type`: `network_scan`, `network_communication`, `authentication`,
+  `web_request` hoặc `service_access` theo loại alert;
+- `event.action`: `scan`, `probe`, `discover`, `connect`, `login`,
+  `authenticate`, `exploit` hoặc `flood`;
+- `event.outcome`: `success` hoặc `failure`;
+- `network.direction`: database hiện có cả vocabulary semantic
+  (`inbound`, `outbound`, `lateral`) và Suricata (`to_server`, `to_client`);
+- `target.type`: một số rule dùng `host` hoặc `application`, trong khi nhánh
+  raw Wazuh của normalizer hiện mặc định là `service`;
+- `http.status_code`: evidence dùng số nguyên `401`/`403`; upstream không nên
+  gửi chuỗi `"401"`/`"403"`;
+- khi không biết `network.application_protocol`, normalizer raw để trống chứ
+  không sinh literal `unknown`.
+
+Rule `T1498-POS-002` trước đây dùng field không tồn tại
+`network.transport_protocol`; bản build này đã sửa sang field chuẩn
+`network.transport`.
+
+## 10. Giới hạn nghiên cứu hiện tại
 
 - Mapping từng alert độc lập, không correlation theo chuỗi thời gian.
-- Supported subset là 21 technique, không phải toàn bộ Enterprise ATT&CK.
+- Supported subset là 18 technique, không phải toàn bộ Enterprise ATT&CK.
 - Dataset ground truth lớn, calibration, baseline metrics và confusion matrix chưa nằm trong phạm vi kiểm thử alert đơn hiện tại.
 - Model MS MARCO là baseline reranker tiếng Anh; cần validation set SOC thực tế trước khi tối ưu threshold hoặc thay model.
 - Mọi mapping tự động cần lưu candidate trace và được analyst duyệt khi dùng cho quyết định có tác động cao.

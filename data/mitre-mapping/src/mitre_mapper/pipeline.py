@@ -168,6 +168,7 @@ class MappingPipeline:
             "reranker_score": round(value["reranker_score"], 6),
             "rank_after_rerank": value["rank_after_rerank"],
             "required_passed": value["required_passed"],
+            "event_signal_present": value["event_signal_present"],
             "excluded": value["excluded"],
             "evidence_score": value["evidence_score"],
             "candidate_score": value["candidate_score"],

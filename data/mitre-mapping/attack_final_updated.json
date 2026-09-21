@@ -8685,7 +8685,7 @@
           "path traversal",
           "deserialization exploit",
           "remote code execution",
-          "authentication bypass"
+          "rce"
         ],
         "weight": 0.4,
         "reason": "The signature explicitly describes an application exploit class.",

@@ -143,7 +143,10 @@ def validate_database(records: Any) -> dict[str, list[str]]:
         label = item.get("technique_id", "unknown")
         parent = (item.get("parent_technique") or {}).get("technique_id")
         if parent and parent not in known:
-            errors.append(f"{label}: parent {parent} is not present")
+            warnings.append(
+                f"{label}: parent {parent} is outside the supported subset; "
+                "parent fallback is disabled for this technique"
+            )
         for child in item.get("sub_techniques", []):
             child_id = child.get("technique_id") if isinstance(child, dict) else None
             if child_id and child_id not in known:

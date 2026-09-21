@@ -85,6 +85,13 @@ def evaluate_evidence(payload: dict[str, Any], alert: dict[str, Any]) -> dict[st
     negatives = payload.get("negative_evidence", [])
     matched_positive = [_evidence_record(rule, alert) for rule in positives if rule_matches(rule, alert)]
     matched_negative = [_evidence_record(rule, alert) for rule in negatives if rule_matches(rule, alert)]
+    event_signal_present = any(
+        matched and str(rule.get("field", "")).startswith("event.")
+        for rule, matched in zip(required, required_matches)
+    ) or any(
+        str(item.get("field", "")).startswith("event.")
+        for item in matched_positive
+    )
     raw_score = sum(float(value.get("weight", 0.0)) for value in matched_positive + matched_negative)
     positive_capacity = sum(max(0.0, float(rule.get("weight", 0.0))) for rule in positives)
     normalized_score = max(0.0, min(1.0, raw_score / max(positive_capacity, 0.001)))
@@ -94,10 +101,15 @@ def evaluate_evidence(payload: dict[str, Any], alert: dict[str, Any]) -> dict[st
         rejection_reasons.append("Required evidence is missing: " + "; ".join(missing))
     if matched_exclusions:
         rejection_reasons.extend("Excluded: " + item["reason"] for item in matched_exclusions)
+    if not event_signal_present:
+        rejection_reasons.append(
+            "No required or positive event evidence matched the normalized alert."
+        )
     return {
         "required_passed": required_passed,
+        "event_signal_present": event_signal_present,
         "excluded": bool(matched_exclusions),
-        "valid": required_passed and not matched_exclusions,
+        "valid": required_passed and event_signal_present and not matched_exclusions,
         "raw_evidence_score": round(raw_score, 6),
         "evidence_score": round(normalized_score, 6),
         "supporting_evidence": matched_required + matched_positive,

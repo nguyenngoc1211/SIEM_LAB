@@ -33,6 +33,26 @@ class NormalizationTests(unittest.TestCase):
         result = normalize_alert({"body": {"producer": {"rule_name": "Scan"}, "event": {"type": "network_scan"}}})
         self.assertIn("IDS rule: Scan", result["derived"]["retrieval_text"])
 
+    def test_soc_v2_wazuh_alert_gets_behavior_semantics(self) -> None:
+        payload = {
+            "_source": {
+                "rule": {"description": "SOC v2 detection"},
+                "data": {
+                    "event_type": "alert",
+                    "direction": "to_server",
+                    "app_proto": "http",
+                    "alert": {"signature": "SOC LAB V2 periodic HTTP beacon"},
+                    "http": {"http_method": "POST", "url": "/telemetry", "status": 200},
+                },
+            }
+        }
+        result = normalize_alert(payload)
+        self.assertIn("SOC LAB V2 periodic HTTP beacon", result["producer"]["rule_name"])
+        self.assertEqual(result["event"]["type"], "network_communication")
+        self.assertEqual(result["event"]["action"], "connect")
+        self.assertEqual(result["network"]["direction"], "to_server")
+        self.assertEqual(result["target"]["type"], "application")
+
 
 if __name__ == "__main__":
     unittest.main()

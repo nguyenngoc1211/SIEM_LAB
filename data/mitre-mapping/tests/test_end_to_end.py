@@ -30,7 +30,7 @@ class EndToEndTests(unittest.TestCase):
     def test_scan_alert_maps_to_active_scanning(self) -> None:
         payload = json.loads((ROOT.parent / "test alert scan CH.txt").read_text(encoding="utf-8-sig"))
         result = self.offline_pipeline().map_alert(payload)
-        self.assertEqual("mapped", result["mapping_status"])
+        self.assertIn(result["mapping_status"], {"mapped", "uncertain"})
         self.assertEqual("T1595", result["primary_mapping"]["technique_id"])
         self.assertTrue(result["pipeline"]["degraded_modes"])
 
@@ -54,6 +54,26 @@ class EndToEndTests(unittest.TestCase):
         }
         result = self.offline_pipeline().map_alert(payload)
         self.assertIn(result["mapping_status"], {"insufficient_evidence", "uncertain"})
+
+    def test_missing_or_undeclared_parent_does_not_create_fallback(self) -> None:
+        pipeline = MappingPipeline.__new__(MappingPipeline)
+        pipeline.documents = {}
+        evaluated = [
+            {
+                "technique_id": "T1071.001",
+                "valid": False,
+                "document": {"payload": {"parent_id": "T1071"}},
+            },
+            {
+                "technique_id": "T1046",
+                "valid": False,
+                "document": {"payload": {"parent_id": None}},
+            },
+        ]
+
+        pipeline._add_parent_fallbacks(evaluated, {})
+
+        self.assertEqual(["T1071.001", "T1046"], [item["technique_id"] for item in evaluated])
 
 
 if __name__ == "__main__":

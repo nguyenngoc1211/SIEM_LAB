@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import re
 from copy import deepcopy
 from typing import Any
 
@@ -20,6 +21,33 @@ def _first(source: dict[str, Any], *paths: str) -> Any:
         if value is not None:
             return value
     return None
+
+
+def _infer_event_semantics(rule_name: Any, http_status: Any) -> tuple[str, str, str]:
+    """Infer controlled behavior fields from sensor language, never test markers."""
+    text = str(rule_name or "").lower()
+    if re.search(r"\b(brute[ -]?force|password (?:spray|guess)|credential attack)\b", text):
+        return "authentication", "login", "failure"
+    if re.search(r"\b(scan|scanner|enumerat|fingerprint|service discovery|reconnaissance)\w*\b", text):
+        action = "discover" if "discovery" in text or "enumerat" in text else "probe"
+        return "network_scan", action, "unknown"
+    if re.search(r"\b(c2|command and control|beacon)\b", text):
+        return "network_communication", "connect", "unknown"
+    if re.search(r"\b(exfiltrat|data transfer|encoded payload)\w*\b", text):
+        return "data_transfer", "transfer", "unknown"
+    if re.search(
+        r"\b(sql injection|xss|cross-site scripting|path traversal|lfi|file inclusion|"
+        r"command injection|prototype pollution|jwt tamper|ssrf|file upload|framing conflict)\b",
+        text,
+    ):
+        return "web_request", "exploit", "unknown"
+    try:
+        status = int(http_status)
+    except (TypeError, ValueError):
+        status = None
+    if status in {401, 403}:
+        return "authentication", "login", "failure"
+    return "network_event", "unknown", "unknown"
 
 
 def unwrap_payload(value: Any) -> dict[str, Any]:
@@ -78,16 +106,26 @@ def normalize_alert(payload: Any) -> dict[str, Any]:
 
     wazuh = source.get("_source") if isinstance(source.get("_source"), dict) else source
     data = wazuh.get("data") if isinstance(wazuh.get("data"), dict) else {}
-    rule_name = _first(
+    sensor_rule_name = _first(
         wazuh,
-        "rule.description",
         "data.alert.signature",
         "data.signature",
         "alert.signature",
         "message",
     )
-    event_type = _first(wazuh, "event.type", "data.event_type", "data.event.type") or "network_event"
-    action = _first(wazuh, "event.action", "data.event.action", "data.action") or "unknown"
+    wazuh_description = _first(wazuh, "rule.description")
+    rule_name_parts = []
+    for value in (sensor_rule_name, wazuh_description):
+        if value and value not in rule_name_parts:
+            rule_name_parts.append(str(value))
+    rule_name = " | ".join(rule_name_parts) or "Unknown IDS alert"
+    http_status = _first(wazuh, "data.http.status", "http.response.status_code")
+    inferred_type, inferred_action, inferred_outcome = _infer_event_semantics(rule_name, http_status)
+    raw_event_type = _first(wazuh, "event.type", "data.event_type", "data.event.type")
+    event_type = inferred_type if raw_event_type in {None, "", "alert"} else raw_event_type
+    action = _first(wazuh, "event.action", "data.event.action", "data.action") or inferred_action
+    application_protocol = _first(wazuh, "data.app_proto", "network.protocol")
+    target_type = "application" if application_protocol in {"http", "tls"} or event_type == "web_request" else "service"
     alert: dict[str, Any] = {
         "schema_version": "1.0",
         "producer": {
@@ -100,7 +138,7 @@ def normalize_alert(payload: Any) -> dict[str, Any]:
         "event": {
             "type": event_type,
             "action": action,
-            "outcome": _first(wazuh, "event.outcome", "data.event.outcome") or "unknown",
+            "outcome": _first(wazuh, "event.outcome", "data.event.outcome") or inferred_outcome,
             "disposition": _first(wazuh, "data.alert.action", "event.disposition") or "unknown",
         },
         "source": {
@@ -109,20 +147,20 @@ def normalize_alert(payload: Any) -> dict[str, Any]:
             "port": _first(wazuh, "data.src_port", "data.srcport", "source.port"),
         },
         "target": {
-            "type": "service",
+            "type": target_type,
             "ip": _first(wazuh, "data.dest_ip", "data.dst_ip", "data.destip", "destination.ip"),
             "port": _first(wazuh, "data.dest_port", "data.dst_port", "data.destport", "destination.port"),
         },
         "network": {
             "transport": _first(wazuh, "data.proto", "network.transport"),
-            "application_protocol": _first(wazuh, "data.app_proto", "network.protocol"),
-            "direction": _first(wazuh, "network.direction", "data.flow.direction"),
+            "application_protocol": application_protocol,
+            "direction": _first(wazuh, "data.direction", "network.direction", "data.flow.direction"),
         },
     }
     http = {
         "method": _first(wazuh, "data.http.http_method", "http.request.method"),
         "path": _first(wazuh, "data.http.url", "url.path"),
-        "status_code": _first(wazuh, "data.http.status", "http.response.status_code"),
+        "status_code": http_status,
     }
     if any(value is not None for value in http.values()):
         alert["http"] = http
