@@ -1,0 +1,1 @@
+alert http $HOME_NET any -> $HOME_NET any (msg:"LAB Periodic Web Heartbeat Traffic"; flow:established,to_server; http.method; content:"POST"; http.uri; content:"/__soc_internal__/c2/heartbeat"; detection_filter:track by_src,count 3,seconds 30; classtype:misc-activity; sid:1002058; rev:1;)

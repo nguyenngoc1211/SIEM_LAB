@@ -1,0 +1,28 @@
+id: A2-T1659-02
+name: Unexpected External Script Insertion
+description: Return content explicitly marked as inserted by the controlled intermediary simulation.
+mitre:
+  tactic_id:
+    - TA0001
+  technique_id:
+    - T1659
+suricata:
+  expected_sid:
+    - 1002062
+  rule_name: LAB Unexpected External Script Insertion
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002062
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

@@ -1,0 +1,1 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET 80 (msg:"LAB Length Prefixed TCP Beacon"; flow:stateless; content:"|00 08 42 45 41 43 4f 4e 30 31|"; classtype:misc-activity; sid:1002072; rev:1;)

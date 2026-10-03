@@ -1,0 +1,1 @@
+alert udp $EXTERNAL_NET any -> $HOME_NET 5555 (msg:"LAB Binary UDP Synchronization Frame"; flow:stateless; content:"|53 59 4e 43 01 02|"; classtype:misc-activity; sid:1002075; rev:1;)

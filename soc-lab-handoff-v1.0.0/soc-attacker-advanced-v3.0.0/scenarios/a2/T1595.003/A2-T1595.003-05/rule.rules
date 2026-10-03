@@ -1,0 +1,1 @@
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB CMS Resource Enumeration"; flow:established,to_server; http.uri; pcre:"/^\/(?:wp-admin|wp-login|joomla|drupal|xmlrpc|user\/login)/i"; detection_filter:track by_src,count 3,seconds 15; classtype:misc-activity; sid:1002030; rev:2;)

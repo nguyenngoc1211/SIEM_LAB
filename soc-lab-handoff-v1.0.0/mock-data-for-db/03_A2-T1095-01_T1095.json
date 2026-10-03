@@ -1,0 +1,161 @@
+{
+    "record_id":  "rec-20261001-f9a27b93",
+    "source_alert_id":  "1790843342.1864112",
+    "event_time":  "2026-10-01T08:29:00.701752+0000",
+    "processed_at":  "2026-10-02T08:29:59.548Z",
+    "severity_score":  1,
+    "severity_label":  "Low",
+    "signature":  "LAB Opaque TCP Node Greeting",
+    "category":  "network_ids",
+    "source_ip":  "172.29.0.10",
+    "source_port":  44478,
+    "destination_ip":  "172.29.0.4",
+    "destination_port":  80,
+    "protocol":  "tcp",
+    "direction":  "to_server",
+    "mapping_status":  "mapped",
+    "technique_id":  "T1095",
+    "technique_name":  "Non-Application Layer Protocol",
+    "mapping_confidence":  0.947826,
+    "ai_threat_level":  "Medium",
+    "ai_confidence":  "High",
+    "attack_likelihood":  "Medium",
+    "is_false_positive":  false,
+    "need_admin_verification":  true,
+    "summary":  "Cảnh báo Suricata về giao tiếp TCP bất thường giữa các máy chủ nội bộ, có thể liên quan đến giao thức phi ứng dụng.",
+    "detail":  {
+                   "wazuh_alert":  {
+                                       "timestamp":  "2026-10-01T08:29:02.143+0000",
+                                       "rule":  {
+                                                    "level":  3,
+                                                    "description":  "Suricata: Alert - LAB Opaque TCP Node Greeting",
+                                                    "id":  "86601",
+                                                    "firedtimes":  59,
+                                                    "mail":  false,
+                                                    "groups":  [
+                                                                   "ids",
+                                                                   "suricata"
+                                                               ]
+                                                },
+                                       "agent":  {
+                                                     "id":  "000",
+                                                     "name":  "wazuh.manager"
+                                                 },
+                                       "manager":  {
+                                                       "name":  "wazuh.manager"
+                                                   },
+                                       "id":  "1790843342.1864112",
+                                       "decoder":  {
+                                                       "name":  "json"
+                                                   },
+                                       "data":  {
+                                                    "timestamp":  "2026-10-01T08:29:00.701752+0000",
+                                                    "flow_id":  "1324398768135314.000000",
+                                                    "in_iface":  "eth0",
+                                                    "event_type":  "alert",
+                                                    "src_ip":  "172.29.0.10",
+                                                    "src_port":  "44478",
+                                                    "dest_ip":  "172.29.0.4",
+                                                    "dest_port":  "80",
+                                                    "proto":  "TCP",
+                                                    "pkt_src":  "wire/pcap",
+                                                    "alert":  {
+                                                                  "action":  "allowed",
+                                                                  "gid":  "1",
+                                                                  "signature_id":  "1002071",
+                                                                  "rev":  "1",
+                                                                  "signature":  "LAB Opaque TCP Node Greeting",
+                                                                  "category":  "Misc activity",
+                                                                  "severity":  "3",
+                                                                  "metadata":  {
+                                                                                   "mitre_tactic_id":  [
+                                                                                                           "TA0011"
+                                                                                                       ],
+                                                                                   "mitre_technique_id":  [
+                                                                                                              "T1095"
+                                                                                                          ]
+                                                                               }
+                                                              },
+                                                    "direction":  "to_server",
+                                                    "flow":  {
+                                                                 "pkts_toserver":  "4",
+                                                                 "pkts_toclient":  "2",
+                                                                 "bytes_toserver":  "281",
+                                                                 "bytes_toclient":  "140",
+                                                                 "start":  "2026-10-01T08:29:00.701576+0000",
+                                                                 "src_ip":  "172.29.0.10",
+                                                                 "dest_ip":  "172.29.0.4",
+                                                                 "src_port":  "44478",
+                                                                 "dest_port":  "80"
+                                                             }
+                                                },
+                                       "location":  "/var/log/suricata/eve.json"
+                                   },
+                   "suricata_alert":  {
+                                          "timestamp":  "2026-10-01T08:29:00.701752+0000",
+                                          "flow_id":  "1324398768135314.000000",
+                                          "in_iface":  "eth0",
+                                          "event_type":  "alert",
+                                          "src_ip":  "172.29.0.10",
+                                          "src_port":  "44478",
+                                          "dest_ip":  "172.29.0.4",
+                                          "dest_port":  "80",
+                                          "proto":  "TCP",
+                                          "pkt_src":  "wire/pcap",
+                                          "alert":  {
+                                                        "action":  "allowed",
+                                                        "gid":  "1",
+                                                        "signature_id":  "1002071",
+                                                        "rev":  "1",
+                                                        "signature":  "LAB Opaque TCP Node Greeting",
+                                                        "category":  "Misc activity",
+                                                        "severity":  "3",
+                                                        "metadata":  {
+                                                                         "mitre_tactic_id":  [
+                                                                                                 "TA0011"
+                                                                                             ],
+                                                                         "mitre_technique_id":  [
+                                                                                                    "T1095"
+                                                                                                ]
+                                                                     }
+                                                    },
+                                          "direction":  "to_server",
+                                          "flow":  {
+                                                       "pkts_toserver":  "4",
+                                                       "pkts_toclient":  "2",
+                                                       "bytes_toserver":  "281",
+                                                       "bytes_toclient":  "140",
+                                                       "start":  "2026-10-01T08:29:00.701576+0000",
+                                                       "src_ip":  "172.29.0.10",
+                                                       "dest_ip":  "172.29.0.4",
+                                                       "src_port":  "44478",
+                                                       "dest_port":  "80"
+                                                   }
+                                      },
+                   "gemini_analysis":  {
+                                           "summary":  "Cảnh báo Suricata về giao tiếp TCP bất thường giữa các máy chủ nội bộ, có thể liên quan đến giao thức phi ứng dụng.",
+                                           "is_false_positive":  false,
+                                           "threat_level":  "Medium",
+                                           "confidence":  "High",
+                                           "attack_likelihood":  "Medium",
+                                           "rationale":  "Cảnh báo \"LAB Opaque TCP Node Greeting\" của Suricata cho thấy có một giao tiếp TCP không rõ ràng hoặc bất thường giữa địa chỉ IP nguồn 172.29.0.10 và địa chỉ IP đích 172.29.0.4 trên cổng 80. Việc sử dụng giao thức không xác định (unknown protocol) và việc ánh xạ ATT\u0026CK tới T1095 (Giao thức lớp phi ứng dụng) cho thấy khả năng có hoạt động C2 hoặc truyền dữ liệu bằng một giao thức tùy chỉnh hoặc không chuẩn. Mặc dù đây là một cảnh báo \"LAB\", nhưng nó vẫn cần được điều tra để xác định bản chất của giao tiếp này.",
+                                           "observed_evidence":  [
+                                                                     "signature: LAB Opaque TCP Node Greeting",
+                                                                     "source_ip: 172.29.0.10",
+                                                                     "destination_ip: 172.29.0.4",
+                                                                     "destination_port: 80",
+                                                                     "protocol: unknown",
+                                                                     "ATT\u0026CK Technique: T1095 Non-Application Layer Protocol"
+                                                                 ],
+                                           "recommended_actions":  [
+                                                                       "Xác minh mục đích của giao tiếp giữa 172.29.0.10 và 172.29.0.4 trên cổng 80.",
+                                                                       "Kiểm tra nhật ký (log) trên cả máy chủ nguồn và đích để tìm kiếm các hoạt động bất thường khác.",
+                                                                       "Phân tích gói tin (packet capture) nếu có thể để hiểu rõ hơn về nội dung giao tiếp.",
+                                                                       "Tham khảo ý kiến quản trị viên hệ thống hoặc chủ sở hữu tài sản để xác định xem đây có phải là hoạt động hợp pháp hay không."
+                                                                   ],
+                                           "need_admin_verification":  true,
+                                           "soar_action":  "admin_approval",
+                                           "analyst_notes":  "Cảnh báo này có thể là một phần của thử nghiệm nội bộ hoặc một giao tiếp hợp pháp sử dụng giao thức tùy chỉnh. Tuy nhiên, bản chất \"mờ đục\" của nó đòi hỏi phải điều tra kỹ lưỡng để loại trừ các mối đe dọa tiềm ẩn như C2."
+                                       }
+               }
+}

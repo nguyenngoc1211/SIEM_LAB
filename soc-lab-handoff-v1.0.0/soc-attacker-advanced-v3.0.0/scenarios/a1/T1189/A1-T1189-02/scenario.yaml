@@ -1,0 +1,28 @@
+id: A1-T1189-02
+name: Fake system update page response
+description: Return a harmless response containing three fake Windows update page phrases.
+mitre:
+  tactic_id:
+    - TA0001
+  technique_id:
+    - T1189
+suricata:
+  expected_sid:
+    - 2069668
+  rule_name: ET MALWARE Observed Fake Updates Page Inbound
+  rule_source: et_open
+source:
+  container: soc_attacker_v2
+  type: et_open
+  reference: ET Open SID 2069668
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A1-2069668
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 30

@@ -1,0 +1,163 @@
+{
+    "record_id":  "rec-20261001-ec55dddd",
+    "source_alert_id":  "1790843252.1812922",
+    "event_time":  "2026-10-01T08:27:31.627082+0000",
+    "processed_at":  "2026-10-02T08:29:39.598Z",
+    "severity_score":  1,
+    "severity_label":  "Low",
+    "signature":  "LAB Internal Common Service Sweep",
+    "category":  "network_ids",
+    "source_ip":  "172.29.0.2",
+    "source_port":  36272,
+    "destination_ip":  "172.29.0.4",
+    "destination_port":  80,
+    "protocol":  "tcp",
+    "direction":  "to_server",
+    "mapping_status":  "mapped",
+    "technique_id":  "T1046",
+    "technique_name":  "Network Service Discovery",
+    "mapping_confidence":  0.950318,
+    "ai_threat_level":  "Medium",
+    "ai_confidence":  "High",
+    "attack_likelihood":  "Medium",
+    "is_false_positive":  false,
+    "need_admin_verification":  true,
+    "summary":  "Phát hiện quét dịch vụ nội bộ từ 172.29.0.2 đến 172.29.0.4 trên cổng 80, được cảnh báo bởi quy tắc \u0027LAB Internal Common Service Sweep\u0027.",
+    "detail":  {
+                   "wazuh_alert":  {
+                                       "timestamp":  "2026-10-01T08:27:32.008+0000",
+                                       "rule":  {
+                                                    "level":  3,
+                                                    "description":  "Suricata: Alert - LAB Internal Common Service Sweep",
+                                                    "id":  "86601",
+                                                    "firedtimes":  36,
+                                                    "mail":  false,
+                                                    "groups":  [
+                                                                   "ids",
+                                                                   "suricata"
+                                                               ]
+                                                },
+                                       "agent":  {
+                                                     "id":  "000",
+                                                     "name":  "wazuh.manager"
+                                                 },
+                                       "manager":  {
+                                                       "name":  "wazuh.manager"
+                                                   },
+                                       "id":  "1790843252.1812922",
+                                       "decoder":  {
+                                                       "name":  "json"
+                                                   },
+                                       "data":  {
+                                                    "timestamp":  "2026-10-01T08:27:31.627082+0000",
+                                                    "flow_id":  "1004449736756719.000000",
+                                                    "in_iface":  "eth0",
+                                                    "event_type":  "alert",
+                                                    "src_ip":  "172.29.0.2",
+                                                    "src_port":  "36272",
+                                                    "dest_ip":  "172.29.0.4",
+                                                    "dest_port":  "80",
+                                                    "proto":  "TCP",
+                                                    "pkt_src":  "wire/pcap",
+                                                    "alert":  {
+                                                                  "action":  "allowed",
+                                                                  "gid":  "1",
+                                                                  "signature_id":  "1002001",
+                                                                  "rev":  "1",
+                                                                  "signature":  "LAB Internal Common Service Sweep",
+                                                                  "category":  "Misc activity",
+                                                                  "severity":  "3",
+                                                                  "metadata":  {
+                                                                                   "mitre_tactic_id":  [
+                                                                                                           "TA0007"
+                                                                                                       ],
+                                                                                   "mitre_technique_id":  [
+                                                                                                              "T1046"
+                                                                                                          ]
+                                                                               }
+                                                              },
+                                                    "direction":  "to_server",
+                                                    "flow":  {
+                                                                 "pkts_toserver":  "1",
+                                                                 "pkts_toclient":  "0",
+                                                                 "bytes_toserver":  "74",
+                                                                 "bytes_toclient":  "0",
+                                                                 "start":  "2026-10-01T08:27:31.627082+0000",
+                                                                 "src_ip":  "172.29.0.2",
+                                                                 "dest_ip":  "172.29.0.4",
+                                                                 "src_port":  "36272",
+                                                                 "dest_port":  "80"
+                                                             }
+                                                },
+                                       "location":  "/var/log/suricata/eve.json"
+                                   },
+                   "suricata_alert":  {
+                                          "timestamp":  "2026-10-01T08:27:31.627082+0000",
+                                          "flow_id":  "1004449736756719.000000",
+                                          "in_iface":  "eth0",
+                                          "event_type":  "alert",
+                                          "src_ip":  "172.29.0.2",
+                                          "src_port":  "36272",
+                                          "dest_ip":  "172.29.0.4",
+                                          "dest_port":  "80",
+                                          "proto":  "TCP",
+                                          "pkt_src":  "wire/pcap",
+                                          "alert":  {
+                                                        "action":  "allowed",
+                                                        "gid":  "1",
+                                                        "signature_id":  "1002001",
+                                                        "rev":  "1",
+                                                        "signature":  "LAB Internal Common Service Sweep",
+                                                        "category":  "Misc activity",
+                                                        "severity":  "3",
+                                                        "metadata":  {
+                                                                         "mitre_tactic_id":  [
+                                                                                                 "TA0007"
+                                                                                             ],
+                                                                         "mitre_technique_id":  [
+                                                                                                    "T1046"
+                                                                                                ]
+                                                                     }
+                                                    },
+                                          "direction":  "to_server",
+                                          "flow":  {
+                                                       "pkts_toserver":  "1",
+                                                       "pkts_toclient":  "0",
+                                                       "bytes_toserver":  "74",
+                                                       "bytes_toclient":  "0",
+                                                       "start":  "2026-10-01T08:27:31.627082+0000",
+                                                       "src_ip":  "172.29.0.2",
+                                                       "dest_ip":  "172.29.0.4",
+                                                       "src_port":  "36272",
+                                                       "dest_port":  "80"
+                                                   }
+                                      },
+                   "gemini_analysis":  {
+                                           "summary":  "Phát hiện quét dịch vụ nội bộ từ 172.29.0.2 đến 172.29.0.4 trên cổng 80, được cảnh báo bởi quy tắc \u0027LAB Internal Common Service Sweep\u0027.",
+                                           "is_false_positive":  false,
+                                           "threat_level":  "Medium",
+                                           "confidence":  "High",
+                                           "attack_likelihood":  "Medium",
+                                           "rationale":  "Cảnh báo chỉ ra một hoạt động quét dịch vụ nội bộ (Network Service Discovery - T1046) từ địa chỉ IP nguồn 172.29.0.2 đến địa chỉ IP đích 172.29.0.4 trên cổng 80. Bằng chứng bao gồm loại sự kiện là \u0027network_scan\u0027, hành động \u0027scan\u0027, hướng luồng \u0027to_server\u0027, và đặc biệt là tên quy tắc \u0027LAB Internal Common Service Sweep\u0027 của Suricata, tất cả đều nhất quán với việc phát hiện dịch vụ. Mặc dù đây có thể là một hoạt động quét hợp pháp (ví dụ: quét lỗ hổng định kỳ), nhưng không có thông tin xác nhận trong ngữ cảnh hiện tại, do đó cần điều tra thêm.",
+                                           "observed_evidence":  [
+                                                                     "alert_id: 1790843252.1812922",
+                                                                     "timestamp: 2026-10-01T08:27:31.627082+0000",
+                                                                     "signature: LAB Internal Common Service Sweep",
+                                                                     "event_type: network_scan",
+                                                                     "event_action: scan",
+                                                                     "source_ip: 172.29.0.2",
+                                                                     "destination_ip: 172.29.0.4",
+                                                                     "destination_port: 80"
+                                                                 ],
+                                           "recommended_actions":  [
+                                                                       "Xác minh xem địa chỉ IP nguồn 172.29.0.2 có được ủy quyền thực hiện quét mạng nội bộ hay không.",
+                                                                       "Kiểm tra nhật ký của hệ thống 172.29.0.2 để tìm kiếm các hoạt động đáng ngờ khác hoặc thông tin về mục đích của việc quét.",
+                                                                       "Kiểm tra nhật ký của hệ thống đích 172.29.0.4 để xem có phản hồi bất thường nào đối với việc quét hay không.",
+                                                                       "Tham khảo ý kiến quản trị viên hệ thống hoặc nhóm bảo mật để xác định tính hợp lệ của hoạt động quét này."
+                                                                   ],
+                                           "need_admin_verification":  true,
+                                           "soar_action":  "admin_approval",
+                                           "analyst_notes":  "Cảnh báo này cho thấy hoạt động quét dịch vụ nội bộ. Cần xác định xem đây có phải là một hoạt động được ủy quyền hay không. Nếu không, đây có thể là bước đầu của một cuộc tấn công trinh sát."
+                                       }
+               }
+}

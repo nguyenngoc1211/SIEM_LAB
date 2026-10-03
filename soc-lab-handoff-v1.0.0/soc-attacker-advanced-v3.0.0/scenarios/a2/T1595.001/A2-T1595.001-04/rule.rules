@@ -1,0 +1,1 @@
+alert tcp $EXTERNAL_NET any -> [172.29.0.20,172.29.0.21,172.29.0.22,172.29.0.23,172.29.0.24] 8080 (msg:"LAB Alternate Web Address Sweep"; flags:S; flow:stateless; detection_filter:track by_src,count 4,seconds 15; classtype:misc-activity; sid:1002019; rev:1;)

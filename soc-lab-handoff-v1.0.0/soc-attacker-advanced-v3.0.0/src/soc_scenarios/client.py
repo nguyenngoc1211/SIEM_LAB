@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import shlex
 import socket
 import subprocess
 import time
@@ -51,8 +52,17 @@ class LabClient:
         target = self._url(request_path)
         result: dict[str, Any] = {
             "type": "http", "method": method, "path": request_path,
-            "target": target, "body_bytes": len(body or b""),
+            "target": target, "headers": request_headers,
+            "body_bytes": len(body or b""),
+            "body": (body or b"").decode("utf-8", errors="replace"),
         }
+        command = ["curl", "-sS", "-X", method]
+        for key, value in request_headers.items():
+            command.extend(["-H", f"{key}: {value}"])
+        if body:
+            command.extend(["--data-binary", body.decode("utf-8", errors="replace")])
+        command.append(target)
+        result["attack_command"] = " ".join(shlex.quote(value) for value in command)
         if self.dry_run:
             result.update({"sent": False, "dry_run": True})
             self.results.append(result)
@@ -112,7 +122,11 @@ class LabClient:
         return result
 
     def raw_http(self, payload: bytes) -> dict[str, Any]:
-        result: dict[str, Any] = {"type": "raw_http", "bytes": len(payload)}
+        result: dict[str, Any] = {
+            "type": "raw_http", "bytes": len(payload),
+            "payload": payload.decode("latin1", errors="replace"),
+            "attack_command": "raw TCP payload to " + self.target_host + ":" + str(self.target_port),
+        }
         if self.dry_run:
             result.update({"sent": False, "dry_run": True})
             self.results.append(result)
@@ -128,5 +142,50 @@ class LabClient:
             result.update({"sent": True, "error": type(error).__name__ + ": " + str(error)})
         self.results.append(result)
         print("RAW", len(payload), "bytes ->", result.get("error", "sent"))
+        time.sleep(self.delay)
+        return result
+
+    def raw_tcp(self, port: int, payload: bytes) -> dict[str, Any]:
+        result: dict[str, Any] = {
+            "type": "raw_tcp", "port": port, "bytes": len(payload),
+            "payload_hex": payload.hex(),
+            "attack_command": f"send {len(payload)} raw TCP bytes to {self.target_host}:{port}",
+        }
+        if self.dry_run:
+            result.update({"sent": False, "dry_run": True})
+            self.results.append(result)
+            return result
+        try:
+            with socket.create_connection((self.target_host, port), timeout=3) as connection:
+                connection.sendall(payload)
+            result["sent"] = True
+        except Exception as error:
+            # A reset after send is still traffic generation, but connect errors are not.
+            result.update({"sent": False, "error": type(error).__name__ + ": " + str(error)})
+        self.results.append(result)
+        time.sleep(self.delay)
+        return result
+
+    def udp(self, port: int, payload: bytes, *, count: int = 1) -> dict[str, Any]:
+        result: dict[str, Any] = {
+            "type": "udp", "port": port, "bytes_each": len(payload), "count": count,
+            "payload_hex": payload.hex(),
+            "attack_command": f"send {count} UDP datagrams to {self.target_host}:{port}",
+        }
+        if self.dry_run:
+            result.update({"sent": False, "dry_run": True})
+            self.results.append(result)
+            return result
+        sent = 0
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as connection:
+                for _ in range(count):
+                    connection.sendto(payload, (self.target_host, port))
+                    sent += 1
+            result.update({"sent": sent == count, "datagrams_sent": sent})
+        except Exception as error:
+            result.update({"sent": False, "datagrams_sent": sent,
+                           "error": type(error).__name__ + ": " + str(error)})
+        self.results.append(result)
         time.sleep(self.delay)
         return result

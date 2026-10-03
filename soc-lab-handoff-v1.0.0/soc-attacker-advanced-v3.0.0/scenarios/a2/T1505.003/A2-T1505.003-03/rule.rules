@@ -1,0 +1,1 @@
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB Suspicious ASPX Execution Endpoint Access"; flow:established,to_server; http.uri; content:"/aspnet_client/update.aspx?action=exec"; classtype:misc-activity; sid:1002048; rev:1;)

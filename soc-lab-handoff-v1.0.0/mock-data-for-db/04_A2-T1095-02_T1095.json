@@ -1,0 +1,161 @@
+{
+    "record_id":  "rec-20261001-818ef394",
+    "source_alert_id":  "1790843371.1865686",
+    "event_time":  "2026-10-01T08:29:07.412775+0000",
+    "processed_at":  "2026-10-02T08:30:08.149Z",
+    "severity_score":  1,
+    "severity_label":  "Low",
+    "signature":  "LAB Length Prefixed TCP Beacon",
+    "category":  "network_ids",
+    "source_ip":  "172.29.0.10",
+    "source_port":  44530,
+    "destination_ip":  "172.29.0.4",
+    "destination_port":  80,
+    "protocol":  "tcp",
+    "direction":  "to_server",
+    "mapping_status":  "mapped",
+    "technique_id":  "T1095",
+    "technique_name":  "Non-Application Layer Protocol",
+    "mapping_confidence":  0.946649,
+    "ai_threat_level":  "High",
+    "ai_confidence":  "High",
+    "attack_likelihood":  "High",
+    "is_false_positive":  false,
+    "need_admin_verification":  true,
+    "summary":  "Cảnh báo IDS/Suricata phát hiện hoạt động beaconing TCP với tiền tố độ dài, cho thấy khả năng có kênh điều khiển và kiểm soát (C2) sử dụng giao thức phi ứng dụng.",
+    "detail":  {
+                   "wazuh_alert":  {
+                                       "timestamp":  "2026-10-01T08:29:31.474+0000",
+                                       "rule":  {
+                                                    "level":  3,
+                                                    "description":  "Suricata: Alert - LAB Length Prefixed TCP Beacon",
+                                                    "id":  "86601",
+                                                    "firedtimes":  60,
+                                                    "mail":  false,
+                                                    "groups":  [
+                                                                   "ids",
+                                                                   "suricata"
+                                                               ]
+                                                },
+                                       "agent":  {
+                                                     "id":  "000",
+                                                     "name":  "wazuh.manager"
+                                                 },
+                                       "manager":  {
+                                                       "name":  "wazuh.manager"
+                                                   },
+                                       "id":  "1790843371.1865686",
+                                       "decoder":  {
+                                                       "name":  "json"
+                                                   },
+                                       "data":  {
+                                                    "timestamp":  "2026-10-01T08:29:07.412775+0000",
+                                                    "flow_id":  "927861430191373.000000",
+                                                    "in_iface":  "eth0",
+                                                    "event_type":  "alert",
+                                                    "src_ip":  "172.29.0.10",
+                                                    "src_port":  "44530",
+                                                    "dest_ip":  "172.29.0.4",
+                                                    "dest_port":  "80",
+                                                    "proto":  "TCP",
+                                                    "pkt_src":  "wire/pcap",
+                                                    "alert":  {
+                                                                  "action":  "allowed",
+                                                                  "gid":  "1",
+                                                                  "signature_id":  "1002072",
+                                                                  "rev":  "1",
+                                                                  "signature":  "LAB Length Prefixed TCP Beacon",
+                                                                  "category":  "Misc activity",
+                                                                  "severity":  "3",
+                                                                  "metadata":  {
+                                                                                   "mitre_tactic_id":  [
+                                                                                                           "TA0011"
+                                                                                                       ],
+                                                                                   "mitre_technique_id":  [
+                                                                                                              "T1095"
+                                                                                                          ]
+                                                                               }
+                                                              },
+                                                    "direction":  "to_server",
+                                                    "flow":  {
+                                                                 "pkts_toserver":  "4",
+                                                                 "pkts_toclient":  "2",
+                                                                 "bytes_toserver":  "282",
+                                                                 "bytes_toclient":  "140",
+                                                                 "start":  "2026-10-01T08:29:07.412642+0000",
+                                                                 "src_ip":  "172.29.0.10",
+                                                                 "dest_ip":  "172.29.0.4",
+                                                                 "src_port":  "44530",
+                                                                 "dest_port":  "80"
+                                                             }
+                                                },
+                                       "location":  "/var/log/suricata/eve.json"
+                                   },
+                   "suricata_alert":  {
+                                          "timestamp":  "2026-10-01T08:29:07.412775+0000",
+                                          "flow_id":  "927861430191373.000000",
+                                          "in_iface":  "eth0",
+                                          "event_type":  "alert",
+                                          "src_ip":  "172.29.0.10",
+                                          "src_port":  "44530",
+                                          "dest_ip":  "172.29.0.4",
+                                          "dest_port":  "80",
+                                          "proto":  "TCP",
+                                          "pkt_src":  "wire/pcap",
+                                          "alert":  {
+                                                        "action":  "allowed",
+                                                        "gid":  "1",
+                                                        "signature_id":  "1002072",
+                                                        "rev":  "1",
+                                                        "signature":  "LAB Length Prefixed TCP Beacon",
+                                                        "category":  "Misc activity",
+                                                        "severity":  "3",
+                                                        "metadata":  {
+                                                                         "mitre_tactic_id":  [
+                                                                                                 "TA0011"
+                                                                                             ],
+                                                                         "mitre_technique_id":  [
+                                                                                                    "T1095"
+                                                                                                ]
+                                                                     }
+                                                    },
+                                          "direction":  "to_server",
+                                          "flow":  {
+                                                       "pkts_toserver":  "4",
+                                                       "pkts_toclient":  "2",
+                                                       "bytes_toserver":  "282",
+                                                       "bytes_toclient":  "140",
+                                                       "start":  "2026-10-01T08:29:07.412642+0000",
+                                                       "src_ip":  "172.29.0.10",
+                                                       "dest_ip":  "172.29.0.4",
+                                                       "src_port":  "44530",
+                                                       "dest_port":  "80"
+                                                   }
+                                      },
+                   "gemini_analysis":  {
+                                           "summary":  "Cảnh báo IDS/Suricata phát hiện hoạt động beaconing TCP với tiền tố độ dài, cho thấy khả năng có kênh điều khiển và kiểm soát (C2) sử dụng giao thức phi ứng dụng.",
+                                           "is_false_positive":  false,
+                                           "threat_level":  "High",
+                                           "confidence":  "High",
+                                           "attack_likelihood":  "High",
+                                           "rationale":  "Cảnh báo \u0027LAB Length Prefixed TCP Beacon\u0027 từ Suricata cho thấy một kết nối TCP có thể đang thực hiện beaconing, một dấu hiệu phổ biến của hoạt động điều khiển và kiểm soát (C2). Giao tiếp này diễn ra trên cổng 80 (thường dùng cho HTTP) nhưng được phân loại là \u0027unknown\u0027 protocol, phù hợp với kỹ thuật T1095 (Giao thức lớp phi ứng dụng) của MITRE ATT\u0026CK. Điều này ngụ ý rằng kẻ tấn công có thể đang sử dụng một giao thức tùy chỉnh hoặc che giấu để duy trì kết nối với máy chủ bị xâm nhập (172.29.0.4). Mức độ tin cậy cao do chữ ký rõ ràng và sự phù hợp với kỹ thuật ATT\u0026CK.",
+                                           "observed_evidence":  [
+                                                                     "signature: LAB Length Prefixed TCP Beacon",
+                                                                     "source_ip: 172.29.0.10",
+                                                                     "destination_ip: 172.29.0.4",
+                                                                     "destination_port: 80",
+                                                                     "protocol: unknown",
+                                                                     "ATT\u0026CK Technique: T1095 Non-Application Layer Protocol"
+                                                                 ],
+                                           "recommended_actions":  [
+                                                                       "Kiểm tra nhật ký hệ thống và nhật ký mạng trên máy chủ đích (172.29.0.4) để tìm kiếm các hoạt động bất thường khác hoặc dấu hiệu xâm nhập.",
+                                                                       "Phân tích lưu lượng mạng liên quan đến địa chỉ IP nguồn (172.29.0.10) và đích (172.29.0.4) để xác định bản chất của giao tiếp.",
+                                                                       "Xác minh danh tính và mục đích của địa chỉ IP nguồn 172.29.0.10.",
+                                                                       "Nếu xác nhận là độc hại, cô lập máy chủ 172.29.0.4 khỏi mạng và bắt đầu quy trình ứng phó sự cố."
+                                                                   ],
+                                           "need_admin_verification":  true,
+                                           "soar_action":  "create_incident",
+                                           "analyst_notes":  "Cần ưu tiên điều tra cảnh báo này do tính chất của hoạt động beaconing và việc sử dụng giao thức không xác định. Mặc dù cổng đích là 80, việc không có giao thức HTTP cho thấy đây không phải là lưu lượng web thông thường. Cần xác định xem 172.29.0.4 có phải là máy chủ quan trọng hay không và liệu 172.29.0.10 có phải là một tài sản hợp pháp trong mạng hay không."
+                                       }
+               }
+}

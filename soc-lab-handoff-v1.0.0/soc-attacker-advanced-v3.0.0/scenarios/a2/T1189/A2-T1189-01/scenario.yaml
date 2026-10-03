@@ -1,0 +1,28 @@
+id: A2-T1189-01
+name: Fake Verification Page Delivery
+description: Return a harmless response containing urgent verification content.
+mitre:
+  tactic_id:
+    - TA0001
+  technique_id:
+    - T1189
+suricata:
+  expected_sid:
+    - 1002008
+  rule_name: LAB Fake Verification Page Delivery
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002008
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

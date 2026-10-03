@@ -182,6 +182,76 @@ def http_framing(client: LabClient) -> None:
         client.raw_http(payload.encode("ascii"))
 
 
+# One observable and one ET SID per A1 scenario. Keeping these actions small is
+# intentional: a PASS can then be attributed to the declared rule rather than
+# to a broad legacy attack sequence.
+def a1_sqlmap_user_agent(client: LabClient) -> None:
+    client.request("GET", "/rest/products/search?q=test", headers={"User-Agent": "sqlmap/1.8.12#stable"})
+
+
+def a1_sql_injection_user_agent(client: LabClient) -> None:
+    client.request("GET", "/", headers={"User-Agent": "Safe SQL Injection Audit Client"})
+
+
+def a1_log4j_ldap(client: LabClient) -> None:
+    client.request("GET", "/", headers={"X-Lab-Probe": "${jndi:ldap://127.0.0.1/soc-lab}"})
+
+
+def a1_phpnuke_union(client: LabClient) -> None:
+    client.request("GET", "/modules.php?name=News&id=-1%20UNION%20SELECT%201")
+
+
+def a1_baconmap_lfi(client: LabClient) -> None:
+    client.request("GET", "/baconmap/admin/updatelist.php?filepath=%2e%2e%2fmanual.txt")
+
+
+def a1_fake_update_click(client: LabClient) -> None:
+    value = "function sendStat(action);(!clientIP);JSON.stringify({ ip: clientIP })"
+    client.request("GET", "/lab/reflect?q=" + urllib.parse.quote(value, safe=""))
+
+
+def a1_fake_update_page(client: LabClient) -> None:
+    value = (
+        "working on updates. please do not turn off your computer "
+        "installing features and drivers critical security update"
+    )
+    client.request("GET", "/lab/reflect?q=" + urllib.parse.quote(value, safe=""))
+
+
+def a1_metadata_proxy_credentials(client: LabClient) -> None:
+    client.request("GET", "/proxy/lab/latest/meta-data/iam/security-credentials/")
+
+
+def a1_metadata_proxy_identity(client: LabClient) -> None:
+    client.request("GET", "/proxy/lab/latest/dynamic/instance-identity/document")
+
+
+def a1_cisco_hardcoded_credentials(client: LabClient) -> None:
+    client.request("GET", "/cslu/v1/health", headers={
+        "Authorization": "Basic Y3NsdS13aW5kb3dzLWNsaWVudDpMaWJyYXJ5NEMkTFU=",
+    })
+
+
+def a1_dlink_command_injection(client: LabClient) -> None:
+    client.request("GET", "/_ajax_explorer.sgi?action=read&path=/tmp&where=x&en=;echo")
+
+
+def a1_comtrend_command_injection(client: LabClient) -> None:
+    client.request("GET", "/ping.cgi?pingIpAddress=127.0.0.1;echo")
+
+
+def a1_mirai_command_injection(client: LabClient) -> None:
+    client.request("POST", "/op_type=diag;echo", body=b"safe=1")
+
+
+def a1_razer_command_injection(client: LabClient) -> None:
+    client.json_request("POST", "/ubus/", ["exec", {"command": "wget http://127.0.0.1/soc-lab"}])
+
+
+def a1_log4j_lower_bypass(client: LabClient) -> None:
+    client.request("GET", "/", headers={"X-Lab-Probe": "${lower:j}${lower:n}${lower:d}${lower:i}"})
+
+
 ACTIONS: dict[str, Callable[[LabClient], None]] = {
     "BASE-00": baseline,
     "RECON-01": network_discovery,
@@ -202,4 +272,19 @@ ACTIONS: dict[str, Callable[[LabClient], None]] = {
     "EXFIL-16": data_exfiltration,
     "C2-17": c2_beacon,
     "HTTP-18": http_framing,
+    "A1-2008538": a1_sqlmap_user_agent,
+    "A1-2010087": a1_sql_injection_user_agent,
+    "A1-2034647": a1_log4j_ldap,
+    "A1-2001202": a1_phpnuke_union,
+    "A1-2011843": a1_baconmap_lfi,
+    "A1-2069667": a1_fake_update_click,
+    "A1-2069668": a1_fake_update_page,
+    "A1-2068312": a1_metadata_proxy_credentials,
+    "A1-2068313": a1_metadata_proxy_identity,
+    "A1-2056147": a1_cisco_hardcoded_credentials,
+    "A1-2030335": a1_dlink_command_injection,
+    "A1-2030502": a1_comtrend_command_injection,
+    "A1-2033272": a1_mirai_command_injection,
+    "A1-2044530": a1_razer_command_injection,
+    "A1-2034808": a1_log4j_lower_bypass,
 }

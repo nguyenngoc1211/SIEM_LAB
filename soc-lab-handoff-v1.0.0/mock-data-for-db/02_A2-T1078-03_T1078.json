@@ -1,0 +1,207 @@
+{
+    "record_id":  "rec-20261001-0fe70ec5",
+    "source_alert_id":  "1790843326.1859422",
+    "event_time":  "2026-10-01T08:28:45.850357+0000",
+    "processed_at":  "2026-10-02T08:29:48.716Z",
+    "severity_score":  1,
+    "severity_label":  "Low",
+    "signature":  "LAB Successful API Credential Use",
+    "category":  "network_ids",
+    "source_ip":  "172.29.0.4",
+    "source_port":  80,
+    "destination_ip":  "172.29.0.10",
+    "destination_port":  40830,
+    "protocol":  "http",
+    "direction":  "to_client",
+    "mapping_status":  "mapped",
+    "technique_id":  "T1078",
+    "technique_name":  "Valid Accounts",
+    "mapping_confidence":  0.945051,
+    "ai_threat_level":  "High",
+    "ai_confidence":  "High",
+    "attack_likelihood":  "High",
+    "is_false_positive":  false,
+    "need_admin_verification":  true,
+    "summary":  "Phát hiện sử dụng thành công thông tin xác thực API trên hệ thống LAB, liên quan đến địa chỉ IP nguồn 172.29.0.4 truy cập vào soc_gateway.",
+    "detail":  {
+                   "wazuh_alert":  {
+                                       "timestamp":  "2026-10-01T08:28:46.126+0000",
+                                       "rule":  {
+                                                    "level":  3,
+                                                    "description":  "Suricata: Alert - LAB Successful API Credential Use",
+                                                    "id":  "86601",
+                                                    "firedtimes":  57,
+                                                    "mail":  false,
+                                                    "groups":  [
+                                                                   "ids",
+                                                                   "suricata"
+                                                               ]
+                                                },
+                                       "agent":  {
+                                                     "id":  "000",
+                                                     "name":  "wazuh.manager"
+                                                 },
+                                       "manager":  {
+                                                       "name":  "wazuh.manager"
+                                                   },
+                                       "id":  "1790843326.1859422",
+                                       "decoder":  {
+                                                       "name":  "json"
+                                                   },
+                                       "data":  {
+                                                    "timestamp":  "2026-10-01T08:28:45.850357+0000",
+                                                    "flow_id":  "1676529386705912.000000",
+                                                    "in_iface":  "eth0",
+                                                    "event_type":  "alert",
+                                                    "src_ip":  "172.29.0.4",
+                                                    "src_port":  "80",
+                                                    "dest_ip":  "172.29.0.10",
+                                                    "dest_port":  "40830",
+                                                    "proto":  "TCP",
+                                                    "pkt_src":  "wire/pcap",
+                                                    "tx_id":  "0",
+                                                    "alert":  {
+                                                                  "action":  "allowed",
+                                                                  "gid":  "1",
+                                                                  "signature_id":  "1002006",
+                                                                  "rev":  "1",
+                                                                  "signature":  "LAB Successful API Credential Use",
+                                                                  "category":  "Misc activity",
+                                                                  "severity":  "3",
+                                                                  "metadata":  {
+                                                                                   "mitre_tactic_id":  [
+                                                                                                           "TA0001"
+                                                                                                       ],
+                                                                                   "mitre_technique_id":  [
+                                                                                                              "T1078"
+                                                                                                          ]
+                                                                               }
+                                                              },
+                                                    "http":  {
+                                                                 "hostname":  "soc_gateway",
+                                                                 "url":  "/lab/auth/valid/api-key",
+                                                                 "http_user_agent":  "soc-attack-scenarios-v2/2.0",
+                                                                 "http_content_type":  "application/json",
+                                                                 "http_method":  "GET",
+                                                                 "protocol":  "HTTP/1.1",
+                                                                 "status":  "200",
+                                                                 "length":  "51"
+                                                             },
+                                                    "files":  [
+                                                                  {
+                                                                      "filename":  "/lab/auth/valid/api-key",
+                                                                      "gaps":  false,
+                                                                      "state":  "CLOSED",
+                                                                      "stored":  false,
+                                                                      "size":  42,
+                                                                      "tx_id":  0
+                                                                  }
+                                                              ],
+                                                    "app_proto":  "http",
+                                                    "direction":  "to_client",
+                                                    "flow":  {
+                                                                 "pkts_toserver":  "4",
+                                                                 "pkts_toclient":  "4",
+                                                                 "bytes_toserver":  "533",
+                                                                 "bytes_toclient":  "538",
+                                                                 "start":  "2026-10-01T08:28:45.849099+0000",
+                                                                 "src_ip":  "172.29.0.10",
+                                                                 "dest_ip":  "172.29.0.4",
+                                                                 "src_port":  "40830",
+                                                                 "dest_port":  "80"
+                                                             }
+                                                },
+                                       "location":  "/var/log/suricata/eve.json"
+                                   },
+                   "suricata_alert":  {
+                                          "timestamp":  "2026-10-01T08:28:45.850357+0000",
+                                          "flow_id":  "1676529386705912.000000",
+                                          "in_iface":  "eth0",
+                                          "event_type":  "alert",
+                                          "src_ip":  "172.29.0.4",
+                                          "src_port":  "80",
+                                          "dest_ip":  "172.29.0.10",
+                                          "dest_port":  "40830",
+                                          "proto":  "TCP",
+                                          "pkt_src":  "wire/pcap",
+                                          "tx_id":  "0",
+                                          "alert":  {
+                                                        "action":  "allowed",
+                                                        "gid":  "1",
+                                                        "signature_id":  "1002006",
+                                                        "rev":  "1",
+                                                        "signature":  "LAB Successful API Credential Use",
+                                                        "category":  "Misc activity",
+                                                        "severity":  "3",
+                                                        "metadata":  {
+                                                                         "mitre_tactic_id":  [
+                                                                                                 "TA0001"
+                                                                                             ],
+                                                                         "mitre_technique_id":  [
+                                                                                                    "T1078"
+                                                                                                ]
+                                                                     }
+                                                    },
+                                          "http":  {
+                                                       "hostname":  "soc_gateway",
+                                                       "url":  "/lab/auth/valid/api-key",
+                                                       "http_user_agent":  "soc-attack-scenarios-v2/2.0",
+                                                       "http_content_type":  "application/json",
+                                                       "http_method":  "GET",
+                                                       "protocol":  "HTTP/1.1",
+                                                       "status":  "200",
+                                                       "length":  "51"
+                                                   },
+                                          "files":  [
+                                                        {
+                                                            "filename":  "/lab/auth/valid/api-key",
+                                                            "gaps":  false,
+                                                            "state":  "CLOSED",
+                                                            "stored":  false,
+                                                            "size":  42,
+                                                            "tx_id":  0
+                                                        }
+                                                    ],
+                                          "app_proto":  "http",
+                                          "direction":  "to_client",
+                                          "flow":  {
+                                                       "pkts_toserver":  "4",
+                                                       "pkts_toclient":  "4",
+                                                       "bytes_toserver":  "533",
+                                                       "bytes_toclient":  "538",
+                                                       "start":  "2026-10-01T08:28:45.849099+0000",
+                                                       "src_ip":  "172.29.0.10",
+                                                       "dest_ip":  "172.29.0.4",
+                                                       "src_port":  "40830",
+                                                       "dest_port":  "80"
+                                                   }
+                                      },
+                   "gemini_analysis":  {
+                                           "summary":  "Phát hiện sử dụng thành công thông tin xác thực API trên hệ thống LAB, liên quan đến địa chỉ IP nguồn 172.29.0.4 truy cập vào soc_gateway.",
+                                           "is_false_positive":  false,
+                                           "threat_level":  "High",
+                                           "confidence":  "High",
+                                           "attack_likelihood":  "High",
+                                           "rationale":  "Cảnh báo chỉ ra \u0027LAB Successful API Credential Use\u0027 với mã trạng thái HTTP 200, cho thấy việc sử dụng thông tin xác thực API đã thành công. Điều này có thể là một dấu hiệu của truy cập trái phép hoặc lạm dụng tài khoản hợp lệ (MITRE ATT\u0026CK T1078). Mặc dù có từ \u0027LAB\u0027 trong tên signature, nhưng không có thông tin bổ sung nào cho thấy đây là hoạt động được ủy quyền hoặc kiểm thử. Do đó, mức độ đe dọa và khả năng tấn công được đánh giá là Cao.",
+                                           "observed_evidence":  [
+                                                                     "signature: LAB Successful API Credential Use",
+                                                                     "event_type: authentication",
+                                                                     "event_action: authenticate",
+                                                                     "http.method: GET",
+                                                                     "http.hostname: soc_gateway",
+                                                                     "http.path: /lab/auth/valid/api-key",
+                                                                     "http.status_code: 200",
+                                                                     "source_ip: 172.29.0.4"
+                                                                 ],
+                                           "recommended_actions":  [
+                                                                       "Xác minh với chủ sở hữu hệ thống LAB hoặc nhóm bảo mật ứng dụng về hoạt động API này. Kiểm tra xem đây có phải là hoạt động được ủy quyền hay không.",
+                                                                       "Kiểm tra nhật ký xác thực trên soc_gateway và các hệ thống liên quan để tìm kiếm các hoạt động bất thường khác từ IP nguồn 172.29.0.4 hoặc tài khoản API được sử dụng.",
+                                                                       "Kiểm tra danh tính của tài khoản API đã được sử dụng thành công (nếu có thể trích xuất từ nhật ký chi tiết hơn) và xác minh quyền hạn của nó.",
+                                                                       "Đánh giá các hoạt động gần đây của tài khoản API này để phát hiện bất kỳ hành vi đáng ngờ nào."
+                                                                   ],
+                                           "need_admin_verification":  true,
+                                           "soar_action":  "create_incident",
+                                           "analyst_notes":  "Cảnh báo này chỉ ra việc sử dụng thành công thông tin xác thực API. Cần điều tra khẩn cấp để xác định tính hợp lệ của hoạt động này. Mặc dù có từ \u0027LAB\u0027 trong signature, nhưng không thể loại trừ khả năng tấn công mà không có xác nhận từ quản trị viên hoặc chủ sở hữu hệ thống. Cần kiểm tra thêm nhật ký chi tiết của ứng dụng hoặc hệ thống API để xác định tài khoản cụ thể đã được sử dụng."
+                                       }
+               }
+}

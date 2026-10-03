@@ -1,0 +1,27 @@
+id: A1-T1190-02
+name: SQL injection audit client fingerprint
+description: Send a scanner-like User-Agent whose observable indicates automated vulnerability probing.
+mitre:
+  tactic_id:
+    - TA0001
+  technique_id:
+    - T1190
+suricata:
+  expected_sid:
+    - 2010087
+  rule_name: ET SCAN Suspicious User-Agent Containing SQL Inject/ion Likely SQL Injection Scanner
+  rule_source: et_open
+source:
+  container: soc_attacker_v2
+  type: et_open
+  reference: ET Open SID 2010087
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A1-2010087
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+timeout: 30

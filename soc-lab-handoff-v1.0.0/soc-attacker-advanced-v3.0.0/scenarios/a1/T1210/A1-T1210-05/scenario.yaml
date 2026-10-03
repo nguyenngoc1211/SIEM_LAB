@@ -1,0 +1,27 @@
+id: A1-T1210-05
+name: Obfuscated JNDI token attempt
+description: Send a harmless lower-function Log4j token from the external lab attacker to the public gateway.
+mitre:
+  tactic_id:
+    - TA0008
+  technique_id:
+    - T1210
+suricata:
+  expected_sid:
+    - 2034808
+  rule_name: ET HUNTING Apache log4j RCE Attempt - Any Protocol (lower TCP Bypass) (CVE-2021-44228)
+  rule_source: et_open
+source:
+  container: soc_attacker_v2
+  type: et_open
+  reference: ET Open SID 2034808
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A1-2034808
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+timeout: 30

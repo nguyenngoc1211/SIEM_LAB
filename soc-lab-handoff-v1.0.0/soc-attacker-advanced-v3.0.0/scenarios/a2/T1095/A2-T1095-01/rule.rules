@@ -1,0 +1,1 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET 80 (msg:"LAB Opaque TCP Node Greeting"; flow:stateless; content:"|50 49 4e 47 00 4e 4f 44 45|"; classtype:misc-activity; sid:1002071; rev:1;)

@@ -1,3 +1,6 @@
 .env
 runtime/suricata-logs/*
 !runtime/suricata-logs/.gitkeep
+soc-attacker-advanced-v3.0.0/data/rule_catalog.json
+__pycache__/
+*.py[cod]

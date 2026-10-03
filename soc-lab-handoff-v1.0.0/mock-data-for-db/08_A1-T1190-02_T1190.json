@@ -1,0 +1,253 @@
+{
+    "record_id":  "rec-20261001-493ada1b",
+    "source_alert_id":  "1790843183.1728015",
+    "event_time":  "2026-10-01T08:26:22.240198+0000",
+    "processed_at":  "2026-10-02T08:30:52.051Z",
+    "severity_score":  2,
+    "severity_label":  "Medium",
+    "signature":  "ET SCAN Suspicious User-Agent Containing SQL Inject/ion Likely SQL Injection Scanner",
+    "category":  "network_ids",
+    "source_ip":  "172.29.0.10",
+    "source_port":  42626,
+    "destination_ip":  "172.29.0.4",
+    "destination_port":  80,
+    "protocol":  "http",
+    "direction":  "to_server",
+    "mapping_status":  "mapped",
+    "technique_id":  "T1190",
+    "technique_name":  "Exploit Public-Facing Application",
+    "mapping_confidence":  0.927889,
+    "ai_threat_level":  "Medium",
+    "ai_confidence":  "High",
+    "attack_likelihood":  "Medium",
+    "is_false_positive":  false,
+    "need_admin_verification":  true,
+    "summary":  "Cảnh báo về một User-Agent đáng ngờ chứa chuỗi liên quan đến SQL Injection, cho thấy có thể là một máy quét SQL Injection đang hoạt động.",
+    "detail":  {
+                   "wazuh_alert":  {
+                                       "timestamp":  "2026-10-01T08:26:23.896+0000",
+                                       "rule":  {
+                                                    "level":  3,
+                                                    "description":  "Suricata: Alert - ET SCAN Suspicious User-Agent Containing SQL Inject/ion Likely SQL Injection Scanner",
+                                                    "id":  "86601",
+                                                    "firedtimes":  11,
+                                                    "mail":  false,
+                                                    "groups":  [
+                                                                   "ids",
+                                                                   "suricata"
+                                                               ]
+                                                },
+                                       "agent":  {
+                                                     "id":  "000",
+                                                     "name":  "wazuh.manager"
+                                                 },
+                                       "manager":  {
+                                                       "name":  "wazuh.manager"
+                                                   },
+                                       "id":  "1790843183.1728015",
+                                       "decoder":  {
+                                                       "name":  "json"
+                                                   },
+                                       "data":  {
+                                                    "timestamp":  "2026-10-01T08:26:22.240198+0000",
+                                                    "flow_id":  "1861356829516491.000000",
+                                                    "in_iface":  "eth0",
+                                                    "event_type":  "alert",
+                                                    "src_ip":  "172.29.0.10",
+                                                    "src_port":  "42626",
+                                                    "dest_ip":  "172.29.0.4",
+                                                    "dest_port":  "80",
+                                                    "proto":  "TCP",
+                                                    "pkt_src":  "wire/pcap",
+                                                    "tx_id":  "0",
+                                                    "alert":  {
+                                                                  "action":  "allowed",
+                                                                  "gid":  "1",
+                                                                  "signature_id":  "2010087",
+                                                                  "rev":  "8",
+                                                                  "signature":  "ET SCAN Suspicious User-Agent Containing SQL Inject/ion Likely SQL Injection Scanner",
+                                                                  "category":  "Attempted Information Leak",
+                                                                  "severity":  "2",
+                                                                  "metadata":  {
+                                                                                   "affected_product":  [
+                                                                                                            "Any",
+                                                                                                            "Web_Server_Applications"
+                                                                                                        ],
+                                                                                   "attack_target":  [
+                                                                                                         "Client_Endpoint"
+                                                                                                     ],
+                                                                                   "confidence":  [
+                                                                                                      "Medium"
+                                                                                                  ],
+                                                                                   "created_at":  [
+                                                                                                      "2010_07_30"
+                                                                                                  ],
+                                                                                   "deployment":  [
+                                                                                                      "Datacenter",
+                                                                                                      "Perimeter"
+                                                                                                  ],
+                                                                                   "mitre_tactic_id":  [
+                                                                                                           "TA0001"
+                                                                                                       ],
+                                                                                   "mitre_tactic_name":  [
+                                                                                                             "Initial_Access"
+                                                                                                         ],
+                                                                                   "mitre_technique_id":  [
+                                                                                                              "T1190"
+                                                                                                          ],
+                                                                                   "mitre_technique_name":  [
+                                                                                                                "Exploit_Public_Facing_Application"
+                                                                                                            ],
+                                                                                   "signature_severity":  [
+                                                                                                              "Major"
+                                                                                                          ],
+                                                                                   "tag":  [
+                                                                                               "User_Agent",
+                                                                                               "SQL_Injection"
+                                                                                           ],
+                                                                                   "updated_at":  [
+                                                                                                      "2020_08_06"
+                                                                                                  ]
+                                                                               }
+                                                              },
+                                                    "http":  {
+                                                                 "hostname":  "soc_gateway",
+                                                                 "url":  "/",
+                                                                 "http_user_agent":  "Safe SQL Injection Audit Client",
+                                                                 "http_content_type":  "text/html",
+                                                                 "http_method":  "GET",
+                                                                 "protocol":  "HTTP/1.1",
+                                                                 "status":  "200",
+                                                                 "length":  "987"
+                                                             },
+                                                    "app_proto":  "http",
+                                                    "direction":  "to_server",
+                                                    "flow":  {
+                                                                 "pkts_toserver":  "4",
+                                                                 "pkts_toclient":  "7",
+                                                                 "bytes_toserver":  "481",
+                                                                 "bytes_toclient":  "7710",
+                                                                 "start":  "2026-10-01T08:26:22.236772+0000",
+                                                                 "src_ip":  "172.29.0.10",
+                                                                 "dest_ip":  "172.29.0.4",
+                                                                 "src_port":  "42626",
+                                                                 "dest_port":  "80"
+                                                             }
+                                                },
+                                       "location":  "/var/log/suricata/eve.json"
+                                   },
+                   "suricata_alert":  {
+                                          "timestamp":  "2026-10-01T08:26:22.240198+0000",
+                                          "flow_id":  "1861356829516491.000000",
+                                          "in_iface":  "eth0",
+                                          "event_type":  "alert",
+                                          "src_ip":  "172.29.0.10",
+                                          "src_port":  "42626",
+                                          "dest_ip":  "172.29.0.4",
+                                          "dest_port":  "80",
+                                          "proto":  "TCP",
+                                          "pkt_src":  "wire/pcap",
+                                          "tx_id":  "0",
+                                          "alert":  {
+                                                        "action":  "allowed",
+                                                        "gid":  "1",
+                                                        "signature_id":  "2010087",
+                                                        "rev":  "8",
+                                                        "signature":  "ET SCAN Suspicious User-Agent Containing SQL Inject/ion Likely SQL Injection Scanner",
+                                                        "category":  "Attempted Information Leak",
+                                                        "severity":  "2",
+                                                        "metadata":  {
+                                                                         "affected_product":  [
+                                                                                                  "Any",
+                                                                                                  "Web_Server_Applications"
+                                                                                              ],
+                                                                         "attack_target":  [
+                                                                                               "Client_Endpoint"
+                                                                                           ],
+                                                                         "confidence":  [
+                                                                                            "Medium"
+                                                                                        ],
+                                                                         "created_at":  [
+                                                                                            "2010_07_30"
+                                                                                        ],
+                                                                         "deployment":  [
+                                                                                            "Datacenter",
+                                                                                            "Perimeter"
+                                                                                        ],
+                                                                         "mitre_tactic_id":  [
+                                                                                                 "TA0001"
+                                                                                             ],
+                                                                         "mitre_tactic_name":  [
+                                                                                                   "Initial_Access"
+                                                                                               ],
+                                                                         "mitre_technique_id":  [
+                                                                                                    "T1190"
+                                                                                                ],
+                                                                         "mitre_technique_name":  [
+                                                                                                      "Exploit_Public_Facing_Application"
+                                                                                                  ],
+                                                                         "signature_severity":  [
+                                                                                                    "Major"
+                                                                                                ],
+                                                                         "tag":  [
+                                                                                     "User_Agent",
+                                                                                     "SQL_Injection"
+                                                                                 ],
+                                                                         "updated_at":  [
+                                                                                            "2020_08_06"
+                                                                                        ]
+                                                                     }
+                                                    },
+                                          "http":  {
+                                                       "hostname":  "soc_gateway",
+                                                       "url":  "/",
+                                                       "http_user_agent":  "Safe SQL Injection Audit Client",
+                                                       "http_content_type":  "text/html",
+                                                       "http_method":  "GET",
+                                                       "protocol":  "HTTP/1.1",
+                                                       "status":  "200",
+                                                       "length":  "987"
+                                                   },
+                                          "app_proto":  "http",
+                                          "direction":  "to_server",
+                                          "flow":  {
+                                                       "pkts_toserver":  "4",
+                                                       "pkts_toclient":  "7",
+                                                       "bytes_toserver":  "481",
+                                                       "bytes_toclient":  "7710",
+                                                       "start":  "2026-10-01T08:26:22.236772+0000",
+                                                       "src_ip":  "172.29.0.10",
+                                                       "dest_ip":  "172.29.0.4",
+                                                       "src_port":  "42626",
+                                                       "dest_port":  "80"
+                                                   }
+                                      },
+                   "gemini_analysis":  {
+                                           "summary":  "Cảnh báo về một User-Agent đáng ngờ chứa chuỗi liên quan đến SQL Injection, cho thấy có thể là một máy quét SQL Injection đang hoạt động.",
+                                           "is_false_positive":  false,
+                                           "threat_level":  "Medium",
+                                           "confidence":  "High",
+                                           "attack_likelihood":  "Medium",
+                                           "rationale":  "Cảnh báo được kích hoạt bởi một chữ ký Suricata phát hiện User-Agent đáng ngờ có chứa các chuỗi liên quan đến SQL Injection. Điều này cho thấy địa chỉ IP nguồn 172.29.0.10 có thể đang thực hiện quét lỗ hổng SQL Injection nhắm vào máy chủ 172.29.0.4 trên cổng 80 (HTTP). Mặc dù đây chỉ là một hành vi quét, nó vẫn là một dấu hiệu của hoạt động tấn công tiềm tàng.",
+                                           "observed_evidence":  [
+                                                                     "Chữ ký: ET SCAN Suspicious User-Agent Containing SQL Inject/ion Likely SQL Injection Scanner",
+                                                                     "IP nguồn: 172.29.0.10",
+                                                                     "IP đích: 172.29.0.4",
+                                                                     "Cổng đích: 80 (HTTP)",
+                                                                     "Phương thức HTTP: GET",
+                                                                     "Hành động sự kiện: exploit",
+                                                                     "Loại sự kiện: web_request",
+                                                                     "Danh mục: network_ids"
+                                                                 ],
+                                           "recommended_actions":  [
+                                                                       "Kiểm tra chi tiết nhật ký HTTP trên máy chủ đích (172.29.0.4) để xác định chuỗi User-Agent đầy đủ và các yêu cầu khác từ IP nguồn 172.29.0.10.",
+                                                                       "Xác minh xem máy chủ đích (172.29.0.4) có phải là ứng dụng web công khai hay không và có lỗ hổng SQL Injection đã biết nào không.",
+                                                                       "Kiểm tra danh tiếng của IP nguồn 172.29.0.10.",
+                                                                       "Nếu xác nhận là quét độc hại, xem xét chặn IP nguồn 172.29.0.10 tại tường lửa hoặc WAF (cần phê duyệt của quản trị viên)."
+                                                                   ],
+                                           "need_admin_verification":  true,
+                                           "soar_action":  "create_incident",
+                                           "analyst_notes":  "Cảnh báo này chỉ ra một hoạt động quét ban đầu. Cần điều tra thêm để xác định mức độ nghiêm trọng và liệu có bất kỳ nỗ lực khai thác nào thành công hay không. Hiện tại, không có bằng chứng về việc khai thác thành công."
+                                       }
+               }
+}

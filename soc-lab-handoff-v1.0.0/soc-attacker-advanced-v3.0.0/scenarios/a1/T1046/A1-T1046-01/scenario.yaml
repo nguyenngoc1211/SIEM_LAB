@@ -1,0 +1,28 @@
+id: A1-T1046-01
+name: Cloud credential proxy path probe
+description: Probe an AWS credential metadata path through a proxy-shaped endpoint.
+mitre:
+  tactic_id:
+    - TA0007
+  technique_id:
+    - T1046
+suricata:
+  expected_sid:
+    - 2068312
+  rule_name: ET INFO Insecure Proxy Discovery via AWS Instance Metadata Retrieval M1
+  rule_source: et_open
+source:
+  container: soc_attacker_v2
+  type: et_open
+  reference: ET Open SID 2068312
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A1-2068312
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 30

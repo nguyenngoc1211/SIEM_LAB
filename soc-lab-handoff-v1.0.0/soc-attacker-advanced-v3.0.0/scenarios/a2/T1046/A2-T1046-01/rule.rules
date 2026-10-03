@@ -1,0 +1,1 @@
+alert tcp 172.29.0.2 any -> 172.29.0.4 [21,22,23,25,80,443] (msg:"LAB Internal Common Service Sweep"; flags:S; flow:stateless; detection_filter:track by_src,count 4,seconds 10; classtype:misc-activity; sid:1002001; rev:1;)

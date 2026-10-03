@@ -1,0 +1,1 @@
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB Multipart Processing Request Surge"; flow:established,to_server; http.method; content:"POST"; http.uri; content:"/lab/upload"; detection_filter:track by_src,count 10,seconds 60; classtype:misc-activity; sid:1002055; rev:1;)

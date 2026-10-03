@@ -1,0 +1,28 @@
+id: A2-T1498-04
+name: High Rate Discovery Service Traffic
+description: Send twenty small UDP datagrams to lab port 1900; volume is intentionally harmless.
+mitre:
+  tactic_id:
+    - TA0040
+  technique_id:
+    - T1498
+suricata:
+  expected_sid:
+    - 1002069
+  rule_name: LAB High Rate Discovery Service Traffic
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002069
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

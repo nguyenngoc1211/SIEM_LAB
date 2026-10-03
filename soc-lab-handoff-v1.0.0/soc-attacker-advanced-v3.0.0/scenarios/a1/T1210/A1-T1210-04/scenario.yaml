@@ -1,0 +1,27 @@
+id: A1-T1210-04
+name: Router JSON download command attempt
+description: Send a harmless Razer-shaped download command request from the external lab attacker.
+mitre:
+  tactic_id:
+    - TA0008
+  technique_id:
+    - T1210
+suricata:
+  expected_sid:
+    - 2044530
+  rule_name: ET EXPLOIT Razer Sila Router - Command Injection Attempt Inbound (wget) (No CVE)
+  rule_source: et_open
+source:
+  container: soc_attacker_v2
+  type: et_open
+  reference: ET Open SID 2044530
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A1-2044530
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+timeout: 30

@@ -1,0 +1,28 @@
+id: A2-T1110-02
+name: Repeated Form Authentication Failures
+description: Submit multiple failed authentication attempts with both identities and credentials varying.
+mitre:
+  tactic_id:
+    - TA0006
+  technique_id:
+    - T1110
+suricata:
+  expected_sid:
+    - 1002032
+  rule_name: LAB Repeated Form Authentication Failures
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002032
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

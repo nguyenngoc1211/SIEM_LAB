@@ -1,0 +1,1 @@
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB Search Endpoint Request Surge"; flow:established,to_server; http.uri; content:"/rest/products/search?q=resource-intensive"; detection_filter:track by_src,count 10,seconds 60; classtype:misc-activity; sid:1002053; rev:1;)

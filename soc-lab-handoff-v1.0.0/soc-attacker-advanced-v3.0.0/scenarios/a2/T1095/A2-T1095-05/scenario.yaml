@@ -1,0 +1,28 @@
+id: A2-T1095-05
+name: Binary UDP Synchronization Frame
+description: Send an opaque application-independent frame inside the isolated lab network.
+mitre:
+  tactic_id:
+    - TA0011
+  technique_id:
+    - T1095
+suricata:
+  expected_sid:
+    - 1002075
+  rule_name: LAB Binary UDP Synchronization Frame
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002075
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

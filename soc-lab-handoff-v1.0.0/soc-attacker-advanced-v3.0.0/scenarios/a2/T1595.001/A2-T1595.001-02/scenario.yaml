@@ -1,0 +1,28 @@
+id: A2-T1595.001-02
+name: TLS Address Range Sweep
+description: Probe TCP port 443 across five isolated gateway IP aliases.
+mitre:
+  tactic_id:
+    - TA0043
+  technique_id:
+    - T1595.001
+suricata:
+  expected_sid:
+    - 1002017
+  rule_name: LAB TLS Address Range Sweep
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002017
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

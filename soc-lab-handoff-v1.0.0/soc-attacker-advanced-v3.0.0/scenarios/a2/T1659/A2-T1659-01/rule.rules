@@ -1,0 +1,1 @@
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"LAB Unexpected Verification Banner Insertion"; flow:established,to_client; http.response_header; content:"X-SOC-Content-Origin|3a| intermediary"; nocase; http.response_body; content:"urgent-notice"; nocase; classtype:misc-activity; sid:1002061; rev:1;)

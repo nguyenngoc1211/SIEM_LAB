@@ -1,0 +1,1 @@
+alert tcp 172.29.0.2 any -> 172.29.0.4 [445,1433,3000,8080,9200] (msg:"LAB Internal Administrative Port Sweep"; flags:S; flow:stateless; detection_filter:track by_src,count 4,seconds 10; classtype:misc-activity; sid:1002002; rev:1;)

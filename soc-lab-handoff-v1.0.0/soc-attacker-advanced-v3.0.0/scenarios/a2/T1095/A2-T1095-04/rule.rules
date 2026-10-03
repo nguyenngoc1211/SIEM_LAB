@@ -1,0 +1,1 @@
+alert udp $EXTERNAL_NET any -> $HOME_NET 4444 (msg:"LAB Opaque UDP Node Greeting"; flow:stateless; content:"|4e 4f 44 45 2d 48 45 4c 4c 4f ff|"; classtype:misc-activity; sid:1002074; rev:1;)

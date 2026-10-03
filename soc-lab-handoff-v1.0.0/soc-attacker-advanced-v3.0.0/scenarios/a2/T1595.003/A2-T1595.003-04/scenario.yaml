@@ -1,0 +1,28 @@
+id: A2-T1595.003-04
+name: API Documentation Enumeration
+description: Enumerate a bounded dictionary of related web resources on the local gateway.
+mitre:
+  tactic_id:
+    - TA0043
+  technique_id:
+    - T1595.003
+suricata:
+  expected_sid:
+    - 1002029
+  rule_name: LAB API Documentation Enumeration
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002029
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

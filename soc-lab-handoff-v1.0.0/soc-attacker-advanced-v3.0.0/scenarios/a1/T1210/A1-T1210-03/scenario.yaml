@@ -1,0 +1,27 @@
+id: A1-T1210-03
+name: Device operation command separator attempt
+description: Send a harmless Mirai-shaped command injection request from the external lab attacker.
+mitre:
+  tactic_id:
+    - TA0008
+  technique_id:
+    - T1210
+suricata:
+  expected_sid:
+    - 2033272
+  rule_name: ET EXPLOIT Unknown Command Injection Attempt Inbound (Possible Mirai Activity)
+  rule_source: et_open
+source:
+  container: soc_attacker_v2
+  type: et_open
+  reference: ET Open SID 2033272
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A1-2033272
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+timeout: 30

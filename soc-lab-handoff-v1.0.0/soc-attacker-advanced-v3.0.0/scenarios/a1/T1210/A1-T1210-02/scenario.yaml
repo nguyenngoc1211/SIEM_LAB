@@ -1,0 +1,27 @@
+id: A1-T1210-02
+name: Router ping command separator attempt
+description: Send a harmless Comtrend-shaped command injection request from the external lab attacker.
+mitre:
+  tactic_id:
+    - TA0008
+  technique_id:
+    - T1210
+suricata:
+  expected_sid:
+    - 2030502
+  rule_name: ET EXPLOIT Possible Authenticated Command Injection Inbound - Comtrend VR-3033 (CVE-2020-10173)
+  rule_source: et_open
+source:
+  container: soc_attacker_v2
+  type: et_open
+  reference: ET Open SID 2030502
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A1-2030502
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+timeout: 30

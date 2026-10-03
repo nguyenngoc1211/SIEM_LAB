@@ -1,0 +1,1 @@
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB Shared Basic Credential Across Accounts"; flow:established,to_server; http.uri; content:"/lab/auth/basic"; http.request_body; content:"Shared-Password-1!"; nocase; classtype:misc-activity; sid:1002043; rev:1;)

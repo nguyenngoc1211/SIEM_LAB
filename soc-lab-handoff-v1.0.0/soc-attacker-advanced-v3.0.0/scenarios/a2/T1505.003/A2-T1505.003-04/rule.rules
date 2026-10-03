@@ -1,0 +1,1 @@
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB Hidden Script Control Request"; flow:established,to_server; http.uri; content:"/cgi-bin/.maintenance.pl"; http.request_body; content:"action=command"; classtype:misc-activity; sid:1002049; rev:1;)

@@ -8,6 +8,7 @@ WORKDIR /opt/soc
 COPY --chmod=0755 src/ /opt/soc/
 COPY scenarios/ /opt/soc/scenarios/
 COPY wordlists/ /opt/soc/wordlists/
+COPY tests/ /opt/soc/tests/
 
 ENV PYTHONPATH=/opt/soc
 

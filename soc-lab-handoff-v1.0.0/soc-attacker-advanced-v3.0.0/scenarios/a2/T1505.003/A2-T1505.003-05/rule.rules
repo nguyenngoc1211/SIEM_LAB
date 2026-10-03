@@ -1,0 +1,1 @@
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB Plugin Command Console Access"; flow:established,to_server; http.uri; content:"/plugins/healthcheck.phtml?c="; classtype:misc-activity; sid:1002050; rev:1;)

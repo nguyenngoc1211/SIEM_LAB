@@ -1,0 +1,1 @@
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"LAB Hidden Loader Script Delivery"; flow:established,to_client; http.response_body; content:"https://cdn.invalid/stage.js"; nocase; classtype:misc-activity; sid:1002009; rev:1;)

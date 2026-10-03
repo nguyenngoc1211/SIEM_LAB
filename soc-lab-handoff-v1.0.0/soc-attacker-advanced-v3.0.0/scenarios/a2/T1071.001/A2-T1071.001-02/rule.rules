@@ -1,0 +1,1 @@
+alert http $HOME_NET any -> $HOME_NET any (msg:"LAB Periodic Web Checkin Traffic"; flow:established,to_server; http.method; content:"GET"; http.uri; content:"/__soc_internal__/c2/checkin"; detection_filter:track by_src,count 3,seconds 30; classtype:misc-activity; sid:1002057; rev:1;)

@@ -1,0 +1,1 @@
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB Suspicious JSP Command Endpoint Access"; flow:established,to_server; http.uri; content:"/images/cache.jsp"; http.request_body; content:"cmd=whoami"; classtype:misc-activity; sid:1002047; rev:1;)

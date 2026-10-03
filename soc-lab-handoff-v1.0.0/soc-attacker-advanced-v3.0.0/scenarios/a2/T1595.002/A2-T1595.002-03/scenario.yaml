@@ -1,0 +1,28 @@
+id: A2-T1595.002-03
+name: WebDAV Capability Check
+description: Send a bounded request intended to assess a specific exposed feature or weakness.
+mitre:
+  tactic_id:
+    - TA0043
+  technique_id:
+    - T1595.002
+suricata:
+  expected_sid:
+    - 1002023
+  rule_name: LAB WebDAV Capability Check
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002023
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

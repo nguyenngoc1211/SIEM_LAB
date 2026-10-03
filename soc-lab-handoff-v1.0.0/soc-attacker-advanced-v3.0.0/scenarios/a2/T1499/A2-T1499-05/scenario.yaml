@@ -1,0 +1,28 @@
+id: A2-T1499-05
+name: Multipart Processing Request Surge
+description: Send a small bounded burst to one application endpoint without exhausting host resources.
+mitre:
+  tactic_id:
+    - TA0040
+  technique_id:
+    - T1499
+suricata:
+  expected_sid:
+    - 1002055
+  rule_name: LAB Multipart Processing Request Surge
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002055
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

@@ -16,9 +16,12 @@ services:
       SCENARIO_DELAY: ${SCENARIO_DELAY:-0.05}
       MAX_BURST: ${MAX_BURST:-20}
       GROUND_TRUTH_PATH: /opt/soc/runtime/ground-truth/scenario-runs.jsonl
+      MAPPER_URL: http://host.docker.internal:8000
     volumes:
       - ../runtime:/opt/soc/runtime
       - ../runtime/suricata-logs:/opt/soc/telemetry/suricata:ro
+      - suricata_state:/opt/soc/rule-state:ro
+      - ./data:/opt/soc/data
     networks:
       - soc_backend
     restart: unless-stopped
@@ -29,10 +32,17 @@ services:
       - no-new-privileges:true
     cap_drop:
       - ALL
+    group_add:
+      - "998"
     mem_limit: 512m
     cpus: 0.75
     pids_limit: 192
     command: ["sleep", "infinity"]
+
+volumes:
+  suricata_state:
+    external: true
+    name: soc_suricata_state
 
 networks:
   soc_backend:

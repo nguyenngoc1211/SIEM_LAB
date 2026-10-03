@@ -1,0 +1,1 @@
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"LAB Successful API Credential Use"; flow:established,to_client; http.response_body; content:"|22|authenticated|22 3a|true"; nocase; content:"|22|channel|22 3a 22|api-key|22|"; nocase; classtype:misc-activity; sid:1002006; rev:1;)

@@ -1,0 +1,1 @@
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"LAB Deceptive Browser Update Delivery"; flow:established,to_client; http.response_body; content:"secure-browser-update.bin"; nocase; classtype:misc-activity; sid:1002010; rev:1;)

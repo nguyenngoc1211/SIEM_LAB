@@ -1,0 +1,247 @@
+{
+    "record_id":  "rec-20261001-7113ffb1",
+    "source_alert_id":  "1790843175.1722908",
+    "event_time":  "2026-10-01T08:26:15.465908+0000",
+    "processed_at":  "2026-10-02T08:30:40.641Z",
+    "severity_score":  2,
+    "severity_label":  "Medium",
+    "signature":  "ET SCAN Sqlmap SQL Injection Scan",
+    "category":  "network_ids",
+    "source_ip":  "172.29.0.10",
+    "source_port":  40046,
+    "destination_ip":  "172.29.0.4",
+    "destination_port":  80,
+    "protocol":  "http",
+    "direction":  "to_server",
+    "mapping_status":  "mapped",
+    "technique_id":  "T1190",
+    "technique_name":  "Exploit Public-Facing Application",
+    "mapping_confidence":  0.930145,
+    "ai_threat_level":  "High",
+    "ai_confidence":  "High",
+    "attack_likelihood":  "High",
+    "is_false_positive":  false,
+    "need_admin_verification":  true,
+    "summary":  "Phát hiện quét lỗ hổng SQL Injection bằng Sqlmap nhắm vào ứng dụng web trên cổng 80 của máy chủ 172.29.0.4 từ địa chỉ IP nguồn 172.29.0.10.",
+    "detail":  {
+                   "wazuh_alert":  {
+                                       "timestamp":  "2026-10-01T08:26:15.884+0000",
+                                       "rule":  {
+                                                    "level":  3,
+                                                    "description":  "Suricata: Alert - ET SCAN Sqlmap SQL Injection Scan",
+                                                    "id":  "86601",
+                                                    "firedtimes":  10,
+                                                    "mail":  false,
+                                                    "groups":  [
+                                                                   "ids",
+                                                                   "suricata"
+                                                               ]
+                                                },
+                                       "agent":  {
+                                                     "id":  "000",
+                                                     "name":  "wazuh.manager"
+                                                 },
+                                       "manager":  {
+                                                       "name":  "wazuh.manager"
+                                                   },
+                                       "id":  "1790843175.1722908",
+                                       "decoder":  {
+                                                       "name":  "json"
+                                                   },
+                                       "data":  {
+                                                    "timestamp":  "2026-10-01T08:26:15.465908+0000",
+                                                    "flow_id":  "2219336949957640.000000",
+                                                    "in_iface":  "eth0",
+                                                    "event_type":  "alert",
+                                                    "src_ip":  "172.29.0.10",
+                                                    "src_port":  "40046",
+                                                    "dest_ip":  "172.29.0.4",
+                                                    "dest_port":  "80",
+                                                    "proto":  "TCP",
+                                                    "pkt_src":  "wire/pcap",
+                                                    "tx_id":  "0",
+                                                    "alert":  {
+                                                                  "action":  "allowed",
+                                                                  "gid":  "1",
+                                                                  "signature_id":  "2008538",
+                                                                  "rev":  "10",
+                                                                  "signature":  "ET SCAN Sqlmap SQL Injection Scan",
+                                                                  "category":  "Attempted Information Leak",
+                                                                  "severity":  "2",
+                                                                  "metadata":  {
+                                                                                   "affected_product":  [
+                                                                                                            "Web_Server_Applications"
+                                                                                                        ],
+                                                                                   "attack_target":  [
+                                                                                                         "Web_Server"
+                                                                                                     ],
+                                                                                   "confidence":  [
+                                                                                                      "Medium"
+                                                                                                  ],
+                                                                                   "created_at":  [
+                                                                                                      "2010_07_30"
+                                                                                                  ],
+                                                                                   "deployment":  [
+                                                                                                      "Datacenter"
+                                                                                                  ],
+                                                                                   "mitre_tactic_id":  [
+                                                                                                           "TA0001"
+                                                                                                       ],
+                                                                                   "mitre_tactic_name":  [
+                                                                                                             "Initial_Access"
+                                                                                                         ],
+                                                                                   "mitre_technique_id":  [
+                                                                                                              "T1190"
+                                                                                                          ],
+                                                                                   "mitre_technique_name":  [
+                                                                                                                "Exploit_Public_Facing_Application"
+                                                                                                            ],
+                                                                                   "signature_severity":  [
+                                                                                                              "Major"
+                                                                                                          ],
+                                                                                   "tag":  [
+                                                                                               "SQL_Injection"
+                                                                                           ],
+                                                                                   "updated_at":  [
+                                                                                                      "2024_04_13"
+                                                                                                  ]
+                                                                               }
+                                                              },
+                                                    "http":  {
+                                                                 "hostname":  "soc_gateway",
+                                                                 "url":  "/rest/products/search?q=test",
+                                                                 "http_user_agent":  "sqlmap/1.8.12#stable",
+                                                                 "http_content_type":  "application/json",
+                                                                 "http_method":  "GET",
+                                                                 "protocol":  "HTTP/1.1",
+                                                                 "status":  "200",
+                                                                 "length":  "517"
+                                                             },
+                                                    "app_proto":  "http",
+                                                    "direction":  "to_server",
+                                                    "flow":  {
+                                                                 "pkts_toserver":  "4",
+                                                                 "pkts_toclient":  "3",
+                                                                 "bytes_toserver":  "497",
+                                                                 "bytes_toclient":  "1103",
+                                                                 "start":  "2026-10-01T08:26:15.451193+0000",
+                                                                 "src_ip":  "172.29.0.10",
+                                                                 "dest_ip":  "172.29.0.4",
+                                                                 "src_port":  "40046",
+                                                                 "dest_port":  "80"
+                                                             }
+                                                },
+                                       "location":  "/var/log/suricata/eve.json"
+                                   },
+                   "suricata_alert":  {
+                                          "timestamp":  "2026-10-01T08:26:15.465908+0000",
+                                          "flow_id":  "2219336949957640.000000",
+                                          "in_iface":  "eth0",
+                                          "event_type":  "alert",
+                                          "src_ip":  "172.29.0.10",
+                                          "src_port":  "40046",
+                                          "dest_ip":  "172.29.0.4",
+                                          "dest_port":  "80",
+                                          "proto":  "TCP",
+                                          "pkt_src":  "wire/pcap",
+                                          "tx_id":  "0",
+                                          "alert":  {
+                                                        "action":  "allowed",
+                                                        "gid":  "1",
+                                                        "signature_id":  "2008538",
+                                                        "rev":  "10",
+                                                        "signature":  "ET SCAN Sqlmap SQL Injection Scan",
+                                                        "category":  "Attempted Information Leak",
+                                                        "severity":  "2",
+                                                        "metadata":  {
+                                                                         "affected_product":  [
+                                                                                                  "Web_Server_Applications"
+                                                                                              ],
+                                                                         "attack_target":  [
+                                                                                               "Web_Server"
+                                                                                           ],
+                                                                         "confidence":  [
+                                                                                            "Medium"
+                                                                                        ],
+                                                                         "created_at":  [
+                                                                                            "2010_07_30"
+                                                                                        ],
+                                                                         "deployment":  [
+                                                                                            "Datacenter"
+                                                                                        ],
+                                                                         "mitre_tactic_id":  [
+                                                                                                 "TA0001"
+                                                                                             ],
+                                                                         "mitre_tactic_name":  [
+                                                                                                   "Initial_Access"
+                                                                                               ],
+                                                                         "mitre_technique_id":  [
+                                                                                                    "T1190"
+                                                                                                ],
+                                                                         "mitre_technique_name":  [
+                                                                                                      "Exploit_Public_Facing_Application"
+                                                                                                  ],
+                                                                         "signature_severity":  [
+                                                                                                    "Major"
+                                                                                                ],
+                                                                         "tag":  [
+                                                                                     "SQL_Injection"
+                                                                                 ],
+                                                                         "updated_at":  [
+                                                                                            "2024_04_13"
+                                                                                        ]
+                                                                     }
+                                                    },
+                                          "http":  {
+                                                       "hostname":  "soc_gateway",
+                                                       "url":  "/rest/products/search?q=test",
+                                                       "http_user_agent":  "sqlmap/1.8.12#stable",
+                                                       "http_content_type":  "application/json",
+                                                       "http_method":  "GET",
+                                                       "protocol":  "HTTP/1.1",
+                                                       "status":  "200",
+                                                       "length":  "517"
+                                                   },
+                                          "app_proto":  "http",
+                                          "direction":  "to_server",
+                                          "flow":  {
+                                                       "pkts_toserver":  "4",
+                                                       "pkts_toclient":  "3",
+                                                       "bytes_toserver":  "497",
+                                                       "bytes_toclient":  "1103",
+                                                       "start":  "2026-10-01T08:26:15.451193+0000",
+                                                       "src_ip":  "172.29.0.10",
+                                                       "dest_ip":  "172.29.0.4",
+                                                       "src_port":  "40046",
+                                                       "dest_port":  "80"
+                                                   }
+                                      },
+                   "gemini_analysis":  {
+                                           "summary":  "Phát hiện quét lỗ hổng SQL Injection bằng Sqlmap nhắm vào ứng dụng web trên cổng 80 của máy chủ 172.29.0.4 từ địa chỉ IP nguồn 172.29.0.10.",
+                                           "is_false_positive":  false,
+                                           "threat_level":  "High",
+                                           "confidence":  "High",
+                                           "attack_likelihood":  "High",
+                                           "rationale":  "Cảnh báo được kích hoạt bởi chữ ký \u0027ET SCAN Sqlmap SQL Injection Scan\u0027, cho thấy một nỗ lực rõ ràng để quét và tìm kiếm lỗ hổng SQL Injection trên ứng dụng web. Sqlmap là một công cụ tự động phổ biến được sử dụng cho mục đích này. Mặc dù kết quả HTTP status code là 200 (OK), điều này không loại trừ khả năng quét đang diễn ra hoặc đã thành công trong việc thăm dò thông tin. Mục tiêu là một ứng dụng web công khai, làm tăng mức độ nghiêm trọng của mối đe dọa.",
+                                           "observed_evidence":  [
+                                                                     "signature: ET SCAN Sqlmap SQL Injection Scan",
+                                                                     "source_ip: 172.29.0.10",
+                                                                     "destination_ip: 172.29.0.4",
+                                                                     "destination_port: 80",
+                                                                     "http.method: GET",
+                                                                     "http.path: /rest/products/search",
+                                                                     "event_action: exploit",
+                                                                     "affected_products: Web_Server_Applications"
+                                                                 ],
+                                           "recommended_actions":  [
+                                                                       "Xác minh nhật ký truy cập web (access logs) trên máy chủ đích (172.29.0.4) để tìm thêm các yêu cầu đáng ngờ từ IP nguồn 172.29.0.10.",
+                                                                       "Kiểm tra nhật ký ứng dụng (application logs) trên máy chủ đích để tìm dấu hiệu của các lỗi SQL hoặc các truy vấn bất thường.",
+                                                                       "Kiểm tra các lỗ hổng đã biết trên ứng dụng web \u0027/rest/products/search\u0027 và đảm bảo rằng tất cả các bản vá bảo mật đã được áp dụng.",
+                                                                       "Cô lập tạm thời IP nguồn 172.29.0.10 nếu có bằng chứng rõ ràng về hoạt động độc hại liên tục (yêu cầu phê duyệt từ quản trị viên)."
+                                                                   ],
+                                           "need_admin_verification":  true,
+                                           "soar_action":  "create_incident",
+                                           "analyst_notes":  "Cảnh báo chỉ ra một nỗ lực quét lỗ hổng SQL Injection sử dụng công cụ Sqlmap. Điều này phù hợp với kỹ thuật MITRE ATT\u0026CK T1190 - Exploit Public-Facing Application. Cần điều tra thêm để xác định mức độ của cuộc tấn công và liệu có bất kỳ sự khai thác thành công nào đã xảy ra hay không. Mặc dù HTTP status code là 200, điều này không đảm bảo rằng không có lỗ hổng nào được tìm thấy hoặc khai thác."
+                                       }
+               }
+}

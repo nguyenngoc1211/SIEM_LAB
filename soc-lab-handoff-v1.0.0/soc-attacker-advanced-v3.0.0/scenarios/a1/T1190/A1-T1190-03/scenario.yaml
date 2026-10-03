@@ -1,0 +1,27 @@
+id: A1-T1190-03
+name: JNDI LDAP lookup attempt
+description: Send a harmless Log4j-style LDAP lookup string to the local gateway.
+mitre:
+  tactic_id:
+    - TA0001
+  technique_id:
+    - T1190
+suricata:
+  expected_sid:
+    - 2034647
+  rule_name: ET EXPLOIT Apache log4j RCE Attempt (http ldap) (CVE-2021-44228)
+  rule_source: et_open
+source:
+  container: soc_attacker_v2
+  type: et_open
+  reference: ET Open SID 2034647
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A1-2034647
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+timeout: 30

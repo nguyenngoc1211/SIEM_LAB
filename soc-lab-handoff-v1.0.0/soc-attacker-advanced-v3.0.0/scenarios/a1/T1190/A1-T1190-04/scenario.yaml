@@ -1,0 +1,27 @@
+id: A1-T1190-04
+name: Legacy CMS UNION query attempt
+description: Send a non-destructive PHPNuke-shaped UNION SELECT request to the local gateway.
+mitre:
+  tactic_id:
+    - TA0001
+  technique_id:
+    - T1190
+suricata:
+  expected_sid:
+    - 2001202
+  rule_name: ET WEB_SPECIFIC_APPS PHPNuke general SQL injection attempt
+  rule_source: et_open
+source:
+  container: soc_attacker_v2
+  type: et_open
+  reference: ET Open SID 2001202
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A1-2001202
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+timeout: 30

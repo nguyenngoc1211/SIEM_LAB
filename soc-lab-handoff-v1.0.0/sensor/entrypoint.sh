@@ -2,6 +2,8 @@
 set -eu
 
 INTERFACE="${SURICATA_INTERFACE:-eth0}"
+HOME_NET_VALUE="${SURICATA_HOME_NET:-}"
+A2_SCAN_ALIASES_VALUE="${A2_SCAN_ALIASES:-172.29.0.20/32,172.29.0.21/32,172.29.0.22/32,172.29.0.23/32,172.29.0.24/32}"
 UPDATE_INTERVAL="${RULE_UPDATE_INTERVAL:-86400}"
 UPDATE_ENABLED="${RULE_UPDATE_ENABLED:-false}"
 RULE_DIR="/var/lib/suricata/rules"
@@ -10,6 +12,7 @@ COMBINED_RULES="${RULE_DIR}/soc-combined.rules"
 CANDIDATE_RULES="${RULE_DIR}/soc-combined.rules.candidate"
 ET_BACKUP="${RULE_DIR}/suricata.rules.before-update"
 LOCAL_RULES="/opt/soc/local.rules"
+A2_RULES="/opt/soc/a2.rules"
 CONFIG_FILE="/etc/suricata/suricata.yaml"
 LOG_DIR="/var/log/suricata"
 PID_FILE="/run/suricata.pid"
@@ -26,6 +29,24 @@ case "$UPDATE_ENABLED" in
     true|false) ;;
     *)
         echo "RULE_UPDATE_ENABLED must be true or false." >&2
+        exit 1
+        ;;
+esac
+
+if [ -n "$HOME_NET_VALUE" ]; then
+    case "$HOME_NET_VALUE" in
+        *[!0-9a-fA-F:.,/\[\]\!]*)
+            echo "SURICATA_HOME_NET contains unsupported characters." >&2
+            exit 1
+            ;;
+    esac
+    # Configure the trust boundary only; ET and custom rule files stay immutable.
+    sed -i "s#^    HOME_NET:.*#    HOME_NET: \"${HOME_NET_VALUE}\"#" "$CONFIG_FILE"
+fi
+
+case "$A2_SCAN_ALIASES_VALUE" in
+    *[!0-9.,/]* )
+        echo "A2_SCAN_ALIASES contains unsupported characters." >&2
         exit 1
         ;;
 esac
@@ -55,6 +76,8 @@ build_combined_rules() {
 
     printf '\n%s\n' "$LOCAL_MARKER" >> "$tmp"
     cat "$LOCAL_RULES" >> "$tmp"
+    printf '\n# --- SOC lab A2 custom rules ---\n' >> "$tmp"
+    cat "$A2_RULES" >> "$tmp"
 
     mv "$tmp" "$output"
     chmod 0644 "$output"
@@ -80,7 +103,7 @@ prepare_initial_rules() {
 
     echo "[suricata] Cached ET rules are invalid; starting with local lab rules only." >&2
     cp "$ET_RULES" "${ET_RULES}.invalid" 2>/dev/null || true
-    cp "$LOCAL_RULES" "$CANDIDATE_RULES"
+    cat "$LOCAL_RULES" "$A2_RULES" > "$CANDIDATE_RULES"
     validate_rules_file "$CANDIDATE_RULES"
     mv "$CANDIDATE_RULES" "$COMBINED_RULES"
 }
@@ -162,6 +185,15 @@ sed -i '/^        - stats:$/,/^            deltas: no/d' "$CONFIG_FILE"
 # /run is backed by a container volume and can retain a stale PID across
 # Docker Desktop restarts. No Suricata child exists yet at this point.
 rm -f "$PID_FILE"
+
+# Five isolated aliases allow bounded multi-IP scanning scenarios without
+# contacting another Docker network or any public address.
+OLD_IFS="$IFS"
+IFS=','
+for address in $A2_SCAN_ALIASES_VALUE; do
+    ip address add "$address" dev "$INTERFACE" 2>/dev/null || true
+done
+IFS="$OLD_IFS"
 
 prepare_initial_rules
 

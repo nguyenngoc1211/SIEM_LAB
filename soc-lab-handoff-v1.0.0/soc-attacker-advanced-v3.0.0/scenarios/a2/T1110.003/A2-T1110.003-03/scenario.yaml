@@ -1,0 +1,28 @@
+id: A2-T1110.003-03
+name: Shared Basic Credential Across Accounts
+description: Try one fixed credential against multiple distinct lab identities.
+mitre:
+  tactic_id:
+    - TA0006
+  technique_id:
+    - T1110.003
+suricata:
+  expected_sid:
+    - 1002043
+  rule_name: LAB Shared Basic Credential Across Accounts
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002043
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

@@ -1,0 +1,161 @@
+{
+    "record_id":  "rec-20261001-aef1df1a",
+    "source_alert_id":  "1790843706.2425634",
+    "event_time":  "2026-10-01T08:35:05.366436+0000",
+    "processed_at":  "2026-10-02T08:32:02.427Z",
+    "severity_score":  1,
+    "severity_label":  "Low",
+    "signature":  "LAB Web Address Range Sweep",
+    "category":  "network_ids",
+    "source_ip":  "172.29.0.10",
+    "source_port":  34318,
+    "destination_ip":  "172.29.0.20",
+    "destination_port":  80,
+    "protocol":  "tcp",
+    "direction":  "to_server",
+    "mapping_status":  "mapped",
+    "technique_id":  "T1595.001",
+    "technique_name":  "Scanning IP Blocks",
+    "mapping_confidence":  1,
+    "ai_threat_level":  "Medium",
+    "ai_confidence":  "High",
+    "attack_likelihood":  "Medium",
+    "is_false_positive":  false,
+    "need_admin_verification":  true,
+    "summary":  "Phát hiện quét dải địa chỉ web từ 172.29.0.10 đến 172.29.0.20 trên cổng 80, có thể là hoạt động trinh sát.",
+    "detail":  {
+                   "wazuh_alert":  {
+                                       "timestamp":  "2026-10-01T08:35:06.908+0000",
+                                       "rule":  {
+                                                    "level":  3,
+                                                    "description":  "Suricata: Alert - LAB Web Address Range Sweep",
+                                                    "id":  "86601",
+                                                    "firedtimes":  237,
+                                                    "mail":  false,
+                                                    "groups":  [
+                                                                   "ids",
+                                                                   "suricata"
+                                                               ]
+                                                },
+                                       "agent":  {
+                                                     "id":  "000",
+                                                     "name":  "wazuh.manager"
+                                                 },
+                                       "manager":  {
+                                                       "name":  "wazuh.manager"
+                                                   },
+                                       "id":  "1790843706.2425634",
+                                       "decoder":  {
+                                                       "name":  "json"
+                                                   },
+                                       "data":  {
+                                                    "timestamp":  "2026-10-01T08:35:05.366436+0000",
+                                                    "flow_id":  "447933592960102.000000",
+                                                    "in_iface":  "eth0",
+                                                    "event_type":  "alert",
+                                                    "src_ip":  "172.29.0.10",
+                                                    "src_port":  "34318",
+                                                    "dest_ip":  "172.29.0.20",
+                                                    "dest_port":  "80",
+                                                    "proto":  "TCP",
+                                                    "pkt_src":  "wire/pcap",
+                                                    "alert":  {
+                                                                  "action":  "allowed",
+                                                                  "gid":  "1",
+                                                                  "signature_id":  "1002016",
+                                                                  "rev":  "1",
+                                                                  "signature":  "LAB Web Address Range Sweep",
+                                                                  "category":  "Misc activity",
+                                                                  "severity":  "3",
+                                                                  "metadata":  {
+                                                                                   "mitre_tactic_id":  [
+                                                                                                           "TA0043"
+                                                                                                       ],
+                                                                                   "mitre_technique_id":  [
+                                                                                                              "T1595.001"
+                                                                                                          ]
+                                                                               }
+                                                              },
+                                                    "direction":  "to_server",
+                                                    "flow":  {
+                                                                 "pkts_toserver":  "1",
+                                                                 "pkts_toclient":  "0",
+                                                                 "bytes_toserver":  "74",
+                                                                 "bytes_toclient":  "0",
+                                                                 "start":  "2026-10-01T08:35:05.366436+0000",
+                                                                 "src_ip":  "172.29.0.10",
+                                                                 "dest_ip":  "172.29.0.20",
+                                                                 "src_port":  "34318",
+                                                                 "dest_port":  "80"
+                                                             }
+                                                },
+                                       "location":  "/var/log/suricata/eve.json"
+                                   },
+                   "suricata_alert":  {
+                                          "timestamp":  "2026-10-01T08:35:05.366436+0000",
+                                          "flow_id":  "447933592960102.000000",
+                                          "in_iface":  "eth0",
+                                          "event_type":  "alert",
+                                          "src_ip":  "172.29.0.10",
+                                          "src_port":  "34318",
+                                          "dest_ip":  "172.29.0.20",
+                                          "dest_port":  "80",
+                                          "proto":  "TCP",
+                                          "pkt_src":  "wire/pcap",
+                                          "alert":  {
+                                                        "action":  "allowed",
+                                                        "gid":  "1",
+                                                        "signature_id":  "1002016",
+                                                        "rev":  "1",
+                                                        "signature":  "LAB Web Address Range Sweep",
+                                                        "category":  "Misc activity",
+                                                        "severity":  "3",
+                                                        "metadata":  {
+                                                                         "mitre_tactic_id":  [
+                                                                                                 "TA0043"
+                                                                                             ],
+                                                                         "mitre_technique_id":  [
+                                                                                                    "T1595.001"
+                                                                                                ]
+                                                                     }
+                                                    },
+                                          "direction":  "to_server",
+                                          "flow":  {
+                                                       "pkts_toserver":  "1",
+                                                       "pkts_toclient":  "0",
+                                                       "bytes_toserver":  "74",
+                                                       "bytes_toclient":  "0",
+                                                       "start":  "2026-10-01T08:35:05.366436+0000",
+                                                       "src_ip":  "172.29.0.10",
+                                                       "dest_ip":  "172.29.0.20",
+                                                       "src_port":  "34318",
+                                                       "dest_port":  "80"
+                                                   }
+                                      },
+                   "gemini_analysis":  {
+                                           "summary":  "Phát hiện quét dải địa chỉ web từ 172.29.0.10 đến 172.29.0.20 trên cổng 80, có thể là hoạt động trinh sát.",
+                                           "is_false_positive":  false,
+                                           "threat_level":  "Medium",
+                                           "confidence":  "High",
+                                           "attack_likelihood":  "Medium",
+                                           "rationale":  "Cảnh báo Suricata \u0027LAB Web Address Range Sweep\u0027 cho thấy hoạt động quét dải địa chỉ IP từ 172.29.0.10 nhắm vào 172.29.0.20 trên cổng 80. Điều này phù hợp với kỹ thuật ATT\u0026CK T1595.001 (Scanning IP Blocks), thường là bước trinh sát ban đầu để thu thập thông tin về mục tiêu. Mặc dù đây là một hoạt động khám phá, nhưng không thể xác định ngay ý định của tác nhân. Có thể là một công cụ hợp pháp hoặc một nỗ lực tìm kiếm lỗ hổng.",
+                                           "observed_evidence":  [
+                                                                     "signature: LAB Web Address Range Sweep",
+                                                                     "event_type: network_scan",
+                                                                     "source_ip: 172.29.0.10",
+                                                                     "destination_ip: 172.29.0.20",
+                                                                     "destination_port: 80",
+                                                                     "ATT\u0026CK Technique: T1595.001 - Scanning IP Blocks"
+                                                                 ],
+                                           "recommended_actions":  [
+                                                                       "Kiểm tra nhật ký từ 172.29.0.10 để tìm các hoạt động đáng ngờ khác.",
+                                                                       "Xác minh mục đích của hoạt động quét này. Nếu không được ủy quyền, hãy coi đây là hoạt động trinh sát độc hại.",
+                                                                       "Kiểm tra các hệ thống mục tiêu (172.29.0.20) để tìm dấu hiệu xâm nhập hoặc khai thác.",
+                                                                       "Nếu xác nhận là độc hại, xem xét chặn IP nguồn 172.29.0.10 sau khi có sự chấp thuận của quản trị viên."
+                                                                   ],
+                                           "need_admin_verification":  true,
+                                           "soar_action":  "create_incident",
+                                           "analyst_notes":  "Cảnh báo này chỉ ra một hoạt động quét mạng cơ bản. Cần điều tra thêm để xác định liệu đây có phải là một phần của cuộc tấn công lớn hơn hay không. Mức độ nghiêm trọng có thể tăng lên nếu phát hiện thêm bằng chứng về ý định độc hại."
+                                       }
+               }
+}

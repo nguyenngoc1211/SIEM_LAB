@@ -1,0 +1,27 @@
+id: A1-T1190-01
+name: Automated SQL assessment fingerprint
+description: Send a harmless SQLmap User-Agent to the local gateway; the network evidence is scanning, not successful exploitation.
+mitre:
+  tactic_id:
+    - TA0001
+  technique_id:
+    - T1190
+suricata:
+  expected_sid:
+    - 2008538
+  rule_name: ET SCAN Sqlmap SQL Injection Scan
+  rule_source: et_open
+source:
+  container: soc_attacker_v2
+  type: et_open
+  reference: ET Open SID 2008538
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A1-2008538
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+timeout: 30

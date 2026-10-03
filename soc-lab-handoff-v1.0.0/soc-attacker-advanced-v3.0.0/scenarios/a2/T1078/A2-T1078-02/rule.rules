@@ -1,0 +1,1 @@
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"LAB Successful Web Session Reuse"; flow:established,to_client; http.response_body; content:"|22|authenticated|22 3a|true"; nocase; content:"|22|channel|22 3a 22|session|22|"; nocase; classtype:misc-activity; sid:1002005; rev:1;)

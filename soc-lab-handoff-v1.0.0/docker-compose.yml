@@ -7,6 +7,7 @@ services:
       - "3000"
     networks:
       soc_backend:
+        ipv4_address: 172.29.0.3
       soc_shared:
         aliases:
           - juice-shop
@@ -27,6 +28,7 @@ services:
       # network namespace and captures SURICATA_INTERFACE=eth0.
       soc_backend:
         interface_name: eth0
+        ipv4_address: 172.29.0.4
       soc_shared:
         interface_name: eth1
         aliases:
@@ -57,11 +59,21 @@ services:
       - SYS_NICE
     environment:
       SURICATA_INTERFACE: ${SURICATA_INTERFACE:-eth0}
+      # Attacker is the only host outside HOME_NET, while remaining on the
+      # isolated Docker bridge. This lets inbound ET rules keep their semantics.
+      SURICATA_HOME_NET: ${SURICATA_HOME_NET:-[172.29.0.0/24,!172.29.0.10]}
       RULE_UPDATE_INTERVAL: ${RULE_UPDATE_INTERVAL:-86400}
       RULE_UPDATE_ENABLED: ${RULE_UPDATE_ENABLED:-false}
+      A2_SCAN_ALIASES: ${A2_SCAN_ALIASES:-172.29.0.20/32,172.29.0.21/32,172.29.0.22/32,172.29.0.23/32,172.29.0.24/32}
     volumes:
       - ./runtime/suricata-logs:/var/log/suricata
       - suricata_state:/var/lib/suricata
+    healthcheck:
+      test: ["CMD-SHELL", "suricatasc -c uptime 2>/dev/null | grep -q '\"return\": \"OK\"'"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 60s
 
   lab-backend:
     build:
@@ -76,6 +88,7 @@ services:
       INTERNAL_TOKEN: soc-lab-v2-internal
     networks:
       soc_backend:
+        ipv4_address: 172.29.0.2
         aliases:
           - lab-backend
     read_only: true
@@ -186,12 +199,17 @@ services:
       SAFE_MODE: true
       GROUND_TRUTH_PATH: /opt/soc/runtime/ground-truth/scenario-runs.jsonl
       WAZUH_ALERTS_PATH: /var/ossec-logs/alerts/alerts.json
+      N8N_MAPPING_WEBHOOK_URL: http://host.docker.internal:5678/webhook/soc-alert-analysis
+      ALERT_QUIET_SECONDS: 2.0
     networks:
-      - soc_backend
+      soc_backend:
+        ipv4_address: 172.29.0.10
     volumes:
       - ./runtime:/opt/soc/runtime
       - wazuh_logs:/var/ossec-logs:ro
       - ./runtime/suricata-logs:/opt/soc/telemetry/suricata:ro
+      - suricata_state:/opt/soc/rule-state:ro
+      - ./soc-attacker-advanced-v3.0.0/data:/opt/soc/data
     read_only: true
     tmpfs:
       - /tmp:rw,noexec,nosuid,size=64m
@@ -200,6 +218,8 @@ services:
     cap_drop:
       - ALL
     group_add:
+      # suricata_state is owned by the sensor image's suricata group.
+      - "998"
       - "999"
     mem_limit: 512m
     cpus: 0.75
@@ -210,6 +230,9 @@ networks:
   soc_backend:
     name: soc_backend
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.29.0.0/24
   soc_shared:
     external: true
   soc_internal:

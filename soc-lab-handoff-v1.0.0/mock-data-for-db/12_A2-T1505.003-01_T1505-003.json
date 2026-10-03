@@ -1,0 +1,186 @@
+{
+    "record_id":  "rec-20261001-199c5d43",
+    "source_alert_id":  "1790843620.2399595",
+    "event_time":  "2026-10-01T08:33:39.772376+0000",
+    "processed_at":  "2026-10-02T08:31:40.796Z",
+    "severity_score":  1,
+    "severity_label":  "Low",
+    "signature":  "LAB Suspicious PHP Command Endpoint Access",
+    "category":  "network_ids",
+    "source_ip":  "172.29.0.10",
+    "source_port":  57952,
+    "destination_ip":  "172.29.0.4",
+    "destination_port":  80,
+    "protocol":  "http",
+    "direction":  "to_server",
+    "mapping_status":  "mapped",
+    "technique_id":  "T1505.003",
+    "technique_name":  "Web Shell",
+    "mapping_confidence":  0.920303,
+    "ai_threat_level":  "High",
+    "ai_confidence":  "High",
+    "attack_likelihood":  "High",
+    "is_false_positive":  false,
+    "need_admin_verification":  true,
+    "summary":  "Cảnh báo truy cập điểm cuối lệnh PHP đáng ngờ trên máy chủ soc_gateway, có thể là web shell.",
+    "detail":  {
+                   "wazuh_alert":  {
+                                       "timestamp":  "2026-10-01T08:33:40.748+0000",
+                                       "rule":  {
+                                                    "level":  3,
+                                                    "description":  "Suricata: Alert - LAB Suspicious PHP Command Endpoint Access",
+                                                    "id":  "86601",
+                                                    "firedtimes":  225,
+                                                    "mail":  false,
+                                                    "groups":  [
+                                                                   "ids",
+                                                                   "suricata"
+                                                               ]
+                                                },
+                                       "agent":  {
+                                                     "id":  "000",
+                                                     "name":  "wazuh.manager"
+                                                 },
+                                       "manager":  {
+                                                       "name":  "wazuh.manager"
+                                                   },
+                                       "id":  "1790843620.2399595",
+                                       "decoder":  {
+                                                       "name":  "json"
+                                                   },
+                                       "data":  {
+                                                    "timestamp":  "2026-10-01T08:33:39.772376+0000",
+                                                    "flow_id":  "1007820462273773.000000",
+                                                    "in_iface":  "eth0",
+                                                    "event_type":  "alert",
+                                                    "src_ip":  "172.29.0.10",
+                                                    "src_port":  "57952",
+                                                    "dest_ip":  "172.29.0.4",
+                                                    "dest_port":  "80",
+                                                    "proto":  "TCP",
+                                                    "pkt_src":  "wire/pcap",
+                                                    "tx_id":  "0",
+                                                    "alert":  {
+                                                                  "action":  "allowed",
+                                                                  "gid":  "1",
+                                                                  "signature_id":  "1002046",
+                                                                  "rev":  "1",
+                                                                  "signature":  "LAB Suspicious PHP Command Endpoint Access",
+                                                                  "category":  "Misc activity",
+                                                                  "severity":  "3",
+                                                                  "metadata":  {
+                                                                                   "mitre_tactic_id":  [
+                                                                                                           "TA0003"
+                                                                                                       ],
+                                                                                   "mitre_technique_id":  [
+                                                                                                              "T1505.003"
+                                                                                                          ]
+                                                                               }
+                                                              },
+                                                    "http":  {
+                                                                 "hostname":  "soc_gateway",
+                                                                 "url":  "/uploads/system.php?cmd=id",
+                                                                 "http_user_agent":  "soc-attack-scenarios-v2/2.0",
+                                                                 "http_content_type":  "text/html",
+                                                                 "http_method":  "GET",
+                                                                 "protocol":  "HTTP/1.1",
+                                                                 "status":  "200",
+                                                                 "length":  "987"
+                                                             },
+                                                    "app_proto":  "http",
+                                                    "direction":  "to_server",
+                                                    "flow":  {
+                                                                 "pkts_toserver":  "4",
+                                                                 "pkts_toclient":  "7",
+                                                                 "bytes_toserver":  "506",
+                                                                 "bytes_toclient":  "7710",
+                                                                 "start":  "2026-10-01T08:33:39.758939+0000",
+                                                                 "src_ip":  "172.29.0.10",
+                                                                 "dest_ip":  "172.29.0.4",
+                                                                 "src_port":  "57952",
+                                                                 "dest_port":  "80"
+                                                             }
+                                                },
+                                       "location":  "/var/log/suricata/eve.json"
+                                   },
+                   "suricata_alert":  {
+                                          "timestamp":  "2026-10-01T08:33:39.772376+0000",
+                                          "flow_id":  "1007820462273773.000000",
+                                          "in_iface":  "eth0",
+                                          "event_type":  "alert",
+                                          "src_ip":  "172.29.0.10",
+                                          "src_port":  "57952",
+                                          "dest_ip":  "172.29.0.4",
+                                          "dest_port":  "80",
+                                          "proto":  "TCP",
+                                          "pkt_src":  "wire/pcap",
+                                          "tx_id":  "0",
+                                          "alert":  {
+                                                        "action":  "allowed",
+                                                        "gid":  "1",
+                                                        "signature_id":  "1002046",
+                                                        "rev":  "1",
+                                                        "signature":  "LAB Suspicious PHP Command Endpoint Access",
+                                                        "category":  "Misc activity",
+                                                        "severity":  "3",
+                                                        "metadata":  {
+                                                                         "mitre_tactic_id":  [
+                                                                                                 "TA0003"
+                                                                                             ],
+                                                                         "mitre_technique_id":  [
+                                                                                                    "T1505.003"
+                                                                                                ]
+                                                                     }
+                                                    },
+                                          "http":  {
+                                                       "hostname":  "soc_gateway",
+                                                       "url":  "/uploads/system.php?cmd=id",
+                                                       "http_user_agent":  "soc-attack-scenarios-v2/2.0",
+                                                       "http_content_type":  "text/html",
+                                                       "http_method":  "GET",
+                                                       "protocol":  "HTTP/1.1",
+                                                       "status":  "200",
+                                                       "length":  "987"
+                                                   },
+                                          "app_proto":  "http",
+                                          "direction":  "to_server",
+                                          "flow":  {
+                                                       "pkts_toserver":  "4",
+                                                       "pkts_toclient":  "7",
+                                                       "bytes_toserver":  "506",
+                                                       "bytes_toclient":  "7710",
+                                                       "start":  "2026-10-01T08:33:39.758939+0000",
+                                                       "src_ip":  "172.29.0.10",
+                                                       "dest_ip":  "172.29.0.4",
+                                                       "src_port":  "57952",
+                                                       "dest_port":  "80"
+                                                   }
+                                      },
+                   "gemini_analysis":  {
+                                           "summary":  "Cảnh báo truy cập điểm cuối lệnh PHP đáng ngờ trên máy chủ soc_gateway, có thể là web shell.",
+                                           "is_false_positive":  false,
+                                           "threat_level":  "High",
+                                           "confidence":  "High",
+                                           "attack_likelihood":  "High",
+                                           "rationale":  "Cảnh báo Suricata \u0027LAB Suspicious PHP Command Endpoint Access\u0027 được kích hoạt khi có yêu cầu GET đến đường dẫn \u0027/uploads/system.php\u0027 trên máy chủ 172.29.0.4 (soc_gateway). Mã trạng thái HTTP 200 cho thấy yêu cầu đã thành công. Điều này rất phù hợp với kỹ thuật T1505.003 (Web Shell) của MITRE ATT\u0026CK, cho thấy khả năng cao có một web shell đã được triển khai và đang được truy cập. Nguồn truy cập là 172.29.0.10. Mức độ tin cậy cao do chữ ký rõ ràng và đường dẫn bất thường.",
+                                           "observed_evidence":  [
+                                                                     "Chữ ký IDS: LAB Suspicious PHP Command Endpoint Access",
+                                                                     "Đường dẫn HTTP: /uploads/system.php",
+                                                                     "Địa chỉ IP nguồn: 172.29.0.10",
+                                                                     "Địa chỉ IP đích: 172.29.0.4",
+                                                                     "Tên máy chủ HTTP: soc_gateway",
+                                                                     "Phương thức HTTP: GET",
+                                                                     "Mã trạng thái HTTP: 200"
+                                                                 ],
+                                           "recommended_actions":  [
+                                                                       "Xác minh sự tồn tại và tính hợp pháp của tệp \u0027/uploads/system.php\u0027 trên máy chủ 172.29.0.4.",
+                                                                       "Kiểm tra nhật ký truy cập web trên 172.29.0.4 để tìm các hoạt động bất thường khác liên quan đến đường dẫn này hoặc từ IP nguồn 172.29.0.10.",
+                                                                       "Điều tra máy chủ nguồn 172.29.0.10 để xác định xem nó có bị xâm nhập hay không.",
+                                                                       "Nếu xác nhận là web shell, yêu cầu phê duyệt để cách ly máy chủ 172.29.0.4 và thực hiện phân tích pháp y."
+                                                                   ],
+                                           "need_admin_verification":  true,
+                                           "soar_action":  "create_incident",
+                                           "analyst_notes":  "Cảnh báo này có mức độ nghiêm trọng cao do liên quan đến web shell, một công cụ phổ biến được kẻ tấn công sử dụng để duy trì quyền truy cập và thực thi lệnh từ xa. Cần ưu tiên điều tra ngay lập tức."
+                                       }
+               }
+}

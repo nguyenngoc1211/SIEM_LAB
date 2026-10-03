@@ -1,0 +1,28 @@
+id: A2-T1110.001-02
+name: Repeated Form Credential Guesses
+description: Try multiple different credentials against one fixed lab identity.
+mitre:
+  tactic_id:
+    - TA0006
+  technique_id:
+    - T1110.001
+suricata:
+  expected_sid:
+    - 1002037
+  rule_name: LAB Repeated Form Credential Guesses
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002037
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

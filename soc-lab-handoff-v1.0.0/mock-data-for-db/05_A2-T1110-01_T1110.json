@@ -1,0 +1,181 @@
+{
+    "record_id":  "rec-20261001-0d10dfce",
+    "source_alert_id":  "1790843372.1874083",
+    "event_time":  "2026-10-01T08:29:31.830398+0000",
+    "processed_at":  "2026-10-02T08:30:19.789Z",
+    "severity_score":  1,
+    "severity_label":  "Low",
+    "signature":  "LAB Repeated JSON Authentication Failures",
+    "category":  "network_ids",
+    "source_ip":  "172.29.0.10",
+    "source_port":  46842,
+    "destination_ip":  "172.29.0.4",
+    "destination_port":  80,
+    "protocol":  "http",
+    "direction":  "to_server",
+    "mapping_status":  "mapped",
+    "technique_id":  "T1110",
+    "technique_name":  "Brute Force",
+    "mapping_confidence":  0.946154,
+    "ai_threat_level":  "Medium",
+    "ai_confidence":  "High",
+    "attack_likelihood":  "High",
+    "is_false_positive":  false,
+    "need_admin_verification":  true,
+    "summary":  "Cảnh báo về các lần xác thực JSON thất bại lặp lại từ IP nguồn 172.29.0.10 đến máy chủ 172.29.0.4, có thể là một cuộc tấn công vét cạn (Brute Force).",
+    "detail":  {
+                   "wazuh_alert":  {
+                                       "timestamp":  "2026-10-01T08:29:32.193+0000",
+                                       "rule":  {
+                                                    "level":  3,
+                                                    "description":  "Suricata: Alert - LAB Repeated JSON Authentication Failures",
+                                                    "id":  "86601",
+                                                    "firedtimes":  65,
+                                                    "mail":  false,
+                                                    "groups":  [
+                                                                   "ids",
+                                                                   "suricata"
+                                                               ]
+                                                },
+                                       "agent":  {
+                                                     "id":  "000",
+                                                     "name":  "wazuh.manager"
+                                                 },
+                                       "manager":  {
+                                                       "name":  "wazuh.manager"
+                                                   },
+                                       "id":  "1790843372.1874083",
+                                       "decoder":  {
+                                                       "name":  "json"
+                                                   },
+                                       "data":  {
+                                                    "timestamp":  "2026-10-01T08:29:31.830398+0000",
+                                                    "flow_id":  "1032216291637260.000000",
+                                                    "in_iface":  "eth0",
+                                                    "event_type":  "alert",
+                                                    "src_ip":  "172.29.0.10",
+                                                    "src_port":  "46842",
+                                                    "dest_ip":  "172.29.0.4",
+                                                    "dest_port":  "80",
+                                                    "proto":  "TCP",
+                                                    "pkt_src":  "wire/pcap",
+                                                    "tx_id":  "0",
+                                                    "alert":  {
+                                                                  "action":  "allowed",
+                                                                  "gid":  "1",
+                                                                  "signature_id":  "1002031",
+                                                                  "rev":  "1",
+                                                                  "signature":  "LAB Repeated JSON Authentication Failures",
+                                                                  "category":  "Misc activity",
+                                                                  "severity":  "3",
+                                                                  "metadata":  {
+                                                                                   "mitre_tactic_id":  [
+                                                                                                           "TA0006"
+                                                                                                       ],
+                                                                                   "mitre_technique_id":  [
+                                                                                                              "T1110"
+                                                                                                          ]
+                                                                               }
+                                                              },
+                                                    "http":  {
+                                                                 "hostname":  "soc_gateway",
+                                                                 "url":  "/lab/auth/json",
+                                                                 "http_user_agent":  "soc-attack-scenarios-v2/2.0",
+                                                                 "http_method":  "POST",
+                                                                 "protocol":  "HTTP/1.1",
+                                                                 "length":  "0"
+                                                             },
+                                                    "app_proto":  "http",
+                                                    "direction":  "to_server",
+                                                    "flow":  {
+                                                                 "pkts_toserver":  "4",
+                                                                 "pkts_toclient":  "2",
+                                                                 "bytes_toserver":  "598",
+                                                                 "bytes_toclient":  "140",
+                                                                 "start":  "2026-10-01T08:29:31.830155+0000",
+                                                                 "src_ip":  "172.29.0.10",
+                                                                 "dest_ip":  "172.29.0.4",
+                                                                 "src_port":  "46842",
+                                                                 "dest_port":  "80"
+                                                             }
+                                                },
+                                       "location":  "/var/log/suricata/eve.json"
+                                   },
+                   "suricata_alert":  {
+                                          "timestamp":  "2026-10-01T08:29:31.830398+0000",
+                                          "flow_id":  "1032216291637260.000000",
+                                          "in_iface":  "eth0",
+                                          "event_type":  "alert",
+                                          "src_ip":  "172.29.0.10",
+                                          "src_port":  "46842",
+                                          "dest_ip":  "172.29.0.4",
+                                          "dest_port":  "80",
+                                          "proto":  "TCP",
+                                          "pkt_src":  "wire/pcap",
+                                          "tx_id":  "0",
+                                          "alert":  {
+                                                        "action":  "allowed",
+                                                        "gid":  "1",
+                                                        "signature_id":  "1002031",
+                                                        "rev":  "1",
+                                                        "signature":  "LAB Repeated JSON Authentication Failures",
+                                                        "category":  "Misc activity",
+                                                        "severity":  "3",
+                                                        "metadata":  {
+                                                                         "mitre_tactic_id":  [
+                                                                                                 "TA0006"
+                                                                                             ],
+                                                                         "mitre_technique_id":  [
+                                                                                                    "T1110"
+                                                                                                ]
+                                                                     }
+                                                    },
+                                          "http":  {
+                                                       "hostname":  "soc_gateway",
+                                                       "url":  "/lab/auth/json",
+                                                       "http_user_agent":  "soc-attack-scenarios-v2/2.0",
+                                                       "http_method":  "POST",
+                                                       "protocol":  "HTTP/1.1",
+                                                       "length":  "0"
+                                                   },
+                                          "app_proto":  "http",
+                                          "direction":  "to_server",
+                                          "flow":  {
+                                                       "pkts_toserver":  "4",
+                                                       "pkts_toclient":  "2",
+                                                       "bytes_toserver":  "598",
+                                                       "bytes_toclient":  "140",
+                                                       "start":  "2026-10-01T08:29:31.830155+0000",
+                                                       "src_ip":  "172.29.0.10",
+                                                       "dest_ip":  "172.29.0.4",
+                                                       "src_port":  "46842",
+                                                       "dest_port":  "80"
+                                                   }
+                                      },
+                   "gemini_analysis":  {
+                                           "summary":  "Cảnh báo về các lần xác thực JSON thất bại lặp lại từ IP nguồn 172.29.0.10 đến máy chủ 172.29.0.4, có thể là một cuộc tấn công vét cạn (Brute Force).",
+                                           "is_false_positive":  false,
+                                           "threat_level":  "Medium",
+                                           "confidence":  "High",
+                                           "attack_likelihood":  "High",
+                                           "rationale":  "Cảnh báo được kích hoạt bởi chữ ký \u0027LAB Repeated JSON Authentication Failures\u0027, cho thấy có nhiều lần xác thực không thành công đến đường dẫn \u0027/lab/auth/json\u0027 trên máy chủ 172.29.0.4 từ địa chỉ IP 172.29.0.10. Điều này phù hợp với kỹ thuật tấn công vét cạn (T1110 Brute Force) theo phân tích ATT\u0026CK. Mặc dù chữ ký có chứa \u0027LAB\u0027, nhưng không có thông tin bổ sung nào cho thấy đây là hoạt động thử nghiệm hợp pháp.",
+                                           "observed_evidence":  [
+                                                                     "Chữ ký IDS: LAB Repeated JSON Authentication Failures",
+                                                                     "IP nguồn: 172.29.0.10",
+                                                                     "IP đích: 172.29.0.4",
+                                                                     "Đường dẫn HTTP: /lab/auth/json",
+                                                                     "Loại sự kiện: authentication, Hành động: authenticate",
+                                                                     "Kỹ thuật ATT\u0026CK: T1110 Brute Force"
+                                                                 ],
+                                           "recommended_actions":  [
+                                                                       "Xác minh xem IP nguồn 172.29.0.10 có phải là một máy chủ hợp lệ trong mạng nội bộ hay không.",
+                                                                       "Kiểm tra nhật ký xác thực trên máy chủ đích 172.29.0.4 để tìm các lần đăng nhập thành công hoặc các hoạt động đáng ngờ khác từ 172.29.0.10.",
+                                                                       "Giám sát hoạt động của IP 172.29.0.10 để phát hiện các hành vi bất thường tiếp theo.",
+                                                                       "Nếu xác định 172.29.0.10 là độc hại và không phải tài sản nội bộ, đề xuất chặn IP này sau khi có sự chấp thuận của quản trị viên."
+                                                                   ],
+                                           "need_admin_verification":  true,
+                                           "soar_action":  "admin_approval",
+                                           "analyst_notes":  "Cả IP nguồn và IP đích đều nằm trong dải IP nội bộ (172.29.0.0/16). Chữ ký có chứa \u0027LAB\u0027 có thể gợi ý đây là môi trường thử nghiệm hoặc hoạt động kiểm tra, nhưng cần xác minh thêm để loại trừ khả năng tấn công thực tế. Hiện tại, không có bằng chứng về việc xác thực thành công."
+                                       }
+               }
+}

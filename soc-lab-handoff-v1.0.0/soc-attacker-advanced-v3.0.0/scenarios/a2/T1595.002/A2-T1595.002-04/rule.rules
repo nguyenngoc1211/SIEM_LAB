@@ -1,0 +1,1 @@
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB Graph Query Schema Probe"; flow:established,to_server; http.uri; content:"/graphql"; http.request_body; content:"__schema"; classtype:misc-activity; sid:1002024; rev:1;)

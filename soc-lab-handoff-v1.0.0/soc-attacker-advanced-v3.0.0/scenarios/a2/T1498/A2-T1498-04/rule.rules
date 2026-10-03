@@ -1,0 +1,1 @@
+alert udp $EXTERNAL_NET any -> $HOME_NET 1900 (msg:"LAB High Rate Discovery Service Traffic"; flow:stateless; detection_filter:track by_src,count 12,seconds 5; classtype:misc-activity; sid:1002069; rev:1;)

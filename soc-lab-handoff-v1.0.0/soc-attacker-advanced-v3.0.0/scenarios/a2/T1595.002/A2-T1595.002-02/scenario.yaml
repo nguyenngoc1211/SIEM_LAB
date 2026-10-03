@@ -1,0 +1,28 @@
+id: A2-T1595.002-02
+name: CVE Exposure Check Request
+description: Send a bounded request intended to assess a specific exposed feature or weakness.
+mitre:
+  tactic_id:
+    - TA0043
+  technique_id:
+    - T1595.002
+suricata:
+  expected_sid:
+    - 1002022
+  rule_name: LAB CVE Exposure Check Request
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002022
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

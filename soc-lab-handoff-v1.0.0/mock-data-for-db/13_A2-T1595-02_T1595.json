@@ -1,0 +1,185 @@
+{
+    "record_id":  "rec-20261001-89ffe09c",
+    "source_alert_id":  "1790843672.2415532",
+    "event_time":  "2026-10-01T08:34:32.250517+0000",
+    "processed_at":  "2026-10-02T08:31:51.896Z",
+    "severity_score":  1,
+    "severity_label":  "Low",
+    "signature":  "LAB HTTP Capability Assessment",
+    "category":  "network_ids",
+    "source_ip":  "172.29.0.10",
+    "source_port":  38154,
+    "destination_ip":  "172.29.0.4",
+    "destination_port":  80,
+    "protocol":  "http",
+    "direction":  "to_server",
+    "mapping_status":  "mapped",
+    "technique_id":  "T1595",
+    "technique_name":  "Active Scanning",
+    "mapping_confidence":  0.846918,
+    "ai_threat_level":  "Low",
+    "ai_confidence":  "High",
+    "attack_likelihood":  "Low",
+    "is_false_positive":  false,
+    "need_admin_verification":  false,
+    "summary":  "Cảnh báo Suricata về đánh giá khả năng HTTP (HTTP Capability Assessment) từ 172.29.0.10 đến 172.29.0.4 sử dụng phương thức OPTIONS.",
+    "detail":  {
+                   "wazuh_alert":  {
+                                       "timestamp":  "2026-10-01T08:34:32.851+0000",
+                                       "rule":  {
+                                                    "level":  3,
+                                                    "description":  "Suricata: Alert - LAB HTTP Capability Assessment",
+                                                    "id":  "86601",
+                                                    "firedtimes":  232,
+                                                    "mail":  false,
+                                                    "groups":  [
+                                                                   "ids",
+                                                                   "suricata"
+                                                               ]
+                                                },
+                                       "agent":  {
+                                                     "id":  "000",
+                                                     "name":  "wazuh.manager"
+                                                 },
+                                       "manager":  {
+                                                       "name":  "wazuh.manager"
+                                                   },
+                                       "id":  "1790843672.2415532",
+                                       "decoder":  {
+                                                       "name":  "json"
+                                                   },
+                                       "data":  {
+                                                    "timestamp":  "2026-10-01T08:34:32.250517+0000",
+                                                    "flow_id":  "220251137312097.000000",
+                                                    "in_iface":  "eth0",
+                                                    "event_type":  "alert",
+                                                    "src_ip":  "172.29.0.10",
+                                                    "src_port":  "38154",
+                                                    "dest_ip":  "172.29.0.4",
+                                                    "dest_port":  "80",
+                                                    "proto":  "TCP",
+                                                    "pkt_src":  "wire/pcap",
+                                                    "tx_id":  "0",
+                                                    "alert":  {
+                                                                  "action":  "allowed",
+                                                                  "gid":  "1",
+                                                                  "signature_id":  "1002012",
+                                                                  "rev":  "1",
+                                                                  "signature":  "LAB HTTP Capability Assessment",
+                                                                  "category":  "Misc activity",
+                                                                  "severity":  "3",
+                                                                  "metadata":  {
+                                                                                   "mitre_tactic_id":  [
+                                                                                                           "TA0043"
+                                                                                                       ],
+                                                                                   "mitre_technique_id":  [
+                                                                                                              "T1595"
+                                                                                                          ]
+                                                                               }
+                                                              },
+                                                    "http":  {
+                                                                 "hostname":  "soc_gateway",
+                                                                 "url":  "/",
+                                                                 "http_user_agent":  "network-audit-client/1.0",
+                                                                 "http_method":  "OPTIONS",
+                                                                 "protocol":  "HTTP/1.1",
+                                                                 "status":  "204",
+                                                                 "length":  "0"
+                                                             },
+                                                    "app_proto":  "http",
+                                                    "direction":  "to_server",
+                                                    "flow":  {
+                                                                 "pkts_toserver":  "4",
+                                                                 "pkts_toclient":  "3",
+                                                                 "bytes_toserver":  "478",
+                                                                 "bytes_toclient":  "462",
+                                                                 "start":  "2026-10-01T08:34:32.247889+0000",
+                                                                 "src_ip":  "172.29.0.10",
+                                                                 "dest_ip":  "172.29.0.4",
+                                                                 "src_port":  "38154",
+                                                                 "dest_port":  "80"
+                                                             }
+                                                },
+                                       "location":  "/var/log/suricata/eve.json"
+                                   },
+                   "suricata_alert":  {
+                                          "timestamp":  "2026-10-01T08:34:32.250517+0000",
+                                          "flow_id":  "220251137312097.000000",
+                                          "in_iface":  "eth0",
+                                          "event_type":  "alert",
+                                          "src_ip":  "172.29.0.10",
+                                          "src_port":  "38154",
+                                          "dest_ip":  "172.29.0.4",
+                                          "dest_port":  "80",
+                                          "proto":  "TCP",
+                                          "pkt_src":  "wire/pcap",
+                                          "tx_id":  "0",
+                                          "alert":  {
+                                                        "action":  "allowed",
+                                                        "gid":  "1",
+                                                        "signature_id":  "1002012",
+                                                        "rev":  "1",
+                                                        "signature":  "LAB HTTP Capability Assessment",
+                                                        "category":  "Misc activity",
+                                                        "severity":  "3",
+                                                        "metadata":  {
+                                                                         "mitre_tactic_id":  [
+                                                                                                 "TA0043"
+                                                                                             ],
+                                                                         "mitre_technique_id":  [
+                                                                                                    "T1595"
+                                                                                                ]
+                                                                     }
+                                                    },
+                                          "http":  {
+                                                       "hostname":  "soc_gateway",
+                                                       "url":  "/",
+                                                       "http_user_agent":  "network-audit-client/1.0",
+                                                       "http_method":  "OPTIONS",
+                                                       "protocol":  "HTTP/1.1",
+                                                       "status":  "204",
+                                                       "length":  "0"
+                                                   },
+                                          "app_proto":  "http",
+                                          "direction":  "to_server",
+                                          "flow":  {
+                                                       "pkts_toserver":  "4",
+                                                       "pkts_toclient":  "3",
+                                                       "bytes_toserver":  "478",
+                                                       "bytes_toclient":  "462",
+                                                       "start":  "2026-10-01T08:34:32.247889+0000",
+                                                       "src_ip":  "172.29.0.10",
+                                                       "dest_ip":  "172.29.0.4",
+                                                       "src_port":  "38154",
+                                                       "dest_port":  "80"
+                                                   }
+                                      },
+                   "gemini_analysis":  {
+                                           "summary":  "Cảnh báo Suricata về đánh giá khả năng HTTP (HTTP Capability Assessment) từ 172.29.0.10 đến 172.29.0.4 sử dụng phương thức OPTIONS.",
+                                           "is_false_positive":  false,
+                                           "threat_level":  "Low",
+                                           "confidence":  "High",
+                                           "attack_likelihood":  "Low",
+                                           "rationale":  "Cảnh báo Suricata \"LAB HTTP Capability Assessment\" cho thấy một hoạt động quét mạng sử dụng phương thức HTTP OPTIONS. Đây thường là một hình thức trinh sát để khám phá các khả năng của máy chủ web. Địa chỉ nguồn 172.29.0.10 đang thăm dò máy chủ 172.29.0.4 trên cổng 80. Mặc dù bản thân phương thức OPTIONS không gây hại, nó có thể là bước đầu tiên trong một chuỗi tấn công phức tạp hơn. Mức độ đe dọa được đánh giá là thấp vì đây chỉ là hoạt động trinh sát ban đầu.",
+                                           "observed_evidence":  [
+                                                                     "signature: LAB HTTP Capability Assessment",
+                                                                     "event_type: network_scan",
+                                                                     "event_action: scan",
+                                                                     "source_ip: 172.29.0.10",
+                                                                     "destination_ip: 172.29.0.4",
+                                                                     "destination_port: 80",
+                                                                     "http.method: OPTIONS",
+                                                                     "http.status_code: 204"
+                                                                 ],
+                                           "recommended_actions":  [
+                                                                       "Kiểm tra nhật ký của máy chủ đích (172.29.0.4) để tìm các hoạt động bất thường khác từ địa chỉ IP nguồn (172.29.0.10).",
+                                                                       "Xác minh xem địa chỉ IP nguồn (172.29.0.10) có phải là một phần của mạng nội bộ hợp pháp hoặc một công cụ quét được ủy quyền hay không.",
+                                                                       "Theo dõi các hoạt động tiếp theo từ địa chỉ IP nguồn này.",
+                                                                       "Nếu phát hiện thêm hành vi đáng ngờ, hãy xem xét chặn địa chỉ IP nguồn sau khi có sự chấp thuận của quản trị viên."
+                                                                   ],
+                                           "need_admin_verification":  false,
+                                           "soar_action":  "notify_only",
+                                           "analyst_notes":  "Đây là một cảnh báo trinh sát mạng cơ bản. Cần theo dõi thêm để xác định ý định thực sự của nguồn. Hiện tại, không có dấu hiệu tấn công thành công hoặc khai thác lỗ hổng."
+                                       }
+               }
+}

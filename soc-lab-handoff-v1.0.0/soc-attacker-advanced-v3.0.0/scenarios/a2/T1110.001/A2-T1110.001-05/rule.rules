@@ -1,0 +1,1 @@
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB Repeated PIN Credential Guesses"; flow:established,to_server; http.uri; content:"/lab/auth/pin"; http.request_body; content:"fixed-user@soc.lab"; nocase; classtype:misc-activity; sid:1002040; rev:1;)

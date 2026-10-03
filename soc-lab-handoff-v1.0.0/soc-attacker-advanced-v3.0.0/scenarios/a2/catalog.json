@@ -1,0 +1,1061 @@
+[
+  {
+    "id": "A2-T1046-01",
+    "sid": 1002001,
+    "technique": "T1046",
+    "tactic": "TA0007",
+    "rule_name": "LAB Internal Common Service Sweep",
+    "description": "Probe a fixed set of common TCP services from one internal lab host to another.",
+    "kind": "internal_discovery",
+    "params": {
+      "profile": "tcp-common"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1046-02",
+    "sid": 1002002,
+    "technique": "T1046",
+    "tactic": "TA0007",
+    "rule_name": "LAB Internal Administrative Port Sweep",
+    "description": "Probe administrative and database service ports inside the lab network.",
+    "kind": "internal_discovery",
+    "params": {
+      "profile": "tcp-admin"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1046-03",
+    "sid": 1002003,
+    "technique": "T1046",
+    "tactic": "TA0007",
+    "rule_name": "LAB Internal UDP Service Probe",
+    "description": "Send harmless UDP discovery datagrams to internal service ports.",
+    "kind": "internal_discovery",
+    "params": {
+      "profile": "udp-service"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1078-01",
+    "sid": 1002004,
+    "technique": "T1078",
+    "tactic": "TA0001",
+    "rule_name": "LAB Successful Bearer Session Use",
+    "description": "Use a valid lab bearer credential and observe an authenticated response.",
+    "kind": "valid_auth",
+    "params": {
+      "channel": "bearer"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1078-02",
+    "sid": 1002005,
+    "technique": "T1078",
+    "tactic": "TA0001",
+    "rule_name": "LAB Successful Web Session Reuse",
+    "description": "Use a valid lab session credential and observe an authenticated response.",
+    "kind": "valid_auth",
+    "params": {
+      "channel": "session"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1078-03",
+    "sid": 1002006,
+    "technique": "T1078",
+    "tactic": "TA0001",
+    "rule_name": "LAB Successful API Credential Use",
+    "description": "Use a valid lab api-key credential and observe an authenticated response.",
+    "kind": "valid_auth",
+    "params": {
+      "channel": "api-key"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1078-04",
+    "sid": 1002007,
+    "technique": "T1078",
+    "tactic": "TA0001",
+    "rule_name": "LAB Successful Basic Credential Use",
+    "description": "Use a valid lab basic credential and observe an authenticated response.",
+    "kind": "valid_auth",
+    "params": {
+      "channel": "basic"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1189-01",
+    "sid": 1002008,
+    "technique": "T1189",
+    "tactic": "TA0001",
+    "rule_name": "LAB Fake Verification Page Delivery",
+    "description": "Return a harmless response containing urgent verification content.",
+    "kind": "driveby_response",
+    "params": {
+      "payload": "<div class=urgent-verification>Confirm browser access to continue</div>"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1189-02",
+    "sid": 1002009,
+    "technique": "T1189",
+    "tactic": "TA0001",
+    "rule_name": "LAB Hidden Loader Script Delivery",
+    "description": "Return a harmless response containing a hidden client-side loader.",
+    "kind": "driveby_response",
+    "params": {
+      "payload": "<script>window.hiddenLoader='https://cdn.invalid/stage.js'</script>"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1189-03",
+    "sid": 1002010,
+    "technique": "T1189",
+    "tactic": "TA0001",
+    "rule_name": "LAB Deceptive Browser Update Delivery",
+    "description": "Return a harmless response containing a fake browser update prompt.",
+    "kind": "driveby_response",
+    "params": {
+      "payload": "Browser update required. Download secure-browser-update.bin to continue"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595-01",
+    "sid": 1002011,
+    "technique": "T1595",
+    "tactic": "TA0043",
+    "rule_name": "LAB Sequential Public Service Probes",
+    "description": "Perform a bounded reconnaissance probe against the isolated public lab gateway.",
+    "kind": "active_port_scan",
+    "params": {},
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595-02",
+    "sid": 1002012,
+    "technique": "T1595",
+    "tactic": "TA0043",
+    "rule_name": "LAB HTTP Capability Assessment",
+    "description": "Perform a bounded reconnaissance probe against the isolated public lab gateway.",
+    "kind": "http_probe",
+    "params": {
+      "method": "OPTIONS",
+      "path": "/",
+      "user_agent": "network-audit-client/1.0"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595-03",
+    "sid": 1002013,
+    "technique": "T1595",
+    "tactic": "TA0043",
+    "rule_name": "LAB Service Banner Identification",
+    "description": "Perform a bounded reconnaissance probe against the isolated public lab gateway.",
+    "kind": "http_probe",
+    "params": {
+      "method": "HEAD",
+      "path": "/",
+      "user_agent": "service-banner-audit/1.0"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595-04",
+    "sid": 1002014,
+    "technique": "T1595",
+    "tactic": "TA0043",
+    "rule_name": "LAB Infrastructure Metadata Probe",
+    "description": "Perform a bounded reconnaissance probe against the isolated public lab gateway.",
+    "kind": "http_probe",
+    "params": {
+      "method": "GET",
+      "path": "/robots.txt",
+      "user_agent": "infrastructure-inventory/1.0"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595-05",
+    "sid": 1002015,
+    "technique": "T1595",
+    "tactic": "TA0043",
+    "rule_name": "LAB Legacy Method Reconnaissance",
+    "description": "Perform a bounded reconnaissance probe against the isolated public lab gateway.",
+    "kind": "raw_http_probe",
+    "params": {
+      "method": "TRACE"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595.001-01",
+    "sid": 1002016,
+    "technique": "T1595.001",
+    "tactic": "TA0043",
+    "rule_name": "LAB Web Address Range Sweep",
+    "description": "Probe TCP port 80 across five isolated gateway IP aliases.",
+    "kind": "ip_block_scan",
+    "params": {
+      "port": 80
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595.001-02",
+    "sid": 1002017,
+    "technique": "T1595.001",
+    "tactic": "TA0043",
+    "rule_name": "LAB TLS Address Range Sweep",
+    "description": "Probe TCP port 443 across five isolated gateway IP aliases.",
+    "kind": "ip_block_scan",
+    "params": {
+      "port": 443
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595.001-03",
+    "sid": 1002018,
+    "technique": "T1595.001",
+    "tactic": "TA0043",
+    "rule_name": "LAB Remote Access Address Sweep",
+    "description": "Probe TCP port 22 across five isolated gateway IP aliases.",
+    "kind": "ip_block_scan",
+    "params": {
+      "port": 22
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595.001-04",
+    "sid": 1002019,
+    "technique": "T1595.001",
+    "tactic": "TA0043",
+    "rule_name": "LAB Alternate Web Address Sweep",
+    "description": "Probe TCP port 8080 across five isolated gateway IP aliases.",
+    "kind": "ip_block_scan",
+    "params": {
+      "port": 8080
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595.001-05",
+    "sid": 1002020,
+    "technique": "T1595.001",
+    "tactic": "TA0043",
+    "rule_name": "LAB Application Address Range Sweep",
+    "description": "Probe TCP port 3000 across five isolated gateway IP aliases.",
+    "kind": "ip_block_scan",
+    "params": {
+      "port": 3000
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595.002-01",
+    "sid": 1002021,
+    "technique": "T1595.002",
+    "tactic": "TA0043",
+    "rule_name": "LAB Template Scanner Request",
+    "description": "Send a bounded request intended to assess a specific exposed feature or weakness.",
+    "kind": "vuln_scan",
+    "params": {
+      "method": "GET",
+      "path": "/",
+      "user_agent": "Nuclei - Open-source project",
+      "body": null
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595.002-02",
+    "sid": 1002022,
+    "technique": "T1595.002",
+    "tactic": "TA0043",
+    "rule_name": "LAB CVE Exposure Check Request",
+    "description": "Send a bounded request intended to assess a specific exposed feature or weakness.",
+    "kind": "vuln_scan",
+    "params": {
+      "method": "GET",
+      "path": "/.well-known/security.txt?cve_check=CVE-2021-44228",
+      "user_agent": "Mozilla/5.0",
+      "body": null
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595.002-03",
+    "sid": 1002023,
+    "technique": "T1595.002",
+    "tactic": "TA0043",
+    "rule_name": "LAB WebDAV Capability Check",
+    "description": "Send a bounded request intended to assess a specific exposed feature or weakness.",
+    "kind": "vuln_scan",
+    "params": {
+      "method": "OPTIONS",
+      "path": "/webdav/",
+      "user_agent": "configuration-audit/1.0",
+      "body": null
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595.002-04",
+    "sid": 1002024,
+    "technique": "T1595.002",
+    "tactic": "TA0043",
+    "rule_name": "LAB Graph Query Schema Probe",
+    "description": "Send a bounded request intended to assess a specific exposed feature or weakness.",
+    "kind": "vuln_scan",
+    "params": {
+      "method": "POST",
+      "path": "/graphql",
+      "user_agent": "schema-audit/1.0",
+      "body": "{\"query\":\"{__schema{types{name}}}\"}"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595.002-05",
+    "sid": 1002025,
+    "technique": "T1595.002",
+    "tactic": "TA0043",
+    "rule_name": "LAB Server Status Exposure Check",
+    "description": "Send a bounded request intended to assess a specific exposed feature or weakness.",
+    "kind": "vuln_scan",
+    "params": {
+      "method": "GET",
+      "path": "/server-status?auto",
+      "user_agent": "version-audit/1.0",
+      "body": null
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595.003-01",
+    "sid": 1002026,
+    "technique": "T1595.003",
+    "tactic": "TA0043",
+    "rule_name": "LAB Administrative Resource Enumeration",
+    "description": "Enumerate a bounded dictionary of related web resources on the local gateway.",
+    "kind": "wordlist_scan",
+    "params": {
+      "paths": [
+        "/admin",
+        "/administrator",
+        "/admin/login",
+        "/manage",
+        "/console",
+        "/controlpanel"
+      ]
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595.003-02",
+    "sid": 1002027,
+    "technique": "T1595.003",
+    "tactic": "TA0043",
+    "rule_name": "LAB Backup Artifact Enumeration",
+    "description": "Enumerate a bounded dictionary of related web resources on the local gateway.",
+    "kind": "wordlist_scan",
+    "params": {
+      "paths": [
+        "/backup.zip",
+        "/site.tar.gz",
+        "/database.bak",
+        "/dump.sql",
+        "/www.zip",
+        "/archive.old"
+      ]
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595.003-03",
+    "sid": 1002028,
+    "technique": "T1595.003",
+    "tactic": "TA0043",
+    "rule_name": "LAB Repository Metadata Enumeration",
+    "description": "Enumerate a bounded dictionary of related web resources on the local gateway.",
+    "kind": "wordlist_scan",
+    "params": {
+      "paths": [
+        "/.git/config",
+        "/.svn/entries",
+        "/.hg/store",
+        "/.env",
+        "/config.yml",
+        "/settings.json"
+      ]
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595.003-04",
+    "sid": 1002029,
+    "technique": "T1595.003",
+    "tactic": "TA0043",
+    "rule_name": "LAB API Documentation Enumeration",
+    "description": "Enumerate a bounded dictionary of related web resources on the local gateway.",
+    "kind": "wordlist_scan",
+    "params": {
+      "paths": [
+        "/swagger",
+        "/swagger-ui",
+        "/openapi.json",
+        "/api-docs",
+        "/graphql",
+        "/redoc"
+      ]
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1595.003-05",
+    "sid": 1002030,
+    "technique": "T1595.003",
+    "tactic": "TA0043",
+    "rule_name": "LAB CMS Resource Enumeration",
+    "description": "Enumerate a bounded dictionary of related web resources on the local gateway.",
+    "kind": "wordlist_scan",
+    "params": {
+      "paths": [
+        "/wp-admin",
+        "/wp-login.php",
+        "/joomla",
+        "/drupal",
+        "/xmlrpc.php",
+        "/user/login"
+      ]
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1110-01",
+    "sid": 1002031,
+    "technique": "T1110",
+    "tactic": "TA0006",
+    "rule_name": "LAB Repeated JSON Authentication Failures",
+    "description": "Submit multiple failed authentication attempts with both identities and credentials varying.",
+    "kind": "brute_parent",
+    "params": {
+      "channel": "json"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1110-02",
+    "sid": 1002032,
+    "technique": "T1110",
+    "tactic": "TA0006",
+    "rule_name": "LAB Repeated Form Authentication Failures",
+    "description": "Submit multiple failed authentication attempts with both identities and credentials varying.",
+    "kind": "brute_parent",
+    "params": {
+      "channel": "form"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1110-03",
+    "sid": 1002033,
+    "technique": "T1110",
+    "tactic": "TA0006",
+    "rule_name": "LAB Repeated Basic Authentication Failures",
+    "description": "Submit multiple failed authentication attempts with both identities and credentials varying.",
+    "kind": "brute_parent",
+    "params": {
+      "channel": "basic"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1110-04",
+    "sid": 1002034,
+    "technique": "T1110",
+    "tactic": "TA0006",
+    "rule_name": "LAB Repeated Token Authentication Failures",
+    "description": "Submit multiple failed authentication attempts with both identities and credentials varying.",
+    "kind": "brute_parent",
+    "params": {
+      "channel": "token"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1110-05",
+    "sid": 1002035,
+    "technique": "T1110",
+    "tactic": "TA0006",
+    "rule_name": "LAB Repeated PIN Authentication Failures",
+    "description": "Submit multiple failed authentication attempts with both identities and credentials varying.",
+    "kind": "brute_parent",
+    "params": {
+      "channel": "pin"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1110.001-01",
+    "sid": 1002036,
+    "technique": "T1110.001",
+    "tactic": "TA0006",
+    "rule_name": "LAB Repeated JSON Credential Guesses",
+    "description": "Try multiple different credentials against one fixed lab identity.",
+    "kind": "password_guess",
+    "params": {
+      "channel": "json"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1110.001-02",
+    "sid": 1002037,
+    "technique": "T1110.001",
+    "tactic": "TA0006",
+    "rule_name": "LAB Repeated Form Credential Guesses",
+    "description": "Try multiple different credentials against one fixed lab identity.",
+    "kind": "password_guess",
+    "params": {
+      "channel": "form"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1110.001-03",
+    "sid": 1002038,
+    "technique": "T1110.001",
+    "tactic": "TA0006",
+    "rule_name": "LAB Repeated Basic Credential Guesses",
+    "description": "Try multiple different credentials against one fixed lab identity.",
+    "kind": "password_guess",
+    "params": {
+      "channel": "basic"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1110.001-04",
+    "sid": 1002039,
+    "technique": "T1110.001",
+    "tactic": "TA0006",
+    "rule_name": "LAB Repeated Token Credential Guesses",
+    "description": "Try multiple different credentials against one fixed lab identity.",
+    "kind": "password_guess",
+    "params": {
+      "channel": "token"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1110.001-05",
+    "sid": 1002040,
+    "technique": "T1110.001",
+    "tactic": "TA0006",
+    "rule_name": "LAB Repeated PIN Credential Guesses",
+    "description": "Try multiple different credentials against one fixed lab identity.",
+    "kind": "password_guess",
+    "params": {
+      "channel": "pin"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1110.003-01",
+    "sid": 1002041,
+    "technique": "T1110.003",
+    "tactic": "TA0006",
+    "rule_name": "LAB Shared JSON Credential Across Accounts",
+    "description": "Try one fixed credential against multiple distinct lab identities.",
+    "kind": "password_spray",
+    "params": {
+      "channel": "json"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1110.003-02",
+    "sid": 1002042,
+    "technique": "T1110.003",
+    "tactic": "TA0006",
+    "rule_name": "LAB Shared Form Credential Across Accounts",
+    "description": "Try one fixed credential against multiple distinct lab identities.",
+    "kind": "password_spray",
+    "params": {
+      "channel": "form"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1110.003-03",
+    "sid": 1002043,
+    "technique": "T1110.003",
+    "tactic": "TA0006",
+    "rule_name": "LAB Shared Basic Credential Across Accounts",
+    "description": "Try one fixed credential against multiple distinct lab identities.",
+    "kind": "password_spray",
+    "params": {
+      "channel": "basic"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1110.003-04",
+    "sid": 1002044,
+    "technique": "T1110.003",
+    "tactic": "TA0006",
+    "rule_name": "LAB Shared Token Credential Across Accounts",
+    "description": "Try one fixed credential against multiple distinct lab identities.",
+    "kind": "password_spray",
+    "params": {
+      "channel": "token"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1110.003-05",
+    "sid": 1002045,
+    "technique": "T1110.003",
+    "tactic": "TA0006",
+    "rule_name": "LAB Shared PIN Credential Across Accounts",
+    "description": "Try one fixed credential against multiple distinct lab identities.",
+    "kind": "password_spray",
+    "params": {
+      "channel": "pin"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1505.003-01",
+    "sid": 1002046,
+    "technique": "T1505.003",
+    "tactic": "TA0003",
+    "rule_name": "LAB Suspicious PHP Command Endpoint Access",
+    "description": "Access a harmless web-shell-shaped path using a command-control parameter.",
+    "kind": "webshell_access",
+    "params": {
+      "method": "GET",
+      "path": "/uploads/system.php?cmd=id",
+      "body": null
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1505.003-02",
+    "sid": 1002047,
+    "technique": "T1505.003",
+    "tactic": "TA0003",
+    "rule_name": "LAB Suspicious JSP Command Endpoint Access",
+    "description": "Access a harmless web-shell-shaped path using a command-control parameter.",
+    "kind": "webshell_access",
+    "params": {
+      "method": "POST",
+      "path": "/images/cache.jsp",
+      "body": "cmd=whoami"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1505.003-03",
+    "sid": 1002048,
+    "technique": "T1505.003",
+    "tactic": "TA0003",
+    "rule_name": "LAB Suspicious ASPX Execution Endpoint Access",
+    "description": "Access a harmless web-shell-shaped path using a command-control parameter.",
+    "kind": "webshell_access",
+    "params": {
+      "method": "GET",
+      "path": "/aspnet_client/update.aspx?action=exec",
+      "body": null
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1505.003-04",
+    "sid": 1002049,
+    "technique": "T1505.003",
+    "tactic": "TA0003",
+    "rule_name": "LAB Hidden Script Control Request",
+    "description": "Access a harmless web-shell-shaped path using a command-control parameter.",
+    "kind": "webshell_access",
+    "params": {
+      "method": "POST",
+      "path": "/cgi-bin/.maintenance.pl",
+      "body": "action=command&value=id"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1505.003-05",
+    "sid": 1002050,
+    "technique": "T1505.003",
+    "tactic": "TA0003",
+    "rule_name": "LAB Plugin Command Console Access",
+    "description": "Access a harmless web-shell-shaped path using a command-control parameter.",
+    "kind": "webshell_access",
+    "params": {
+      "method": "GET",
+      "path": "/plugins/healthcheck.phtml?c=whoami",
+      "body": null
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1499-01",
+    "sid": 1002051,
+    "technique": "T1499",
+    "tactic": "TA0040",
+    "rule_name": "LAB Rapid Rendering Request Burst",
+    "description": "Send a small bounded burst to one application endpoint without exhausting host resources.",
+    "kind": "endpoint_dos",
+    "params": {
+      "profile": "normal_get",
+      "count": 12
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1499-02",
+    "sid": 1002052,
+    "technique": "T1499",
+    "tactic": "TA0040",
+    "rule_name": "LAB Repeated Aggregation Submissions",
+    "description": "Send a small bounded burst to one application endpoint without exhausting host resources.",
+    "kind": "endpoint_dos",
+    "params": {
+      "profile": "normal_post",
+      "count": 12
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1499-03",
+    "sid": 1002053,
+    "technique": "T1499",
+    "tactic": "TA0040",
+    "rule_name": "LAB Search Endpoint Request Surge",
+    "description": "Send a small bounded burst to one application endpoint without exhausting host resources.",
+    "kind": "endpoint_dos",
+    "params": {
+      "profile": "search",
+      "count": 12
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1499-04",
+    "sid": 1002054,
+    "technique": "T1499",
+    "tactic": "TA0040",
+    "rule_name": "LAB Authentication Endpoint Request Surge",
+    "description": "Send a small bounded burst to one application endpoint without exhausting host resources.",
+    "kind": "endpoint_dos",
+    "params": {
+      "profile": "auth",
+      "count": 12
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1499-05",
+    "sid": 1002055,
+    "technique": "T1499",
+    "tactic": "TA0040",
+    "rule_name": "LAB Multipart Processing Request Surge",
+    "description": "Send a small bounded burst to one application endpoint without exhausting host resources.",
+    "kind": "endpoint_dos",
+    "params": {
+      "profile": "upload",
+      "count": 12
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1071.001-01",
+    "sid": 1002056,
+    "technique": "T1071.001",
+    "tactic": "TA0011",
+    "rule_name": "LAB Periodic Web Telemetry Traffic",
+    "description": "Generate six periodic HTTP requests from the lab backend to the isolated command sink.",
+    "kind": "web_c2",
+    "params": {
+      "profile": "telemetry"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1071.001-02",
+    "sid": 1002057,
+    "technique": "T1071.001",
+    "tactic": "TA0011",
+    "rule_name": "LAB Periodic Web Checkin Traffic",
+    "description": "Generate six periodic HTTP requests from the lab backend to the isolated command sink.",
+    "kind": "web_c2",
+    "params": {
+      "profile": "checkin"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1071.001-03",
+    "sid": 1002058,
+    "technique": "T1071.001",
+    "tactic": "TA0011",
+    "rule_name": "LAB Periodic Web Heartbeat Traffic",
+    "description": "Generate six periodic HTTP requests from the lab backend to the isolated command sink.",
+    "kind": "web_c2",
+    "params": {
+      "profile": "heartbeat"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1071.001-04",
+    "sid": 1002059,
+    "technique": "T1071.001",
+    "tactic": "TA0011",
+    "rule_name": "LAB Periodic Web Sync Traffic",
+    "description": "Generate six periodic HTTP requests from the lab backend to the isolated command sink.",
+    "kind": "web_c2",
+    "params": {
+      "profile": "sync"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1071.001-05",
+    "sid": 1002060,
+    "technique": "T1071.001",
+    "tactic": "TA0011",
+    "rule_name": "LAB Periodic Web Tasks Traffic",
+    "description": "Generate six periodic HTTP requests from the lab backend to the isolated command sink.",
+    "kind": "web_c2",
+    "params": {
+      "profile": "tasks"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1659-01",
+    "sid": 1002061,
+    "technique": "T1659",
+    "tactic": "TA0001",
+    "rule_name": "LAB Unexpected Verification Banner Insertion",
+    "description": "Return content explicitly marked as inserted by the controlled intermediary simulation.",
+    "kind": "content_injection",
+    "params": {
+      "profile": "banner"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1659-02",
+    "sid": 1002062,
+    "technique": "T1659",
+    "tactic": "TA0001",
+    "rule_name": "LAB Unexpected External Script Insertion",
+    "description": "Return content explicitly marked as inserted by the controlled intermediary simulation.",
+    "kind": "content_injection",
+    "params": {
+      "profile": "script"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1659-03",
+    "sid": 1002063,
+    "technique": "T1659",
+    "tactic": "TA0001",
+    "rule_name": "LAB Unexpected Hidden Frame Insertion",
+    "description": "Return content explicitly marked as inserted by the controlled intermediary simulation.",
+    "kind": "content_injection",
+    "params": {
+      "profile": "iframe"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1659-04",
+    "sid": 1002064,
+    "technique": "T1659",
+    "tactic": "TA0001",
+    "rule_name": "LAB Unexpected Configuration Redirection",
+    "description": "Return content explicitly marked as inserted by the controlled intermediary simulation.",
+    "kind": "content_injection",
+    "params": {
+      "profile": "config"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1659-05",
+    "sid": 1002065,
+    "technique": "T1659",
+    "tactic": "TA0001",
+    "rule_name": "LAB Unexpected Download Link Insertion",
+    "description": "Return content explicitly marked as inserted by the controlled intermediary simulation.",
+    "kind": "content_injection",
+    "params": {
+      "profile": "download"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1498-01",
+    "sid": 1002066,
+    "technique": "T1498",
+    "tactic": "TA0040",
+    "rule_name": "LAB High Rate DNS Service Traffic",
+    "description": "Send twenty small UDP datagrams to lab port 53; volume is intentionally harmless.",
+    "kind": "network_dos",
+    "params": {
+      "port": 53,
+      "count": 20
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1498-02",
+    "sid": 1002067,
+    "technique": "T1498",
+    "tactic": "TA0040",
+    "rule_name": "LAB High Rate Time Service Traffic",
+    "description": "Send twenty small UDP datagrams to lab port 123; volume is intentionally harmless.",
+    "kind": "network_dos",
+    "params": {
+      "port": 123,
+      "count": 20
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1498-03",
+    "sid": 1002068,
+    "technique": "T1498",
+    "tactic": "TA0040",
+    "rule_name": "LAB High Rate Management Service Traffic",
+    "description": "Send twenty small UDP datagrams to lab port 161; volume is intentionally harmless.",
+    "kind": "network_dos",
+    "params": {
+      "port": 161,
+      "count": 20
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1498-04",
+    "sid": 1002069,
+    "technique": "T1498",
+    "tactic": "TA0040",
+    "rule_name": "LAB High Rate Discovery Service Traffic",
+    "description": "Send twenty small UDP datagrams to lab port 1900; volume is intentionally harmless.",
+    "kind": "network_dos",
+    "params": {
+      "port": 1900,
+      "count": 20
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1498-05",
+    "sid": 1002070,
+    "technique": "T1498",
+    "tactic": "TA0040",
+    "rule_name": "LAB High Rate Cache Service Traffic",
+    "description": "Send twenty small UDP datagrams to lab port 11211; volume is intentionally harmless.",
+    "kind": "network_dos",
+    "params": {
+      "port": 11211,
+      "count": 20
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1095-01",
+    "sid": 1002071,
+    "technique": "T1095",
+    "tactic": "TA0011",
+    "rule_name": "LAB Opaque TCP Node Greeting",
+    "description": "Send an opaque application-independent frame inside the isolated lab network.",
+    "kind": "non_app",
+    "params": {
+      "protocol": "tcp",
+      "port": 80,
+      "payload_hex": "50494e47004e4f4445"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1095-02",
+    "sid": 1002072,
+    "technique": "T1095",
+    "tactic": "TA0011",
+    "rule_name": "LAB Length Prefixed TCP Beacon",
+    "description": "Send an opaque application-independent frame inside the isolated lab network.",
+    "kind": "non_app",
+    "params": {
+      "protocol": "tcp",
+      "port": 80,
+      "payload_hex": "0008424541434f4e3031"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1095-03",
+    "sid": 1002073,
+    "technique": "T1095",
+    "tactic": "TA0011",
+    "rule_name": "LAB Plain TCP Heartbeat Frame",
+    "description": "Send an opaque application-independent frame inside the isolated lab network.",
+    "kind": "non_app",
+    "params": {
+      "protocol": "tcp",
+      "port": 80,
+      "payload_hex": "4845415254424541547c686f73747c310a"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1095-04",
+    "sid": 1002074,
+    "technique": "T1095",
+    "tactic": "TA0011",
+    "rule_name": "LAB Opaque UDP Node Greeting",
+    "description": "Send an opaque application-independent frame inside the isolated lab network.",
+    "kind": "non_app",
+    "params": {
+      "protocol": "udp",
+      "port": 4444,
+      "payload_hex": "4e4f44452d48454c4c4fff"
+    },
+    "expected_status": "mapped"
+  },
+  {
+    "id": "A2-T1095-05",
+    "sid": 1002075,
+    "technique": "T1095",
+    "tactic": "TA0011",
+    "rule_name": "LAB Binary UDP Synchronization Frame",
+    "description": "Send an opaque application-independent frame inside the isolated lab network.",
+    "kind": "non_app",
+    "params": {
+      "protocol": "udp",
+      "port": 5555,
+      "payload_hex": "53594e430102"
+    },
+    "expected_status": "mapped"
+  }
+]

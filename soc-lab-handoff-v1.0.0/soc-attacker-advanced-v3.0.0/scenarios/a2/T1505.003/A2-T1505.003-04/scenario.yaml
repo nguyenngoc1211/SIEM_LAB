@@ -1,0 +1,28 @@
+id: A2-T1505.003-04
+name: Hidden Script Control Request
+description: Access a harmless web-shell-shaped path using a command-control parameter.
+mitre:
+  tactic_id:
+    - TA0003
+  technique_id:
+    - T1505.003
+suricata:
+  expected_sid:
+    - 1002049
+  rule_name: LAB Hidden Script Control Request
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002049
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

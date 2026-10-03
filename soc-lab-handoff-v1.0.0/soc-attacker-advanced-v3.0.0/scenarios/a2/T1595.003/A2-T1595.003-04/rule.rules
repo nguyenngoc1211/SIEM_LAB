@@ -1,0 +1,1 @@
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB API Documentation Enumeration"; flow:established,to_server; http.uri; pcre:"/^\/(?:swagger|openapi|api-docs|graphql|redoc)/i"; detection_filter:track by_src,count 4,seconds 15; classtype:misc-activity; sid:1002029; rev:1;)

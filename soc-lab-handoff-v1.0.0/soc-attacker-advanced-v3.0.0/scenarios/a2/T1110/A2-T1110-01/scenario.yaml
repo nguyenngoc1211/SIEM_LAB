@@ -1,0 +1,28 @@
+id: A2-T1110-01
+name: Repeated JSON Authentication Failures
+description: Submit multiple failed authentication attempts with both identities and credentials varying.
+mitre:
+  tactic_id:
+    - TA0006
+  technique_id:
+    - T1110
+suricata:
+  expected_sid:
+    - 1002031
+  rule_name: LAB Repeated JSON Authentication Failures
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002031
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

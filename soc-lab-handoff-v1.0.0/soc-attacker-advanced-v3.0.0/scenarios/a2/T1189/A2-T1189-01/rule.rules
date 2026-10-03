@@ -1,0 +1,1 @@
+alert http $HOME_NET any -> $EXTERNAL_NET any (msg:"LAB Fake Verification Page Delivery"; flow:established,to_client; http.response_body; content:"urgent-verification"; nocase; classtype:misc-activity; sid:1002008; rev:1;)

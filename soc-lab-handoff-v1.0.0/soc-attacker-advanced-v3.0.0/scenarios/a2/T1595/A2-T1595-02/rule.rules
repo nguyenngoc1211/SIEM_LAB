@@ -1,0 +1,1 @@
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB HTTP Capability Assessment"; flow:established,to_server; http.method; content:"OPTIONS"; http.user_agent; content:"network-audit-client/1.0"; classtype:misc-activity; sid:1002012; rev:1;)

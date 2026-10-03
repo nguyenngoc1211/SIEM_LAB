@@ -1,7 +1,9 @@
 'use strict';
 
 const fs = require('fs');
+const dgram = require('dgram');
 const http = require('http');
+const net = require('net');
 const path = require('path');
 
 const PORT = 3001;
@@ -71,6 +73,34 @@ function internalRequest(method, route, body) {
     request.on('error', reject);
     if (data.length) request.write(data);
     request.end();
+  });
+}
+
+function tcpProbe(port) {
+  return new Promise((resolve) => {
+    const socket = net.createConnection({ host: GATEWAY.hostname, port: port });
+    const finish = (status) => {
+      socket.destroy();
+      resolve({ port: port, status: status });
+    };
+    socket.setTimeout(700, () => finish('timeout'));
+    socket.once('connect', () => finish('connected'));
+    socket.once('error', () => finish('closed'));
+  });
+}
+
+function udpProbe(port, label) {
+  return new Promise((resolve) => {
+    const socket = dgram.createSocket('udp4');
+    const payload = Buffer.from('SOC-LAB-SERVICE-PROBE:' + label);
+    socket.send(payload, port, GATEWAY.hostname, () => {
+      socket.close();
+      resolve({ port: port, status: 'sent' });
+    });
+    socket.on('error', () => {
+      socket.close();
+      resolve({ port: port, status: 'error' });
+    });
   });
 }
 
@@ -165,6 +195,64 @@ async function handler(req, res) {
       log('authentication_failure', { client: client, username: body.email, pattern: pattern });
       return send(res, 401, { authenticated: false, pattern: pattern }, { 'X-SOC-Auth-Pattern': pattern });
     }
+    const authChannel = /^\/lab\/auth\/(json|form|basic|token|pin)$/.exec(url.pathname);
+    if (req.method === 'POST' && authChannel) {
+      const body = JSON.parse((await readBody(req)).toString('utf8') || '{}');
+      const username = String(body.username || body.email || 'unknown');
+      const password = String(body.password || body.credential || 'invalid');
+      const pattern = classifyAuth(username, password);
+      log('authentication_failure', { client: client, username: username, pattern: pattern, channel: authChannel[1] });
+      return send(res, 401, { authenticated: false, pattern: pattern, channel: authChannel[1] }, {
+        'X-SOC-Auth-Pattern': pattern,
+        'X-SOC-Auth-Channel': authChannel[1]
+      });
+    }
+    const validChannel = /^\/lab\/auth\/valid\/(bearer|session|api-key|basic)$/.exec(url.pathname);
+    if (req.method === 'GET' && validChannel) {
+      const channel = validChannel[1];
+      const valid = (
+        (channel === 'bearer' && req.headers.authorization === 'Bearer soc-lab-valid-token') ||
+        (channel === 'session' && String(req.headers.cookie || '').includes('session=soc-lab-valid-session')) ||
+        (channel === 'api-key' && req.headers['x-api-key'] === 'soc-lab-valid-api-key') ||
+        (channel === 'basic' && req.headers.authorization === 'Basic c29jbGFiOnZhbGlk')
+      );
+      log('authentication_result', { client: client, channel: channel, success: valid });
+      return send(res, valid ? 200 : 401, { authenticated: valid, channel: channel }, {
+        'X-SOC-Auth-Result': valid ? 'success' : 'failure',
+        'X-SOC-Auth-Method': channel
+      });
+    }
+    if (req.method === 'POST' && url.pathname === '/lab/discovery') {
+      const body = JSON.parse((await readBody(req)).toString('utf8') || '{}');
+      const profiles = {
+        'tcp-common': { protocol: 'tcp', ports: [21, 22, 23, 25, 80, 443] },
+        'tcp-admin': { protocol: 'tcp', ports: [445, 1433, 3000, 3001, 8080, 9200] },
+        'udp-service': { protocol: 'udp', ports: [53, 67, 123, 161, 1900] }
+      };
+      const profile = profiles[body.profile];
+      if (!profile) return send(res, 400, { error: 'unknown discovery profile' });
+      const results = profile.protocol === 'tcp'
+        ? await Promise.all(profile.ports.map((port) => tcpProbe(port)))
+        : await Promise.all(profile.ports.map((port) => udpProbe(port, body.profile)));
+      log('service_discovery', { client: client, profile: body.profile, results: results });
+      return send(res, 200, { profile: body.profile, probes: results });
+    }
+    if (req.method === 'GET' && url.pathname === '/lab/content/preview') {
+      const profile = url.searchParams.get('profile') || '';
+      const bodies = {
+        banner: '<div class="urgent-notice">Your session requires immediate verification</div>',
+        script: '<script src="https://cdn.invalid/inserted-loader.js"></script>',
+        iframe: '<iframe hidden src="https://portal.invalid/embedded-content"></iframe>',
+        config: '{"homepage":"https://redirect.invalid/modified","injected":true}',
+        download: '<a download href="https://updates.invalid/browser-update.bin">Install update</a>'
+      };
+      if (!bodies[profile]) return send(res, 400, { error: 'unknown content profile' });
+      log('content_injection_simulation', { client: client, profile: profile });
+      return send(res, 200, bodies[profile], {
+        'Content-Type': profile === 'config' ? 'application/json' : 'text/html; charset=utf-8',
+        'X-SOC-Content-Origin': 'intermediary'
+      });
+    }
     if (req.method === 'POST' && url.pathname === '/lab/ssrf') {
       const body = JSON.parse((await readBody(req)).toString('utf8') || '{}');
       const destinations = {
@@ -230,13 +318,21 @@ async function handler(req, res) {
       const count = Math.max(3, Math.min(Number(body.count) || 5, 8));
       const interval = Math.max(200, Math.min(Number(body.interval_ms) || 500, 1000));
       const hostId = 'SOC-LAB-HOST-001';
+      const profiles = {
+        telemetry: { method: 'POST', path: 'telemetry' },
+        checkin: { method: 'GET', path: 'checkin' },
+        heartbeat: { method: 'POST', path: 'heartbeat' },
+        sync: { method: 'PUT', path: 'sync' },
+        tasks: { method: 'POST', path: 'tasks' }
+      };
+      const profile = profiles[body.profile] || profiles.telemetry;
       for (let index = 0; index < count; index += 1) {
-        const route = '/__soc_internal__/c2/telemetry?host=' + hostId + '&seq=' + index;
-        await internalRequest('POST', route, JSON.stringify({ host_id: hostId, status: 'ok' }));
+        const route = '/__soc_internal__/c2/' + profile.path + '?host=' + hostId + '&seq=' + index;
+        await internalRequest(profile.method, route, JSON.stringify({ host_id: hostId, status: 'ok' }));
         if (index + 1 < count) await new Promise((resolve) => setTimeout(resolve, interval));
       }
-      log('c2_beacon_sequence', { client: client, host_id: hostId, count: count, interval_ms: interval });
-      return send(res, 200, { completed: true, host_id: hostId, count: count, interval_ms: interval });
+      log('c2_beacon_sequence', { client: client, host_id: hostId, count: count, interval_ms: interval, profile: body.profile || 'telemetry' });
+      return send(res, 200, { completed: true, host_id: hostId, count: count, interval_ms: interval, profile: body.profile || 'telemetry' });
     }
     return send(res, 404, { error: 'lab endpoint not found' });
   } catch (error) {

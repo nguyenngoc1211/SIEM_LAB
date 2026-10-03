@@ -1,0 +1,28 @@
+id: A2-T1071.001-05
+name: Periodic Web Tasks Traffic
+description: Generate six periodic HTTP requests from the lab backend to the isolated command sink.
+mitre:
+  tactic_id:
+    - TA0011
+  technique_id:
+    - T1071.001
+suricata:
+  expected_sid:
+    - 1002060
+  rule_name: LAB Periodic Web Tasks Traffic
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002060
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

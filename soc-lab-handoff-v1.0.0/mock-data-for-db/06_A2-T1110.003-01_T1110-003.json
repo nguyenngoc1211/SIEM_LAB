@@ -1,0 +1,205 @@
+{
+    "record_id":  "rec-20261001-48b26e7d",
+    "source_alert_id":  "1790843464.2088318",
+    "event_time":  "2026-10-01T08:31:26.899457+0000",
+    "processed_at":  "2026-10-02T08:30:32.478Z",
+    "severity_score":  1,
+    "severity_label":  "Low",
+    "signature":  "LAB Shared JSON Credential Across Accounts",
+    "category":  "network_ids",
+    "source_ip":  "172.29.0.10",
+    "source_port":  47836,
+    "destination_ip":  "172.29.0.4",
+    "destination_port":  80,
+    "protocol":  "http",
+    "direction":  "to_server",
+    "mapping_status":  "uncertain",
+    "technique_id":  "T1110.003",
+    "technique_name":  "Password Spraying",
+    "mapping_confidence":  0.591441,
+    "ai_threat_level":  "Medium",
+    "ai_confidence":  "Medium",
+    "attack_likelihood":  "Medium",
+    "is_false_positive":  false,
+    "need_admin_verification":  true,
+    "summary":  "Cảnh báo về một nỗ lực xác thực không thành công tới /lab/auth/json trên soc_gateway từ 172.29.0.10, được phát hiện bởi chữ ký \u0027LAB Shared JSON Credential Across Accounts\u0027. Mã trạng thái HTTP 401 cho thấy lỗi xác thực.",
+    "detail":  {
+                   "wazuh_alert":  {
+                                       "timestamp":  "2026-10-01T08:31:04.408+0000",
+                                       "rule":  {
+                                                    "level":  3,
+                                                    "description":  "Suricata: Alert - LAB Shared JSON Credential Across Accounts",
+                                                    "id":  "86601",
+                                                    "firedtimes":  119,
+                                                    "mail":  false,
+                                                    "groups":  [
+                                                                   "ids",
+                                                                   "suricata"
+                                                               ]
+                                                },
+                                       "agent":  {
+                                                     "id":  "000",
+                                                     "name":  "wazuh.manager"
+                                                 },
+                                       "manager":  {
+                                                       "name":  "wazuh.manager"
+                                                   },
+                                       "id":  "1790843464.2088318",
+                                       "decoder":  {
+                                                       "name":  "json"
+                                                   },
+                                       "data":  {
+                                                    "timestamp":  "2026-10-01T08:31:26.899457+0000",
+                                                    "flow_id":  "1880544337212783.000000",
+                                                    "in_iface":  "eth0",
+                                                    "event_type":  "alert",
+                                                    "src_ip":  "172.29.0.10",
+                                                    "src_port":  "47836",
+                                                    "dest_ip":  "172.29.0.4",
+                                                    "dest_port":  "80",
+                                                    "proto":  "TCP",
+                                                    "pkt_src":  "wire/pcap",
+                                                    "tx_id":  "0",
+                                                    "alert":  {
+                                                                  "action":  "allowed",
+                                                                  "gid":  "1",
+                                                                  "signature_id":  "1002041",
+                                                                  "rev":  "1",
+                                                                  "signature":  "LAB Shared JSON Credential Across Accounts",
+                                                                  "category":  "Misc activity",
+                                                                  "severity":  "3",
+                                                                  "metadata":  {
+                                                                                   "mitre_tactic_id":  [
+                                                                                                           "TA0006"
+                                                                                                       ],
+                                                                                   "mitre_technique_id":  [
+                                                                                                              "T1110.003"
+                                                                                                          ]
+                                                                               }
+                                                              },
+                                                    "http":  {
+                                                                 "hostname":  "soc_gateway",
+                                                                 "url":  "/lab/auth/json",
+                                                                 "http_user_agent":  "soc-attack-scenarios-v2/2.0",
+                                                                 "http_content_type":  "application/json",
+                                                                 "http_method":  "POST",
+                                                                 "protocol":  "HTTP/1.1",
+                                                                 "status":  "401",
+                                                                 "length":  "75"
+                                                             },
+                                                    "files":  [
+                                                                  {
+                                                                      "filename":  "/lab/auth/json",
+                                                                      "gaps":  false,
+                                                                      "state":  "CLOSED",
+                                                                      "stored":  false,
+                                                                      "size":  67,
+                                                                      "tx_id":  0
+                                                                  }
+                                                              ],
+                                                    "app_proto":  "http",
+                                                    "direction":  "to_server",
+                                                    "flow":  {
+                                                                 "pkts_toserver":  "5",
+                                                                 "pkts_toclient":  "4",
+                                                                 "bytes_toserver":  "680",
+                                                                 "bytes_toclient":  "577",
+                                                                 "start":  "2026-10-01T08:31:26.896600+0000",
+                                                                 "src_ip":  "172.29.0.10",
+                                                                 "dest_ip":  "172.29.0.4",
+                                                                 "src_port":  "47836",
+                                                                 "dest_port":  "80"
+                                                             }
+                                                },
+                                       "location":  "/var/log/suricata/eve.json"
+                                   },
+                   "suricata_alert":  {
+                                          "timestamp":  "2026-10-01T08:31:26.899457+0000",
+                                          "flow_id":  "1880544337212783.000000",
+                                          "in_iface":  "eth0",
+                                          "event_type":  "alert",
+                                          "src_ip":  "172.29.0.10",
+                                          "src_port":  "47836",
+                                          "dest_ip":  "172.29.0.4",
+                                          "dest_port":  "80",
+                                          "proto":  "TCP",
+                                          "pkt_src":  "wire/pcap",
+                                          "tx_id":  "0",
+                                          "alert":  {
+                                                        "action":  "allowed",
+                                                        "gid":  "1",
+                                                        "signature_id":  "1002041",
+                                                        "rev":  "1",
+                                                        "signature":  "LAB Shared JSON Credential Across Accounts",
+                                                        "category":  "Misc activity",
+                                                        "severity":  "3",
+                                                        "metadata":  {
+                                                                         "mitre_tactic_id":  [
+                                                                                                 "TA0006"
+                                                                                             ],
+                                                                         "mitre_technique_id":  [
+                                                                                                    "T1110.003"
+                                                                                                ]
+                                                                     }
+                                                    },
+                                          "http":  {
+                                                       "hostname":  "soc_gateway",
+                                                       "url":  "/lab/auth/json",
+                                                       "http_user_agent":  "soc-attack-scenarios-v2/2.0",
+                                                       "http_content_type":  "application/json",
+                                                       "http_method":  "POST",
+                                                       "protocol":  "HTTP/1.1",
+                                                       "status":  "401",
+                                                       "length":  "75"
+                                                   },
+                                          "files":  [
+                                                        {
+                                                            "filename":  "/lab/auth/json",
+                                                            "gaps":  false,
+                                                            "state":  "CLOSED",
+                                                            "stored":  false,
+                                                            "size":  67,
+                                                            "tx_id":  0
+                                                        }
+                                                    ],
+                                          "app_proto":  "http",
+                                          "direction":  "to_server",
+                                          "flow":  {
+                                                       "pkts_toserver":  "5",
+                                                       "pkts_toclient":  "4",
+                                                       "bytes_toserver":  "680",
+                                                       "bytes_toclient":  "577",
+                                                       "start":  "2026-10-01T08:31:26.896600+0000",
+                                                       "src_ip":  "172.29.0.10",
+                                                       "dest_ip":  "172.29.0.4",
+                                                       "src_port":  "47836",
+                                                       "dest_port":  "80"
+                                                   }
+                                      },
+                   "gemini_analysis":  {
+                                           "summary":  "Cảnh báo về một nỗ lực xác thực không thành công tới /lab/auth/json trên soc_gateway từ 172.29.0.10, được phát hiện bởi chữ ký \u0027LAB Shared JSON Credential Across Accounts\u0027. Mã trạng thái HTTP 401 cho thấy lỗi xác thực.",
+                                           "is_false_positive":  false,
+                                           "threat_level":  "Medium",
+                                           "confidence":  "Medium",
+                                           "attack_likelihood":  "Medium",
+                                           "rationale":  "Cảnh báo chỉ ra một nỗ lực xác thực không thành công (HTTP 401) vào một điểm cuối xác thực JSON. Chữ ký \u0027LAB Shared JSON Credential Across Accounts\u0027 cùng với các sự kiện xác thực thất bại và mã trạng thái 401 HTTP hỗ trợ khả năng tấn công dò mật khẩu (Password Spraying - T1110.003). Tuy nhiên, trạng thái ánh xạ ATT\u0026CK là \u0027uncertain\u0027 (không chắc chắn) do chỉ có một sự kiện được quan sát, không đủ để xác nhận một chiến dịch phun mật khẩu trên nhiều tài khoản. Cần điều tra thêm để xác định liệu đây có phải là một phần của cuộc tấn công lớn hơn hay không.",
+                                           "observed_evidence":  [
+                                                                     "Chữ ký IDS: LAB Shared JSON Credential Across Accounts",
+                                                                     "Loại sự kiện: authentication, Hành động: authenticate, Kết quả: failure",
+                                                                     "Địa chỉ IP nguồn: 172.29.0.10",
+                                                                     "Địa chỉ IP đích: 172.29.0.4",
+                                                                     "Phương thức HTTP: POST, Đường dẫn: /lab/auth/json, Mã trạng thái HTTP: 401",
+                                                                     "ATT\u0026CK Mapping: T1110.003 Password Spraying (uncertain confidence)"
+                                                                 ],
+                                           "recommended_actions":  [
+                                                                       "Kiểm tra nhật ký xác thực trên máy chủ đích (172.29.0.4) và soc_gateway để tìm các nỗ lực xác thực tương tự từ IP nguồn 172.29.0.10 hoặc các IP khác.",
+                                                                       "Xác minh danh tính của 172.29.0.10. Nếu là một máy chủ nội bộ, kiểm tra xem nó có bị xâm nhập hay không.",
+                                                                       "Kiểm tra các tài khoản người dùng có liên quan đến các nỗ lực xác thực không thành công này để tìm dấu hiệu bị khóa hoặc hoạt động bất thường.",
+                                                                       "Xem xét các cảnh báo IDS/IPS khác liên quan đến IP nguồn 172.29.0.10 hoặc đích 172.29.0.4 trong khoảng thời gian gần đây."
+                                                                   ],
+                                           "need_admin_verification":  true,
+                                           "soar_action":  "create_incident",
+                                           "analyst_notes":  "Cảnh báo này có thể là một phần của nỗ lực phun mật khẩu. Mặc dù ánh xạ ATT\u0026CK là không chắc chắn, các bằng chứng cho thấy một nỗ lực xác thực không thành công vào một điểm cuối quan trọng. Cần ưu tiên điều tra để xác định phạm vi và tác động tiềm tàng."
+                                       }
+               }
+}

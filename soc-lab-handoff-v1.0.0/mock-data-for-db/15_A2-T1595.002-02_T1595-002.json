@@ -1,0 +1,187 @@
+{
+    "record_id":  "rec-20261001-8a89d7e8",
+    "source_alert_id":  "1790843762.2442291",
+    "event_time":  "2026-10-01T08:36:01.988651+0000",
+    "processed_at":  "2026-10-02T08:32:12.199Z",
+    "severity_score":  1,
+    "severity_label":  "Low",
+    "signature":  "LAB CVE Exposure Check Request",
+    "category":  "network_ids",
+    "source_ip":  "172.29.0.10",
+    "source_port":  55540,
+    "destination_ip":  "172.29.0.4",
+    "destination_port":  80,
+    "protocol":  "http",
+    "direction":  "to_server",
+    "mapping_status":  "mapped",
+    "technique_id":  "T1595.002",
+    "technique_name":  "Vulnerability Scanning",
+    "mapping_confidence":  0.673467,
+    "ai_threat_level":  "Medium",
+    "ai_confidence":  "High",
+    "attack_likelihood":  "Medium",
+    "is_false_positive":  false,
+    "need_admin_verification":  true,
+    "summary":  "Phát hiện yêu cầu kiểm tra lỗ hổng CVE từ một máy chủ nội bộ (172.29.0.10) đến một máy chủ nội bộ khác (172.29.0.4) thông qua HTTP GET đến đường dẫn \u0027/.well-known/security.txt\u0027.",
+    "detail":  {
+                   "wazuh_alert":  {
+                                       "timestamp":  "2026-10-01T08:36:02.983+0000",
+                                       "rule":  {
+                                                    "level":  3,
+                                                    "description":  "Suricata: Alert - LAB CVE Exposure Check Request",
+                                                    "id":  "86601",
+                                                    "firedtimes":  244,
+                                                    "mail":  false,
+                                                    "groups":  [
+                                                                   "ids",
+                                                                   "suricata"
+                                                               ]
+                                                },
+                                       "agent":  {
+                                                     "id":  "000",
+                                                     "name":  "wazuh.manager"
+                                                 },
+                                       "manager":  {
+                                                       "name":  "wazuh.manager"
+                                                   },
+                                       "id":  "1790843762.2442291",
+                                       "decoder":  {
+                                                       "name":  "json"
+                                                   },
+                                       "data":  {
+                                                    "timestamp":  "2026-10-01T08:36:01.988651+0000",
+                                                    "flow_id":  "292322963375373.000000",
+                                                    "in_iface":  "eth0",
+                                                    "event_type":  "alert",
+                                                    "src_ip":  "172.29.0.10",
+                                                    "src_port":  "55540",
+                                                    "dest_ip":  "172.29.0.4",
+                                                    "dest_port":  "80",
+                                                    "proto":  "TCP",
+                                                    "pkt_src":  "wire/pcap",
+                                                    "tx_id":  "0",
+                                                    "alert":  {
+                                                                  "action":  "allowed",
+                                                                  "gid":  "1",
+                                                                  "signature_id":  "1002022",
+                                                                  "rev":  "1",
+                                                                  "signature":  "LAB CVE Exposure Check Request",
+                                                                  "category":  "Misc activity",
+                                                                  "severity":  "3",
+                                                                  "metadata":  {
+                                                                                   "mitre_tactic_id":  [
+                                                                                                           "TA0043"
+                                                                                                       ],
+                                                                                   "mitre_technique_id":  [
+                                                                                                              "T1595.002"
+                                                                                                          ]
+                                                                               }
+                                                              },
+                                                    "http":  {
+                                                                 "hostname":  "soc_gateway",
+                                                                 "url":  "/.well-known/security.txt?cve_check=CVE-2021-44228",
+                                                                 "http_user_agent":  "Mozilla/5.0",
+                                                                 "http_content_type":  "text/plain",
+                                                                 "http_method":  "GET",
+                                                                 "protocol":  "HTTP/1.1",
+                                                                 "status":  "200",
+                                                                 "length":  "475"
+                                                             },
+                                                    "app_proto":  "http",
+                                                    "direction":  "to_server",
+                                                    "flow":  {
+                                                                 "pkts_toserver":  "4",
+                                                                 "pkts_toclient":  "3",
+                                                                 "bytes_toserver":  "514",
+                                                                 "bytes_toclient":  "1055",
+                                                                 "start":  "2026-10-01T08:36:01.985565+0000",
+                                                                 "src_ip":  "172.29.0.10",
+                                                                 "dest_ip":  "172.29.0.4",
+                                                                 "src_port":  "55540",
+                                                                 "dest_port":  "80"
+                                                             }
+                                                },
+                                       "location":  "/var/log/suricata/eve.json"
+                                   },
+                   "suricata_alert":  {
+                                          "timestamp":  "2026-10-01T08:36:01.988651+0000",
+                                          "flow_id":  "292322963375373.000000",
+                                          "in_iface":  "eth0",
+                                          "event_type":  "alert",
+                                          "src_ip":  "172.29.0.10",
+                                          "src_port":  "55540",
+                                          "dest_ip":  "172.29.0.4",
+                                          "dest_port":  "80",
+                                          "proto":  "TCP",
+                                          "pkt_src":  "wire/pcap",
+                                          "tx_id":  "0",
+                                          "alert":  {
+                                                        "action":  "allowed",
+                                                        "gid":  "1",
+                                                        "signature_id":  "1002022",
+                                                        "rev":  "1",
+                                                        "signature":  "LAB CVE Exposure Check Request",
+                                                        "category":  "Misc activity",
+                                                        "severity":  "3",
+                                                        "metadata":  {
+                                                                         "mitre_tactic_id":  [
+                                                                                                 "TA0043"
+                                                                                             ],
+                                                                         "mitre_technique_id":  [
+                                                                                                    "T1595.002"
+                                                                                                ]
+                                                                     }
+                                                    },
+                                          "http":  {
+                                                       "hostname":  "soc_gateway",
+                                                       "url":  "/.well-known/security.txt?cve_check=CVE-2021-44228",
+                                                       "http_user_agent":  "Mozilla/5.0",
+                                                       "http_content_type":  "text/plain",
+                                                       "http_method":  "GET",
+                                                       "protocol":  "HTTP/1.1",
+                                                       "status":  "200",
+                                                       "length":  "475"
+                                                   },
+                                          "app_proto":  "http",
+                                          "direction":  "to_server",
+                                          "flow":  {
+                                                       "pkts_toserver":  "4",
+                                                       "pkts_toclient":  "3",
+                                                       "bytes_toserver":  "514",
+                                                       "bytes_toclient":  "1055",
+                                                       "start":  "2026-10-01T08:36:01.985565+0000",
+                                                       "src_ip":  "172.29.0.10",
+                                                       "dest_ip":  "172.29.0.4",
+                                                       "src_port":  "55540",
+                                                       "dest_port":  "80"
+                                                   }
+                                      },
+                   "gemini_analysis":  {
+                                           "summary":  "Phát hiện yêu cầu kiểm tra lỗ hổng CVE từ một máy chủ nội bộ (172.29.0.10) đến một máy chủ nội bộ khác (172.29.0.4) thông qua HTTP GET đến đường dẫn \u0027/.well-known/security.txt\u0027.",
+                                           "is_false_positive":  false,
+                                           "threat_level":  "Medium",
+                                           "confidence":  "High",
+                                           "attack_likelihood":  "Medium",
+                                           "rationale":  "Cảnh báo này chỉ ra một hoạt động quét lỗ hổng (Vulnerability Scanning - T1595.002) được thực hiện bởi địa chỉ IP nguồn 172.29.0.10 nhắm vào 172.29.0.4. Dấu hiệu \u0027LAB CVE Exposure Check Request\u0027 và yêu cầu HTTP GET đến \u0027/.well-known/security.txt\u0027 cho thấy đây là một nỗ lực thăm dò để tìm kiếm các thông tin liên quan đến bảo mật hoặc lỗ hổng. Mặc dù đây là hoạt động trinh sát, nhưng nó có thể là tiền đề cho một cuộc tấn công nghiêm trọng hơn nếu không được ủy quyền.",
+                                           "observed_evidence":  [
+                                                                     "Chữ ký: LAB CVE Exposure Check Request",
+                                                                     "Loại sự kiện: network_scan",
+                                                                     "Hành động: scan",
+                                                                     "IP nguồn: 172.29.0.10",
+                                                                     "IP đích: 172.29.0.4",
+                                                                     "Giao thức: HTTP",
+                                                                     "Phương thức HTTP: GET",
+                                                                     "Đường dẫn HTTP: /.well-known/security.txt"
+                                                                 ],
+                                           "recommended_actions":  [
+                                                                       "Xác minh xem 172.29.0.10 có phải là máy chủ quét lỗ hổng được ủy quyền trong mạng nội bộ hay không.",
+                                                                       "Kiểm tra nhật ký trên máy chủ đích 172.29.0.4 để tìm kiếm các hoạt động bất thường khác hoặc các yêu cầu tương tự.",
+                                                                       "Đánh giá mục đích của việc truy cập \u0027/.well-known/security.txt\u0027 từ 172.29.0.10.",
+                                                                       "Nếu không được ủy quyền, cô lập IP nguồn 172.29.0.10 và tiến hành điều tra sâu hơn."
+                                                                   ],
+                                           "need_admin_verification":  true,
+                                           "soar_action":  "admin_approval",
+                                           "analyst_notes":  "Hoạt động quét diễn ra giữa hai IP nội bộ. Cần xác định xem đây có phải là một phần của quy trình kiểm tra bảo mật định kỳ hay là một hành vi thăm dò trái phép. Việc kiểm tra \u0027/.well-known/security.txt\u0027 thường được sử dụng để tìm kiếm thông tin liên hệ bảo mật hoặc báo cáo lỗ hổng, nhưng cũng có thể bị lạm dụng trong giai đoạn trinh sát."
+                                       }
+               }
+}

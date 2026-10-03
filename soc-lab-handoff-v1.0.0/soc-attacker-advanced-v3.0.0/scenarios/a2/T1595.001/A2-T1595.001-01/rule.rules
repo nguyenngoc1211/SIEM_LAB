@@ -1,0 +1,1 @@
+alert tcp $EXTERNAL_NET any -> [172.29.0.20,172.29.0.21,172.29.0.22,172.29.0.23,172.29.0.24] 80 (msg:"LAB Web Address Range Sweep"; flags:S; flow:stateless; detection_filter:track by_src,count 4,seconds 15; classtype:misc-activity; sid:1002016; rev:1;)

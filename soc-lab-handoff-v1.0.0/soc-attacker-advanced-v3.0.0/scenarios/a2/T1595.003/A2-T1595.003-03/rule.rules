@@ -1,0 +1,1 @@
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB Repository Metadata Enumeration"; flow:established,to_server; http.uri; pcre:"/^\/(?:\.git|\.svn|\.hg|\.env|config|settings)/i"; detection_filter:track by_src,count 4,seconds 15; classtype:misc-activity; sid:1002028; rev:1;)

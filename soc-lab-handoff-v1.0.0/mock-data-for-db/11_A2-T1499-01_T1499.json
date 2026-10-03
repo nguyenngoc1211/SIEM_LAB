@@ -1,0 +1,187 @@
+{
+    "record_id":  "rec-20261001-485fc85e",
+    "source_alert_id":  "1790843580.2364355",
+    "event_time":  "2026-10-01T08:32:59.477339+0000",
+    "processed_at":  "2026-10-02T08:31:55.167Z",
+    "severity_score":  1,
+    "severity_label":  "Low",
+    "signature":  "LAB Rapid Rendering Request Burst",
+    "category":  "network_ids",
+    "source_ip":  "172.29.0.10",
+    "source_port":  46930,
+    "destination_ip":  "172.29.0.4",
+    "destination_port":  80,
+    "protocol":  "http",
+    "direction":  "to_server",
+    "mapping_status":  "mapped",
+    "technique_id":  "T1499",
+    "technique_name":  "Endpoint Denial of Service",
+    "mapping_confidence":  0.88,
+    "ai_threat_level":  "Medium",
+    "ai_confidence":  "High",
+    "attack_likelihood":  "High",
+    "is_false_positive":  false,
+    "need_admin_verification":  true,
+    "summary":  "Cảnh báo Suricata phát hiện một đợt yêu cầu kết xuất nhanh (Rapid Rendering Request Burst) từ 172.29.0.10 đến máy chủ web 172.29.0.4, có thể là một nỗ lực từ chối dịch vụ (DoS) nhắm vào ứng dụng.",
+    "detail":  {
+                   "wazuh_alert":  {
+                                       "timestamp":  "2026-10-01T08:33:00.677+0000",
+                                       "rule":  {
+                                                    "level":  3,
+                                                    "description":  "Suricata: Alert - LAB Rapid Rendering Request Burst",
+                                                    "id":  "86601",
+                                                    "firedtimes":  208,
+                                                    "mail":  false,
+                                                    "groups":  [
+                                                                   "ids",
+                                                                   "suricata"
+                                                               ]
+                                                },
+                                       "agent":  {
+                                                     "id":  "000",
+                                                     "name":  "wazuh.manager"
+                                                 },
+                                       "manager":  {
+                                                       "name":  "wazuh.manager"
+                                                   },
+                                       "id":  "1790843580.2364355",
+                                       "decoder":  {
+                                                       "name":  "json"
+                                                   },
+                                       "data":  {
+                                                    "timestamp":  "2026-10-01T08:32:59.477339+0000",
+                                                    "flow_id":  "918855488448237.000000",
+                                                    "in_iface":  "eth0",
+                                                    "event_type":  "alert",
+                                                    "src_ip":  "172.29.0.10",
+                                                    "src_port":  "46930",
+                                                    "dest_ip":  "172.29.0.4",
+                                                    "dest_port":  "80",
+                                                    "proto":  "TCP",
+                                                    "pkt_src":  "wire/pcap",
+                                                    "tx_id":  "0",
+                                                    "alert":  {
+                                                                  "action":  "allowed",
+                                                                  "gid":  "1",
+                                                                  "signature_id":  "1002051",
+                                                                  "rev":  "1",
+                                                                  "signature":  "LAB Rapid Rendering Request Burst",
+                                                                  "category":  "Misc activity",
+                                                                  "severity":  "3",
+                                                                  "metadata":  {
+                                                                                   "mitre_tactic_id":  [
+                                                                                                           "TA0040"
+                                                                                                       ],
+                                                                                   "mitre_technique_id":  [
+                                                                                                              "T1499"
+                                                                                                          ]
+                                                                               }
+                                                              },
+                                                    "http":  {
+                                                                 "hostname":  "soc_gateway",
+                                                                 "url":  "/lab/normal?work=render\u0026item=11",
+                                                                 "http_user_agent":  "soc-attack-scenarios-v2/2.0",
+                                                                 "http_content_type":  "application/json",
+                                                                 "http_method":  "GET",
+                                                                 "protocol":  "HTTP/1.1",
+                                                                 "status":  "200",
+                                                                 "length":  "57"
+                                                             },
+                                                    "app_proto":  "http",
+                                                    "direction":  "to_server",
+                                                    "flow":  {
+                                                                 "pkts_toserver":  "4",
+                                                                 "pkts_toclient":  "3",
+                                                                 "bytes_toserver":  "507",
+                                                                 "bytes_toclient":  "422",
+                                                                 "start":  "2026-10-01T08:32:59.476081+0000",
+                                                                 "src_ip":  "172.29.0.10",
+                                                                 "dest_ip":  "172.29.0.4",
+                                                                 "src_port":  "46930",
+                                                                 "dest_port":  "80"
+                                                             }
+                                                },
+                                       "location":  "/var/log/suricata/eve.json"
+                                   },
+                   "suricata_alert":  {
+                                          "timestamp":  "2026-10-01T08:32:59.477339+0000",
+                                          "flow_id":  "918855488448237.000000",
+                                          "in_iface":  "eth0",
+                                          "event_type":  "alert",
+                                          "src_ip":  "172.29.0.10",
+                                          "src_port":  "46930",
+                                          "dest_ip":  "172.29.0.4",
+                                          "dest_port":  "80",
+                                          "proto":  "TCP",
+                                          "pkt_src":  "wire/pcap",
+                                          "tx_id":  "0",
+                                          "alert":  {
+                                                        "action":  "allowed",
+                                                        "gid":  "1",
+                                                        "signature_id":  "1002051",
+                                                        "rev":  "1",
+                                                        "signature":  "LAB Rapid Rendering Request Burst",
+                                                        "category":  "Misc activity",
+                                                        "severity":  "3",
+                                                        "metadata":  {
+                                                                         "mitre_tactic_id":  [
+                                                                                                 "TA0040"
+                                                                                             ],
+                                                                         "mitre_technique_id":  [
+                                                                                                    "T1499"
+                                                                                                ]
+                                                                     }
+                                                    },
+                                          "http":  {
+                                                       "hostname":  "soc_gateway",
+                                                       "url":  "/lab/normal?work=render\u0026item=11",
+                                                       "http_user_agent":  "soc-attack-scenarios-v2/2.0",
+                                                       "http_content_type":  "application/json",
+                                                       "http_method":  "GET",
+                                                       "protocol":  "HTTP/1.1",
+                                                       "status":  "200",
+                                                       "length":  "57"
+                                                   },
+                                          "app_proto":  "http",
+                                          "direction":  "to_server",
+                                          "flow":  {
+                                                       "pkts_toserver":  "4",
+                                                       "pkts_toclient":  "3",
+                                                       "bytes_toserver":  "507",
+                                                       "bytes_toclient":  "422",
+                                                       "start":  "2026-10-01T08:32:59.476081+0000",
+                                                       "src_ip":  "172.29.0.10",
+                                                       "dest_ip":  "172.29.0.4",
+                                                       "src_port":  "46930",
+                                                       "dest_port":  "80"
+                                                   }
+                                      },
+                   "gemini_analysis":  {
+                                           "summary":  "Cảnh báo Suricata phát hiện một đợt yêu cầu kết xuất nhanh (Rapid Rendering Request Burst) từ 172.29.0.10 đến máy chủ web 172.29.0.4, có thể là một nỗ lực từ chối dịch vụ (DoS) nhắm vào ứng dụng.",
+                                           "is_false_positive":  false,
+                                           "threat_level":  "Medium",
+                                           "confidence":  "High",
+                                           "attack_likelihood":  "High",
+                                           "rationale":  "Cảnh báo được kích hoạt bởi chữ ký \"LAB Rapid Rendering Request Burst\" và hành động sự kiện được xác định là \"flood\" (làm ngập lụt) thông qua giao thức HTTP GET. Điều này cho thấy một lượng lớn yêu cầu đang được gửi đến ứng dụng đích, phù hợp với kỹ thuật T1499 (Endpoint Denial of Service) của MITRE ATT\u0026CK. Mặc dù có tiền tố \"LAB\" trong chữ ký, cần phải xác minh xem đây có phải là một cuộc tấn công thực sự hay một thử nghiệm trong môi trường phòng thí nghiệm. Nếu là tấn công, nó có thể ảnh hưởng đến tính khả dụng của dịch vụ trên máy chủ đích.",
+                                           "observed_evidence":  [
+                                                                     "Chữ ký: LAB Rapid Rendering Request Burst",
+                                                                     "Hành động sự kiện: flood",
+                                                                     "Phương thức HTTP: GET",
+                                                                     "Đường dẫn HTTP: /lab/normal",
+                                                                     "IP nguồn: 172.29.0.10",
+                                                                     "IP đích: 172.29.0.4",
+                                                                     "Giao thức: http",
+                                                                     "Kỹ thuật ATT\u0026CK: T1499 Endpoint Denial of Service"
+                                                                 ],
+                                           "recommended_actions":  [
+                                                                       "Kiểm tra máy chủ đích (172.29.0.4) để tìm các dấu hiệu về hiệu suất kém hoặc hoạt động bất thường.",
+                                                                       "Điều tra IP nguồn (172.29.0.10) để xác định xem đây có phải là một máy chủ hợp lệ đang thực hiện kiểm tra hay một nguồn tấn công độc hại.",
+                                                                       "Xem xét nhật ký trên máy chủ đích để tìm kiếm số lượng yêu cầu cao bất thường từ IP nguồn.",
+                                                                       "Nếu xác nhận là tấn công, xem xét chặn IP nguồn sau khi có sự chấp thuận của quản trị viên."
+                                                                   ],
+                                           "need_admin_verification":  true,
+                                           "soar_action":  "create_incident",
+                                           "analyst_notes":  "Chữ ký có tiền tố \"LAB\" có thể chỉ ra rằng đây là một cảnh báo được tạo ra trong môi trường phòng thí nghiệm hoặc thử nghiệm. Cần xác minh thêm để loại trừ khả năng đây là một sự kiện không độc hại hoặc một thử nghiệm nội bộ."
+                                       }
+               }
+}

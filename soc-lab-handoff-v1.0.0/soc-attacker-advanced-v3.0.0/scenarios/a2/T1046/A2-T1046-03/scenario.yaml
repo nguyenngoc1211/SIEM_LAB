@@ -1,0 +1,28 @@
+id: A2-T1046-03
+name: Internal UDP Service Probe
+description: Send harmless UDP discovery datagrams to internal service ports.
+mitre:
+  tactic_id:
+    - TA0007
+  technique_id:
+    - T1046
+suricata:
+  expected_sid:
+    - 1002003
+  rule_name: LAB Internal UDP Service Probe
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002003
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

@@ -1,0 +1,28 @@
+id: A2-T1095-03
+name: Plain TCP Heartbeat Frame
+description: Send an opaque application-independent frame inside the isolated lab network.
+mitre:
+  tactic_id:
+    - TA0011
+  technique_id:
+    - T1095
+suricata:
+  expected_sid:
+    - 1002073
+  rule_name: LAB Plain TCP Heartbeat Frame
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002073
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40

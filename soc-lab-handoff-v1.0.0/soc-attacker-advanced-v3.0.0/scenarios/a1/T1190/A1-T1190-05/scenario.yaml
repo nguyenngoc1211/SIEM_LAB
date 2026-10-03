@@ -1,0 +1,27 @@
+id: A1-T1190-05
+name: Encoded file path inclusion attempt
+description: Send an encoded traversal through a BaconMap-shaped file parameter.
+mitre:
+  tactic_id:
+    - TA0001
+  technique_id:
+    - T1190
+suricata:
+  expected_sid:
+    - 2011843
+  rule_name: ET WEB_SPECIFIC_APPS BaconMap updatelist.php filepath Local File Inclusion Attempt
+  rule_source: et_open
+source:
+  container: soc_attacker_v2
+  type: et_open
+  reference: ET Open SID 2011843
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A1-2011843
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+timeout: 30

@@ -1,0 +1,28 @@
+id: A1-T1078-01
+name: Embedded service credential request
+description: Send a request with a known hardcoded lab credential value to a product-shaped endpoint.
+mitre:
+  tactic_id:
+    - TA0001
+  technique_id:
+    - T1078
+suricata:
+  expected_sid:
+    - 2056147
+  rule_name: ET WEB_SPECIFIC_APPS Cisco Smart Licensing Utility API Hardcoded Admin Credentials (CVE-2024-20439)
+  rule_source: et_open
+source:
+  container: soc_attacker_v2
+  type: et_open
+  reference: ET Open SID 2056147
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A1-2056147
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 30

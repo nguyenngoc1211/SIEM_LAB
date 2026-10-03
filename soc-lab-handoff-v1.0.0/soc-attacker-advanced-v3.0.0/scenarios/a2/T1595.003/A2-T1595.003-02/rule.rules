@@ -1,0 +1,1 @@
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB Backup Artifact Enumeration"; flow:established,to_server; http.uri; pcre:"/(?:backup|site|database|dump|www|archive).*(?:zip|gz|bak|sql|old)/i"; detection_filter:track by_src,count 4,seconds 15; classtype:misc-activity; sid:1002027; rev:1;)

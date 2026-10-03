@@ -1,0 +1,1 @@
+alert udp 172.29.0.2 any -> 172.29.0.4 [53,67,123,161,1900] (msg:"LAB Internal UDP Service Probe"; flow:stateless; content:"SOC-LAB-SERVICE-PROBE|3a|udp-service"; detection_filter:track by_src,count 3,seconds 10; classtype:misc-activity; sid:1002003; rev:1;)

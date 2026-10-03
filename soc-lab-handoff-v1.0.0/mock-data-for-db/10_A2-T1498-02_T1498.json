@@ -1,0 +1,164 @@
+{
+    "record_id":  "rec-20261001-e6126532",
+    "source_alert_id":  "1790843571.2320926",
+    "event_time":  "2026-10-01T08:32:26.858634+0000",
+    "processed_at":  "2026-10-02T08:31:16.864Z",
+    "severity_score":  1,
+    "severity_label":  "Low",
+    "signature":  "LAB High Rate Time Service Traffic",
+    "category":  "network_ids",
+    "source_ip":  "172.29.0.10",
+    "source_port":  52522,
+    "destination_ip":  "172.29.0.4",
+    "destination_port":  123,
+    "protocol":  "udp",
+    "direction":  "to_server",
+    "mapping_status":  "mapped",
+    "technique_id":  "T1498",
+    "technique_name":  "Network Denial of Service",
+    "mapping_confidence":  1,
+    "ai_threat_level":  "High",
+    "ai_confidence":  "High",
+    "attack_likelihood":  "High",
+    "is_false_positive":  false,
+    "need_admin_verification":  true,
+    "summary":  "Cảnh báo lưu lượng dịch vụ thời gian tốc độ cao bất thường, có thể là tấn công từ chối dịch vụ (DoS).",
+    "detail":  {
+                   "wazuh_alert":  {
+                                       "timestamp":  "2026-10-01T08:32:51.933+0000",
+                                       "rule":  {
+                                                    "level":  3,
+                                                    "description":  "Suricata: Alert - LAB High Rate Time Service Traffic",
+                                                    "id":  "86601",
+                                                    "firedtimes":  182,
+                                                    "mail":  false,
+                                                    "groups":  [
+                                                                   "ids",
+                                                                   "suricata"
+                                                               ]
+                                                },
+                                       "agent":  {
+                                                     "id":  "000",
+                                                     "name":  "wazuh.manager"
+                                                 },
+                                       "manager":  {
+                                                       "name":  "wazuh.manager"
+                                                   },
+                                       "id":  "1790843571.2320926",
+                                       "decoder":  {
+                                                       "name":  "json"
+                                                   },
+                                       "data":  {
+                                                    "timestamp":  "2026-10-01T08:32:26.858634+0000",
+                                                    "flow_id":  "825084795316420.000000",
+                                                    "in_iface":  "eth0",
+                                                    "event_type":  "alert",
+                                                    "src_ip":  "172.29.0.10",
+                                                    "src_port":  "52522",
+                                                    "dest_ip":  "172.29.0.4",
+                                                    "dest_port":  "123",
+                                                    "proto":  "UDP",
+                                                    "pkt_src":  "wire/pcap",
+                                                    "alert":  {
+                                                                  "action":  "allowed",
+                                                                  "gid":  "1",
+                                                                  "signature_id":  "1002067",
+                                                                  "rev":  "1",
+                                                                  "signature":  "LAB High Rate Time Service Traffic",
+                                                                  "category":  "Misc activity",
+                                                                  "severity":  "3",
+                                                                  "metadata":  {
+                                                                                   "mitre_tactic_id":  [
+                                                                                                           "TA0040"
+                                                                                                       ],
+                                                                                   "mitre_technique_id":  [
+                                                                                                              "T1498"
+                                                                                                          ]
+                                                                               }
+                                                              },
+                                                    "app_proto":  "failed",
+                                                    "direction":  "to_server",
+                                                    "flow":  {
+                                                                 "pkts_toserver":  "20",
+                                                                 "pkts_toclient":  "6",
+                                                                 "bytes_toserver":  "1240",
+                                                                 "bytes_toclient":  "540",
+                                                                 "start":  "2026-10-01T08:32:26.847465+0000",
+                                                                 "src_ip":  "172.29.0.10",
+                                                                 "dest_ip":  "172.29.0.4",
+                                                                 "src_port":  "52522",
+                                                                 "dest_port":  "123"
+                                                             }
+                                                },
+                                       "location":  "/var/log/suricata/eve.json"
+                                   },
+                   "suricata_alert":  {
+                                          "timestamp":  "2026-10-01T08:32:26.858634+0000",
+                                          "flow_id":  "825084795316420.000000",
+                                          "in_iface":  "eth0",
+                                          "event_type":  "alert",
+                                          "src_ip":  "172.29.0.10",
+                                          "src_port":  "52522",
+                                          "dest_ip":  "172.29.0.4",
+                                          "dest_port":  "123",
+                                          "proto":  "UDP",
+                                          "pkt_src":  "wire/pcap",
+                                          "alert":  {
+                                                        "action":  "allowed",
+                                                        "gid":  "1",
+                                                        "signature_id":  "1002067",
+                                                        "rev":  "1",
+                                                        "signature":  "LAB High Rate Time Service Traffic",
+                                                        "category":  "Misc activity",
+                                                        "severity":  "3",
+                                                        "metadata":  {
+                                                                         "mitre_tactic_id":  [
+                                                                                                 "TA0040"
+                                                                                             ],
+                                                                         "mitre_technique_id":  [
+                                                                                                    "T1498"
+                                                                                                ]
+                                                                     }
+                                                    },
+                                          "app_proto":  "failed",
+                                          "direction":  "to_server",
+                                          "flow":  {
+                                                       "pkts_toserver":  "20",
+                                                       "pkts_toclient":  "6",
+                                                       "bytes_toserver":  "1240",
+                                                       "bytes_toclient":  "540",
+                                                       "start":  "2026-10-01T08:32:26.847465+0000",
+                                                       "src_ip":  "172.29.0.10",
+                                                       "dest_ip":  "172.29.0.4",
+                                                       "src_port":  "52522",
+                                                       "dest_port":  "123"
+                                                   }
+                                      },
+                   "gemini_analysis":  {
+                                           "summary":  "Cảnh báo lưu lượng dịch vụ thời gian tốc độ cao bất thường, có thể là tấn công từ chối dịch vụ (DoS).",
+                                           "is_false_positive":  false,
+                                           "threat_level":  "High",
+                                           "confidence":  "High",
+                                           "attack_likelihood":  "High",
+                                           "rationale":  "Cảnh báo Suricata \"LAB High Rate Time Service Traffic\" cho thấy có lưu lượng truy cập UDP tốc độ cao bất thường từ 172.29.0.10 đến cổng 123 (dịch vụ thời gian/NTP) trên 172.29.0.4. Hành động được ghi nhận là \"flood\", phù hợp với kỹ thuật T1498 (Network Denial of Service) của MITRE ATT\u0026CK. Điều này có thể chỉ ra một nỗ lực làm gián đoạn hoặc làm quá tải dịch vụ thời gian trên máy chủ đích, ảnh hưởng đến đồng bộ hóa thời gian và các chức năng phụ thuộc khác. Mặc dù tên quy tắc có \"LAB\", nhưng không có thông tin nào khác để xác định đây là một hoạt động thử nghiệm hợp pháp.",
+                                           "observed_evidence":  [
+                                                                     "Chữ ký IDS: \"LAB High Rate Time Service Traffic\"",
+                                                                     "Hành động sự kiện: \"flood\"",
+                                                                     "IP nguồn: 172.29.0.10",
+                                                                     "IP đích: 172.29.0.4",
+                                                                     "Cổng đích: 123 (dịch vụ thời gian/NTP)",
+                                                                     "Giao thức: UDP",
+                                                                     "Phân loại ATT\u0026CK: T1498 - Network Denial of Service"
+                                                                 ],
+                                           "recommended_actions":  [
+                                                                       "Kiểm tra nhật ký trên 172.29.0.4 để tìm bằng chứng về sự gián đoạn dịch vụ hoặc lỗi liên quan đến NTP.",
+                                                                       "Kiểm tra nhật ký trên 172.29.0.10 để xác định nguyên nhân của lưu lượng truy cập tốc độ cao này.",
+                                                                       "Xác minh xem 172.29.0.10 có phải là một máy chủ hợp lệ trong môi trường hay không và liệu nó có được phép tạo ra lưu lượng NTP tốc độ cao hay không.",
+                                                                       "Nếu xác định là độc hại, xem xét cô lập IP nguồn 172.29.0.10 sau khi có sự chấp thuận của quản trị viên."
+                                                                   ],
+                                           "need_admin_verification":  true,
+                                           "soar_action":  "create_incident",
+                                           "analyst_notes":  "Cần xác minh thêm về mục đích của lưu lượng truy cập này, đặc biệt là với tên quy tắc có chứa \"LAB\". Có thể đây là một thử nghiệm nội bộ hoặc cấu hình sai."
+                                       }
+               }
+}

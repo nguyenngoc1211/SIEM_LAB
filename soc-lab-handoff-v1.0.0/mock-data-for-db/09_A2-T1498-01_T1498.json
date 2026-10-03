@@ -1,0 +1,163 @@
+{
+    "record_id":  "rec-20261001-40c89046",
+    "source_alert_id":  "1790843561.2307845",
+    "event_time":  "2026-10-01T08:32:17.782236+0000",
+    "processed_at":  "2026-10-02T08:31:04.614Z",
+    "severity_score":  1,
+    "severity_label":  "Low",
+    "signature":  "LAB High Rate DNS Service Traffic",
+    "category":  "network_ids",
+    "source_ip":  "172.29.0.10",
+    "source_port":  58821,
+    "destination_ip":  "172.29.0.4",
+    "destination_port":  53,
+    "protocol":  "udp",
+    "direction":  "to_server",
+    "mapping_status":  "mapped",
+    "technique_id":  "T1498",
+    "technique_name":  "Network Denial of Service",
+    "mapping_confidence":  1,
+    "ai_threat_level":  "High",
+    "ai_confidence":  "High",
+    "attack_likelihood":  "High",
+    "is_false_positive":  false,
+    "need_admin_verification":  true,
+    "summary":  "Cảnh báo lưu lượng truy cập dịch vụ DNS cao bất thường từ 172.29.0.10 đến máy chủ DNS 172.29.0.4, có thể là dấu hiệu của một cuộc tấn công từ chối dịch vụ (DoS).",
+    "detail":  {
+                   "wazuh_alert":  {
+                                       "timestamp":  "2026-10-01T08:32:41.914+0000",
+                                       "rule":  {
+                                                    "level":  3,
+                                                    "description":  "Suricata: Alert - LAB High Rate DNS Service Traffic",
+                                                    "id":  "86601",
+                                                    "firedtimes":  174,
+                                                    "mail":  false,
+                                                    "groups":  [
+                                                                   "ids",
+                                                                   "suricata"
+                                                               ]
+                                                },
+                                       "agent":  {
+                                                     "id":  "000",
+                                                     "name":  "wazuh.manager"
+                                                 },
+                                       "manager":  {
+                                                       "name":  "wazuh.manager"
+                                                   },
+                                       "id":  "1790843561.2307845",
+                                       "decoder":  {
+                                                       "name":  "json"
+                                                   },
+                                       "data":  {
+                                                    "timestamp":  "2026-10-01T08:32:17.782236+0000",
+                                                    "flow_id":  "424824578148481.000000",
+                                                    "in_iface":  "eth0",
+                                                    "event_type":  "alert",
+                                                    "src_ip":  "172.29.0.10",
+                                                    "src_port":  "58821",
+                                                    "dest_ip":  "172.29.0.4",
+                                                    "dest_port":  "53",
+                                                    "proto":  "UDP",
+                                                    "pkt_src":  "wire/pcap",
+                                                    "alert":  {
+                                                                  "action":  "allowed",
+                                                                  "gid":  "1",
+                                                                  "signature_id":  "1002066",
+                                                                  "rev":  "1",
+                                                                  "signature":  "LAB High Rate DNS Service Traffic",
+                                                                  "category":  "Misc activity",
+                                                                  "severity":  "3",
+                                                                  "metadata":  {
+                                                                                   "mitre_tactic_id":  [
+                                                                                                           "TA0040"
+                                                                                                       ],
+                                                                                   "mitre_technique_id":  [
+                                                                                                              "T1498"
+                                                                                                          ]
+                                                                               }
+                                                              },
+                                                    "app_proto":  "failed",
+                                                    "direction":  "to_server",
+                                                    "flow":  {
+                                                                 "pkts_toserver":  "20",
+                                                                 "pkts_toclient":  "5",
+                                                                 "bytes_toserver":  "1220",
+                                                                 "bytes_toclient":  "445",
+                                                                 "start":  "2026-10-01T08:32:17.754272+0000",
+                                                                 "src_ip":  "172.29.0.10",
+                                                                 "dest_ip":  "172.29.0.4",
+                                                                 "src_port":  "58821",
+                                                                 "dest_port":  "53"
+                                                             }
+                                                },
+                                       "location":  "/var/log/suricata/eve.json"
+                                   },
+                   "suricata_alert":  {
+                                          "timestamp":  "2026-10-01T08:32:17.782236+0000",
+                                          "flow_id":  "424824578148481.000000",
+                                          "in_iface":  "eth0",
+                                          "event_type":  "alert",
+                                          "src_ip":  "172.29.0.10",
+                                          "src_port":  "58821",
+                                          "dest_ip":  "172.29.0.4",
+                                          "dest_port":  "53",
+                                          "proto":  "UDP",
+                                          "pkt_src":  "wire/pcap",
+                                          "alert":  {
+                                                        "action":  "allowed",
+                                                        "gid":  "1",
+                                                        "signature_id":  "1002066",
+                                                        "rev":  "1",
+                                                        "signature":  "LAB High Rate DNS Service Traffic",
+                                                        "category":  "Misc activity",
+                                                        "severity":  "3",
+                                                        "metadata":  {
+                                                                         "mitre_tactic_id":  [
+                                                                                                 "TA0040"
+                                                                                             ],
+                                                                         "mitre_technique_id":  [
+                                                                                                    "T1498"
+                                                                                                ]
+                                                                     }
+                                                    },
+                                          "app_proto":  "failed",
+                                          "direction":  "to_server",
+                                          "flow":  {
+                                                       "pkts_toserver":  "20",
+                                                       "pkts_toclient":  "5",
+                                                       "bytes_toserver":  "1220",
+                                                       "bytes_toclient":  "445",
+                                                       "start":  "2026-10-01T08:32:17.754272+0000",
+                                                       "src_ip":  "172.29.0.10",
+                                                       "dest_ip":  "172.29.0.4",
+                                                       "src_port":  "58821",
+                                                       "dest_port":  "53"
+                                                   }
+                                      },
+                   "gemini_analysis":  {
+                                           "summary":  "Cảnh báo lưu lượng truy cập dịch vụ DNS cao bất thường từ 172.29.0.10 đến máy chủ DNS 172.29.0.4, có thể là dấu hiệu của một cuộc tấn công từ chối dịch vụ (DoS).",
+                                           "is_false_positive":  false,
+                                           "threat_level":  "High",
+                                           "confidence":  "High",
+                                           "attack_likelihood":  "High",
+                                           "rationale":  "Cảnh báo IDS/Suricata \"LAB High Rate DNS Service Traffic\" với hành động \"flood\" nhắm vào cổng 53 (DNS) của máy chủ 172.29.0.4 cho thấy một lượng lớn lưu lượng truy cập bất thường. Điều này phù hợp với kỹ thuật T1498 Network Denial of Service. Mặc dù có từ \"LAB\" trong tên signature, hành vi flood đến một dịch vụ cơ sở hạ tầng quan trọng như DNS cần được xem xét nghiêm túc. Nguồn 172.29.0.10 đang tạo ra lưu lượng này.",
+                                           "observed_evidence":  [
+                                                                     "signature: LAB High Rate DNS Service Traffic",
+                                                                     "event_action: flood",
+                                                                     "destination_ip: 172.29.0.4",
+                                                                     "destination_port: 53",
+                                                                     "source_ip: 172.29.0.10",
+                                                                     "event_type: network_communication"
+                                                                 ],
+                                           "recommended_actions":  [
+                                                                       "Kiểm tra tình trạng hoạt động và tải của máy chủ DNS 172.29.0.4 để xác định bất kỳ tác động nào đến dịch vụ.",
+                                                                       "Phân tích chi tiết lưu lượng mạng giữa 172.29.0.10 và 172.29.0.4 để xác định bản chất và khối lượng của lưu lượng cao.",
+                                                                       "Kiểm tra nhật ký trên máy chủ nguồn 172.29.0.10 để tìm kiếm các quy trình hoặc ứng dụng bất thường gây ra lưu lượng DNS cao.",
+                                                                       "Xác minh với nhóm quản trị hệ thống xem có bất kỳ hoạt động bảo trì, kiểm tra hiệu suất hoặc thay đổi cấu hình nào đang diễn ra liên quan đến lưu lượng DNS cao hay không."
+                                                                   ],
+                                           "need_admin_verification":  true,
+                                           "soar_action":  "create_incident",
+                                           "analyst_notes":  "Cần ưu tiên xác định xem đây là một cuộc tấn công DoS thực sự hay một sự cố cấu hình sai/kiểm tra nội bộ, đặc biệt với từ \"LAB\" trong tên signature. Thu thập thêm thông tin về vai trò của 172.29.0.10 trong mạng."
+                                       }
+               }
+}

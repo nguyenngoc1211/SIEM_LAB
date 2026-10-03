@@ -1,0 +1,28 @@
+id: A2-T1595-02
+name: HTTP Capability Assessment
+description: Perform a bounded reconnaissance probe against the isolated public lab gateway.
+mitre:
+  tactic_id:
+    - TA0043
+  technique_id:
+    - T1595
+suricata:
+  expected_sid:
+    - 1002012
+  rule_name: LAB HTTP Capability Assessment
+  rule_source: custom
+source:
+  container: soc_attacker_v2
+  type: custom
+  reference: Manual network-observable lab scenario
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002012
+expected:
+  minimum_alerts: 1
+  ingestion_required: true
+  mapping_required: true
+  mapping_status: mapped
+timeout: 40
