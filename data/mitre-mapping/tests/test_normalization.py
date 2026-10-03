@@ -53,6 +53,30 @@ class NormalizationTests(unittest.TestCase):
         self.assertEqual(result["network"]["direction"], "to_server")
         self.assertEqual(result["target"]["type"], "application")
 
+    def test_suricata_rule_identity_and_mitre_metadata_are_preserved(self) -> None:
+        payload = {
+            "rule": {"id": "86601", "description": "Generic Suricata ingestion"},
+            "data": {
+                "app_proto": "http",
+                "alert": {
+                    "signature_id": 1002036,
+                    "signature": "LAB Repeated JSON Credential Guesses",
+                    "metadata": {
+                        "mitre_tactic_id": ["TA0006"],
+                        "mitre_technique_id": ["T1110.001"],
+                    },
+                },
+            },
+        }
+
+        result = normalize_alert(payload)
+
+        self.assertEqual(1002036, result["producer"]["rule_id"])
+        self.assertEqual("86601", result["producer"]["collector_rule_id"])
+        self.assertEqual(["TA0006"], result["mitre"]["tactic_ids"])
+        self.assertEqual(["T1110.001"], result["mitre"]["technique_ids"])
+        self.assertEqual("sensor_rule_metadata", result["mitre"]["source"])
+
 
 if __name__ == "__main__":
     unittest.main()

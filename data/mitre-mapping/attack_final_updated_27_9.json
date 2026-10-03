@@ -719,10 +719,7 @@
           "internal port scan",
           "internal service discovery",
           "lateral service scan",
-        "post-compromise scanning",
-        "common service sweep",
-        "administrative port sweep",
-        "udp service probe"
+          "post-compromise scanning"
         ],
         "weight": 0.4,
         "reason": "The signature explicitly identifies internal discovery.",
@@ -730,23 +727,7 @@
       }
     ],
     "required_evidence": [],
-    "negative_evidence": [
-      {
-        "rule_id": "T1046-NEG-001",
-        "field": "producer.rule_name",
-        "operator": "contains_any",
-        "value": [
-          "public service probes",
-          "address range sweep",
-          "template scanner",
-          "exposure check",
-          "resource enumeration"
-        ],
-        "weight": -0.4,
-        "reason": "External reconnaissance terminology favors T1595 or one of its sub-techniques.",
-        "source": "manual"
-      }
-    ],
+    "negative_evidence": [],
     "exclusion_indicators": [],
     "parent_technique": null,
     "sub_techniques": [],
@@ -4597,14 +4578,28 @@
           "HTTP beacon",
           "HTTPS beacon",
           "command and control over HTTP",
-        "periodic web"
+          "periodic web telemetry",
+          "periodic web checkin",
+          "periodic web heartbeat",
+          "periodic web sync",
+          "periodic web tasks"
         ],
-        "weight": 0.5,
+        "weight": 0.4,
         "reason": "The signature supplies the C2 intent that protocol alone cannot establish.",
         "source": "manual"
       }
     ],
-    "required_evidence": [],
+    "required_evidence": [
+      {
+        "rule_id": "T1071.001-REQ-001",
+        "field": "event.type",
+        "operator": "equals",
+        "value": "web_request",
+        "weight": 0.0,
+        "reason": "A normalized web request is the minimum gate for HTTP or HTTPS C2.",
+        "source": "manual"
+      }
+    ],
     "negative_evidence": [
       {
         "rule_id": "T1071.001-NEG-001",
@@ -4613,22 +4608,6 @@
         "value": "unknown",
         "weight": -0.2,
         "reason": "No recognized application protocol favors T1095.",
-        "source": "manual"
-      },
-      {
-        "rule_id": "T1071.001-NEG-002",
-        "field": "producer.rule_name",
-        "operator": "contains_any",
-        "value": [
-          "request burst",
-          "request surge",
-          "capability check",
-          "address range sweep",
-          "banner insertion",
-          "script insertion"
-        ],
-        "weight": -0.4,
-        "reason": "The signature favors denial of service, scanning, or content injection rather than web-protocol C2.",
         "source": "manual"
       }
     ],
@@ -4657,7 +4636,12 @@
       "web protocol C2",
       "HTTP command and control",
       "HTTPS beacon",
-      "web beacon"
+      "web beacon",
+      "periodic web telemetry",
+      "periodic web checkin",
+      "periodic web heartbeat",
+      "periodic web sync",
+      "periodic web tasks"
     ],
     "retrieval_text": "Technique T1071.001 Web Protocols. Command and control uses HTTP, HTTPS, or web-protocol semantics. Its ATT&CK parent T1071 is outside this dataset, so parent fallback is disabled.",
     "mapping_guidance": {
@@ -5298,12 +5282,7 @@
           "successful account login",
           "successful login",
           "new authenticated session",
-          "legitimate credential use",
-        "successful bearer session",
-        "web session reuse",
-        "successful API credential use",
-        "successful basic credential use",
-        "hardcoded admin credentials"
+          "legitimate credential use"
         ],
         "weight": 0.4,
         "reason": "The signature explicitly identifies successful credential use.",
@@ -5331,19 +5310,6 @@
         ],
         "weight": -0.15,
         "reason": "Authentication rejection favors brute force rather than valid-account use.",
-        "source": "manual"
-      },
-      {
-        "rule_id": "T1078-NEG-003",
-        "field": "producer.rule_name",
-        "operator": "contains_any",
-        "value": [
-          "authentication failures",
-          "credential guesses",
-          "credential across accounts"
-        ],
-        "weight": -0.4,
-        "reason": "Failure or credential-attempt terminology favors T1110 or a brute-force sub-technique.",
         "source": "manual"
       }
     ],
@@ -6436,12 +6402,7 @@
           "socket-based C2",
           "direct socket communication",
           "lower-layer C2",
-        "custom binary protocol",
-        "TCP node greeting",
-        "UDP node greeting",
-        "length prefixed TCP beacon",
-        "TCP heartbeat frame",
-        "UDP synchronization frame"
+          "custom binary protocol"
         ],
         "weight": 0.4,
         "reason": "The signature explicitly identifies lower-layer command and control.",
@@ -6460,19 +6421,6 @@
         ],
         "weight": -0.2,
         "reason": "Recognized web-protocol semantics favor T1071.001.",
-        "source": "manual"
-      },
-      {
-        "rule_id": "T1095-NEG-002",
-        "field": "producer.rule_name",
-        "operator": "contains_any",
-        "value": [
-          "periodic web",
-          "HTTP beacon",
-          "HTTPS beacon"
-        ],
-        "weight": -0.4,
-        "reason": "Explicit web-protocol beacon terminology favors T1071.001.",
         "source": "manual"
       }
     ],
@@ -6801,8 +6749,7 @@
           "repeated login",
           "repeated authentication",
           "multiple login attempts",
-        "credential attack",
-        "authentication failures"
+          "credential attack"
         ],
         "weight": 0.4,
         "reason": "The signature supplies the repetition context not present in a single request.",
@@ -6818,18 +6765,6 @@
         "value": "success",
         "weight": -0.35,
         "reason": "A successful login without attempt context favors Valid Accounts.",
-        "source": "manual"
-      },
-      {
-        "rule_id": "T1110-NEG-002",
-        "field": "producer.rule_name",
-        "operator": "contains_any",
-        "value": [
-          "credential guesses",
-          "credential across accounts"
-        ],
-        "weight": -0.4,
-        "reason": "Specific credential distribution terminology favors a T1110 sub-technique.",
         "source": "manual"
       }
     ],
@@ -7114,8 +7049,8 @@
           "single account brute force",
           "many passwords one account",
           "same account multiple passwords",
-        "dictionary password attack",
-        "credential guesses"
+          "dictionary password attack",
+          "credential guesses"
         ],
         "weight": 0.4,
         "reason": "The signature supplies the account/password distribution unavailable in one alert.",
@@ -7142,8 +7077,7 @@
           "password spray",
           "password spraying",
           "one password many accounts",
-        "small password set many users",
-        "credential across accounts"
+          "small password set many users"
         ],
         "weight": -0.4,
         "reason": "Spraying terminology favors T1110.003.",
@@ -7188,7 +7122,8 @@
       "password guessing",
       "single account brute force",
       "many passwords one account",
-      "dictionary password attack"
+      "dictionary password attack",
+      "credential guesses"
     ],
     "retrieval_text": "Technique T1110.001 Password Guessing. Multiple candidate passwords are tried against one or a small number of accounts. The normalized single-alert schema has no cardinality field, so sub-technique selection requires explicit signature context; otherwise fallback to T1110.",
     "mapping_guidance": {
@@ -7435,9 +7370,8 @@
           "one password many accounts",
           "same password across accounts",
           "small password set many users",
-        "low and slow password spray",
-        "credential across accounts",
-        "shared credential"
+          "low and slow password spray",
+          "shared credential across accounts"
         ],
         "weight": 0.4,
         "reason": "The signature supplies the multi-account distribution unavailable in one alert.",
@@ -7464,8 +7398,7 @@
           "password guessing",
           "single account brute force",
           "many passwords one account",
-        "same account multiple passwords",
-        "credential guesses"
+          "same account multiple passwords"
         ],
         "weight": -0.4,
         "reason": "Single-account guessing terminology favors T1110.001.",
@@ -7510,7 +7443,8 @@
       "password spraying",
       "one password many accounts",
       "low and slow spray",
-      "many users targeted"
+      "many users targeted",
+      "shared credential across accounts"
     ],
     "retrieval_text": "Technique T1110.003 Password Spraying. One or a few passwords are attempted across many accounts. The single-alert contract has no cardinality field, so explicit sensor signature context is required; otherwise fallback to T1110.",
     "mapping_guidance": {
@@ -8010,11 +7944,11 @@
           "malicious script delivery",
           "client-side exploit",
           "watering hole",
-        "fake updates",
-        "victim click confirmation",
-        "fake verification page delivery",
-        "loader script delivery",
-        "browser update delivery"
+          "fake updates victim click",
+          "fake updates page",
+          "fake verification page delivery",
+          "hidden loader script delivery",
+          "deceptive browser update delivery"
         ],
         "weight": 0.4,
         "reason": "The signature explicitly identifies malicious content delivered to a client.",
@@ -8030,23 +7964,6 @@
         "value": "to_server",
         "weight": -0.3,
         "reason": "An exploit request sent to a server favors T1190.",
-        "source": "manual"
-      },
-      {
-        "rule_id": "T1189-NEG-002",
-        "field": "producer.rule_name",
-        "operator": "contains_any",
-        "value": [
-          "banner insertion",
-          "script insertion",
-          "hidden frame insertion",
-          "configuration redirection",
-          "download link insertion",
-          "SQL injection",
-          "command injection"
-        ],
-        "weight": -0.4,
-        "reason": "The signature favors in-transit content injection or a server-side application exploit.",
         "source": "manual"
       }
     ],
@@ -8072,7 +7989,11 @@
       "drive-by compromise",
       "exploit kit",
       "malicious web content",
-      "client-side exploit"
+      "client-side exploit",
+      "fake update page",
+      "fake verification page",
+      "hidden loader script",
+      "browser update delivery"
     ],
     "retrieval_text": "Technique T1189 Drive-by Compromise. A user or client is compromised through malicious website content. The decisive observable is delivery toward the client, not an exploit request sent to the server.",
     "mapping_guidance": {
@@ -8753,7 +8674,7 @@
         "field": "event.type",
         "operator": "equals",
         "value": "web_request",
-        "weight": 0.25,
+        "weight": 0.2,
         "reason": "The observable is a request to a web application.",
         "source": "manual"
       },
@@ -8787,18 +8708,24 @@
           "path traversal",
           "deserialization exploit",
           "remote code execution",
-        "rce",
-        "SQL injection scan",
-        "SQL injection scanner",
-        "local file inclusion",
-        "rce attempt"
+          "rce"
         ],
         "weight": 0.4,
         "reason": "The signature explicitly describes an application exploit class.",
         "source": "manual"
       }
     ],
-    "required_evidence": [],
+    "required_evidence": [
+      {
+        "rule_id": "T1190-REQ-001",
+        "field": "event.action",
+        "operator": "equals",
+        "value": "exploit",
+        "weight": 0.0,
+        "reason": "Explicit exploit behavior is required before mapping a public-facing application exploit.",
+        "source": "manual"
+      }
+    ],
     "negative_evidence": [
       {
         "rule_id": "T1190-NEG-002",
@@ -8807,28 +8734,6 @@
         "value": "network_scan",
         "weight": -0.25,
         "reason": "Assessment scanning without exploit action favors T1595.002.",
-        "source": "manual"
-      },
-      {
-        "rule_id": "T1190-NEG-003",
-        "field": "producer.rule_name",
-        "operator": "contains_any",
-        "value": [
-          "periodic web",
-          "request burst",
-          "request surge",
-          "template scanner",
-          "exposure check",
-          "capability check",
-          "schema probe",
-          "resource enumeration",
-          "command endpoint access",
-          "command console access",
-          "banner insertion",
-          "script insertion"
-        ],
-        "weight": -0.4,
-        "reason": "The signature favors C2, denial of service, reconnaissance, web-shell access, or content injection rather than initial exploitation.",
         "source": "manual"
       }
     ],
@@ -8842,8 +8747,7 @@
           "version detection",
           "service fingerprint",
           "wordlist scan",
-          "directory enumeration",
-          "command injection"
+          "directory enumeration"
         ],
         "reason": "A discovery or assessment signature alone does not establish exploitation.",
         "source": "manual"
@@ -9255,7 +9159,12 @@
           "lateral exploit",
           "SMB exploit",
           "RDP exploit",
-          "SSH exploit"
+          "SSH exploit",
+          "D-Link command injection",
+          "authenticated command injection inbound",
+          "unknown command injection attempt inbound",
+          "Razer Sila router command injection",
+          "Apache log4j RCE attempt - any protocol"
         ],
         "weight": 0.4,
         "reason": "The signature explicitly identifies remote-service exploitation.",
@@ -9263,20 +9172,7 @@
       }
     ],
     "required_evidence": [],
-    "negative_evidence": [
-      {
-        "rule_id": "T1210-NEG-001",
-        "field": "producer.rule_name",
-        "operator": "contains_any",
-        "value": [
-          "SQL injection",
-          "local file inclusion"
-        ],
-        "weight": -0.4,
-        "reason": "Public-facing web exploit terminology favors T1190 over remote-service exploitation.",
-        "source": "manual"
-      }
-    ],
+    "negative_evidence": [],
     "exclusion_indicators": [],
     "parent_technique": null,
     "sub_techniques": [],
@@ -9299,7 +9195,10 @@
       "remote service exploitation",
       "lateral exploit",
       "SMB exploit",
-      "internal service exploit"
+      "internal service exploit",
+      "router command injection inbound",
+      "authenticated command injection inbound",
+      "any protocol RCE attempt"
     ],
     "retrieval_text": "Technique T1210 Exploitation of Remote Services. An adversary exploits an internal remote service to move laterally. A public-facing inbound web exploit belongs to T1190.",
     "mapping_guidance": {
@@ -9439,12 +9338,12 @@
           "NTP amplification",
           "SYN flood",
           "UDP flood",
-        "ICMP flood",
-        "high rate DNS service traffic",
-        "high rate time service traffic",
-        "high rate management service traffic",
-        "high rate discovery service traffic",
-        "high rate cache service traffic"
+          "ICMP flood",
+          "high rate DNS service traffic",
+          "high rate time service traffic",
+          "high rate management service traffic",
+          "high rate discovery service traffic",
+          "high rate cache service traffic"
         ],
         "weight": 0.4,
         "reason": "The signature identifies a network-capacity DoS mechanism.",
@@ -9463,19 +9362,6 @@
         ],
         "weight": -0.2,
         "reason": "Application-layer request exhaustion may favor T1499.",
-        "source": "manual"
-      },
-      {
-        "rule_id": "T1498-NEG-002",
-        "field": "producer.rule_name",
-        "operator": "contains_any",
-        "value": [
-          "request burst",
-          "request surge",
-          "aggregation submissions"
-        ],
-        "weight": -0.4,
-        "reason": "Application request exhaustion terminology favors T1499.",
         "source": "manual"
       }
     ],
@@ -9501,7 +9387,8 @@
       "network denial of service",
       "volumetric DDoS",
       "packet flood",
-      "reflection amplification"
+      "reflection amplification",
+      "high rate service traffic"
     ],
     "retrieval_text": "Technique T1498 Network Denial of Service. Network capacity or protocol infrastructure is exhausted by volumetric floods, reflection, or amplification. Application-request exhaustion belongs to T1499.",
     "mapping_guidance": {
@@ -9653,10 +9540,10 @@
           "application crash",
           "slow HTTP",
           "Slowloris",
-        "ReDoS",
-        "request burst",
-        "request surge",
-        "aggregation submissions"
+          "ReDoS",
+          "request burst",
+          "request surge",
+          "repeated aggregation submissions"
         ],
         "weight": 0.4,
         "reason": "The signature identifies endpoint or application resource exhaustion.",
@@ -9674,12 +9561,7 @@
           "bandwidth saturation",
           "reflection amplification",
           "network flood",
-        "packet flood",
-        "high rate DNS service traffic",
-        "high rate time service traffic",
-        "high rate management service traffic",
-        "high rate discovery service traffic",
-        "high rate cache service traffic"
+          "packet flood"
         ],
         "weight": -0.4,
         "reason": "Network-capacity terminology favors T1498.",
@@ -9708,7 +9590,10 @@
       "endpoint denial of service",
       "application-layer DoS",
       "service exhaustion",
-      "application crash"
+      "application crash",
+      "request burst",
+      "request surge",
+      "repeated aggregation submissions"
     ],
     "retrieval_text": "Technique T1499 Endpoint Denial of Service. Requests exhaust resources of a host or application endpoint. A single flow supports the candidate but normally cannot prove operational impact.",
     "mapping_guidance": {
@@ -10375,11 +10260,9 @@
           "web shell command",
           "malicious PHP shell",
           "malicious JSP shell",
-        "malicious ASPX shell",
-        "command endpoint access",
-        "execution endpoint access",
-        "script control request",
-        "command console access"
+          "malicious ASPX shell",
+          "command console",
+          "hidden script control request"
         ],
         "weight": 0.4,
         "reason": "The signature explicitly identifies the resource as a web shell.",
@@ -10409,20 +10292,6 @@
         "weight": -0.3,
         "reason": "An initial exploit request without web-shell context favors T1190.",
         "source": "manual"
-      },
-      {
-        "rule_id": "T1505.003-NEG-002",
-        "field": "producer.rule_name",
-        "operator": "contains_any",
-        "value": [
-          "injection attempt",
-          "rce attempt",
-          "template scanner",
-          "exposure check"
-        ],
-        "weight": -0.4,
-        "reason": "Initial exploitation or assessment terminology does not establish access to an existing web shell.",
-        "source": "manual"
       }
     ],
     "exclusion_indicators": [],
@@ -10450,7 +10319,9 @@
       "web shell",
       "server-side shell",
       "webshell access",
-      "malicious script endpoint"
+      "malicious script endpoint",
+      "command console",
+      "hidden script control request"
     ],
     "retrieval_text": "Technique T1505.003 Web Shell. A server-side script is deployed or accessed to maintain control. Exploit delivery alone is T1190; a suspicious upload without evidence that the file is a web shell remains insufficient.",
     "mapping_guidance": {
@@ -10555,12 +10426,10 @@
           "active reconnaissance",
           "external scan",
           "infrastructure probing",
-        "pre-compromise scan",
-        "public service probes",
-        "capability assessment",
-        "service banner identification",
-        "infrastructure metadata probe",
-        "method reconnaissance"
+          "pre-compromise scan",
+          "sequential public service probes",
+          "HTTP capability assessment",
+          "service banner identification"
         ],
         "weight": 0.4,
         "reason": "The sensor signature explicitly describes active reconnaissance.",
@@ -10568,27 +10437,7 @@
       }
     ],
     "required_evidence": [],
-    "negative_evidence": [
-      {
-        "rule_id": "T1595-NEG-001",
-        "field": "producer.rule_name",
-        "operator": "contains_any",
-        "value": [
-          "internal common service sweep",
-          "internal administrative port sweep",
-          "address range sweep",
-          "template scanner",
-          "exposure check",
-          "capability check",
-          "schema probe",
-          "resource enumeration",
-          "artifact enumeration"
-        ],
-        "weight": -0.4,
-        "reason": "The signature is more specific to internal discovery or an Active Scanning sub-technique.",
-        "source": "manual"
-      }
-    ],
+    "negative_evidence": [],
     "exclusion_indicators": [
       {
         "rule_id": "T1595-EXC-001",
@@ -10792,8 +10641,7 @@
           "host sweep",
           "subnet scan",
           "CIDR scan",
-        "multiple hosts scanned",
-        "address range sweep"
+          "multiple hosts scanned"
         ],
         "weight": 0.4,
         "reason": "The signature supplies the range or multi-host context unavailable in a single flow.",
@@ -10814,23 +10662,7 @@
         "source": "manual"
       }
     ],
-    "negative_evidence": [
-      {
-        "rule_id": "T1595.001-NEG-001",
-        "field": "producer.rule_name",
-        "operator": "contains_any",
-        "value": [
-          "internal common service sweep",
-          "internal administrative port sweep",
-          "service banner identification",
-          "exposure check",
-          "resource enumeration"
-        ],
-        "weight": -0.4,
-        "reason": "The signature favors internal discovery, generic reconnaissance, vulnerability scanning, or wordlist scanning.",
-        "source": "manual"
-      }
-    ],
+    "negative_evidence": [],
     "exclusion_indicators": [],
     "parent_technique": {
       "technique_id": "T1595",
@@ -11087,11 +10919,12 @@
           "version detection",
           "service fingerprint",
           "exploitability check",
-        "configuration check",
-        "template scanner",
-        "exposure check",
-        "capability check",
-        "schema probe"
+          "configuration check",
+          "template scanner request",
+          "CVE exposure check",
+          "WebDAV capability check",
+          "graph query schema probe",
+          "server status exposure check"
         ],
         "weight": 0.4,
         "reason": "The signature supplies vulnerability-specific intent.",
@@ -11142,23 +10975,6 @@
         "weight": -0.3,
         "reason": "Exploit-oriented behavior favors T1190 over vulnerability assessment.",
         "source": "manual"
-      },
-      {
-        "rule_id": "T1595.002-NEG-002",
-        "field": "producer.rule_name",
-        "operator": "contains_any",
-        "value": [
-          "SQL injection",
-          "command injection",
-          "local file inclusion",
-          "rce attempt",
-          "address range sweep",
-          "resource enumeration",
-          "capability assessment"
-        ],
-        "weight": -0.4,
-        "reason": "The signature favors exploitation, IP-range scanning, wordlist scanning, or generic active reconnaissance.",
-        "source": "manual"
       }
     ],
     "exclusion_indicators": [],
@@ -11199,7 +11015,12 @@
       "vulnerability scan",
       "CVE probe",
       "version detection",
-      "exploitability check"
+      "exploitability check",
+      "template scanner request",
+      "CVE exposure check",
+      "WebDAV capability check",
+      "schema probe",
+      "server status exposure check"
     ],
     "retrieval_text": "Technique T1595.002 Vulnerability Scanning. Reconnaissance checks exposed systems for vulnerabilities, versions, configurations, or CVEs. Distinguish assessment probes from T1190 exploit attempts.",
     "mapping_guidance": {
@@ -11310,12 +11131,12 @@
           "directory enumeration",
           "content discovery",
           "endpoint enumeration",
+          "resource enumeration",
+          "artifact enumeration",
+          "metadata enumeration",
+          "documentation enumeration",
           "subdomain brute force",
-        "virtual host brute force",
-        "resource enumeration",
-        "artifact enumeration",
-        "metadata enumeration",
-        "documentation enumeration"
+          "virtual host brute force"
         ],
         "weight": 0.4,
         "reason": "The signature explicitly identifies dictionary-driven enumeration.",
@@ -11345,22 +11166,6 @@
         "value": "authentication",
         "weight": -0.25,
         "reason": "Authentication semantics favor T1110.",
-        "source": "manual"
-      },
-      {
-        "rule_id": "T1595.003-NEG-002",
-        "field": "producer.rule_name",
-        "operator": "contains_any",
-        "value": [
-          "authentication failures",
-          "credential guesses",
-          "credential across accounts",
-          "address range sweep",
-          "service sweep",
-          "port sweep"
-        ],
-        "weight": -0.4,
-        "reason": "The signature favors authentication attacks, IP-range scanning, or network service discovery.",
         "source": "manual"
       }
     ],
@@ -11402,7 +11207,11 @@
       "wordlist scanning",
       "directory enumeration",
       "content discovery",
-      "endpoint enumeration"
+      "endpoint enumeration",
+      "resource enumeration",
+      "artifact enumeration",
+      "metadata enumeration",
+      "documentation enumeration"
     ],
     "retrieval_text": "Technique T1595.003 Wordlist Scanning. Reconnaissance tries dictionary-derived resource names such as paths, files, endpoints, subdomains, or virtual hosts. Authentication guessing belongs to T1110 instead.",
     "mapping_guidance": {
@@ -11536,15 +11345,24 @@
           "malicious response injection",
           "injected HTTP reply",
           "injected DNS reply",
-        "traffic data modification",
-        "banner insertion",
-        "script insertion",
-        "hidden frame insertion",
-        "configuration redirection",
-        "download link insertion"
+          "traffic data modification",
+          "banner insertion",
+          "script insertion",
+          "link insertion",
+          "frame insertion",
+          "configuration redirection"
         ],
         "weight": 0.4,
         "reason": "The signature supplies the modification or injection semantics missing from the controlled event-action vocabulary.",
+        "source": "manual"
+      },
+      {
+        "rule_id": "T1659-POS-005",
+        "field": "event.type",
+        "operator": "equals",
+        "value": "web_request",
+        "weight": 0.2,
+        "reason": "HTTP-carried content insertion can be observed as a web request.",
         "source": "manual"
       }
     ],
@@ -11568,11 +11386,7 @@
           "SQLi",
           "XSS",
           "command injection",
-        "path traversal",
-        "fake updates",
-        "verification page delivery",
-        "loader script delivery",
-        "browser update delivery"
+          "path traversal"
         ],
         "weight": -0.4,
         "reason": "Application exploit input favors T1190 unless traffic modification is explicit.",
@@ -11614,7 +11428,12 @@
       "content injection",
       "response injection",
       "in-transit modification",
-      "malicious injected response"
+      "malicious injected response",
+      "banner insertion",
+      "script insertion",
+      "link insertion",
+      "frame insertion",
+      "configuration redirection"
     ],
     "retrieval_text": "Technique T1659 Content Injection. An adversary inserts or alters content in a communication channel so it is delivered to a recipient. SQL injection or XSS input sent to a server does not by itself establish this technique.",
     "mapping_guidance": {

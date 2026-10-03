@@ -11,6 +11,8 @@ from .settings import Settings
 
 
 class MappingPipeline:
+    FINAL_CANDIDATE_LIMIT = 5
+
     def __init__(self, settings: Settings | None = None):
         self.settings = settings or Settings.load()
         self.retriever = HybridRetriever(self.settings)
@@ -21,22 +23,32 @@ class MappingPipeline:
     def map_alert(self, raw_alert: Any) -> dict[str, Any]:
         started = time.perf_counter()
         alert = normalize_alert(raw_alert)
+        metadata_result = self._map_declared_metadata(alert, started)
+        if metadata_result is not None:
+            return metadata_result
         alert_text = (alert.get("derived") or {}).get("retrieval_text", "")
         if not alert_text.strip():
             raise ValueError("Normalized alert has no retrieval_text")
         candidates, degraded = self.retriever.retrieve(alert_text)
-        top, reranker_degraded, reranker_version = self.reranker.rerank(alert_text, candidates)
+        ranked, reranker_degraded, reranker_version = self.reranker.rerank(
+            alert_text, candidates, limit=len(candidates),
+        )
         degraded.extend(reranker_degraded)
 
         evaluated: list[dict[str, Any]] = []
-        for candidate in top:
+        for candidate in ranked:
             evaluation = self._evaluate_candidate(candidate, alert)
             evaluated.append(evaluation)
         self._add_parent_fallbacks(evaluated, alert)
         self._apply_confusion_guard(evaluated)
+        final_pool = self._select_final_pool(evaluated, self.FINAL_CANDIDATE_LIMIT)
+        final_pool.sort(key=lambda value: (-value["candidate_score"], value["technique_id"]))
+        final_ids = {value["technique_id"] for value in final_pool}
+        for value in evaluated:
+            value["selected_for_final_pool"] = value["technique_id"] in final_ids
         evaluated.sort(key=lambda value: (-value["candidate_score"], value["technique_id"]))
 
-        valid = [value for value in evaluated if value["valid"]]
+        valid = final_pool
         status = "insufficient_evidence"
         primary = None
         if valid:
@@ -53,7 +65,7 @@ class MappingPipeline:
 
         chosen = valid[0] if primary else None
         alternatives = []
-        for value in evaluated:
+        for value in final_pool:
             if chosen and value["technique_id"] == chosen["technique_id"]:
                 continue
             reason = value["rejection_reason"]
@@ -68,6 +80,19 @@ class MappingPipeline:
                 "rejection_reason": reason,
             })
 
+        rejected_candidates = []
+        for value in evaluated:
+            if value["technique_id"] in final_ids:
+                continue
+            rejected_candidates.append({
+                "technique_id": value["technique_id"],
+                "name": value["name"],
+                "confidence": value["candidate_score"],
+                "rejection_reason": value["rejection_reason"] or (
+                    "Candidate was outside the final top-5 valid pool."
+                ),
+            })
+
         elapsed_ms = round((time.perf_counter() - started) * 1000, 3)
         return {
             "mapping_status": status,
@@ -75,16 +100,71 @@ class MappingPipeline:
             "supporting_evidence": chosen["supporting_evidence"] if chosen else [],
             "contradictory_evidence": chosen["contradictory_evidence"] if chosen else [],
             "alternative_candidates": alternatives,
+            "rejected_candidates": rejected_candidates,
             "candidate_trace": [self._trace(value) for value in evaluated],
             "normalized_alert": alert,
             "pipeline": {
                 "retriever_version": "hybrid-bm25-attackbert-1.0.0",
                 "reranker_version": reranker_version,
+                "reranker_score_formula": "per_query_minmax(raw_reranker_score)",
                 "rule_engine_version": "1.0.0",
+                "final_candidate_limit": self.FINAL_CANDIDATE_LIMIT,
                 "attack_index_version": self.manifest["index_version"],
                 "attack_final_sha256": self.manifest["attack_final_sha256"],
                 "collection": self.settings.collection_name,
                 "degraded_modes": degraded,
+                "latency_ms": elapsed_ms,
+            },
+        }
+
+    def _map_declared_metadata(
+        self, alert: dict[str, Any], started: float,
+    ) -> dict[str, Any] | None:
+        mitre = alert.get("mitre") if isinstance(alert.get("mitre"), dict) else {}
+        declared = mitre.get("technique_ids")
+        if not isinstance(declared, list):
+            return None
+        technique_ids: list[str] = []
+        for value in declared:
+            technique_id = str(value).strip().upper()
+            if technique_id in self.documents and technique_id not in technique_ids:
+                technique_ids.append(technique_id)
+        if not technique_ids:
+            return None
+
+        mappings = [
+            {
+                "technique_id": technique_id,
+                "name": self.documents[technique_id]["name"],
+                "confidence": 1.0,
+            }
+            for technique_id in technique_ids
+        ]
+        elapsed_ms = round((time.perf_counter() - started) * 1000, 3)
+        return {
+            "mapping_status": "mapped",
+            "mapping_source": "sensor_rule_metadata",
+            "primary_mapping": mappings[0],
+            "mappings": mappings,
+            "supporting_evidence": [{
+                "rule_id": "META-MITRE-001",
+                "field": "mitre.technique_ids",
+                "value": technique_ids,
+                "weight": 1.0,
+                "reason": "The originating IDS rule declares MITRE ATT&CK technique metadata.",
+            }],
+            "contradictory_evidence": [],
+            "alternative_candidates": [],
+            "candidate_trace": [],
+            "normalized_alert": alert,
+            "pipeline": {
+                "retriever_version": "metadata-direct-1.0.0",
+                "reranker_version": "not_used",
+                "rule_engine_version": "1.0.0",
+                "attack_index_version": self.manifest["index_version"],
+                "attack_final_sha256": self.manifest["attack_final_sha256"],
+                "collection": self.settings.collection_name if hasattr(self, "settings") else None,
+                "degraded_modes": [],
                 "latency_ms": elapsed_ms,
             },
         }
@@ -133,6 +213,21 @@ class MappingPipeline:
         evaluated.extend(additions)
 
     @staticmethod
+    def _select_final_pool(
+        evaluated: list[dict[str, Any]], limit: int = 5,
+    ) -> list[dict[str, Any]]:
+        """Backfill by reranker rank until the final pool has only valid candidates."""
+        ranked_valid = sorted(
+            (value for value in evaluated if value["valid"]),
+            key=lambda value: (
+                value.get("rank_after_rerank", 10**9),
+                value.get("rank_before_rerank", 10**9),
+                value["technique_id"],
+            ),
+        )
+        return ranked_valid[:limit]
+
+    @staticmethod
     def _apply_confusion_guard(evaluated: list[dict[str, Any]]) -> None:
         by_id = {value["technique_id"]: value for value in evaluated}
         for candidate in evaluated:
@@ -172,6 +267,7 @@ class MappingPipeline:
             "excluded": value["excluded"],
             "evidence_score": value["evidence_score"],
             "candidate_score": value["candidate_score"],
+            "selected_for_final_pool": value.get("selected_for_final_pool", False),
             "fallback_from": value["fallback_from"],
             "rejection_reason": value["rejection_reason"],
         }

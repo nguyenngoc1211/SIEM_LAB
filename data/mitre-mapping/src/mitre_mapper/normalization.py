@@ -23,6 +23,18 @@ def _first(source: dict[str, Any], *paths: str) -> Any:
     return None
 
 
+def _string_list(value: Any) -> list[str]:
+    if value is None:
+        return []
+    values = value if isinstance(value, (list, tuple, set)) else [value]
+    result: list[str] = []
+    for item in values:
+        text = str(item).strip()
+        if text and text not in result:
+            result.append(text)
+    return result
+
+
 def _infer_event_semantics(rule_name: Any, http_status: Any) -> tuple[str, str, str]:
     """Infer controlled behavior fields from sensor language, never test markers."""
     text = str(rule_name or "").lower()
@@ -83,12 +95,17 @@ def build_retrieval_text(alert: dict[str, Any]) -> str:
         ("DNS query", _get(alert, "dns.question.name")),
         ("Network direction", _get(alert, "network.direction")),
         ("Attack pattern", _get(alert, "derived.attack_pattern")),
+        ("Declared MITRE tactics", _get(alert, "mitre.tactic_ids")),
+        ("Declared MITRE techniques", _get(alert, "mitre.technique_ids")),
     ]
     parts = []
     for label, value in fields:
         if value is None or value == "":
             continue
-        display = str(value).replace("_", " ")
+        if isinstance(value, (list, tuple, set)):
+            display = ", ".join(str(item) for item in value)
+        else:
+            display = str(value).replace("_", " ")
         parts.append(f"{label}: {display}.")
     return "\n".join(parts)
 
@@ -113,6 +130,18 @@ def normalize_alert(payload: Any) -> dict[str, Any]:
         "alert.signature",
         "message",
     )
+    sensor_rule_id = _first(
+        wazuh, "data.alert.signature_id", "data.signature_id", "alert.signature_id",
+    )
+    collector_rule_id = _first(wazuh, "rule.id")
+    tactic_ids = _string_list(_first(
+        wazuh, "data.alert.metadata.mitre_tactic_id",
+        "alert.metadata.mitre_tactic_id", "rule.mitre.tactic",
+    ))
+    technique_ids = _string_list(_first(
+        wazuh, "data.alert.metadata.mitre_technique_id",
+        "alert.metadata.mitre_technique_id", "rule.mitre.id",
+    ))
     wazuh_description = _first(wazuh, "rule.description")
     rule_name_parts = []
     for value in (sensor_rule_name, wazuh_description):
@@ -131,7 +160,7 @@ def normalize_alert(payload: Any) -> dict[str, Any]:
         "producer": {
             "type": "nids",
             "name": _first(wazuh, "data.app_proto", "decoder.name") or "Suricata/Wazuh",
-            "rule_id": _first(wazuh, "rule.id", "data.alert.signature_id"),
+            "rule_id": sensor_rule_id or collector_rule_id,
             "rule_name": rule_name or "Unknown IDS alert",
         },
         "data_source": {"category": "network_traffic", "subcategory": _first(wazuh, "rule.groups.0")},
@@ -157,6 +186,14 @@ def normalize_alert(payload: Any) -> dict[str, Any]:
             "direction": _first(wazuh, "data.direction", "network.direction", "data.flow.direction"),
         },
     }
+    if collector_rule_id is not None and str(collector_rule_id) != str(sensor_rule_id):
+        alert["producer"]["collector_rule_id"] = collector_rule_id
+    if tactic_ids or technique_ids:
+        alert["mitre"] = {
+            "tactic_ids": tactic_ids,
+            "technique_ids": technique_ids,
+            "source": "sensor_rule_metadata",
+        }
     http = {
         "method": _first(wazuh, "data.http.http_method", "http.request.method"),
         "path": _first(wazuh, "data.http.url", "url.path"),

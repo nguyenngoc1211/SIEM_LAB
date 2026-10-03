@@ -55,6 +55,35 @@ class EndToEndTests(unittest.TestCase):
         result = self.offline_pipeline().map_alert(payload)
         self.assertIn(result["mapping_status"], {"insufficient_evidence", "uncertain"})
 
+    def test_explicit_sensor_metadata_takes_precedence_over_retrieval(self) -> None:
+        pipeline = MappingPipeline.__new__(MappingPipeline)
+        pipeline.documents = {"T1110.001": {"name": "Password Guessing"}}
+        pipeline.manifest = {
+            "index_version": "test",
+            "attack_final_sha256": "test-sha256",
+        }
+        payload = {
+            "rule": {"id": "86601"},
+            "data": {
+                "alert": {
+                    "signature_id": 1002036,
+                    "signature": "LAB Repeated JSON Credential Guesses",
+                    "metadata": {
+                        "mitre_tactic_id": ["TA0006"],
+                        "mitre_technique_id": ["T1110.001"],
+                    },
+                },
+            },
+        }
+
+        result = pipeline.map_alert(payload)
+
+        self.assertEqual("mapped", result["mapping_status"])
+        self.assertEqual("sensor_rule_metadata", result["mapping_source"])
+        self.assertEqual("T1110.001", result["primary_mapping"]["technique_id"])
+        self.assertEqual("metadata-direct-1.0.0", result["pipeline"]["retriever_version"])
+        self.assertEqual(1002036, result["normalized_alert"]["producer"]["rule_id"])
+
     def test_missing_or_undeclared_parent_does_not_create_fallback(self) -> None:
         pipeline = MappingPipeline.__new__(MappingPipeline)
         pipeline.documents = {}

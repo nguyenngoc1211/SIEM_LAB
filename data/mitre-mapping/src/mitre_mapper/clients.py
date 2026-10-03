@@ -291,9 +291,12 @@ class CrossEncoderReranker:
                 document_terms = set(tokenize(candidate["document"]["dense_text"]))
                 overlap = len(query_terms & document_terms) / max(len(query_terms), 1)
                 candidate["reranker_raw_score"] = overlap
-                candidate["reranker_score"] = min(1.0, 0.55 * candidate["fusion_score"] + 0.45 * overlap)
+                candidate["reranker_score"] = min(
+                    1.0, 0.55 * candidate["fusion_score"] + 0.45 * overlap,
+                )
             model_version = "lexical-fallback-1.0.0"
         candidates.sort(key=lambda value: (-value["reranker_score"], value["rank_before_rerank"]))
         for rank, candidate in enumerate(candidates, 1):
             candidate["rank_after_rerank"] = rank
+            candidate["reranker_score"] = round(candidate["reranker_score"], 6)
         return candidates[:limit], degraded, model_version
