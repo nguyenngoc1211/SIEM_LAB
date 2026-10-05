@@ -10,7 +10,7 @@ suricata:
   expected_sid:
     - 1002047
   rule_name: LAB Suspicious JSP Command Endpoint Access
-  rule_source: custom
+  rule_source: owasp_crs
 source:
   container: soc_attacker_v2
   type: custom

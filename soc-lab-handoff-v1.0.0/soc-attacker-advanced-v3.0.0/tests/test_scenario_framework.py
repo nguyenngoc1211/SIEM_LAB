@@ -102,6 +102,40 @@ class RuleCatalogTests(unittest.TestCase):
         self.assertEqual(catalog.rules[2008538].rev, 2)
         self.assertTrue(any("Duplicate active SID" in item for item in catalog.warnings))
 
+    def test_owasp_crs_metadata_is_classified_as_owasp_crs(self) -> None:
+        rule = parse_rule(
+            'alert http $EXTERNAL_NET any -> $HOME_NET any '
+            '(msg:"LAB Repository Metadata Enumeration"; '
+            'flow:established,to_server; http.uri; '
+            'metadata:owasp_crs_rule 930130, owasp_crs_ver 4.29.0, '
+            'owasp_crs_strength literal; classtype:misc-activity; '
+            'sid:1002028; rev:1;)',
+            default_file="a2.rules",
+        )
+        assert rule is not None
+        self.assertEqual(rule.source, "owasp_crs")
+        self.assertEqual(rule.rule_file, "a2.rules")
+
+    def test_a2_sid_without_crs_metadata_keeps_custom_provenance(self) -> None:
+        rule = parse_rule(
+            'alert tcp 172.29.0.2 any -> 172.29.0.4 [21,22] '
+            '(msg:"LAB Internal Common Service Sweep"; flags:S; '
+            'classtype:misc-activity; sid:1002001; rev:1;)',
+            default_file="a2.rules",
+        )
+        assert rule is not None
+        self.assertEqual(rule.source, "custom")
+        # A SID inside the former reserved 1002100-1002149 block must stay
+        # custom now that provenance is driven by the metadata tag alone.
+        legacy = parse_rule(
+            'alert http $EXTERNAL_NET any -> $HOME_NET any '
+            '(msg:"LAB Legacy Block Probe"; classtype:misc-activity; '
+            'sid:1002100; rev:1;)',
+            default_file="a2.rules",
+        )
+        assert legacy is not None
+        self.assertEqual(legacy.source, "custom")
+
 
 class ScenarioTests(unittest.TestCase):
     def load_fixture(self):
@@ -141,6 +175,50 @@ class ScenarioTests(unittest.TestCase):
             self.assertTrue(any("expected technique IDs must match" in item for item in errors))
         finally:
             directory.cleanup()
+
+    def test_owasp_crs_scenario_matches_crs_catalog_source(self) -> None:
+        crs_rule = parse_rule(
+            'alert http $EXTERNAL_NET any -> $HOME_NET any '
+            '(msg:"LAB Repository Metadata Enumeration"; '
+            'flow:established,to_server; http.uri; '
+            'metadata:owasp_crs_rule 930130, owasp_crs_ver 4.29.0, '
+            'owasp_crs_strength literal; classtype:misc-activity; '
+            'sid:1002028; rev:1;)',
+            default_file="a2.rules",
+        )
+        assert crs_rule is not None
+        catalog = RuleCatalog({crs_rule.sid: crs_rule})
+        scenario_yaml = """\
+id: A2-T1595.003-03
+name: Repository Metadata Enumeration
+description: Fixture CRS-derived scenario.
+mitre:
+  tactic_id:
+    - TA0043
+  technique_id:
+    - T1595.003
+suricata:
+  expected_sid:
+    - 1002028
+  rule_name: LAB Repository Metadata Enumeration
+  rule_source: owasp_crs
+source:
+  container: soc_attacker_v2
+target:
+  container: soc_gateway
+  port: 80
+execution:
+  action_id: A2-1002028
+expected:
+  minimum_alerts: 1
+  mapping_status: mapped
+timeout: 40
+"""
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "scenario.yaml"
+            path.write_text(scenario_yaml, encoding="utf-8")
+            scenario = load_scenario(path)
+        self.assertEqual(validate_scenario(scenario, catalog), [])
 
 
 class EventAndEvaluationTests(unittest.TestCase):

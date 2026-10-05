@@ -1,1 +1,1 @@
-alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB Legacy Method Reconnaissance"; flow:established,to_server; http.method; content:"TRACE"; classtype:misc-activity; sid:1002015; rev:1;)
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB Legacy Method Reconnaissance"; flow:established,to_server; http.method; content:"TRACE"; metadata:owasp_crs_rule 911100, owasp_crs_ver 4.29.0, owasp_crs_strength literal; classtype:misc-activity; sid:1002015; rev:1;)

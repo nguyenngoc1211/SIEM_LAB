@@ -196,7 +196,13 @@ def _mitre_items(metadata: dict[str, list[str]], kind: str,
     return result
 
 
-def _source_for(sid: int, signature: str, origin: str | None) -> tuple[str, str | None]:
+def _source_for(sid: int, signature: str, origin: str | None,
+                metadata: dict[str, list[str]] | None = None) -> tuple[str, str | None]:
+    # A2 rules whose detection condition is adapted from an OWASP CRS rule
+    # carry an ``owasp_crs_rule`` metadata tag, so they keep a distinct
+    # provenance even though they ship inside the generated a2.rules file.
+    if metadata and metadata.get("owasp_crs_rule"):
+        return "owasp_crs", "a2.rules"
     if 1002001 <= sid <= 1002999 or signature.startswith("LAB "):
         return "custom", "a2.rules"
     if 1001001 <= sid <= 1001099 or signature.startswith("SOC LAB V2 "):
@@ -229,7 +235,7 @@ def parse_rule(line: str, *, default_file: str, origins: dict[int, str] | None =
         "tactics": _mitre_items(metadata, "tactics", sid, warnings),
         "techniques": _mitre_items(metadata, "techniques", sid, warnings),
     }
-    source, rule_file = _source_for(sid, signature, (origins or {}).get(sid))
+    source, rule_file = _source_for(sid, signature, (origins or {}).get(sid), metadata)
     return RuleRecord(
         sid=sid, rev=int(rev_match.group(1)) if rev_match else 0,
         action=header.group(1).lower(), protocol=header.group(2).lower(),

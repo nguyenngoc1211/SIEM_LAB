@@ -1,1 +1,1 @@
-alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB Suspicious PHP Command Endpoint Access"; flow:established,to_server; http.uri; content:"/uploads/system.php?cmd="; classtype:misc-activity; sid:1002046; rev:1;)
+alert http $EXTERNAL_NET any -> $HOME_NET any (msg:"LAB Suspicious PHP Command Endpoint Access"; flow:established,to_server; http.uri; content:"/uploads/system.php?cmd="; metadata:owasp_crs_rule 932160, owasp_crs_ver 4.29.0, owasp_crs_strength literal; classtype:misc-activity; sid:1002046; rev:1;)

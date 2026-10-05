@@ -16,18 +16,53 @@ SID_START = 1002001
 records: list[dict[str, Any]] = []
 
 
+# OWASP CRS provenance. A subset of the A2 rules adapts the detection
+# condition of an OWASP Core Rule Set rule; the referenced CRS rule id is
+# recorded in the Suricata rule metadata so the generated rule keeps an
+# auditable external reference without renaming the behavioural message.
+CRS_VERSION = "4.29.0"
+CRS_LEGACY_VERSION = "3.3.7"
+
+
+def crs_metadata(rule_id: str, version: str, strength: str) -> str:
+    """Render the ``metadata`` clause that records the CRS reference."""
+    return (
+        f"owasp_crs_rule {rule_id}, owasp_crs_ver {version}, "
+        f"owasp_crs_strength {strength}"
+    )
+
+
+def crs_kwargs(reference: tuple[str, str, str] | None) -> dict[str, Any]:
+    """Translate a CRS reference tuple into ``add`` keyword arguments."""
+    if reference is None:
+        return {}
+    rule_id, version, strength = reference
+    return {
+        "metadata": crs_metadata(rule_id, version, strength),
+        "rule_source": "owasp_crs",
+    }
+
+
+# Keys that only exist in the scenario manifest, never in catalog.json.
+YAML_ONLY_KEYS = {"rule", "rule_source", "source_type", "reference"}
+
+
 def add(
     technique: str, tactic: str, name: str, description: str,
     kind: str, params: dict[str, Any], header: str, options: str,
     *, expected_status: str = "mapped", revision: int = 1,
+    classtype: str = "misc-activity", metadata: str | None = None,
+    rule_source: str = "custom", source_type: str = "custom",
+    reference: str = "Manual network-observable lab scenario",
 ) -> None:
     sid = SID_START + len(records)
     index = 1 + sum(item["technique"] == technique for item in records)
     scenario_id = f"A2-{technique}-{index:02d}"
     rule_name = "LAB " + name
+    metadata_clause = f"metadata:{metadata}; " if metadata else ""
     rule = (
         f'{header} (msg:"{rule_name}"; {options} '
-        f'classtype:misc-activity; sid:{sid}; rev:{revision};)'
+        f'{metadata_clause}classtype:{classtype}; sid:{sid}; rev:{revision};)'
     )
     records.append({
         "id": scenario_id,
@@ -40,6 +75,9 @@ def add(
         "params": params,
         "rule": rule,
         "expected_status": expected_status,
+        "rule_source": rule_source,
+        "source_type": source_type,
+        "reference": reference,
     })
 
 
@@ -64,14 +102,14 @@ for title, description, payload in driveby:
 
 # T1595: generic active reconnaissance observables.
 active = [
-    ("Sequential Public Service Probes", "active_port_scan", {}, "alert tcp $EXTERNAL_NET any -> $HOME_NET [21,22,23,25,443,8080,9200]", "flags:S; flow:stateless; detection_filter:track by_src,count 5,seconds 10;"),
-    ("HTTP Capability Assessment", "http_probe", {"method": "OPTIONS", "path": "/", "user_agent": "network-audit-client/1.0"}, "alert http $EXTERNAL_NET any -> $HOME_NET any", 'flow:established,to_server; http.method; content:"OPTIONS"; http.user_agent; content:"network-audit-client/1.0";'),
-    ("Service Banner Identification", "http_probe", {"method": "HEAD", "path": "/", "user_agent": "service-banner-audit/1.0"}, "alert http $EXTERNAL_NET any -> $HOME_NET any", 'flow:established,to_server; http.method; content:"HEAD"; http.user_agent; content:"service-banner-audit/1.0";'),
-    ("Infrastructure Metadata Probe", "http_probe", {"method": "GET", "path": "/robots.txt", "user_agent": "infrastructure-inventory/1.0"}, "alert http $EXTERNAL_NET any -> $HOME_NET any", 'flow:established,to_server; http.uri; content:"/robots.txt"; http.user_agent; content:"infrastructure-inventory/1.0";'),
-    ("Legacy Method Reconnaissance", "raw_http_probe", {"method": "TRACE"}, "alert http $EXTERNAL_NET any -> $HOME_NET any", 'flow:established,to_server; http.method; content:"TRACE";'),
+    ("Sequential Public Service Probes", "active_port_scan", {}, "alert tcp $EXTERNAL_NET any -> $HOME_NET [21,22,23,25,443,8080,9200]", "flags:S; flow:stateless; detection_filter:track by_src,count 5,seconds 10;", None),
+    ("HTTP Capability Assessment", "http_probe", {"method": "OPTIONS", "path": "/", "user_agent": "network-audit-client/1.0"}, "alert http $EXTERNAL_NET any -> $HOME_NET any", 'flow:established,to_server; http.method; content:"OPTIONS"; http.user_agent; content:"network-audit-client/1.0";', ("913100", CRS_VERSION, "semantic")),
+    ("Service Banner Identification", "http_probe", {"method": "HEAD", "path": "/", "user_agent": "service-banner-audit/1.0"}, "alert http $EXTERNAL_NET any -> $HOME_NET any", 'flow:established,to_server; http.method; content:"HEAD"; http.user_agent; content:"service-banner-audit/1.0";', ("913100", CRS_VERSION, "semantic")),
+    ("Infrastructure Metadata Probe", "http_probe", {"method": "GET", "path": "/robots.txt", "user_agent": "infrastructure-inventory/1.0"}, "alert http $EXTERNAL_NET any -> $HOME_NET any", 'flow:established,to_server; http.uri; content:"/robots.txt"; http.user_agent; content:"infrastructure-inventory/1.0";', ("913100", CRS_VERSION, "semantic")),
+    ("Legacy Method Reconnaissance", "raw_http_probe", {"method": "TRACE"}, "alert http $EXTERNAL_NET any -> $HOME_NET any", 'flow:established,to_server; http.method; content:"TRACE";', ("911100", CRS_VERSION, "literal")),
 ]
-for title, kind, params, header, options in active:
-    add("T1595", "TA0043", title, "Perform a bounded reconnaissance probe against the isolated public lab gateway.", kind, params, header, options)
+for title, kind, params, header, options, crs in active:
+    add("T1595", "TA0043", title, "Perform a bounded reconnaissance probe against the isolated public lab gateway.", kind, params, header, options, **crs_kwargs(crs))
 
 # T1595.001: the gateway owns five lab-only aliases, allowing a real multi-IP sweep.
 for port, label in [(80, "Web Address Range Sweep"), (443, "TLS Address Range Sweep"), (22, "Remote Access Address Sweep"), (8080, "Alternate Web Address Sweep"), (3000, "Application Address Range Sweep")]:
@@ -79,27 +117,27 @@ for port, label in [(80, "Web Address Range Sweep"), (443, "TLS Address Range Sw
 
 # T1595.002: vulnerability and exposure assessment requests.
 vuln = [
-    ("Template Scanner Request", "GET", "/", "Nuclei - Open-source project", None, 'http.user_agent; content:"Nuclei - Open-source project";'),
-    ("CVE Exposure Check Request", "GET", "/.well-known/security.txt?cve_check=CVE-2021-44228", "Mozilla/5.0", None, 'http.uri; content:"cve_check=CVE-2021-44228"; nocase;'),
-    ("WebDAV Capability Check", "OPTIONS", "/webdav/", "configuration-audit/1.0", None, 'http.method; content:"OPTIONS"; http.uri; content:"/webdav/";'),
-    ("Graph Query Schema Probe", "POST", "/graphql", "schema-audit/1.0", '{"query":"{__schema{types{name}}}"}', 'http.uri; content:"/graphql"; http.request_body; content:"__schema";'),
-    ("Server Status Exposure Check", "GET", "/server-status?auto", "version-audit/1.0", None, 'http.uri; content:"/server-status?auto";'),
+    ("Template Scanner Request", "GET", "/", "Nuclei - Open-source project", None, 'http.user_agent; content:"Nuclei - Open-source project";', ("913100", CRS_VERSION, "literal")),
+    ("CVE Exposure Check Request", "GET", "/.well-known/security.txt?cve_check=CVE-2021-44228", "Mozilla/5.0", None, 'http.uri; content:"cve_check=CVE-2021-44228"; nocase;', None),
+    ("WebDAV Capability Check", "OPTIONS", "/webdav/", "configuration-audit/1.0", None, 'http.method; content:"OPTIONS"; http.uri; content:"/webdav/";', None),
+    ("Graph Query Schema Probe", "POST", "/graphql", "schema-audit/1.0", '{"query":"{__schema{types{name}}}"}', 'http.uri; content:"/graphql"; http.request_body; content:"__schema";', None),
+    ("Server Status Exposure Check", "GET", "/server-status?auto", "version-audit/1.0", None, 'http.uri; content:"/server-status?auto";', None),
 ]
-for title, method, path, ua, body, match in vuln:
-    add("T1595.002", "TA0043", title, "Send a bounded request intended to assess a specific exposed feature or weakness.", "vuln_scan", {"method": method, "path": path, "user_agent": ua, "body": body}, "alert http $EXTERNAL_NET any -> $HOME_NET any", f"flow:established,to_server; {match}")
+for title, method, path, ua, body, match, crs in vuln:
+    add("T1595.002", "TA0043", title, "Send a bounded request intended to assess a specific exposed feature or weakness.", "vuln_scan", {"method": method, "path": path, "user_agent": ua, "body": body}, "alert http $EXTERNAL_NET any -> $HOME_NET any", f"flow:established,to_server; {match}", **crs_kwargs(crs))
 
 # T1595.003: five distinct dictionary-derived resource families.
 wordlists = [
-    ("Administrative Resource Enumeration", ["/admin", "/administrator", "/admin/login", "/manage", "/console", "/controlpanel"], r"/^\/(?:admin|administrator|manage|console|controlpanel)/"),
-    ("Backup Artifact Enumeration", ["/backup.zip", "/site.tar.gz", "/database.bak", "/dump.sql", "/www.zip", "/archive.old"], r"/(?:backup|site|database|dump|www|archive).*(?:zip|gz|bak|sql|old)/"),
-    ("Repository Metadata Enumeration", ["/.git/config", "/.svn/entries", "/.hg/store", "/.env", "/config.yml", "/settings.json"], r"/^\/(?:\.git|\.svn|\.hg|\.env|config|settings)/"),
-    ("API Documentation Enumeration", ["/swagger", "/swagger-ui", "/openapi.json", "/api-docs", "/graphql", "/redoc"], r"/^\/(?:swagger|openapi|api-docs|graphql|redoc)/"),
-    ("CMS Resource Enumeration", ["/wp-admin", "/wp-login.php", "/joomla", "/drupal", "/xmlrpc.php", "/user/login"], r"/^\/(?:wp-admin|wp-login|joomla|drupal|xmlrpc|user\/login)/"),
+    ("Administrative Resource Enumeration", ["/admin", "/administrator", "/admin/login", "/manage", "/console", "/controlpanel"], r"/^\/(?:admin|administrator|manage|console|controlpanel)/", None),
+    ("Backup Artifact Enumeration", ["/backup.zip", "/site.tar.gz", "/database.bak", "/dump.sql", "/www.zip", "/archive.old"], r"/(?:backup|site|database|dump|www|archive).*(?:zip|gz|bak|sql|old)/", ("920440", CRS_VERSION, "literal")),
+    ("Repository Metadata Enumeration", ["/.git/config", "/.svn/entries", "/.hg/store", "/.env", "/config.yml", "/settings.json"], r"/^\/(?:\.git|\.svn|\.hg|\.env|config|settings)/", ("930130", CRS_VERSION, "literal")),
+    ("API Documentation Enumeration", ["/swagger", "/swagger-ui", "/openapi.json", "/api-docs", "/graphql", "/redoc"], r"/^\/(?:swagger|openapi|api-docs|graphql|redoc)/", None),
+    ("CMS Resource Enumeration", ["/wp-admin", "/wp-login.php", "/joomla", "/drupal", "/xmlrpc.php", "/user/login"], r"/^\/(?:wp-admin|wp-login|joomla|drupal|xmlrpc|user\/login)/", None),
 ]
-for title, paths, regex in wordlists:
+for title, paths, regex, crs in wordlists:
     threshold_count = 3 if title == "CMS Resource Enumeration" else 4
     revision = 2 if title == "CMS Resource Enumeration" else 1
-    add("T1595.003", "TA0043", title, "Enumerate a bounded dictionary of related web resources on the local gateway.", "wordlist_scan", {"paths": paths}, "alert http $EXTERNAL_NET any -> $HOME_NET any", f'flow:established,to_server; http.uri; pcre:"{regex}i"; detection_filter:track by_src,count {threshold_count},seconds 15;', revision=revision)
+    add("T1595.003", "TA0043", title, "Enumerate a bounded dictionary of related web resources on the local gateway.", "wordlist_scan", {"paths": paths}, "alert http $EXTERNAL_NET any -> $HOME_NET any", f'flow:established,to_server; http.uri; pcre:"{regex}i"; detection_filter:track by_src,count {threshold_count},seconds 15;', revision=revision, **crs_kwargs(crs))
 
 channels = ["json", "form", "basic", "token", "pin"]
 channel_titles = {"json": "JSON", "form": "Form", "basic": "Basic", "token": "Token", "pin": "PIN"}
@@ -118,28 +156,29 @@ for channel in channels:
 
 # T1505.003: access to five web-shell-shaped resources.
 shells = [
-    ("Suspicious PHP Command Endpoint Access", "GET", "/uploads/system.php?cmd=id", None, 'http.uri; content:"/uploads/system.php?cmd=";'),
-    ("Suspicious JSP Command Endpoint Access", "POST", "/images/cache.jsp", "cmd=whoami", 'http.uri; content:"/images/cache.jsp"; http.request_body; content:"cmd=whoami";'),
-    ("Suspicious ASPX Execution Endpoint Access", "GET", "/aspnet_client/update.aspx?action=exec", None, 'http.uri; content:"/aspnet_client/update.aspx?action=exec";'),
-    ("Hidden Script Control Request", "POST", "/cgi-bin/.maintenance.pl", "action=command&value=id", 'http.uri; content:"/cgi-bin/.maintenance.pl"; http.request_body; content:"action=command";'),
-    ("Plugin Command Console Access", "GET", "/plugins/healthcheck.phtml?c=whoami", None, 'http.uri; content:"/plugins/healthcheck.phtml?c=";'),
+    ("Suspicious PHP Command Endpoint Access", "GET", "/uploads/system.php?cmd=id", None, 'http.uri; content:"/uploads/system.php?cmd=";', ("932160", CRS_VERSION, "literal")),
+    ("Suspicious JSP Command Endpoint Access", "POST", "/images/cache.jsp", "cmd=whoami", 'http.uri; content:"/images/cache.jsp"; http.request_body; content:"cmd=whoami";', ("932160", CRS_VERSION, "literal")),
+    ("Suspicious ASPX Execution Endpoint Access", "GET", "/aspnet_client/update.aspx?action=exec", None, 'http.uri; content:"/aspnet_client/update.aspx?action=exec";', None),
+    ("Hidden Script Control Request", "POST", "/cgi-bin/.maintenance.pl", "action=command&value=id", 'http.uri; content:"/cgi-bin/.maintenance.pl"; http.request_body; content:"action=command";', ("932160", CRS_VERSION, "literal")),
+    ("Plugin Command Console Access", "GET", "/plugins/healthcheck.phtml?c=whoami", None, 'http.uri; content:"/plugins/healthcheck.phtml?c=";', ("932160", CRS_VERSION, "literal")),
 ]
-for title, method, path, body, match in shells:
-    add("T1505.003", "TA0003", title, "Access a harmless web-shell-shaped path using a command-control parameter.", "webshell_access", {"method": method, "path": path, "body": body}, "alert http $EXTERNAL_NET any -> $HOME_NET any", f"flow:established,to_server; {match}")
+for title, method, path, body, match, crs in shells:
+    add("T1505.003", "TA0003", title, "Access a harmless web-shell-shaped path using a command-control parameter.", "webshell_access", {"method": method, "path": path, "body": body}, "alert http $EXTERNAL_NET any -> $HOME_NET any", f"flow:established,to_server; {match}", **crs_kwargs(crs))
 
-# T1499: bounded application-layer request surges.
+# T1499: bounded application-layer request surges. The burst-threshold shape is
+# adapted from the CRS request-burst DoS counter, which only exists in CRS 3.x.
 endpoint_dos = [
-    ("Rapid Rendering Request Burst", "normal_get", 'http.uri; content:"/lab/normal?work=render";'),
-    ("Repeated Aggregation Submissions", "normal_post", 'http.method; content:"POST"; http.uri; content:"/lab/normal"; http.request_body; content:"aggregate";'),
-    ("Search Endpoint Request Surge", "search", 'http.uri; content:"/rest/products/search?q=resource-intensive";'),
-    ("Authentication Endpoint Request Surge", "auth", 'http.method; content:"POST"; http.uri; content:"/lab/auth/json";'),
-    ("Multipart Processing Request Surge", "upload", 'http.method; content:"POST"; http.uri; content:"/lab/upload";'),
+    ("Rapid Rendering Request Burst", "normal_get", 'http.uri; content:"/lab/normal?work=render";', ("912170", CRS_LEGACY_VERSION, "semantic")),
+    ("Repeated Aggregation Submissions", "normal_post", 'http.method; content:"POST"; http.uri; content:"/lab/normal"; http.request_body; content:"aggregate";', ("912170", CRS_LEGACY_VERSION, "semantic")),
+    ("Search Endpoint Request Surge", "search", 'http.uri; content:"/rest/products/search?q=resource-intensive";', ("912170", CRS_LEGACY_VERSION, "semantic")),
+    ("Authentication Endpoint Request Surge", "auth", 'http.method; content:"POST"; http.uri; content:"/lab/auth/json";', ("912170", CRS_LEGACY_VERSION, "semantic")),
+    ("Multipart Processing Request Surge", "upload", 'http.method; content:"POST"; http.uri; content:"/lab/upload";', ("912170", CRS_LEGACY_VERSION, "semantic")),
 ]
-for title, profile, match in endpoint_dos:
+for title, profile, match, crs in endpoint_dos:
     # Keep the threshold high enough to represent a burst, while allowing for
     # host clock corrections that can split one monotonic run across wall-clock
     # seconds in containerized Windows environments.
-    add("T1499", "TA0040", title, "Send a small bounded burst to one application endpoint without exhausting host resources.", "endpoint_dos", {"profile": profile, "count": 12}, "alert http $EXTERNAL_NET any -> $HOME_NET any", f"flow:established,to_server; {match} detection_filter:track by_src,count 10,seconds 60;")
+    add("T1499", "TA0040", title, "Send a small bounded burst to one application endpoint without exhausting host resources.", "endpoint_dos", {"profile": profile, "count": 12}, "alert http $EXTERNAL_NET any -> $HOME_NET any", f"flow:established,to_server; {match} detection_filter:track by_src,count 10,seconds 60;", **crs_kwargs(crs))
 
 # T1071.001: five HTTP command-channel request shapes.
 for profile, method in [("telemetry", "POST"), ("checkin", "GET"), ("heartbeat", "POST"), ("sync", "PUT"), ("tasks", "POST")]:
@@ -185,11 +224,11 @@ suricata:
   expected_sid:
     - {record['sid']}
   rule_name: {record['rule_name']}
-  rule_source: custom
+  rule_source: {record['rule_source']}
 source:
   container: soc_attacker_v2
-  type: custom
-  reference: Manual network-observable lab scenario
+  type: {record['source_type']}
+  reference: {record['reference']}
 target:
   container: soc_gateway
   port: 80
@@ -214,7 +253,7 @@ def main() -> None:
         (directory / "scenario.yaml").write_text(yaml_text(record), encoding="utf-8")
         (directory / "rule.rules").write_text(record["rule"] + "\n", encoding="utf-8")
     catalog = [
-        {key: value for key, value in record.items() if key != "rule"}
+        {key: value for key, value in record.items() if key not in YAML_ONLY_KEYS}
         for record in records
     ]
     (SCENARIO_ROOT / "catalog.json").write_text(
@@ -222,7 +261,8 @@ def main() -> None:
     )
     RULE_OUTPUT.write_text(
         "# A2 custom rules. Generated by src/tools/generate_a2.py.\n"
-        "# SID namespace 1002001-1002999 is reserved for A2.\n\n"
+        "# SID namespace 1002001-1002999 is reserved for A2.\n"
+        "# Rules that adapt an OWASP CRS detection carry 'owasp_crs_rule' metadata.\n\n"
         + "\n\n".join(record["rule"] for record in records) + "\n",
         encoding="utf-8",
     )

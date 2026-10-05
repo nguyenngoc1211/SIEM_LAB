@@ -24,7 +24,7 @@ def load_json(path: Path) -> dict[str, Any]:
 
 
 def yaml_scalar(text: str, key: str) -> str | None:
-    match = re.search(rf"(?m)^{re.escape(key)}:\s*(.+?)\s*$", text)
+    match = re.search(rf"(?m)^[ \t]*{re.escape(key)}:[ \t]*(.+?)[ \t]*$", text)
     if not match:
         return None
     return match.group(1).strip().strip('"\'')
@@ -43,6 +43,7 @@ def load_definitions() -> tuple[dict[str, dict[str, Any]], dict[int, dict[str, A
                 "group": group.upper(),
                 "name": yaml_scalar(text, "name"),
                 "description": yaml_scalar(text, "description"),
+                "rule_source": yaml_scalar(text, "rule_source"),
                 "sid": int(sid_match.group(1)) if sid_match else None,
                 "path": path.relative_to(ROOT).as_posix(),
             }
@@ -50,6 +51,21 @@ def load_definitions() -> tuple[dict[str, dict[str, Any]], dict[int, dict[str, A
             if item["sid"] is not None:
                 by_sid[item["sid"]] = item
     return by_id, by_sid
+
+
+RULE_SOURCE_LABELS = {
+    "et_open": "ET Open",
+    "et": "ET Open",
+    "owasp_crs": "OWASP CRS-derived",
+    "custom": "Custom",
+}
+
+
+def rule_source_label(value: str | None, group: str) -> str:
+    """Human-readable rule provenance, defaulting by scenario group."""
+    if value:
+        return RULE_SOURCE_LABELS.get(value, md(value))
+    return "ET Open" if group == "A1" else "Custom"
 
 
 def md(value: Any) -> str:
@@ -230,13 +246,22 @@ def technique_summary(items: list[dict[str, Any]]) -> list[str]:
     return rows
 
 
+def rule_source_cell(
+    report: dict[str, Any], definitions_by_sid: dict[int, dict[str, Any]], group: str,
+) -> str:
+    expected = report.get("detection", {}).get("expected_sids", [])
+    definition = definitions_by_sid.get(int(expected[0])) if expected else None
+    value = definition.get("rule_source") if definition else None
+    return rule_source_label(value, group)
+
+
 def table_rows(
     group: str, reports: list[tuple[str, Path, dict[str, Any]]], definitions: dict[str, dict[str, Any]],
     definitions_by_sid: dict[int, dict[str, Any]], rules_by_sid: dict[int, dict[str, Any]],
 ) -> list[str]:
     rows = [
-        "| Kịch bản | Trạng thái artifact | Mô tả nhanh hành vi | Command / payload tấn công | Rule dự kiến kích hoạt (đã đối chiếu alert thực tế) | Technique dự kiến | Technique thực tế | Confidence top 3 | Detection / Wazuh / Mapping / Overall |",
-        "|---|---|---|---|---|---|---|---|---|",
+        "| Kịch bản | Trạng thái artifact | Mô tả nhanh hành vi | Command / payload tấn công | Rule dự kiến kích hoạt (đã đối chiếu alert thực tế) | Rule source | Technique dự kiến | Technique thực tế | Confidence top 3 | Detection / Wazuh / Mapping / Overall |",
+        "|---|---|---|---|---|---|---|---|---|---|",
     ]
     for item_group, path, report in reports:
         if item_group != group:
@@ -261,12 +286,45 @@ def table_rows(
                 behavior(report, definitions_by_sid),
                 attack_summary(report),
                 rule_summary(report, rules_by_sid),
+                rule_source_cell(report, definitions_by_sid, group),
                 "<br>".join(f"<code>{md(item)}</code>" for item in expected) or "—",
                 "<br>".join(f"<code>{md(item)}</code>" for item in observed) or "—",
                 top_three(report),
                 outcomes,
             ]) + " |"
         )
+    return rows
+
+
+def rule_source_summary(definitions: dict[str, dict[str, Any]]) -> list[str]:
+    rows = [
+        "| Nhóm | ET Open | OWASP CRS-derived | Custom | Tổng | Có nguồn tham khảo |",
+        "|---|---:|---:|---:|---:|---:|",
+    ]
+    order = ("ET Open", "OWASP CRS-derived", "Custom")
+
+    def ratio(sourced: int, total: int) -> str:
+        if not total:
+            return f"{sourced}/{total}"
+        return f"{sourced}/{total} ({100 * sourced / total:.1f}%)"
+
+    totals: Counter[str] = Counter()
+    for group in ("A1", "A2"):
+        items = [item for item in definitions.values() if item.get("group") == group]
+        counts = Counter(rule_source_label(item.get("rule_source"), group) for item in items)
+        totals.update(counts)
+        total = len(items)
+        sourced = counts["ET Open"] + counts["OWASP CRS-derived"]
+        rows.append(
+            f"| {group} | " + " | ".join(str(counts[label]) for label in order)
+            + f" | {total} | {ratio(sourced, total)} |"
+        )
+    grand = sum(totals.values())
+    grand_sourced = totals["ET Open"] + totals["OWASP CRS-derived"]
+    rows.append(
+        "| Tổng | " + " | ".join(str(totals[label]) for label in order)
+        + f" | {grand} | {ratio(grand_sourced, grand)} |"
+    )
     return rows
 
 
@@ -462,6 +520,12 @@ def build() -> str:
         f"{sum(candidate_hit(item, 1) for item in standard)}/{len(standard)} | "
         f"{sum(candidate_hit(item, 3) for item in standard)}/{len(standard)} |"
     )
+    lines.extend([
+        "",
+        "## Nguồn gốc rule theo nhóm kịch bản",
+        "",
+    ])
+    lines.extend(rule_source_summary(definitions))
     lines.extend([
         "",
         "## Nhận xét",

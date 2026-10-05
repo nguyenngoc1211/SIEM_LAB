@@ -10,7 +10,7 @@ suricata:
   expected_sid:
     - 1002021
   rule_name: LAB Template Scanner Request
-  rule_source: custom
+  rule_source: owasp_crs
 source:
   container: soc_attacker_v2
   type: custom
