@@ -4,6 +4,7 @@
 - **Nhánh:** `main`
 - **Commit:** `1c0b528` — `feat(soc-lab): ground A2 Suricata rules on OWASP CRS via metadata`
 - **Phạm vi ảnh hưởng:** `soc-lab-handoff-v1.0.0/` — 37 file thay đổi (+284 / −95)
+- **Tài liệu liên quan:** `docs/A2_RENAME_ACCEPTANCE_REVIEW.md` — đánh giá gốc của cả 57 ứng viên đổi tên (tiêu chí C1/C2, phân nhóm loại N1–N7).
 
 > Tài liệu này dành cho thành viên nhóm: mô tả **đã sửa cái gì, vì sao, và cách tự kiểm chứng lại**.
 
@@ -111,6 +112,8 @@ Trước khi gắn nhãn, 57 ứng viên đã được soi qua 2 tiêu chí:
 - **C1 — Độ tương đồng với rule custom cũ:** điều kiện CRS phải thực sự tương ứng với điều kiện phát hiện hiện tại.
 - **C2 — Tương thích với scenario + MITRE:** nhãn/ngữ nghĩa CRS phải khớp hành vi kịch bản và Technique.
 
+> Bảng đánh giá đầy đủ cả 57 ứng viên (kèm phân nhóm N1–N7 và lý do chi tiết từng rule) nằm trong tài liệu nguồn: `docs/A2_RENAME_ACCEPTANCE_REVIEW.md`.
+
 **Kết quả: 16 chấp nhận (28,1%) — 41 loại (71,9%).** Các nhóm bị loại:
 
 | Nhóm | Lý do | Số rule |
@@ -161,4 +164,4 @@ python3 scripts/build_scenario_results_report.py
 
 - Chưa regenerate `docs/A1_A2_SCENARIO_RESULTS.md` (cần một lần chạy tạo `runtime/reports/a1|a2`).
 - Vài câu chữ docs vẫn gọi "A2 là custom rule" ở **mức nhóm** — vẫn đúng ở cấp nhóm, giữ nguyên.
-- Thư mục `temp/` (tài liệu đánh giá nội bộ + file rule tham chiếu) **chưa được commit**.
+- Tài liệu đánh giá nguồn đã được đưa vào repo tại `docs/A2_RENAME_ACCEPTANCE_REVIEW.md`. Thư mục `temp/` còn lại (file rule tham chiếu + `.Zone.Identifier`) vẫn untracked.
