@@ -162,6 +162,6 @@ python3 scripts/build_scenario_results_report.py
 
 ## 9. Tồn đọng
 
-- Chưa regenerate `docs/A1_A2_SCENARIO_RESULTS.md` (cần một lần chạy tạo `runtime/reports/a1|a2`).
+- Chưa regenerate `../reports/scenario-results-a1-a2/REPORT.md` (cần một lần chạy tạo `runtime/reports/a1|a2`).
 - Vài câu chữ docs vẫn gọi "A2 là custom rule" ở **mức nhóm** — vẫn đúng ở cấp nhóm, giữ nguyên.
 - Tài liệu đánh giá nguồn đã được đưa vào repo tại `docs/A2_RENAME_ACCEPTANCE_REVIEW.md`. Thư mục `temp/` còn lại (file rule tham chiếu + `.Zone.Identifier`) vẫn untracked.

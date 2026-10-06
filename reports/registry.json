@@ -1,0 +1,57 @@
+{
+  "schema_version": "1.0.0",
+  "updated_at": "2026-10-06",
+  "root": "reports",
+  "policy": {
+    "tier1_committed": [
+      "REPORT.md",
+      "*.md",
+      "comparison.md",
+      "comparison.csv",
+      "comparison.json",
+      "run_metadata.json",
+      "MANIFEST.json"
+    ],
+    "tier2_ignored": [
+      "raw/",
+      "raw_results/",
+      "checkpoints/",
+      "snapshots/",
+      "archive/"
+    ]
+  },
+  "reports": [
+    {
+      "id": "scenario-results-a1-a2",
+      "type": "run",
+      "title": "Kết quả chạy 90 scenario A1/A2 trên mô hình chính",
+      "main_report": "scenario-results-a1-a2/REPORT.md",
+      "manifest": "scenario-results-a1-a2/MANIFEST.json",
+      "updated_at": "2026-10-06",
+      "writer": "soc-lab-handoff-v1.0.0/scripts/build_scenario_results_report.py",
+      "raw_root": "soc-lab-handoff-v1.0.0/runtime/reports",
+      "source_ref": "n8n production webhook + MITRE mapper (mô hình chính)",
+      "dataset": {
+        "scenarios": 90,
+        "a1": 15,
+        "a2": 75
+      }
+    },
+    {
+      "id": "baseline-comparison",
+      "type": "cmp",
+      "title": "So sánh mapper chính với baseline B1 BM25-only và B2 DeepSeek-only",
+      "main_report": "baseline-comparison/REPORT.md",
+      "manifest": "baseline-comparison/run_metadata.json",
+      "updated_at": "2026-10-06",
+      "writer": "data/mitre-mapping/scripts/run_baselines.py",
+      "raw_root": "reports/baseline-comparison/raw_results",
+      "source_ref": "benchmark/alerts.jsonl + ground_truth.jsonl (dataset 1.0.0)",
+      "dataset": {
+        "alerts": 90,
+        "attack_version": "19.1",
+        "technique_subset": 18
+      }
+    }
+  ]
+}

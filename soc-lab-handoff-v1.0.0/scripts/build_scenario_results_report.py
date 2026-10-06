@@ -14,7 +14,9 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[1]
 SCENARIOS = ROOT / "soc-attacker-advanced-v3.0.0" / "scenarios"
 REPORTS = ROOT / "runtime" / "reports"
-OUTPUT = ROOT / "docs" / "A1_A2_SCENARIO_RESULTS.md"
+CODE_ROOT = ROOT.parents[0]
+REPORTS_BUNDLE = CODE_ROOT / "reports" / "scenario-results-a1-a2"
+OUTPUT = REPORTS_BUNDLE / "REPORT.md"
 RERANKER_AUDIT = REPORTS / "reranker_audit.json"
 
 
@@ -489,6 +491,10 @@ def build() -> str:
         "",
         f"Thời điểm sinh báo cáo: `{generated_at}`.",
         "",
+        f"> Bundle: `{REPORTS_BUNDLE.relative_to(CODE_ROOT).as_posix()}`. "
+        "Mọi đường dẫn tương đối trong báo cáo tính từ gốc `soc-lab-handoff-v1.0.0/`; "
+        "artifact thô nằm ở `runtime/reports/a1|a2/` và không được commit vào git.",
+        "",
         "## Phạm vi và cách đọc",
         "",
         f"Báo cáo được sinh trực tiếp từ **{len(standard)} kết quả của lần chạy mới nhất** trong `runtime/reports/a1/` và `runtime/reports/a2/`, rồi đối chiếu với {len(definitions)} YAML hiện hành trong `scenarios/a1/` và `scenarios/a2/`. Kết quả cũ đã được tách khỏi tập đo hiện tại và lưu dưới `runtime/reports/archive/`.",
@@ -585,8 +591,6 @@ def build() -> str:
         "│   │   └── a2-scenario-runs.jsonl                    # Lịch sử lần chạy A2",
         "│   └── suricata-logs/eve.json                        # EVE event/alert gốc từ Suricata",
         "├── docs/",
-        "│   ├── A1_A2_SCENARIO_RESULTS.md                     # Báo cáo tổng hợp này",
-        "│   ├── A1_SCENARIO_RESULTS.md                        # Snapshot tóm tắt A1 cũ",
         "│   └── A2_RUN_ISSUES.md                              # Nhật ký chạy và sửa lỗi A2",
         "└── docker-compose.yml                                # Mount log/rule state và nối các container",
         "```",

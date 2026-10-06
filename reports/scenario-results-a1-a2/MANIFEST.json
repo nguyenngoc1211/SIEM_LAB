@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0.0",
+  "bundle": "scenario-results-a1-a2",
+  "type": "run",
+  "updated_at": "2026-10-06",
+  "main_report": "REPORT.md",
+  "writer": "soc-lab-handoff-v1.0.0/scripts/build_scenario_results_report.py",
+  "raw_tier": "tier2_ignored",
+  "raw_root": "soc-lab-handoff-v1.0.0/runtime/reports",
+  "raw_note": "Giữ tại chỗ vì ./runtime là bind mount của Docker; xem raw/README.md.",
+  "counts": {
+    "a1": 15,
+    "a2": 75,
+    "total": 90,
+    "archive_snapshots": 7
+  },
+  "raw_bytes_total": 4507072,
+  "digests": {
+    "a1_sha256": "41eac95ea8e43b14b189a540357d0559a86b05f095f956793eab5c685d6d78c1",
+    "a2_sha256": "12dfb1f4f82247763f737896c556332d7d2c6d3832461bb3f669476b3df6bd5f",
+    "digest_method": "sha256(name + sha256(file)) trên các file .json đã sort"
+  },
+  "newest_scenario_result": "2026-10-01T15:38:41+07:00",
+  "archive_snapshots": [
+    "20260928-093503-pre-normalization-rerun",
+    "20260928-111508-pre-reranker-top10",
+    "20260928-134820-pre-minmax-top5",
+    "20261001-1007-fix-attack-final",
+    "20261001-1518-add_phrase_evidence",
+    "20261001-pre-attack-final-update",
+    "pre-n8n-full-run-20260927-220755"
+  ],
+  "related_docs": [
+    "A1_SCENARIO_RESULTS.md"
+  ]
+}

@@ -5,7 +5,7 @@
 - File gốc: `sensor/a2.rules` (75 rule, SID `1002001`–`1002075`).
 - File đổi tên: `a2_owasp_crs_4_29.rules` (57 rule đổi `msg:`).
 - Báo cáo chuyển tên: `a2_owasp_crs_4_29_report.md`.
-- Ngữ nghĩa kịch bản: `docs/A1_A2_SCENARIO_RESULTS.md` (mục `Chi tiết A2`).
+- Ngữ nghĩa kịch bản: `../reports/scenario-results-a1-a2/REPORT.md` (mục `Chi tiết A2`).
 
 Kiểm chứng độc lập bằng diff trên cả 75 dòng `alert`:
 **đúng là chỉ trường `msg:` thay đổi**, các phần còn lại (SID, protocol, direction, flow, content, pcre, detection_filter, classtype, rev) giữ nguyên.

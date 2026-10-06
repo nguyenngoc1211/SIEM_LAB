@@ -40,3 +40,16 @@ Thumbs.db
 .idea/
 .vscode/
 
+# --- Reports policy -------------------------------------------------------
+# reports/ has two tiers:
+#   tier 1 (tracked)   : report chinh (.md), bang tong hop, run_metadata.json,
+#                        registry.json, MANIFEST.json
+#   tier 2 (ignored)   : output tho, checkpoint, snapshot, archive do may sinh,
+#                        co the tao lai tu tier 1 + lenh trong report
+# Giu file cua tier 2 tren may de resume/tra cuu, nhung khong commit vao git.
+reports/**/raw/*
+!reports/**/raw/README.md
+reports/**/raw_results/
+reports/**/checkpoints/
+reports/**/snapshots/
+reports/**/archive/
