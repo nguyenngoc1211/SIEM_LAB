@@ -1,0 +1,7044 @@
+{
+  "generated_at": "2026-10-05T13:59:54.975540+00:00",
+  "primary_metric": "primary_hit",
+  "dataset": {
+    "dataset_version": "1.0.0",
+    "created_at": "2026-10-05T12:46:37.368909+00:00",
+    "counts": {
+      "reports": 90,
+      "alerts": 90,
+      "ground_truth": 90,
+      "archived_hybrid_results": 90,
+      "extraction_errors": 0,
+      "alerts_with_leakage_after_sanitize": 0,
+      "removed_fields": 90,
+      "scrubbed_values": 0
+    },
+    "attack_index": {
+      "index_version": "1.0.0",
+      "attack_final_sha256": "16cda6d4e3b0dca9340e6b84f403b335624cc7093665f145540c2809ea33a03e",
+      "technique_count": 18,
+      "attack_version": "19.1"
+    },
+    "alerts_sha256": "68ebdf83997bd8033c02808688e3fdf752d4214edf483452788f6350e5bf481e",
+    "ground_truth_sha256": "4e8c3ec3f6d54ba644a29f8b86404446fcf9b0a51d1018727d1fd4eadf3210a8"
+  },
+  "config": {
+    "bm25_only": {
+      "variant": "top1",
+      "extra_variants": [
+        "threshold"
+      ],
+      "min_score": 0.0,
+      "margin_ratio": 0.1,
+      "top_k": 5,
+      "trace_limit": 20
+    },
+    "gemini_only": {
+      "model": "gemini-2.5-flash",
+      "mode": "closed_set",
+      "temperature": 0.0,
+      "repeats": 1,
+      "max_output_tokens": 8192,
+      "thinking_budget": null,
+      "api_key_env": "GEMINI_API_KEY",
+      "request_timeout": 300,
+      "max_retries": 5,
+      "delay_seconds": 7.0,
+      "backoff_cap_seconds": 90
+    },
+    "evaluation": {
+      "top_n": 3,
+      "partial_credit_parent": 0.5
+    }
+  },
+  "summaries": {
+    "bm25_only": {
+      "strategy": "bm25_only",
+      "n": 90,
+      "exact_top1": {
+        "count": 0,
+        "total": 90,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0409
+        ]
+      },
+      "primary_hit": {
+        "count": 0,
+        "total": 90,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0409
+        ]
+      },
+      "top3_hit": {
+        "count": 0,
+        "total": 90,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0409
+        ]
+      },
+      "all_expected_top3": {
+        "count": 0,
+        "total": 90,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0409
+        ]
+      },
+      "partial_credit_mean": 0.0,
+      "wrong_primary": {
+        "count": 1,
+        "total": 90,
+        "rate": 0.0111,
+        "wilson_95": [
+          0.002,
+          0.0603
+        ]
+      },
+      "wrong_primary_over_answered": {
+        "count": 1,
+        "total": 1,
+        "rate": 1.0,
+        "wilson_95": [
+          0.2065,
+          1.0
+        ]
+      },
+      "coverage": {
+        "count": 1,
+        "total": 90,
+        "rate": 0.0111,
+        "wilson_95": [
+          0.002,
+          0.0603
+        ]
+      },
+      "abstain": {
+        "count": 89,
+        "total": 90,
+        "rate": 0.9889,
+        "wilson_95": [
+          0.9397,
+          0.998
+        ]
+      },
+      "status_counts": {
+        "mapped": 1,
+        "not_run": 89
+      },
+      "latency_ms": {
+        "count": 1,
+        "mean": 2.339,
+        "median": 2.339,
+        "p95": 2.339,
+        "min": 2.339,
+        "max": 2.339
+      }
+    },
+    "bm25_only_threshold": {
+      "strategy": "bm25_only_threshold",
+      "n": 90,
+      "exact_top1": {
+        "count": 0,
+        "total": 90,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0409
+        ]
+      },
+      "primary_hit": {
+        "count": 0,
+        "total": 90,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0409
+        ]
+      },
+      "top3_hit": {
+        "count": 0,
+        "total": 90,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0409
+        ]
+      },
+      "all_expected_top3": {
+        "count": 0,
+        "total": 90,
+        "rate": 0.0,
+        "wilson_95": [
+          0.0,
+          0.0409
+        ]
+      },
+      "partial_credit_mean": 0.0,
+      "wrong_primary": {
+        "count": 1,
+        "total": 90,
+        "rate": 0.0111,
+        "wilson_95": [
+          0.002,
+          0.0603
+        ]
+      },
+      "wrong_primary_over_answered": {
+        "count": 1,
+        "total": 1,
+        "rate": 1.0,
+        "wilson_95": [
+          0.2065,
+          1.0
+        ]
+      },
+      "coverage": {
+        "count": 1,
+        "total": 90,
+        "rate": 0.0111,
+        "wilson_95": [
+          0.002,
+          0.0603
+        ]
+      },
+      "abstain": {
+        "count": 89,
+        "total": 90,
+        "rate": 0.9889,
+        "wilson_95": [
+          0.9397,
+          0.998
+        ]
+      },
+      "status_counts": {
+        "mapped": 1,
+        "not_run": 89
+      },
+      "latency_ms": {
+        "count": 1,
+        "mean": 3.461,
+        "median": 3.461,
+        "p95": 3.461,
+        "min": 3.461,
+        "max": 3.461
+      }
+    },
+    "hybrid_current": {
+      "strategy": "hybrid_current",
+      "n": 90,
+      "exact_top1": {
+        "count": 43,
+        "total": 90,
+        "rate": 0.4778,
+        "wilson_95": [
+          0.3776,
+          0.5798
+        ]
+      },
+      "primary_hit": {
+        "count": 43,
+        "total": 90,
+        "rate": 0.4778,
+        "wilson_95": [
+          0.3776,
+          0.5798
+        ]
+      },
+      "top3_hit": {
+        "count": 73,
+        "total": 90,
+        "rate": 0.8111,
+        "wilson_95": [
+          0.7182,
+          0.8786
+        ]
+      },
+      "all_expected_top3": {
+        "count": 73,
+        "total": 90,
+        "rate": 0.8111,
+        "wilson_95": [
+          0.7182,
+          0.8786
+        ]
+      },
+      "partial_credit_mean": 0.5333,
+      "wrong_primary": {
+        "count": 17,
+        "total": 90,
+        "rate": 0.1889,
+        "wilson_95": [
+          0.1214,
+          0.2818
+        ]
+      },
+      "wrong_primary_over_answered": {
+        "count": 17,
+        "total": 70,
+        "rate": 0.2429,
+        "wilson_95": [
+          0.1575,
+          0.355
+        ]
+      },
+      "coverage": {
+        "count": 70,
+        "total": 90,
+        "rate": 0.7778,
+        "wilson_95": [
+          0.6815,
+          0.8513
+        ]
+      },
+      "abstain": {
+        "count": 20,
+        "total": 90,
+        "rate": 0.2222,
+        "wilson_95": [
+          0.1487,
+          0.3185
+        ]
+      },
+      "status_counts": {
+        "insufficient_evidence": 20,
+        "mapped": 68,
+        "uncertain": 2
+      },
+      "latency_ms": {
+        "count": 90,
+        "mean": 2261.83,
+        "median": 2227.967,
+        "p95": 3293.283,
+        "min": 1253.32,
+        "max": 3480.529
+      }
+    }
+  },
+  "paired_tests": {
+    "bm25_only__vs__bm25_only_threshold": {
+      "n": 90,
+      "only_first": 0,
+      "only_second": 0,
+      "discordant": 0,
+      "p_value": 1.0
+    },
+    "bm25_only__vs__hybrid_current": {
+      "n": 90,
+      "only_first": 0,
+      "only_second": 43,
+      "discordant": 43,
+      "p_value": 0.0
+    },
+    "bm25_only_threshold__vs__hybrid_current": {
+      "n": 90,
+      "only_first": 0,
+      "only_second": 43,
+      "discordant": 43,
+      "p_value": 0.0
+    }
+  },
+  "strategies": {
+    "bm25_only": {
+      "strategy": "bm25_only",
+      "summary": {
+        "strategy": "bm25_only",
+        "n": 90,
+        "exact_top1": {
+          "count": 0,
+          "total": 90,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0409
+          ]
+        },
+        "primary_hit": {
+          "count": 0,
+          "total": 90,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0409
+          ]
+        },
+        "top3_hit": {
+          "count": 0,
+          "total": 90,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0409
+          ]
+        },
+        "all_expected_top3": {
+          "count": 0,
+          "total": 90,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0409
+          ]
+        },
+        "partial_credit_mean": 0.0,
+        "wrong_primary": {
+          "count": 1,
+          "total": 90,
+          "rate": 0.0111,
+          "wilson_95": [
+            0.002,
+            0.0603
+          ]
+        },
+        "wrong_primary_over_answered": {
+          "count": 1,
+          "total": 1,
+          "rate": 1.0,
+          "wilson_95": [
+            0.2065,
+            1.0
+          ]
+        },
+        "coverage": {
+          "count": 1,
+          "total": 90,
+          "rate": 0.0111,
+          "wilson_95": [
+            0.002,
+            0.0603
+          ]
+        },
+        "abstain": {
+          "count": 89,
+          "total": 90,
+          "rate": 0.9889,
+          "wilson_95": [
+            0.9397,
+            0.998
+          ]
+        },
+        "status_counts": {
+          "mapped": 1,
+          "not_run": 89
+        },
+        "latency_ms": {
+          "count": 1,
+          "mean": 2.339,
+          "median": 2.339,
+          "p95": 2.339,
+          "min": 2.339,
+          "max": 2.339
+        }
+      },
+      "scenarios": [
+        {
+          "scenario_id": "A1-T1046-01",
+          "group": "A1",
+          "family": "T1046",
+          "expected": [
+            "T1046"
+          ],
+          "status": "mapped",
+          "primary": "T1095",
+          "candidates": [
+            "T1095",
+            "T1190",
+            "T1595.003",
+            "T1071.001",
+            "T1595.002"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2.339
+        },
+        {
+          "scenario_id": "A1-T1046-02",
+          "group": "A1",
+          "family": "T1046",
+          "expected": [
+            "T1046"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1078-01",
+          "group": "A1",
+          "family": "T1078",
+          "expected": [
+            "T1078"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1189-01",
+          "group": "A1",
+          "family": "T1189",
+          "expected": [
+            "T1189"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1189-02",
+          "group": "A1",
+          "family": "T1189",
+          "expected": [
+            "T1189"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1190-01",
+          "group": "A1",
+          "family": "T1190",
+          "expected": [
+            "T1190"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1190-02",
+          "group": "A1",
+          "family": "T1190",
+          "expected": [
+            "T1190"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1190-03",
+          "group": "A1",
+          "family": "T1190",
+          "expected": [
+            "T1190"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1190-04",
+          "group": "A1",
+          "family": "T1190",
+          "expected": [
+            "T1190"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1190-05",
+          "group": "A1",
+          "family": "T1190",
+          "expected": [
+            "T1190"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1210-01",
+          "group": "A1",
+          "family": "T1210",
+          "expected": [
+            "T1210"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1210-02",
+          "group": "A1",
+          "family": "T1210",
+          "expected": [
+            "T1210"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1210-03",
+          "group": "A1",
+          "family": "T1210",
+          "expected": [
+            "T1210"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1210-04",
+          "group": "A1",
+          "family": "T1210",
+          "expected": [
+            "T1210"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1210-05",
+          "group": "A1",
+          "family": "T1210",
+          "expected": [
+            "T1210"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1046-01",
+          "group": "A2",
+          "family": "T1046",
+          "expected": [
+            "T1046"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1046-02",
+          "group": "A2",
+          "family": "T1046",
+          "expected": [
+            "T1046"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1046-03",
+          "group": "A2",
+          "family": "T1046",
+          "expected": [
+            "T1046"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1071.001-01",
+          "group": "A2",
+          "family": "T1071.001",
+          "expected": [
+            "T1071.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1071.001-02",
+          "group": "A2",
+          "family": "T1071.001",
+          "expected": [
+            "T1071.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1071.001-03",
+          "group": "A2",
+          "family": "T1071.001",
+          "expected": [
+            "T1071.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1071.001-04",
+          "group": "A2",
+          "family": "T1071.001",
+          "expected": [
+            "T1071.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1071.001-05",
+          "group": "A2",
+          "family": "T1071.001",
+          "expected": [
+            "T1071.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1078-01",
+          "group": "A2",
+          "family": "T1078",
+          "expected": [
+            "T1078"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1078-02",
+          "group": "A2",
+          "family": "T1078",
+          "expected": [
+            "T1078"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1078-03",
+          "group": "A2",
+          "family": "T1078",
+          "expected": [
+            "T1078"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1078-04",
+          "group": "A2",
+          "family": "T1078",
+          "expected": [
+            "T1078"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1095-01",
+          "group": "A2",
+          "family": "T1095",
+          "expected": [
+            "T1095"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1095-02",
+          "group": "A2",
+          "family": "T1095",
+          "expected": [
+            "T1095"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1095-03",
+          "group": "A2",
+          "family": "T1095",
+          "expected": [
+            "T1095"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1095-04",
+          "group": "A2",
+          "family": "T1095",
+          "expected": [
+            "T1095"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1095-05",
+          "group": "A2",
+          "family": "T1095",
+          "expected": [
+            "T1095"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110-01",
+          "group": "A2",
+          "family": "T1110",
+          "expected": [
+            "T1110"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110-02",
+          "group": "A2",
+          "family": "T1110",
+          "expected": [
+            "T1110"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110-03",
+          "group": "A2",
+          "family": "T1110",
+          "expected": [
+            "T1110"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110-04",
+          "group": "A2",
+          "family": "T1110",
+          "expected": [
+            "T1110"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110-05",
+          "group": "A2",
+          "family": "T1110",
+          "expected": [
+            "T1110"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.001-01",
+          "group": "A2",
+          "family": "T1110.001",
+          "expected": [
+            "T1110.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.001-02",
+          "group": "A2",
+          "family": "T1110.001",
+          "expected": [
+            "T1110.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.001-03",
+          "group": "A2",
+          "family": "T1110.001",
+          "expected": [
+            "T1110.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.001-04",
+          "group": "A2",
+          "family": "T1110.001",
+          "expected": [
+            "T1110.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.001-05",
+          "group": "A2",
+          "family": "T1110.001",
+          "expected": [
+            "T1110.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.003-01",
+          "group": "A2",
+          "family": "T1110.003",
+          "expected": [
+            "T1110.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.003-02",
+          "group": "A2",
+          "family": "T1110.003",
+          "expected": [
+            "T1110.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.003-03",
+          "group": "A2",
+          "family": "T1110.003",
+          "expected": [
+            "T1110.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.003-04",
+          "group": "A2",
+          "family": "T1110.003",
+          "expected": [
+            "T1110.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.003-05",
+          "group": "A2",
+          "family": "T1110.003",
+          "expected": [
+            "T1110.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1189-01",
+          "group": "A2",
+          "family": "T1189",
+          "expected": [
+            "T1189"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1189-02",
+          "group": "A2",
+          "family": "T1189",
+          "expected": [
+            "T1189"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1189-03",
+          "group": "A2",
+          "family": "T1189",
+          "expected": [
+            "T1189"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1498-01",
+          "group": "A2",
+          "family": "T1498",
+          "expected": [
+            "T1498"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1498-02",
+          "group": "A2",
+          "family": "T1498",
+          "expected": [
+            "T1498"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1498-03",
+          "group": "A2",
+          "family": "T1498",
+          "expected": [
+            "T1498"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1498-04",
+          "group": "A2",
+          "family": "T1498",
+          "expected": [
+            "T1498"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1498-05",
+          "group": "A2",
+          "family": "T1498",
+          "expected": [
+            "T1498"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1499-01",
+          "group": "A2",
+          "family": "T1499",
+          "expected": [
+            "T1499"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1499-02",
+          "group": "A2",
+          "family": "T1499",
+          "expected": [
+            "T1499"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1499-03",
+          "group": "A2",
+          "family": "T1499",
+          "expected": [
+            "T1499"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1499-04",
+          "group": "A2",
+          "family": "T1499",
+          "expected": [
+            "T1499"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1499-05",
+          "group": "A2",
+          "family": "T1499",
+          "expected": [
+            "T1499"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1505.003-01",
+          "group": "A2",
+          "family": "T1505.003",
+          "expected": [
+            "T1505.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1505.003-02",
+          "group": "A2",
+          "family": "T1505.003",
+          "expected": [
+            "T1505.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1505.003-03",
+          "group": "A2",
+          "family": "T1505.003",
+          "expected": [
+            "T1505.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1505.003-04",
+          "group": "A2",
+          "family": "T1505.003",
+          "expected": [
+            "T1505.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1505.003-05",
+          "group": "A2",
+          "family": "T1505.003",
+          "expected": [
+            "T1505.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595-01",
+          "group": "A2",
+          "family": "T1595",
+          "expected": [
+            "T1595"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595-02",
+          "group": "A2",
+          "family": "T1595",
+          "expected": [
+            "T1595"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595-03",
+          "group": "A2",
+          "family": "T1595",
+          "expected": [
+            "T1595"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595-04",
+          "group": "A2",
+          "family": "T1595",
+          "expected": [
+            "T1595"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595-05",
+          "group": "A2",
+          "family": "T1595",
+          "expected": [
+            "T1595"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.001-01",
+          "group": "A2",
+          "family": "T1595.001",
+          "expected": [
+            "T1595.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.001-02",
+          "group": "A2",
+          "family": "T1595.001",
+          "expected": [
+            "T1595.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.001-03",
+          "group": "A2",
+          "family": "T1595.001",
+          "expected": [
+            "T1595.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.001-04",
+          "group": "A2",
+          "family": "T1595.001",
+          "expected": [
+            "T1595.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.001-05",
+          "group": "A2",
+          "family": "T1595.001",
+          "expected": [
+            "T1595.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.002-01",
+          "group": "A2",
+          "family": "T1595.002",
+          "expected": [
+            "T1595.002"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.002-02",
+          "group": "A2",
+          "family": "T1595.002",
+          "expected": [
+            "T1595.002"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.002-03",
+          "group": "A2",
+          "family": "T1595.002",
+          "expected": [
+            "T1595.002"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.002-04",
+          "group": "A2",
+          "family": "T1595.002",
+          "expected": [
+            "T1595.002"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.002-05",
+          "group": "A2",
+          "family": "T1595.002",
+          "expected": [
+            "T1595.002"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.003-01",
+          "group": "A2",
+          "family": "T1595.003",
+          "expected": [
+            "T1595.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.003-02",
+          "group": "A2",
+          "family": "T1595.003",
+          "expected": [
+            "T1595.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.003-03",
+          "group": "A2",
+          "family": "T1595.003",
+          "expected": [
+            "T1595.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.003-04",
+          "group": "A2",
+          "family": "T1595.003",
+          "expected": [
+            "T1595.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.003-05",
+          "group": "A2",
+          "family": "T1595.003",
+          "expected": [
+            "T1595.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1659-01",
+          "group": "A2",
+          "family": "T1659",
+          "expected": [
+            "T1659"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1659-02",
+          "group": "A2",
+          "family": "T1659",
+          "expected": [
+            "T1659"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1659-03",
+          "group": "A2",
+          "family": "T1659",
+          "expected": [
+            "T1659"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1659-04",
+          "group": "A2",
+          "family": "T1659",
+          "expected": [
+            "T1659"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1659-05",
+          "group": "A2",
+          "family": "T1659",
+          "expected": [
+            "T1659"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        }
+      ],
+      "breakdown": {
+        "by_group": {
+          "A1": {
+            "n": 15,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 1,
+            "coverage": 0.0667
+          },
+          "A2": {
+            "n": 75,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          }
+        },
+        "by_family": {
+          "T1046": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 1,
+            "coverage": 0.2
+          },
+          "T1071.001": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1078": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1095": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1110": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1110.001": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1110.003": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1189": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1190": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1210": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1498": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1499": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1505.003": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1595": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1595.001": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1595.002": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1595.003": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1659": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          }
+        }
+      }
+    },
+    "bm25_only_threshold": {
+      "strategy": "bm25_only_threshold",
+      "summary": {
+        "strategy": "bm25_only_threshold",
+        "n": 90,
+        "exact_top1": {
+          "count": 0,
+          "total": 90,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0409
+          ]
+        },
+        "primary_hit": {
+          "count": 0,
+          "total": 90,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0409
+          ]
+        },
+        "top3_hit": {
+          "count": 0,
+          "total": 90,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0409
+          ]
+        },
+        "all_expected_top3": {
+          "count": 0,
+          "total": 90,
+          "rate": 0.0,
+          "wilson_95": [
+            0.0,
+            0.0409
+          ]
+        },
+        "partial_credit_mean": 0.0,
+        "wrong_primary": {
+          "count": 1,
+          "total": 90,
+          "rate": 0.0111,
+          "wilson_95": [
+            0.002,
+            0.0603
+          ]
+        },
+        "wrong_primary_over_answered": {
+          "count": 1,
+          "total": 1,
+          "rate": 1.0,
+          "wilson_95": [
+            0.2065,
+            1.0
+          ]
+        },
+        "coverage": {
+          "count": 1,
+          "total": 90,
+          "rate": 0.0111,
+          "wilson_95": [
+            0.002,
+            0.0603
+          ]
+        },
+        "abstain": {
+          "count": 89,
+          "total": 90,
+          "rate": 0.9889,
+          "wilson_95": [
+            0.9397,
+            0.998
+          ]
+        },
+        "status_counts": {
+          "mapped": 1,
+          "not_run": 89
+        },
+        "latency_ms": {
+          "count": 1,
+          "mean": 3.461,
+          "median": 3.461,
+          "p95": 3.461,
+          "min": 3.461,
+          "max": 3.461
+        }
+      },
+      "scenarios": [
+        {
+          "scenario_id": "A1-T1046-01",
+          "group": "A1",
+          "family": "T1046",
+          "expected": [
+            "T1046"
+          ],
+          "status": "mapped",
+          "primary": "T1095",
+          "candidates": [
+            "T1095",
+            "T1190",
+            "T1595.003",
+            "T1071.001",
+            "T1595.002"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 3.461
+        },
+        {
+          "scenario_id": "A1-T1046-02",
+          "group": "A1",
+          "family": "T1046",
+          "expected": [
+            "T1046"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1078-01",
+          "group": "A1",
+          "family": "T1078",
+          "expected": [
+            "T1078"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1189-01",
+          "group": "A1",
+          "family": "T1189",
+          "expected": [
+            "T1189"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1189-02",
+          "group": "A1",
+          "family": "T1189",
+          "expected": [
+            "T1189"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1190-01",
+          "group": "A1",
+          "family": "T1190",
+          "expected": [
+            "T1190"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1190-02",
+          "group": "A1",
+          "family": "T1190",
+          "expected": [
+            "T1190"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1190-03",
+          "group": "A1",
+          "family": "T1190",
+          "expected": [
+            "T1190"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1190-04",
+          "group": "A1",
+          "family": "T1190",
+          "expected": [
+            "T1190"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1190-05",
+          "group": "A1",
+          "family": "T1190",
+          "expected": [
+            "T1190"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1210-01",
+          "group": "A1",
+          "family": "T1210",
+          "expected": [
+            "T1210"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1210-02",
+          "group": "A1",
+          "family": "T1210",
+          "expected": [
+            "T1210"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1210-03",
+          "group": "A1",
+          "family": "T1210",
+          "expected": [
+            "T1210"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1210-04",
+          "group": "A1",
+          "family": "T1210",
+          "expected": [
+            "T1210"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A1-T1210-05",
+          "group": "A1",
+          "family": "T1210",
+          "expected": [
+            "T1210"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1046-01",
+          "group": "A2",
+          "family": "T1046",
+          "expected": [
+            "T1046"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1046-02",
+          "group": "A2",
+          "family": "T1046",
+          "expected": [
+            "T1046"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1046-03",
+          "group": "A2",
+          "family": "T1046",
+          "expected": [
+            "T1046"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1071.001-01",
+          "group": "A2",
+          "family": "T1071.001",
+          "expected": [
+            "T1071.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1071.001-02",
+          "group": "A2",
+          "family": "T1071.001",
+          "expected": [
+            "T1071.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1071.001-03",
+          "group": "A2",
+          "family": "T1071.001",
+          "expected": [
+            "T1071.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1071.001-04",
+          "group": "A2",
+          "family": "T1071.001",
+          "expected": [
+            "T1071.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1071.001-05",
+          "group": "A2",
+          "family": "T1071.001",
+          "expected": [
+            "T1071.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1078-01",
+          "group": "A2",
+          "family": "T1078",
+          "expected": [
+            "T1078"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1078-02",
+          "group": "A2",
+          "family": "T1078",
+          "expected": [
+            "T1078"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1078-03",
+          "group": "A2",
+          "family": "T1078",
+          "expected": [
+            "T1078"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1078-04",
+          "group": "A2",
+          "family": "T1078",
+          "expected": [
+            "T1078"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1095-01",
+          "group": "A2",
+          "family": "T1095",
+          "expected": [
+            "T1095"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1095-02",
+          "group": "A2",
+          "family": "T1095",
+          "expected": [
+            "T1095"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1095-03",
+          "group": "A2",
+          "family": "T1095",
+          "expected": [
+            "T1095"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1095-04",
+          "group": "A2",
+          "family": "T1095",
+          "expected": [
+            "T1095"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1095-05",
+          "group": "A2",
+          "family": "T1095",
+          "expected": [
+            "T1095"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110-01",
+          "group": "A2",
+          "family": "T1110",
+          "expected": [
+            "T1110"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110-02",
+          "group": "A2",
+          "family": "T1110",
+          "expected": [
+            "T1110"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110-03",
+          "group": "A2",
+          "family": "T1110",
+          "expected": [
+            "T1110"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110-04",
+          "group": "A2",
+          "family": "T1110",
+          "expected": [
+            "T1110"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110-05",
+          "group": "A2",
+          "family": "T1110",
+          "expected": [
+            "T1110"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.001-01",
+          "group": "A2",
+          "family": "T1110.001",
+          "expected": [
+            "T1110.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.001-02",
+          "group": "A2",
+          "family": "T1110.001",
+          "expected": [
+            "T1110.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.001-03",
+          "group": "A2",
+          "family": "T1110.001",
+          "expected": [
+            "T1110.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.001-04",
+          "group": "A2",
+          "family": "T1110.001",
+          "expected": [
+            "T1110.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.001-05",
+          "group": "A2",
+          "family": "T1110.001",
+          "expected": [
+            "T1110.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.003-01",
+          "group": "A2",
+          "family": "T1110.003",
+          "expected": [
+            "T1110.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.003-02",
+          "group": "A2",
+          "family": "T1110.003",
+          "expected": [
+            "T1110.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.003-03",
+          "group": "A2",
+          "family": "T1110.003",
+          "expected": [
+            "T1110.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.003-04",
+          "group": "A2",
+          "family": "T1110.003",
+          "expected": [
+            "T1110.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1110.003-05",
+          "group": "A2",
+          "family": "T1110.003",
+          "expected": [
+            "T1110.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1189-01",
+          "group": "A2",
+          "family": "T1189",
+          "expected": [
+            "T1189"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1189-02",
+          "group": "A2",
+          "family": "T1189",
+          "expected": [
+            "T1189"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1189-03",
+          "group": "A2",
+          "family": "T1189",
+          "expected": [
+            "T1189"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1498-01",
+          "group": "A2",
+          "family": "T1498",
+          "expected": [
+            "T1498"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1498-02",
+          "group": "A2",
+          "family": "T1498",
+          "expected": [
+            "T1498"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1498-03",
+          "group": "A2",
+          "family": "T1498",
+          "expected": [
+            "T1498"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1498-04",
+          "group": "A2",
+          "family": "T1498",
+          "expected": [
+            "T1498"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1498-05",
+          "group": "A2",
+          "family": "T1498",
+          "expected": [
+            "T1498"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1499-01",
+          "group": "A2",
+          "family": "T1499",
+          "expected": [
+            "T1499"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1499-02",
+          "group": "A2",
+          "family": "T1499",
+          "expected": [
+            "T1499"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1499-03",
+          "group": "A2",
+          "family": "T1499",
+          "expected": [
+            "T1499"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1499-04",
+          "group": "A2",
+          "family": "T1499",
+          "expected": [
+            "T1499"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1499-05",
+          "group": "A2",
+          "family": "T1499",
+          "expected": [
+            "T1499"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1505.003-01",
+          "group": "A2",
+          "family": "T1505.003",
+          "expected": [
+            "T1505.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1505.003-02",
+          "group": "A2",
+          "family": "T1505.003",
+          "expected": [
+            "T1505.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1505.003-03",
+          "group": "A2",
+          "family": "T1505.003",
+          "expected": [
+            "T1505.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1505.003-04",
+          "group": "A2",
+          "family": "T1505.003",
+          "expected": [
+            "T1505.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1505.003-05",
+          "group": "A2",
+          "family": "T1505.003",
+          "expected": [
+            "T1505.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595-01",
+          "group": "A2",
+          "family": "T1595",
+          "expected": [
+            "T1595"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595-02",
+          "group": "A2",
+          "family": "T1595",
+          "expected": [
+            "T1595"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595-03",
+          "group": "A2",
+          "family": "T1595",
+          "expected": [
+            "T1595"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595-04",
+          "group": "A2",
+          "family": "T1595",
+          "expected": [
+            "T1595"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595-05",
+          "group": "A2",
+          "family": "T1595",
+          "expected": [
+            "T1595"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.001-01",
+          "group": "A2",
+          "family": "T1595.001",
+          "expected": [
+            "T1595.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.001-02",
+          "group": "A2",
+          "family": "T1595.001",
+          "expected": [
+            "T1595.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.001-03",
+          "group": "A2",
+          "family": "T1595.001",
+          "expected": [
+            "T1595.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.001-04",
+          "group": "A2",
+          "family": "T1595.001",
+          "expected": [
+            "T1595.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.001-05",
+          "group": "A2",
+          "family": "T1595.001",
+          "expected": [
+            "T1595.001"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.002-01",
+          "group": "A2",
+          "family": "T1595.002",
+          "expected": [
+            "T1595.002"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.002-02",
+          "group": "A2",
+          "family": "T1595.002",
+          "expected": [
+            "T1595.002"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.002-03",
+          "group": "A2",
+          "family": "T1595.002",
+          "expected": [
+            "T1595.002"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.002-04",
+          "group": "A2",
+          "family": "T1595.002",
+          "expected": [
+            "T1595.002"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.002-05",
+          "group": "A2",
+          "family": "T1595.002",
+          "expected": [
+            "T1595.002"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.003-01",
+          "group": "A2",
+          "family": "T1595.003",
+          "expected": [
+            "T1595.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.003-02",
+          "group": "A2",
+          "family": "T1595.003",
+          "expected": [
+            "T1595.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.003-03",
+          "group": "A2",
+          "family": "T1595.003",
+          "expected": [
+            "T1595.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.003-04",
+          "group": "A2",
+          "family": "T1595.003",
+          "expected": [
+            "T1595.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1595.003-05",
+          "group": "A2",
+          "family": "T1595.003",
+          "expected": [
+            "T1595.003"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1659-01",
+          "group": "A2",
+          "family": "T1659",
+          "expected": [
+            "T1659"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1659-02",
+          "group": "A2",
+          "family": "T1659",
+          "expected": [
+            "T1659"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1659-03",
+          "group": "A2",
+          "family": "T1659",
+          "expected": [
+            "T1659"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1659-04",
+          "group": "A2",
+          "family": "T1659",
+          "expected": [
+            "T1659"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        },
+        {
+          "scenario_id": "A2-T1659-05",
+          "group": "A2",
+          "family": "T1659",
+          "expected": [
+            "T1659"
+          ],
+          "status": "not_run",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": null
+        }
+      ],
+      "breakdown": {
+        "by_group": {
+          "A1": {
+            "n": 15,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 1,
+            "coverage": 0.0667
+          },
+          "A2": {
+            "n": 75,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          }
+        },
+        "by_family": {
+          "T1046": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 1,
+            "coverage": 0.2
+          },
+          "T1071.001": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1078": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1095": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1110": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1110.001": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1110.003": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1189": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1190": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1210": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1498": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1499": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1505.003": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1595": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1595.001": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1595.002": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1595.003": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1659": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          }
+        }
+      }
+    },
+    "hybrid_current": {
+      "strategy": "hybrid_current",
+      "summary": {
+        "strategy": "hybrid_current",
+        "n": 90,
+        "exact_top1": {
+          "count": 43,
+          "total": 90,
+          "rate": 0.4778,
+          "wilson_95": [
+            0.3776,
+            0.5798
+          ]
+        },
+        "primary_hit": {
+          "count": 43,
+          "total": 90,
+          "rate": 0.4778,
+          "wilson_95": [
+            0.3776,
+            0.5798
+          ]
+        },
+        "top3_hit": {
+          "count": 73,
+          "total": 90,
+          "rate": 0.8111,
+          "wilson_95": [
+            0.7182,
+            0.8786
+          ]
+        },
+        "all_expected_top3": {
+          "count": 73,
+          "total": 90,
+          "rate": 0.8111,
+          "wilson_95": [
+            0.7182,
+            0.8786
+          ]
+        },
+        "partial_credit_mean": 0.5333,
+        "wrong_primary": {
+          "count": 17,
+          "total": 90,
+          "rate": 0.1889,
+          "wilson_95": [
+            0.1214,
+            0.2818
+          ]
+        },
+        "wrong_primary_over_answered": {
+          "count": 17,
+          "total": 70,
+          "rate": 0.2429,
+          "wilson_95": [
+            0.1575,
+            0.355
+          ]
+        },
+        "coverage": {
+          "count": 70,
+          "total": 90,
+          "rate": 0.7778,
+          "wilson_95": [
+            0.6815,
+            0.8513
+          ]
+        },
+        "abstain": {
+          "count": 20,
+          "total": 90,
+          "rate": 0.2222,
+          "wilson_95": [
+            0.1487,
+            0.3185
+          ]
+        },
+        "status_counts": {
+          "insufficient_evidence": 20,
+          "mapped": 68,
+          "uncertain": 2
+        },
+        "latency_ms": {
+          "count": 90,
+          "mean": 2261.83,
+          "median": 2227.967,
+          "p95": 3293.283,
+          "min": 1253.32,
+          "max": 3480.529
+        }
+      },
+      "scenarios": [
+        {
+          "scenario_id": "A1-T1046-01",
+          "group": "A1",
+          "family": "T1046",
+          "expected": [
+            "T1046"
+          ],
+          "status": "mapped",
+          "primary": "T1190",
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1346.155
+        },
+        {
+          "scenario_id": "A1-T1046-02",
+          "group": "A1",
+          "family": "T1046",
+          "expected": [
+            "T1046"
+          ],
+          "status": "mapped",
+          "primary": "T1190",
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1879.067
+        },
+        {
+          "scenario_id": "A1-T1078-01",
+          "group": "A1",
+          "family": "T1078",
+          "expected": [
+            "T1078"
+          ],
+          "status": "mapped",
+          "primary": "T1190",
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1962.187
+        },
+        {
+          "scenario_id": "A1-T1189-01",
+          "group": "A1",
+          "family": "T1189",
+          "expected": [
+            "T1189"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1190",
+            "T1189",
+            "T1505.003"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 1253.838
+        },
+        {
+          "scenario_id": "A1-T1189-02",
+          "group": "A1",
+          "family": "T1189",
+          "expected": [
+            "T1189"
+          ],
+          "status": "mapped",
+          "primary": "T1190",
+          "candidates": [
+            "T1190",
+            "T1189",
+            "T1505.003"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1295.129
+        },
+        {
+          "scenario_id": "A1-T1190-01",
+          "group": "A1",
+          "family": "T1190",
+          "expected": [
+            "T1190"
+          ],
+          "status": "mapped",
+          "primary": "T1190",
+          "candidates": [
+            "T1190",
+            "T1189",
+            "T1210",
+            "T1505.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1926.505
+        },
+        {
+          "scenario_id": "A1-T1190-02",
+          "group": "A1",
+          "family": "T1190",
+          "expected": [
+            "T1190"
+          ],
+          "status": "mapped",
+          "primary": "T1190",
+          "candidates": [
+            "T1190",
+            "T1189",
+            "T1210",
+            "T1505.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1267.602
+        },
+        {
+          "scenario_id": "A1-T1190-03",
+          "group": "A1",
+          "family": "T1190",
+          "expected": [
+            "T1190"
+          ],
+          "status": "mapped",
+          "primary": "T1190",
+          "candidates": [
+            "T1190",
+            "T1210",
+            "T1189",
+            "T1505.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2181.254
+        },
+        {
+          "scenario_id": "A1-T1190-04",
+          "group": "A1",
+          "family": "T1190",
+          "expected": [
+            "T1190"
+          ],
+          "status": "mapped",
+          "primary": "T1190",
+          "candidates": [
+            "T1190",
+            "T1189",
+            "T1210",
+            "T1505.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1973.332
+        },
+        {
+          "scenario_id": "A1-T1190-05",
+          "group": "A1",
+          "family": "T1190",
+          "expected": [
+            "T1190"
+          ],
+          "status": "mapped",
+          "primary": "T1190",
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189",
+            "T1210"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2060.879
+        },
+        {
+          "scenario_id": "A1-T1210-01",
+          "group": "A1",
+          "family": "T1210",
+          "expected": [
+            "T1210"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1210",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 2059.862
+        },
+        {
+          "scenario_id": "A1-T1210-02",
+          "group": "A1",
+          "family": "T1210",
+          "expected": [
+            "T1210"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1210",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 2236.448
+        },
+        {
+          "scenario_id": "A1-T1210-03",
+          "group": "A1",
+          "family": "T1210",
+          "expected": [
+            "T1210"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1210",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 2030.936
+        },
+        {
+          "scenario_id": "A1-T1210-04",
+          "group": "A1",
+          "family": "T1210",
+          "expected": [
+            "T1210"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1210",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 2445.244
+        },
+        {
+          "scenario_id": "A1-T1210-05",
+          "group": "A1",
+          "family": "T1210",
+          "expected": [
+            "T1210"
+          ],
+          "status": "mapped",
+          "primary": "T1190",
+          "candidates": [
+            "T1190",
+            "T1189",
+            "T1210",
+            "T1505.003"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2368.966
+        },
+        {
+          "scenario_id": "A2-T1046-01",
+          "group": "A2",
+          "family": "T1046",
+          "expected": [
+            "T1046"
+          ],
+          "status": "mapped",
+          "primary": "T1046",
+          "candidates": [
+            "T1046",
+            "T1595.001",
+            "T1595.002",
+            "T1595",
+            "T1595.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1657.483
+        },
+        {
+          "scenario_id": "A2-T1046-02",
+          "group": "A2",
+          "family": "T1046",
+          "expected": [
+            "T1046"
+          ],
+          "status": "mapped",
+          "primary": "T1046",
+          "candidates": [
+            "T1046",
+            "T1595.002",
+            "T1595.001",
+            "T1595",
+            "T1595.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1288.694
+        },
+        {
+          "scenario_id": "A2-T1046-03",
+          "group": "A2",
+          "family": "T1046",
+          "expected": [
+            "T1046"
+          ],
+          "status": "mapped",
+          "primary": "T1046",
+          "candidates": [
+            "T1046",
+            "T1595",
+            "T1595.001",
+            "T1595.002",
+            "T1595.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1894.74
+        },
+        {
+          "scenario_id": "A2-T1071.001-01",
+          "group": "A2",
+          "family": "T1071.001",
+          "expected": [
+            "T1071.001"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 1945.507
+        },
+        {
+          "scenario_id": "A2-T1071.001-02",
+          "group": "A2",
+          "family": "T1071.001",
+          "expected": [
+            "T1071.001"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 1945.971
+        },
+        {
+          "scenario_id": "A2-T1071.001-03",
+          "group": "A2",
+          "family": "T1071.001",
+          "expected": [
+            "T1071.001"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 1951.891
+        },
+        {
+          "scenario_id": "A2-T1071.001-04",
+          "group": "A2",
+          "family": "T1071.001",
+          "expected": [
+            "T1071.001"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 1765.105
+        },
+        {
+          "scenario_id": "A2-T1071.001-05",
+          "group": "A2",
+          "family": "T1071.001",
+          "expected": [
+            "T1071.001"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 2075.264
+        },
+        {
+          "scenario_id": "A2-T1078-01",
+          "group": "A2",
+          "family": "T1078",
+          "expected": [
+            "T1078"
+          ],
+          "status": "mapped",
+          "primary": "T1190",
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1273.306
+        },
+        {
+          "scenario_id": "A2-T1078-02",
+          "group": "A2",
+          "family": "T1078",
+          "expected": [
+            "T1078"
+          ],
+          "status": "mapped",
+          "primary": "T1190",
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1420.0
+        },
+        {
+          "scenario_id": "A2-T1078-03",
+          "group": "A2",
+          "family": "T1078",
+          "expected": [
+            "T1078"
+          ],
+          "status": "mapped",
+          "primary": "T1078",
+          "candidates": [
+            "T1078",
+            "T1110",
+            "T1110.001",
+            "T1110.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1363.654
+        },
+        {
+          "scenario_id": "A2-T1078-04",
+          "group": "A2",
+          "family": "T1078",
+          "expected": [
+            "T1078"
+          ],
+          "status": "mapped",
+          "primary": "T1078",
+          "candidates": [
+            "T1078",
+            "T1110",
+            "T1110.001",
+            "T1110.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 3329.844
+        },
+        {
+          "scenario_id": "A2-T1095-01",
+          "group": "A2",
+          "family": "T1095",
+          "expected": [
+            "T1095"
+          ],
+          "status": "mapped",
+          "primary": "T1095",
+          "candidates": [
+            "T1095",
+            "T1659"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1341.997
+        },
+        {
+          "scenario_id": "A2-T1095-02",
+          "group": "A2",
+          "family": "T1095",
+          "expected": [
+            "T1095"
+          ],
+          "status": "mapped",
+          "primary": "T1095",
+          "candidates": [
+            "T1095",
+            "T1659"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1289.683
+        },
+        {
+          "scenario_id": "A2-T1095-03",
+          "group": "A2",
+          "family": "T1095",
+          "expected": [
+            "T1095"
+          ],
+          "status": "mapped",
+          "primary": "T1095",
+          "candidates": [
+            "T1095",
+            "T1659"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1333.888
+        },
+        {
+          "scenario_id": "A2-T1095-04",
+          "group": "A2",
+          "family": "T1095",
+          "expected": [
+            "T1095"
+          ],
+          "status": "mapped",
+          "primary": "T1095",
+          "candidates": [
+            "T1095",
+            "T1659"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1454.052
+        },
+        {
+          "scenario_id": "A2-T1095-05",
+          "group": "A2",
+          "family": "T1095",
+          "expected": [
+            "T1095"
+          ],
+          "status": "mapped",
+          "primary": "T1095",
+          "candidates": [
+            "T1095",
+            "T1659"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1253.32
+        },
+        {
+          "scenario_id": "A2-T1110-01",
+          "group": "A2",
+          "family": "T1110",
+          "expected": [
+            "T1110"
+          ],
+          "status": "mapped",
+          "primary": "T1110",
+          "candidates": [
+            "T1110",
+            "T1078",
+            "T1110.003",
+            "T1110.001"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 1815.89
+        },
+        {
+          "scenario_id": "A2-T1110-02",
+          "group": "A2",
+          "family": "T1110",
+          "expected": [
+            "T1110"
+          ],
+          "status": "mapped",
+          "primary": "T1110",
+          "candidates": [
+            "T1110",
+            "T1078",
+            "T1110.003",
+            "T1110.001"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 3480.529
+        },
+        {
+          "scenario_id": "A2-T1110-03",
+          "group": "A2",
+          "family": "T1110",
+          "expected": [
+            "T1110"
+          ],
+          "status": "mapped",
+          "primary": "T1110",
+          "candidates": [
+            "T1110",
+            "T1078",
+            "T1110.003",
+            "T1110.001"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2408.691
+        },
+        {
+          "scenario_id": "A2-T1110-04",
+          "group": "A2",
+          "family": "T1110",
+          "expected": [
+            "T1110"
+          ],
+          "status": "mapped",
+          "primary": "T1110",
+          "candidates": [
+            "T1110",
+            "T1078",
+            "T1110.003",
+            "T1110.001"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2117.898
+        },
+        {
+          "scenario_id": "A2-T1110-05",
+          "group": "A2",
+          "family": "T1110",
+          "expected": [
+            "T1110"
+          ],
+          "status": "mapped",
+          "primary": "T1110",
+          "candidates": [
+            "T1110",
+            "T1078",
+            "T1110.003",
+            "T1110.001"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2513.414
+        },
+        {
+          "scenario_id": "A2-T1110.001-01",
+          "group": "A2",
+          "family": "T1110.001",
+          "expected": [
+            "T1110.001"
+          ],
+          "status": "mapped",
+          "primary": "T1110",
+          "candidates": [
+            "T1110",
+            "T1110.001",
+            "T1110.003"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.5,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 3293.283
+        },
+        {
+          "scenario_id": "A2-T1110.001-02",
+          "group": "A2",
+          "family": "T1110.001",
+          "expected": [
+            "T1110.001"
+          ],
+          "status": "mapped",
+          "primary": "T1110",
+          "candidates": [
+            "T1110",
+            "T1110.001",
+            "T1110.003"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.5,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 3234.286
+        },
+        {
+          "scenario_id": "A2-T1110.001-03",
+          "group": "A2",
+          "family": "T1110.001",
+          "expected": [
+            "T1110.001"
+          ],
+          "status": "mapped",
+          "primary": "T1110",
+          "candidates": [
+            "T1110",
+            "T1110.001",
+            "T1110.003"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.5,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2801.322
+        },
+        {
+          "scenario_id": "A2-T1110.001-04",
+          "group": "A2",
+          "family": "T1110.001",
+          "expected": [
+            "T1110.001"
+          ],
+          "status": "mapped",
+          "primary": "T1110",
+          "candidates": [
+            "T1110",
+            "T1110.001",
+            "T1110.003"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.5,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2197.628
+        },
+        {
+          "scenario_id": "A2-T1110.001-05",
+          "group": "A2",
+          "family": "T1110.001",
+          "expected": [
+            "T1110.001"
+          ],
+          "status": "mapped",
+          "primary": "T1110",
+          "candidates": [
+            "T1110",
+            "T1110.001",
+            "T1110.003"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.5,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2339.75
+        },
+        {
+          "scenario_id": "A2-T1110.003-01",
+          "group": "A2",
+          "family": "T1110.003",
+          "expected": [
+            "T1110.003"
+          ],
+          "status": "uncertain",
+          "primary": "T1110.003",
+          "candidates": [
+            "T1110.003",
+            "T1110",
+            "T1110.001"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2508.306
+        },
+        {
+          "scenario_id": "A2-T1110.003-02",
+          "group": "A2",
+          "family": "T1110.003",
+          "expected": [
+            "T1110.003"
+          ],
+          "status": "mapped",
+          "primary": "T1110",
+          "candidates": [
+            "T1110",
+            "T1110.003",
+            "T1110.001"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.5,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 3090.67
+        },
+        {
+          "scenario_id": "A2-T1110.003-03",
+          "group": "A2",
+          "family": "T1110.003",
+          "expected": [
+            "T1110.003"
+          ],
+          "status": "mapped",
+          "primary": "T1110",
+          "candidates": [
+            "T1110",
+            "T1110.003",
+            "T1110.001"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.5,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2604.185
+        },
+        {
+          "scenario_id": "A2-T1110.003-04",
+          "group": "A2",
+          "family": "T1110.003",
+          "expected": [
+            "T1110.003"
+          ],
+          "status": "mapped",
+          "primary": "T1110",
+          "candidates": [
+            "T1110",
+            "T1110.003",
+            "T1110.001"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.5,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 3021.629
+        },
+        {
+          "scenario_id": "A2-T1110.003-05",
+          "group": "A2",
+          "family": "T1110.003",
+          "expected": [
+            "T1110.003"
+          ],
+          "status": "mapped",
+          "primary": "T1110",
+          "candidates": [
+            "T1110",
+            "T1110.003",
+            "T1110.001"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.5,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 3040.752
+        },
+        {
+          "scenario_id": "A2-T1189-01",
+          "group": "A2",
+          "family": "T1189",
+          "expected": [
+            "T1189"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1190",
+            "T1189",
+            "T1505.003"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 2622.514
+        },
+        {
+          "scenario_id": "A2-T1189-02",
+          "group": "A2",
+          "family": "T1189",
+          "expected": [
+            "T1189"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1190",
+            "T1189",
+            "T1505.003"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 2693.816
+        },
+        {
+          "scenario_id": "A2-T1189-03",
+          "group": "A2",
+          "family": "T1189",
+          "expected": [
+            "T1189"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1190",
+            "T1189",
+            "T1505.003"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 3248.746
+        },
+        {
+          "scenario_id": "A2-T1498-01",
+          "group": "A2",
+          "family": "T1498",
+          "expected": [
+            "T1498"
+          ],
+          "status": "mapped",
+          "primary": "T1498",
+          "candidates": [
+            "T1498",
+            "T1095",
+            "T1659",
+            "T1499"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 3473.717
+        },
+        {
+          "scenario_id": "A2-T1498-02",
+          "group": "A2",
+          "family": "T1498",
+          "expected": [
+            "T1498"
+          ],
+          "status": "mapped",
+          "primary": "T1498",
+          "candidates": [
+            "T1498",
+            "T1095",
+            "T1659",
+            "T1499"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2854.277
+        },
+        {
+          "scenario_id": "A2-T1498-03",
+          "group": "A2",
+          "family": "T1498",
+          "expected": [
+            "T1498"
+          ],
+          "status": "mapped",
+          "primary": "T1498",
+          "candidates": [
+            "T1498",
+            "T1095",
+            "T1499",
+            "T1659"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2214.177
+        },
+        {
+          "scenario_id": "A2-T1498-04",
+          "group": "A2",
+          "family": "T1498",
+          "expected": [
+            "T1498"
+          ],
+          "status": "mapped",
+          "primary": "T1498",
+          "candidates": [
+            "T1498",
+            "T1095",
+            "T1659",
+            "T1499"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2192.206
+        },
+        {
+          "scenario_id": "A2-T1498-05",
+          "group": "A2",
+          "family": "T1498",
+          "expected": [
+            "T1498"
+          ],
+          "status": "mapped",
+          "primary": "T1498",
+          "candidates": [
+            "T1498",
+            "T1095",
+            "T1659",
+            "T1499"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2141.369
+        },
+        {
+          "scenario_id": "A2-T1499-01",
+          "group": "A2",
+          "family": "T1499",
+          "expected": [
+            "T1499"
+          ],
+          "status": "mapped",
+          "primary": "T1499",
+          "candidates": [
+            "T1499",
+            "T1190",
+            "T1505.003",
+            "T1498",
+            "T1189"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2392.951
+        },
+        {
+          "scenario_id": "A2-T1499-02",
+          "group": "A2",
+          "family": "T1499",
+          "expected": [
+            "T1499"
+          ],
+          "status": "mapped",
+          "primary": "T1499",
+          "candidates": [
+            "T1499",
+            "T1190",
+            "T1498",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2354.157
+        },
+        {
+          "scenario_id": "A2-T1499-03",
+          "group": "A2",
+          "family": "T1499",
+          "expected": [
+            "T1499"
+          ],
+          "status": "mapped",
+          "primary": "T1499",
+          "candidates": [
+            "T1499",
+            "T1505.003",
+            "T1189",
+            "T1498",
+            "T1190"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2619.722
+        },
+        {
+          "scenario_id": "A2-T1499-04",
+          "group": "A2",
+          "family": "T1499",
+          "expected": [
+            "T1499"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1078",
+            "T1110",
+            "T1110.001",
+            "T1110.003"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 2445.272
+        },
+        {
+          "scenario_id": "A2-T1499-05",
+          "group": "A2",
+          "family": "T1499",
+          "expected": [
+            "T1499"
+          ],
+          "status": "mapped",
+          "primary": "T1499",
+          "candidates": [
+            "T1499",
+            "T1498",
+            "T1505.003",
+            "T1190",
+            "T1189"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2688.584
+        },
+        {
+          "scenario_id": "A2-T1505.003-01",
+          "group": "A2",
+          "family": "T1505.003",
+          "expected": [
+            "T1505.003"
+          ],
+          "status": "mapped",
+          "primary": "T1505.003",
+          "candidates": [
+            "T1505.003",
+            "T1189",
+            "T1190"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2294.707
+        },
+        {
+          "scenario_id": "A2-T1505.003-02",
+          "group": "A2",
+          "family": "T1505.003",
+          "expected": [
+            "T1505.003"
+          ],
+          "status": "mapped",
+          "primary": "T1505.003",
+          "candidates": [
+            "T1505.003",
+            "T1189",
+            "T1190"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 3361.854
+        },
+        {
+          "scenario_id": "A2-T1505.003-03",
+          "group": "A2",
+          "family": "T1505.003",
+          "expected": [
+            "T1505.003"
+          ],
+          "status": "mapped",
+          "primary": "T1505.003",
+          "candidates": [
+            "T1505.003",
+            "T1190",
+            "T1189"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2888.69
+        },
+        {
+          "scenario_id": "A2-T1505.003-04",
+          "group": "A2",
+          "family": "T1505.003",
+          "expected": [
+            "T1505.003"
+          ],
+          "status": "uncertain",
+          "primary": "T1190",
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2882.195
+        },
+        {
+          "scenario_id": "A2-T1505.003-05",
+          "group": "A2",
+          "family": "T1505.003",
+          "expected": [
+            "T1505.003"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 3051.298
+        },
+        {
+          "scenario_id": "A2-T1595-01",
+          "group": "A2",
+          "family": "T1595",
+          "expected": [
+            "T1595"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1095",
+            "T1659"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 2415.922
+        },
+        {
+          "scenario_id": "A2-T1595-02",
+          "group": "A2",
+          "family": "T1595",
+          "expected": [
+            "T1595"
+          ],
+          "status": "mapped",
+          "primary": "T1595",
+          "candidates": [
+            "T1595",
+            "T1046",
+            "T1595.001",
+            "T1595.002",
+            "T1595.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2035.598
+        },
+        {
+          "scenario_id": "A2-T1595-03",
+          "group": "A2",
+          "family": "T1595",
+          "expected": [
+            "T1595"
+          ],
+          "status": "mapped",
+          "primary": "T1595",
+          "candidates": [
+            "T1595",
+            "T1046",
+            "T1595.002",
+            "T1595.001",
+            "T1595.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2229.093
+        },
+        {
+          "scenario_id": "A2-T1595-04",
+          "group": "A2",
+          "family": "T1595",
+          "expected": [
+            "T1595"
+          ],
+          "status": "mapped",
+          "primary": "T1595",
+          "candidates": [
+            "T1595",
+            "T1046",
+            "T1595.001",
+            "T1595.002",
+            "T1595.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2679.533
+        },
+        {
+          "scenario_id": "A2-T1595-05",
+          "group": "A2",
+          "family": "T1595",
+          "expected": [
+            "T1595"
+          ],
+          "status": "mapped",
+          "primary": "T1595",
+          "candidates": [
+            "T1595",
+            "T1046",
+            "T1595.001",
+            "T1595.002",
+            "T1595.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2133.828
+        },
+        {
+          "scenario_id": "A2-T1595.001-01",
+          "group": "A2",
+          "family": "T1595.001",
+          "expected": [
+            "T1595.001"
+          ],
+          "status": "mapped",
+          "primary": "T1595.001",
+          "candidates": [
+            "T1595.001",
+            "T1046",
+            "T1595",
+            "T1595.002",
+            "T1595.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2385.674
+        },
+        {
+          "scenario_id": "A2-T1595.001-02",
+          "group": "A2",
+          "family": "T1595.001",
+          "expected": [
+            "T1595.001"
+          ],
+          "status": "mapped",
+          "primary": "T1595.001",
+          "candidates": [
+            "T1595.001",
+            "T1046",
+            "T1595",
+            "T1595.002",
+            "T1595.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2216.913
+        },
+        {
+          "scenario_id": "A2-T1595.001-03",
+          "group": "A2",
+          "family": "T1595.001",
+          "expected": [
+            "T1595.001"
+          ],
+          "status": "mapped",
+          "primary": "T1595.001",
+          "candidates": [
+            "T1595.001",
+            "T1046",
+            "T1595",
+            "T1595.002",
+            "T1595.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2100.137
+        },
+        {
+          "scenario_id": "A2-T1595.001-04",
+          "group": "A2",
+          "family": "T1595.001",
+          "expected": [
+            "T1595.001"
+          ],
+          "status": "mapped",
+          "primary": "T1595.001",
+          "candidates": [
+            "T1595.001",
+            "T1046",
+            "T1595",
+            "T1595.002",
+            "T1595.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2215.194
+        },
+        {
+          "scenario_id": "A2-T1595.001-05",
+          "group": "A2",
+          "family": "T1595.001",
+          "expected": [
+            "T1595.001"
+          ],
+          "status": "mapped",
+          "primary": "T1595.001",
+          "candidates": [
+            "T1595.001",
+            "T1046",
+            "T1595",
+            "T1595.002",
+            "T1595.003"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2195.196
+        },
+        {
+          "scenario_id": "A2-T1595.002-01",
+          "group": "A2",
+          "family": "T1595.002",
+          "expected": [
+            "T1595.002"
+          ],
+          "status": "mapped",
+          "primary": "T1046",
+          "candidates": [
+            "T1046",
+            "T1595.002",
+            "T1595",
+            "T1595.001",
+            "T1595.003"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2146.115
+        },
+        {
+          "scenario_id": "A2-T1595.002-02",
+          "group": "A2",
+          "family": "T1595.002",
+          "expected": [
+            "T1595.002"
+          ],
+          "status": "mapped",
+          "primary": "T1595.002",
+          "candidates": [
+            "T1595.002",
+            "T1046",
+            "T1595.003",
+            "T1595",
+            "T1595.001"
+          ],
+          "exact_top1": true,
+          "primary_hit": true,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 1.0,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2100.356
+        },
+        {
+          "scenario_id": "A2-T1595.002-03",
+          "group": "A2",
+          "family": "T1595.002",
+          "expected": [
+            "T1595.002"
+          ],
+          "status": "mapped",
+          "primary": "T1046",
+          "candidates": [
+            "T1046",
+            "T1595.002",
+            "T1595",
+            "T1595.003",
+            "T1595.001"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2657.613
+        },
+        {
+          "scenario_id": "A2-T1595.002-04",
+          "group": "A2",
+          "family": "T1595.002",
+          "expected": [
+            "T1595.002"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1046",
+            "T1595",
+            "T1595.002",
+            "T1595.001",
+            "T1595.003"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 2599.58
+        },
+        {
+          "scenario_id": "A2-T1595.002-05",
+          "group": "A2",
+          "family": "T1595.002",
+          "expected": [
+            "T1595.002"
+          ],
+          "status": "mapped",
+          "primary": "T1595",
+          "candidates": [
+            "T1595",
+            "T1595.002",
+            "T1046",
+            "T1595.003",
+            "T1595.001"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.5,
+          "wrong_primary": false,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2241.772
+        },
+        {
+          "scenario_id": "A2-T1595.003-01",
+          "group": "A2",
+          "family": "T1595.003",
+          "expected": [
+            "T1595.003"
+          ],
+          "status": "mapped",
+          "primary": "T1046",
+          "candidates": [
+            "T1046",
+            "T1595.003",
+            "T1595.002",
+            "T1595"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2284.626
+        },
+        {
+          "scenario_id": "A2-T1595.003-02",
+          "group": "A2",
+          "family": "T1595.003",
+          "expected": [
+            "T1595.003"
+          ],
+          "status": "mapped",
+          "primary": "T1046",
+          "candidates": [
+            "T1046",
+            "T1595.003",
+            "T1595.002",
+            "T1595"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2515.912
+        },
+        {
+          "scenario_id": "A2-T1595.003-03",
+          "group": "A2",
+          "family": "T1595.003",
+          "expected": [
+            "T1595.003"
+          ],
+          "status": "mapped",
+          "primary": "T1046",
+          "candidates": [
+            "T1046",
+            "T1595.003",
+            "T1595.002",
+            "T1595"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2226.842
+        },
+        {
+          "scenario_id": "A2-T1595.003-04",
+          "group": "A2",
+          "family": "T1595.003",
+          "expected": [
+            "T1595.003"
+          ],
+          "status": "mapped",
+          "primary": "T1046",
+          "candidates": [
+            "T1046",
+            "T1595.003",
+            "T1595.002",
+            "T1595"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2037.134
+        },
+        {
+          "scenario_id": "A2-T1595.003-05",
+          "group": "A2",
+          "family": "T1595.003",
+          "expected": [
+            "T1595.003"
+          ],
+          "status": "mapped",
+          "primary": "T1046",
+          "candidates": [
+            "T1046",
+            "T1595.003",
+            "T1595.002",
+            "T1595"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": true,
+          "all_expected_top_n": true,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2084.776
+        },
+        {
+          "scenario_id": "A2-T1659-01",
+          "group": "A2",
+          "family": "T1659",
+          "expected": [
+            "T1659"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 2552.47
+        },
+        {
+          "scenario_id": "A2-T1659-02",
+          "group": "A2",
+          "family": "T1659",
+          "expected": [
+            "T1659"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 2514.217
+        },
+        {
+          "scenario_id": "A2-T1659-03",
+          "group": "A2",
+          "family": "T1659",
+          "expected": [
+            "T1659"
+          ],
+          "status": "mapped",
+          "primary": "T1190",
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2304.745
+        },
+        {
+          "scenario_id": "A2-T1659-04",
+          "group": "A2",
+          "family": "T1659",
+          "expected": [
+            "T1659"
+          ],
+          "status": "mapped",
+          "primary": "T1190",
+          "candidates": [
+            "T1190",
+            "T1505.003",
+            "T1189"
+          ],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": true,
+          "abstain": false,
+          "coverage": true,
+          "latency_ms": 2398.392
+        },
+        {
+          "scenario_id": "A2-T1659-05",
+          "group": "A2",
+          "family": "T1659",
+          "expected": [
+            "T1659"
+          ],
+          "status": "insufficient_evidence",
+          "primary": null,
+          "candidates": [],
+          "exact_top1": false,
+          "primary_hit": false,
+          "top_n_hit": false,
+          "all_expected_top_n": false,
+          "partial_credit": 0.0,
+          "wrong_primary": false,
+          "abstain": true,
+          "coverage": false,
+          "latency_ms": 2532.806
+        }
+      ],
+      "breakdown": {
+        "by_group": {
+          "A1": {
+            "n": 15,
+            "exact_top1": 0.3333,
+            "primary_hit": 0.3333,
+            "top_n_hit": 0.8,
+            "partial_credit_mean": 0.3333,
+            "wrong_primary": 5,
+            "coverage": 0.6667
+          },
+          "A2": {
+            "n": 75,
+            "exact_top1": 0.5067,
+            "primary_hit": 0.5067,
+            "top_n_hit": 0.8133,
+            "partial_credit_mean": 0.5733,
+            "wrong_primary": 12,
+            "coverage": 0.8
+          }
+        },
+        "by_family": {
+          "T1046": {
+            "n": 5,
+            "exact_top1": 0.6,
+            "primary_hit": 0.6,
+            "top_n_hit": 0.6,
+            "partial_credit_mean": 0.6,
+            "wrong_primary": 2,
+            "coverage": 1.0
+          },
+          "T1071.001": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 0,
+            "coverage": 0.0
+          },
+          "T1078": {
+            "n": 5,
+            "exact_top1": 0.4,
+            "primary_hit": 0.4,
+            "top_n_hit": 0.4,
+            "partial_credit_mean": 0.4,
+            "wrong_primary": 3,
+            "coverage": 1.0
+          },
+          "T1095": {
+            "n": 5,
+            "exact_top1": 1.0,
+            "primary_hit": 1.0,
+            "top_n_hit": 1.0,
+            "partial_credit_mean": 1.0,
+            "wrong_primary": 0,
+            "coverage": 1.0
+          },
+          "T1110": {
+            "n": 5,
+            "exact_top1": 1.0,
+            "primary_hit": 1.0,
+            "top_n_hit": 1.0,
+            "partial_credit_mean": 1.0,
+            "wrong_primary": 0,
+            "coverage": 1.0
+          },
+          "T1110.001": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 1.0,
+            "partial_credit_mean": 0.5,
+            "wrong_primary": 0,
+            "coverage": 1.0
+          },
+          "T1110.003": {
+            "n": 5,
+            "exact_top1": 0.2,
+            "primary_hit": 0.2,
+            "top_n_hit": 1.0,
+            "partial_credit_mean": 0.6,
+            "wrong_primary": 0,
+            "coverage": 1.0
+          },
+          "T1189": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 1.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 1,
+            "coverage": 0.2
+          },
+          "T1190": {
+            "n": 5,
+            "exact_top1": 1.0,
+            "primary_hit": 1.0,
+            "top_n_hit": 1.0,
+            "partial_credit_mean": 1.0,
+            "wrong_primary": 0,
+            "coverage": 1.0
+          },
+          "T1210": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 1.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 1,
+            "coverage": 0.2
+          },
+          "T1498": {
+            "n": 5,
+            "exact_top1": 1.0,
+            "primary_hit": 1.0,
+            "top_n_hit": 1.0,
+            "partial_credit_mean": 1.0,
+            "wrong_primary": 0,
+            "coverage": 1.0
+          },
+          "T1499": {
+            "n": 5,
+            "exact_top1": 0.8,
+            "primary_hit": 0.8,
+            "top_n_hit": 0.8,
+            "partial_credit_mean": 0.8,
+            "wrong_primary": 0,
+            "coverage": 0.8
+          },
+          "T1505.003": {
+            "n": 5,
+            "exact_top1": 0.6,
+            "primary_hit": 0.6,
+            "top_n_hit": 1.0,
+            "partial_credit_mean": 0.6,
+            "wrong_primary": 1,
+            "coverage": 0.8
+          },
+          "T1595": {
+            "n": 5,
+            "exact_top1": 0.8,
+            "primary_hit": 0.8,
+            "top_n_hit": 0.8,
+            "partial_credit_mean": 0.8,
+            "wrong_primary": 0,
+            "coverage": 0.8
+          },
+          "T1595.001": {
+            "n": 5,
+            "exact_top1": 1.0,
+            "primary_hit": 1.0,
+            "top_n_hit": 1.0,
+            "partial_credit_mean": 1.0,
+            "wrong_primary": 0,
+            "coverage": 1.0
+          },
+          "T1595.002": {
+            "n": 5,
+            "exact_top1": 0.2,
+            "primary_hit": 0.2,
+            "top_n_hit": 1.0,
+            "partial_credit_mean": 0.3,
+            "wrong_primary": 2,
+            "coverage": 0.8
+          },
+          "T1595.003": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 1.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 5,
+            "coverage": 1.0
+          },
+          "T1659": {
+            "n": 5,
+            "exact_top1": 0.0,
+            "primary_hit": 0.0,
+            "top_n_hit": 0.0,
+            "partial_credit_mean": 0.0,
+            "wrong_primary": 2,
+            "coverage": 0.4
+          }
+        }
+      }
+    }
+  },
+  "run": {
+    "generated_at": "2026-10-05T13:59:54.975540+00:00",
+    "dry_run": false,
+    "limit": 1,
+    "repeats_override": null,
+    "strategies": [
+      "bm25_only",
+      "bm25_only_threshold",
+      "hybrid_current"
+    ],
+    "raw_results": {
+      "bm25_only": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\verify-runner\\raw_results\\bm25_only.jsonl",
+      "bm25_only_threshold": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\verify-runner\\raw_results\\bm25_only_threshold.jsonl",
+      "hybrid_current": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\verify-runner\\raw_results\\hybrid_current.jsonl"
+    },
+    "config_path": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\configs\\baselines.json",
+    "loaded_arms": [
+      "gemini_only"
+    ],
+    "report_paths": {
+      "comparison_json": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\verify-runner\\comparison.json",
+      "comparison_csv": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\verify-runner\\comparison.csv",
+      "comparison_md": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\verify-runner\\comparison.md"
+    }
+  }
+}

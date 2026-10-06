@@ -1,0 +1,450 @@
+{
+  "generated_at": "2026-10-05T14:08:25.877952+00:00",
+  "dry_run": false,
+  "limit": 1,
+  "repeats_override": null,
+  "strategies": [
+    "gemini_only_38flash_nothink"
+  ],
+  "dataset_manifest": {
+    "dataset_version": "1.0.0",
+    "created_at": "2026-10-05T12:46:37.368909+00:00",
+    "sanitizer_version": "1.0.0",
+    "scrub_inline_ids": true,
+    "reports_root": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports",
+    "groups": [
+      "a1",
+      "a2"
+    ],
+    "counts": {
+      "reports": 90,
+      "alerts": 90,
+      "ground_truth": 90,
+      "archived_hybrid_results": 90,
+      "extraction_errors": 0,
+      "alerts_with_leakage_after_sanitize": 0,
+      "removed_fields": 90,
+      "scrubbed_values": 0
+    },
+    "attack_index": {
+      "index_version": "1.0.0",
+      "attack_final_sha256": "16cda6d4e3b0dca9340e6b84f403b335624cc7093665f145540c2809ea33a03e",
+      "technique_count": 18,
+      "attack_version": "19.1"
+    },
+    "outputs": {
+      "alerts": {
+        "path": "alerts.jsonl",
+        "sha256": "68ebdf83997bd8033c02808688e3fdf752d4214edf483452788f6350e5bf481e"
+      },
+      "ground_truth": {
+        "path": "ground_truth.jsonl",
+        "sha256": "4e8c3ec3f6d54ba644a29f8b86404446fcf9b0a51d1018727d1fd4eadf3210a8"
+      },
+      "archived_hybrid_results": {
+        "path": "archived_hybrid_results.jsonl",
+        "sha256": "6d311573299b6bb3242dc522b35fc2f74454f9aad78b42b8a6fd08e88b0dcca1"
+      }
+    },
+    "source_reports": [
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a1/A1-T1046-01.json",
+        "sha256": "41d2db9f2adaa076ab9d7315bbff2e1be60c7ad89924f260d1a4e7c8371cf169"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a1/A1-T1046-02.json",
+        "sha256": "45e2de6371a666ee9d206c340666084fd5848df8f697b89f2f23f54dd35d9d37"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a1/A1-T1078-01.json",
+        "sha256": "66e86206554aa8327ba4e6227eac24263f20b3a5f1c6201f9589a49abf60c998"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a1/A1-T1189-01.json",
+        "sha256": "e1a4929d3426b1319f8ab02487f02ba7faa2a10a59821979ea7debbb30694a90"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a1/A1-T1189-02.json",
+        "sha256": "00070fd95c28b1678537098ab5fe732be086edacc5318aa9a4217e4682d41241"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a1/A1-T1190-01.json",
+        "sha256": "12dc5d012d5e2cb359c103500488f85eafc94053f1420f6f7a50171fde0b48ba"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a1/A1-T1190-02.json",
+        "sha256": "a8690b2017015eb204482493997bf9b36316bb05e9509322b38c17696b9f19d2"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a1/A1-T1190-03.json",
+        "sha256": "5ca06506ae648cdca28e604e49c767b07c22a92d40e733721d15e8ee4f8844cf"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a1/A1-T1190-04.json",
+        "sha256": "796ec7dd80517bcaa997e874510434f6d1cdb2b0dee61c7af155451c3c10d3ff"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a1/A1-T1190-05.json",
+        "sha256": "6345002403167c80d1e2db0fa2895a5e5a97a2fe6d9b7d66b404bb26c6c4e8ca"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a1/A1-T1210-01.json",
+        "sha256": "2877464f316f7061f2f46aaefda391cf3992c01660c2e393249421514ea63a25"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a1/A1-T1210-02.json",
+        "sha256": "b3ec10c35952b2e7907fa091c0bff8c04fdc3438c6c95a65c07d03a4753c4e3a"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a1/A1-T1210-03.json",
+        "sha256": "330187c2877c9ea8df6b75ee61b5d2767dc10d4be486b7dc589e729607d06499"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a1/A1-T1210-04.json",
+        "sha256": "9e95aea440442f42d668b50e5caba0b5657d48d4ecfa62cd28befe71a8ad05b9"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a1/A1-T1210-05.json",
+        "sha256": "3e772ec8596467c7b95c185e7e188070b7387787177039f84f8b44b84ce9a103"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1046-01.json",
+        "sha256": "c0363bfee7a8b15ee0c53548277c9e8d67557e562e8506eb1b4700c97f946142"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1046-02.json",
+        "sha256": "9ee05067a402223d551f1229855a3514f3c8f98332f0aedc17f4d122f3330b13"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1046-03.json",
+        "sha256": "b730178d084e4d44b852475d2f1b51d028fd1477a52d1c47eec0dfd3db46b6ab"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1071.001-01.json",
+        "sha256": "5b58b844148d1d0b35af59d2f9727110ad819f345598a75b1aceca73288d97b8"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1071.001-02.json",
+        "sha256": "7163381aa958dc2ce5d3613ede700713984ac3182efc58ad25fe42f30fbf384e"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1071.001-03.json",
+        "sha256": "3c64b1aae149f232bf0f5d48ae22de7488bd952bb698c1fd10ed734543748e42"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1071.001-04.json",
+        "sha256": "e1aabe9f27d7d7763c46e87b0afd45a821d57e531f35d086b9c9514197d101c7"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1071.001-05.json",
+        "sha256": "21535463d4c5facbc5f1cac594f7442ce0099221455a835e9126892dd978d0d0"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1078-01.json",
+        "sha256": "c2bb0750e833cade9767c89c811bcba411279fc1ea476025232604358f54bd2b"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1078-02.json",
+        "sha256": "799a2b6ce826cfe43e726a869e825667648171dee5353461a4233d2a5981ce14"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1078-03.json",
+        "sha256": "3e4309cfb7f8c2e4dafdb27914e0485af4c6887fa58e0012e6949bf75794cd34"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1078-04.json",
+        "sha256": "9b3df420c5e7ffbeaea0b51d52d3ddca42557c2c048b252c3bd78ab8142b0b42"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1095-01.json",
+        "sha256": "5b939060a269bd8748323c874e795c9398d1355efb6f3ef6668e577ce9cf0951"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1095-02.json",
+        "sha256": "1be4ad79cc2491cf2fdcd299a4ff15e9e32d58198b5add6873fe767c27f10235"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1095-03.json",
+        "sha256": "4e0631ee0e2ff4a0bca2c30a647914639d7a3c46eebab02722cb7e5c3bf670ee"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1095-04.json",
+        "sha256": "7c18ccd37db60a77e1741185d11d219bd32cf9ae21ca907eeffe4952e769c75b"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1095-05.json",
+        "sha256": "e1ec469cb623918b2f368d985fb5d8ef3da9072b396a6bd3fd228bc5c8db8e14"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1110-01.json",
+        "sha256": "0f0ec142453af2092a8b752755070b5e9d2880f9470cf7e03b45e7f4f0e5ed00"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1110-02.json",
+        "sha256": "d59d9da0e551a856cdaaac9c9ce939b21a25b980d044357c02c59aa4c14a31f6"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1110-03.json",
+        "sha256": "3ddc8444e0b06d7b205c3efa3177945752f49705f251f45f972280f6eec1039c"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1110-04.json",
+        "sha256": "bf031fef839c6d0d00dbdd2786997007dda0dc24cfdb2615e16d5ac0876529ae"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1110-05.json",
+        "sha256": "c98d085d38528803e55bb685d6deb4643d2e33e4403e2e7e062aee38aa7f0f8f"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1110.001-01.json",
+        "sha256": "d759713b4c2b6ad9f542b91e4358ff365ad97405b3053068a888b061e0a7d2c3"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1110.001-02.json",
+        "sha256": "6fe9d3f50e73ddb1510bc63232c048565fe8273e4beb1f45bde73d25afacadae"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1110.001-03.json",
+        "sha256": "896fb0aceacaf89452fc6424d4c92183f971f1c5b2c99517171e4901c5b68b20"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1110.001-04.json",
+        "sha256": "873e521f39621e1218e6a25e88ebc5c512f921ef43661a607c41604b24ab8c1a"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1110.001-05.json",
+        "sha256": "f5417ff41dcbdb3ee495ab2b967838052296093dcf64dd4cb8a7aa2b412bf65e"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1110.003-01.json",
+        "sha256": "4f7876dbe88d87e7e6b9410c46d415c4c218465fa20c80d0a57f7e8a0bc5dc72"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1110.003-02.json",
+        "sha256": "6f7ca2842afcbcfa9914eb471aa10d9ede368af68b7beecb1569c25adc38d800"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1110.003-03.json",
+        "sha256": "f64c6be0b6c51e60ddd992b88b64d5a3c0a36863c629d454d94c6f2076b911d3"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1110.003-04.json",
+        "sha256": "01379d38dcf8f5f4429825bc1237a63594985d867566f204955c48fc8abd458d"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1110.003-05.json",
+        "sha256": "552fa47e9d7758272f83684905660c9b35d053abc472963dffa262295b667751"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1189-01.json",
+        "sha256": "695ef78cd59730a286e5eeb1bb1c64d4b20ed3a7d58bfd680a75490fc143cf70"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1189-02.json",
+        "sha256": "093c40fdd04022d9342ad7892d54f7d5668f2322560e238c347c837d3582678b"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1189-03.json",
+        "sha256": "fbf4ad539ca771cc2b62e875c42d2c741b78ec038f4059d59837d5b622ea1a56"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1498-01.json",
+        "sha256": "4e5987db708aa25a711abb3fb71ff052591c093924afbba08b59f46873293921"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1498-02.json",
+        "sha256": "b520f55000c29823abfeab6f397d0bec65bd7f4fde6d44cf41a1488c2a09e2f3"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1498-03.json",
+        "sha256": "abc74f44a664a072f31f9d20eeb6b920caf5b0b8a5ada50c708c93cb7a45f21a"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1498-04.json",
+        "sha256": "2efbc3c05bd269a94123047e373850feb238a0bc1a09a5cbdbae35d9822c1a0c"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1498-05.json",
+        "sha256": "9d9e1874a1e9744909a5c137b16cf9fb3f79b3ddd67b34e21dafe4554f6d3093"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1499-01.json",
+        "sha256": "5b3219d6a945eb61107372aefa6dfe845f02b73b983ffa5778dea659a4e09c5e"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1499-02.json",
+        "sha256": "93b05fbfd942663b509c71f5e8d935dc7251ef03680a49f6c2a7234f94183654"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1499-03.json",
+        "sha256": "82b72f47537ef0d11a1e13d2b06618649649df789a3eeb6c83132e121806fecc"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1499-04.json",
+        "sha256": "c262ba62f4761722600d8931db4f8094cf4d908c3fab4c392a445027ceeca6bb"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1499-05.json",
+        "sha256": "abcd363dfe43b1e1ed93ff3805a7cb2bdef033312e67d15728dea6a26b0279bf"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1505.003-01.json",
+        "sha256": "63bf8b6e28d0495536fbaf41ee3057c315d6c26900c44b2deb2a3abcc3fcc6b2"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1505.003-02.json",
+        "sha256": "f4f081c6f2c90ff5c6f30205fd9cf1d5af33bc50d5581dc3afc993acec3ab503"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1505.003-03.json",
+        "sha256": "121ce635c4b61b753939fa6cc40dfdb28d7e609207997271aa8b396647c57143"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1505.003-04.json",
+        "sha256": "e8cd98029ea7261ba70caf2192d951e77d3c8781fa58017e38f8012db0a1900d"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1505.003-05.json",
+        "sha256": "e77c093ba3de6c5aadc4217cd5030ea51349ae4e9f5df09a9ce80d961b6e7e2d"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595-01.json",
+        "sha256": "ec33ea91503d0da6d9f85eb54198304a8ff65bc4521ce47cc2502ae6769a3090"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595-02.json",
+        "sha256": "15158f7b35846fab76db64380e51249578ea487ceda04c352c11cdbfda473cb5"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595-03.json",
+        "sha256": "5ba616fd84cad0cbbb8fa87d1443c8a4492904f99ad9f75515631ff25b293538"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595-04.json",
+        "sha256": "46a505cefb29ebc826b806b433c65924b053ed1f70774bb723ee83587c4e5ab4"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595-05.json",
+        "sha256": "eebc680e777b98252fe5487edc0043420ab77eacd1c91c5777e7860f13e7036d"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595.001-01.json",
+        "sha256": "a25a40c3039feb7e03f5f601d0f2f3f04f0b494f117244352403bdf4b3ee6e08"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595.001-02.json",
+        "sha256": "59de6da4d582203de5e85092f0b7d23daf96bb33b3e5bcd9ae1c6e9888e9ac5b"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595.001-03.json",
+        "sha256": "09d8c576995c8ea3c0da3f9c20a0d8f3540219d4b0381b58d2b8d7a14e0d2092"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595.001-04.json",
+        "sha256": "9d45fa0e9041e25cdb96527675c291803988c5cb2ac47e6236fb776e1b05f7cf"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595.001-05.json",
+        "sha256": "0d5e979071c4eeba8c29513dab4d2c9bbc20b2e877aa7570b3c35b892ee05702"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595.002-01.json",
+        "sha256": "ecaaa146f00de64f55840d6da2ff817bfa4bf2e436b7439d37f5761e01a4fdf7"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595.002-02.json",
+        "sha256": "85ce2a7612ac5d61fee041d8da8ff75dd2cfeb08f8575b37fc1af678ddf56825"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595.002-03.json",
+        "sha256": "bdf5e8d0db8f0b90ac0f109c14eca671144db1d3723bf9da2f6e2797e81b5694"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595.002-04.json",
+        "sha256": "298aebf4e214bf45898591e1bddf15c9feb35ec6aef9b59d6b48bbe36ce7d6e7"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595.002-05.json",
+        "sha256": "461fd850a7bbfd6fb058bc660d5e7a9b65017d62caa17f61d648d789a3b19b7a"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595.003-01.json",
+        "sha256": "041862a623e92f3e3337c79da8759e9afddc4fef87b34b2f18359909a1b9b523"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595.003-02.json",
+        "sha256": "3efb6c9d8060ce12ed1f056fec8ef86ba54d11a80fc8e9e1b467f326b8f2bbf4"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595.003-03.json",
+        "sha256": "df8aea7b3ef71e53466c3c7136ee54d6f4fb3ce76b9688b51c7aa4eb812517ab"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595.003-04.json",
+        "sha256": "5385a537066649e6f335807a7f782094ed2363e727cac44436c03d06b430d875"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1595.003-05.json",
+        "sha256": "a49dc8aec9b974f25373a244d9d453734a2f7a50a75c1245bf2ee507f1cd723f"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1659-01.json",
+        "sha256": "cc3d9a8f1afcb72c2184dddc164d8d202acfb13c956f5349b87d6a72b3e854a6"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1659-02.json",
+        "sha256": "d263b483657f5ba056292377084180c5a470ae1f69974e4c03ea48eea74a8f68"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1659-03.json",
+        "sha256": "5e384c1f2959f3684f3293be6937defa462ff2031ecfc75a0ed128748ec6b827"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1659-04.json",
+        "sha256": "1289e9bd549e4fd2676d7fe1e75c4aa3fe7dabaef0bd1c940f4379a969efc748"
+      },
+      {
+        "path": "C:/Users/DELL/Documents/Zalo Received Files/NCKH/NCKH_Code/code/soc-lab-handoff-v1.0.0/runtime/reports/a2/A2-T1659-05.json",
+        "sha256": "95791857593d46ce02b09a59a3d6a3a131f1a32a1112bfdf3cf2e9866fb4029e"
+      }
+    ],
+    "extraction_errors": []
+  },
+  "config": {
+    "bm25_only": {
+      "variant": "top1",
+      "extra_variants": [
+        "threshold"
+      ],
+      "min_score": 0.0,
+      "margin_ratio": 0.1,
+      "top_k": 5,
+      "trace_limit": 20
+    },
+    "gemini_only": {
+      "model": "gemini-2.5-flash",
+      "mode": "closed_set",
+      "temperature": 0.0,
+      "repeats": 1,
+      "max_output_tokens": 8192,
+      "thinking_budget": null,
+      "api_key_env": "GEMINI_API_KEY",
+      "request_timeout": 300,
+      "max_retries": 5,
+      "delay_seconds": 7.0,
+      "backoff_cap_seconds": 90
+    },
+    "evaluation": {
+      "top_n": 3,
+      "partial_credit_parent": 0.5
+    }
+  },
+  "raw_results": {
+    "gemini_only_38flash_nothink": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\baselines\\raw_results\\gemini_only_38flash_nothink.jsonl"
+  },
+  "report_paths": {
+    "comparison_json": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\baselines\\comparison.json",
+    "comparison_csv": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\baselines\\comparison.csv",
+    "comparison_md": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\baselines\\comparison.md"
+  }
+}

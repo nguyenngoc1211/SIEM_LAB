@@ -1,0 +1,39 @@
+{
+  "created_at": "2026-10-05T13:41:33.771430+00:00",
+  "arm": "gemini_only",
+  "checkpoint": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\baselines\\checkpoints\\gemini_only.jsonl",
+  "total_rows_latest": 40,
+  "successful": 23,
+  "failed": 17,
+  "subset_scenario_ids": [
+    "A1-T1046-01",
+    "A1-T1046-02",
+    "A1-T1078-01",
+    "A1-T1189-01",
+    "A1-T1189-02",
+    "A1-T1190-01",
+    "A1-T1190-02",
+    "A1-T1190-03",
+    "A1-T1190-04",
+    "A1-T1190-05",
+    "A1-T1210-01",
+    "A1-T1210-02",
+    "A1-T1210-03",
+    "A1-T1210-04",
+    "A1-T1210-05",
+    "A2-T1046-01",
+    "A2-T1046-02",
+    "A2-T1046-03",
+    "A2-T1071.001-01",
+    "A2-T1071.001-02",
+    "A2-T1071.001-03",
+    "A2-T1071.001-05",
+    "A2-T1078-03"
+  ],
+  "report_paths": {
+    "comparison_json": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\baselines\\snapshots\\gemini_only_2.5_flash_partial\\comparison.json",
+    "comparison_csv": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\baselines\\snapshots\\gemini_only_2.5_flash_partial\\comparison.csv",
+    "comparison_md": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\baselines\\snapshots\\gemini_only_2.5_flash_partial\\comparison.md"
+  },
+  "caveat": "Partial results: the subset is not random and is skewed toward A1 scenarios. Do not treat these numbers as the final B2 evaluation."
+}

@@ -1,0 +1,27 @@
+{
+  "bm25_only": {
+    "variant": "top1",
+    "extra_variants": ["threshold"],
+    "min_score": 0.0,
+    "margin_ratio": 0.1,
+    "top_k": 5,
+    "trace_limit": 20
+  },
+  "gemini_only": {
+    "model": "gemini-2.5-flash",
+    "mode": "closed_set",
+    "temperature": 0.0,
+    "repeats": 1,
+    "max_output_tokens": 8192,
+    "thinking_budget": null,
+    "api_key_env": "GEMINI_API_KEY",
+    "request_timeout": 300,
+    "max_retries": 1,
+    "delay_seconds": 7.0,
+    "backoff_cap_seconds": 90
+  },
+  "evaluation": {
+    "top_n": 3,
+    "partial_credit_parent": 0.5
+  }
+}

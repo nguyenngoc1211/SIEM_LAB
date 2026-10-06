@@ -1,0 +1,107 @@
+{
+  "created_at": "2026-10-05T14:11:44.598058+00:00",
+  "note": "All Gemini attempts were stopped by user request. This snapshot keeps the successful mappings and the failure reasons for audit.",
+  "arms": {
+    "gemini_only": {
+      "checkpoint": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\baselines\\checkpoints\\gemini_only.jsonl",
+      "models": [
+        "gemini-2.5-flash"
+      ],
+      "attempted_scenarios": 40,
+      "successful": 23,
+      "failed": 17,
+      "status_counts": {
+        "error": 17,
+        "mapped": 23
+      },
+      "error_reasons": {
+        "HTTP 404": 17
+      },
+      "successful_scenario_ids": [
+        "A1-T1046-01",
+        "A1-T1046-02",
+        "A1-T1078-01",
+        "A1-T1189-01",
+        "A1-T1189-02",
+        "A1-T1190-01",
+        "A1-T1190-02",
+        "A1-T1190-03",
+        "A1-T1190-04",
+        "A1-T1190-05",
+        "A1-T1210-01",
+        "A1-T1210-02",
+        "A1-T1210-03",
+        "A1-T1210-04",
+        "A1-T1210-05",
+        "A2-T1046-01",
+        "A2-T1046-02",
+        "A2-T1046-03",
+        "A2-T1071.001-01",
+        "A2-T1071.001-02",
+        "A2-T1071.001-03",
+        "A2-T1071.001-05",
+        "A2-T1078-03"
+      ]
+    },
+    "gemini_only_38flash": {
+      "checkpoint": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\baselines\\checkpoints\\gemini_only_38flash.jsonl",
+      "models": [
+        "gemini-3.8-flash"
+      ],
+      "attempted_scenarios": 7,
+      "successful": 1,
+      "failed": 6,
+      "status_counts": {
+        "error": 6,
+        "uncertain": 1
+      },
+      "error_reasons": {
+        "HTTP 429": 4,
+        "HTTP 503": 2
+      },
+      "successful_scenario_ids": [
+        "A1-T1046-01"
+      ]
+    },
+    "gemini_only_38flash_nothink": {
+      "checkpoint": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\baselines\\checkpoints\\gemini_only_38flash_nothink.jsonl",
+      "models": [
+        "gemini-3.8-flash"
+      ],
+      "attempted_scenarios": 1,
+      "successful": 0,
+      "failed": 1,
+      "status_counts": {
+        "error": 1
+      },
+      "error_reasons": {
+        "HTTP 429": 1
+      },
+      "successful_scenario_ids": []
+    },
+    "gemini_only_pro31": {
+      "checkpoint": "C:\\Users\\DELL\\Documents\\Zalo Received Files\\NCKH\\NCKH_Code\\code\\data\\mitre-mapping\\reports\\baselines\\checkpoints\\gemini_only_pro31.jsonl",
+      "models": [
+        "gemini-3.1-pro-preview"
+      ],
+      "attempted_scenarios": 1,
+      "successful": 0,
+      "failed": 1,
+      "status_counts": {
+        "error": 1
+      },
+      "error_reasons": {
+        "HTTP 429": 1
+      },
+      "successful_scenario_ids": []
+    }
+  },
+  "total_successful_rows": 24,
+  "total_successful_unique_scenarios": 23,
+  "partial_evaluation_copied": [
+    "partial_2.5_flash_comparison.json",
+    "partial_2.5_flash_comparison.csv",
+    "partial_2.5_flash_comparison.md",
+    "partial_2.5_flash_snapshot.json"
+  ]
+}
