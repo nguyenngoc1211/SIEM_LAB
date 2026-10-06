@@ -9,6 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 
 from mitre_mapper.baselines.bm25_only import BM25OnlyStrategy  # noqa: E402
+from mitre_mapper.baselines.deepseek_only import DeepSeekOnlyStrategy  # noqa: E402
 from mitre_mapper.baselines.dataset import (  # noqa: E402
     find_leakage,
     scenario_family,
@@ -119,6 +120,66 @@ class GeminiValidationTests(unittest.TestCase):
         result = self.strategy.map_alert({"derived": {"retrieval_text": "x"}}, scenario_id="s1")
         self.assertEqual(result.mapping_status, "skipped")
         self.assertIsNone(result.primary_mapping)
+
+
+class DeepSeekValidationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.strategy = DeepSeekOnlyStrategy(ROOT, dry_run=True)
+
+    def _details(self) -> dict:
+        return {"errors": [], "invalid_ids": []}
+
+    def test_uses_deepseek_prompt_and_env(self) -> None:
+        self.assertEqual(self.strategy.name, "deepseek_only")
+        self.assertEqual(self.strategy.api_key_env, "DEEPSEEK_API_KEY_NCKH")
+        self.assertEqual(self.strategy.prompt_template_path.name, "deepseek_only_v1.md")
+
+    def test_rejects_out_of_subset_primary(self) -> None:
+        details = self._details()
+        result = self.strategy._validate({
+            "mapping_status": "mapped",
+            "primary_technique_id": "T9999",
+            "confidence": 0.9,
+            "ranked_candidates": [{"technique_id": "T9999", "confidence": 0.9, "reason": "x"}],
+        }, details)
+        self.assertEqual(result.mapping_status, "invalid_output")
+        self.assertIsNone(result.primary_mapping)
+        self.assertIn("T9999", details["invalid_ids"])
+
+    def test_accepts_supported_primary(self) -> None:
+        details = self._details()
+        result = self.strategy._validate({
+            "mapping_status": "mapped",
+            "primary_technique_id": "T1046",
+            "confidence": 0.8,
+            "ranked_candidates": [
+                {"technique_id": "T1046", "confidence": 0.8, "reason": "internal scan"}
+            ],
+        }, details)
+        self.assertEqual(result.mapping_status, "mapped")
+        self.assertEqual(result.primary_mapping["technique_id"], "T1046")
+
+    def test_parses_fenced_json(self) -> None:
+        parsed = self.strategy._parse_json('```json\n{"mapping_status": "mapped"}\n```')
+        self.assertEqual(parsed, {"mapping_status": "mapped"})
+
+    def test_dry_run_skips_without_network(self) -> None:
+        result = self.strategy.map_alert(
+            {"derived": {"retrieval_text": "x"}}, scenario_id="s1"
+        )
+        self.assertEqual(result.mapping_status, "skipped")
+        self.assertIsNone(result.primary_mapping)
+
+    def test_pacing_widens_on_throttle_and_relaxes(self) -> None:
+        strategy = DeepSeekOnlyStrategy(ROOT, dry_run=True, delay_seconds=1.0)
+        strategy._note_throttle(429)
+        self.assertGreater(strategy.delay_seconds, strategy.base_interval)
+        widened = strategy.delay_seconds
+        for _ in range(3):
+            strategy._note_success()
+        self.assertLess(strategy.delay_seconds, widened)
+        self.assertGreaterEqual(strategy.delay_seconds, strategy.base_interval)
 
 
 class EvaluationTests(unittest.TestCase):

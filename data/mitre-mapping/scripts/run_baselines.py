@@ -7,13 +7,15 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+CODE_ROOT = ROOT.parents[1]
+DEFAULT_OUTPUT_DIR = CODE_ROOT / "reports" / "baseline-comparison"
 sys.path.insert(0, str(ROOT / "src"))
 
 from mitre_mapper.baselines.runner import run_comparison  # noqa: E402
 
 
 def _load_dotenv(path: Path) -> None:
-    """Load GEMINI_API_KEY from mitre-mapping/.env without printing secrets."""
+    """Load provider API keys from mitre-mapping/.env without printing secrets."""
     import os
 
     if not path.is_file():
@@ -31,40 +33,62 @@ def _load_dotenv(path: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Run BM25-only and Gemini-only baselines over the frozen dataset",
+        description="Run BM25-only (B1) and DeepSeek-only (B2) baselines over the frozen dataset",
     )
     parser.add_argument("--dataset-dir", type=Path, default=ROOT / "benchmark")
     parser.add_argument("--config", type=Path, default=ROOT / "configs" / "baselines.json")
-    parser.add_argument("--output-dir", type=Path, default=ROOT / "reports" / "baselines")
+    parser.add_argument(
+        "--output-dir",
+        type=Path,
+        default=DEFAULT_OUTPUT_DIR,
+        help=(
+            "Report bundle directory. Defaults to "
+            "<repo>/reports/baseline-comparison."
+        ),
+    )
     parser.add_argument(
         "--strategies",
-        default="bm25_only,gemini_only",
-        help="Comma-separated strategy names. Supported: bm25_only, gemini_only.",
+        default="bm25_only,deepseek_only",
+        help=(
+            "Comma-separated strategy names. Supported: bm25_only, deepseek_only "
+            "(and gemini_only for the archived Gemini experiment)."
+        ),
     )
     parser.add_argument("--limit", type=int, default=None, help="Only run the first N alerts.")
     parser.add_argument("--repeats", type=int, default=None, help="Override Gemini repeat count.")
-    parser.add_argument("--model", default=None, help="Override the Gemini model id.")
+    parser.add_argument("--model", default=None, help="Override the LLM model id.")
     parser.add_argument(
         "--api-key-env",
         default=None,
-        help="Environment variable holding the Gemini API key, e.g. GEMINI_API_KEY_NGOC.",
+        help=(
+            "Environment variable holding the LLM API key, e.g. "
+            "DEEPSEEK_API_KEY_NCKH."
+        ),
     )
     parser.add_argument(
         "--arm-name",
-        default="gemini_only",
-        help="Strategy name for this Gemini arm, e.g. gemini_only_pro.",
+        default=None,
+        help="Rename the LLM arm for this run, e.g. deepseek_only_pro.",
     )
     parser.add_argument(
         "--thinking-budget",
         type=int,
         default=None,
-        help="Override Gemini thinking budget. Use 0 to disable thinking on supported models.",
+        help="Override Gemini thinking budget. Gemini arms only.",
     )
     parser.add_argument("--dry-run", action="store_true", help="Skip Gemini API calls.")
     parser.add_argument(
         "--no-resume",
         action="store_true",
         help="Ignore existing per-strategy checkpoints and start over.",
+    )
+    parser.add_argument(
+        "--no-prioritize-pending",
+        action="store_true",
+        help=(
+            "Keep the dataset order instead of running scenarios that are "
+            "missing or previously errored first."
+        ),
     )
     parser.add_argument(
         "--load-arms",
@@ -79,6 +103,16 @@ def main() -> int:
     args = parser.parse_args()
     _load_dotenv(ROOT / ".env")
     names = [name.strip() for name in args.strategies.split(",") if name.strip()]
+    if args.arm_name:
+        renamed = [
+            args.arm_name if name.startswith(("deepseek", "gemini")) else name
+            for name in names
+        ]
+        if renamed == names and not any(
+            name.startswith(("deepseek", "gemini")) for name in names
+        ):
+            renamed.append(args.arm_name)
+        names = renamed
     load_arms = [
         name.strip() for name in (args.load_arms or "").split(",") if name.strip()
     ]
@@ -93,10 +127,10 @@ def main() -> int:
         repeats_override=args.repeats,
         include_archived_hybrid=not args.no_archived_hybrid,
         resume=not args.no_resume,
-        gemini_model_override=args.model,
-        gemini_arm_name=args.arm_name,
-        gemini_api_key_env=args.api_key_env,
-        gemini_thinking_budget=args.thinking_budget,
+        prioritize_pending=not args.no_prioritize_pending,
+        llm_model_override=args.model,
+        llm_api_key_env=args.api_key_env,
+        llm_thinking_budget=args.thinking_budget,
         load_only_arms=load_arms,
     )
     print(json.dumps(comparison["summaries"], ensure_ascii=False, indent=2))

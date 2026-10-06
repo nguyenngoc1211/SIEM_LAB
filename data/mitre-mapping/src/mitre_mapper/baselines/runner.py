@@ -13,8 +13,31 @@ from ..database import read_json, read_jsonl, write_json, write_jsonl
 from .base import load_parent_map
 from .bm25_only import BM25OnlyStrategy
 from .compare import build_comparison, write_reports
+from .deepseek_only import DeepSeekOnlyStrategy
+from .deepseek_only import QuotaExhausted as DeepSeekQuotaExhausted
 from .evaluate import evaluate_strategy
-from .gemini_only import GeminiOnlyStrategy, QuotaExhausted
+from .gemini_only import GeminiOnlyStrategy
+from .gemini_only import QuotaExhausted as GeminiQuotaExhausted
+
+
+LLM_ARM_PREFIXES = ("deepseek", "gemini")
+QUOTA_EXHAUSTED_TYPES = (DeepSeekQuotaExhausted, GeminiQuotaExhausted)
+
+
+def _llm_strategy_class(arm_name: str) -> Any:
+    return DeepSeekOnlyStrategy if arm_name.startswith("deepseek") else GeminiOnlyStrategy
+
+
+def _llm_config_for(config: dict[str, Any], arm_name: str) -> dict[str, Any]:
+    """Pick the provider config block for a DeepSeek or Gemini arm."""
+
+    if arm_name.startswith("deepseek"):
+        block = config.get("deepseek_only")
+        if not isinstance(block, dict):
+            block = config.get("gemini_only", {})
+    else:
+        block = config.get("gemini_only", {})
+    return dict(block or {})
 
 
 def load_dataset(dataset_dir: Path) -> tuple[list[dict[str, Any]], dict[str, dict[str, Any]], dict[str, Any]]:
@@ -61,10 +84,9 @@ def build_strategies(
     *,
     dry_run: bool = False,
     repeats_override: int | None = None,
-    gemini_model_override: str | None = None,
-    gemini_arm_name: str = "gemini_only",
-    gemini_api_key_env: str | None = None,
-    gemini_thinking_budget: int | None = None,
+    llm_model_override: str | None = None,
+    llm_api_key_env: str | None = None,
+    llm_thinking_budget: int | None = None,
 ) -> dict[str, Any]:
     strategies: dict[str, Any] = {}
     if "bm25_only" in names:
@@ -75,22 +97,26 @@ def build_strategies(
             variant_config = dict(bm25_config)
             variant_config["variant"] = variant
             strategies[f"bm25_only_{variant}"] = BM25OnlyStrategy(project_root, **variant_config)
-    if "gemini_only" in names:
-        gemini_config = dict(config.get("gemini_only", {}))
-        if gemini_model_override:
-            gemini_config["model"] = gemini_model_override
-        if gemini_api_key_env:
-            gemini_config["api_key_env"] = gemini_api_key_env
-        if gemini_thinking_budget is not None:
-            gemini_config["thinking_budget"] = gemini_thinking_budget
+    for arm_name in names:
+        if not arm_name.startswith(LLM_ARM_PREFIXES):
+            continue
+        llm_config = _llm_config_for(config, arm_name)
+        if llm_model_override:
+            llm_config["model"] = llm_model_override
+        if llm_api_key_env:
+            llm_config["api_key_env"] = llm_api_key_env
         if repeats_override is not None:
-            gemini_config["repeats"] = int(repeats_override)
-        strategy = GeminiOnlyStrategy(
-            project_root, dry_run=dry_run, **gemini_config,
-        )
-        if gemini_arm_name and gemini_arm_name != "gemini_only":
-            strategy.name = gemini_arm_name
-        strategies[strategy.name] = strategy
+            llm_config["repeats"] = int(repeats_override)
+        strategy_class = _llm_strategy_class(arm_name)
+        if strategy_class is GeminiOnlyStrategy:
+            if llm_thinking_budget is not None:
+                llm_config["thinking_budget"] = llm_thinking_budget
+        else:
+            # DeepSeek has no thinking_budget knob.
+            llm_config.pop("thinking_budget", None)
+        strategy = strategy_class(project_root, dry_run=dry_run, **llm_config)
+        strategy.name = arm_name
+        strategies[arm_name] = strategy
     return strategies
 
 
@@ -101,6 +127,7 @@ def run_strategy(
     limit: int | None = None,
     checkpoint_path: Path | None = None,
     resume: bool = True,
+    prioritize_pending: bool = True,
 ) -> dict[str, dict[str, Any]]:
     success_statuses = {"mapped", "uncertain", "insufficient_evidence"}
     results: dict[str, dict[str, Any]] = {}
@@ -129,7 +156,23 @@ def run_strategy(
             encoding="utf-8",
         )
 
-    for index, alert_row in enumerate(alerts):
+    ordered_alerts = alerts
+    if prioritize_pending and results:
+        # Scenarios without a successful checkpoint row (never run, or last
+        # attempt errored) are attempted first so a resumed run attacks the
+        # gaps instead of re-walking the whole dataset.
+        settled = set(results)
+        pending = [
+            row for row in alerts
+            if row.get("scenario_id") not in settled
+        ]
+        completed = [
+            row for row in alerts
+            if row.get("scenario_id") in settled
+        ]
+        ordered_alerts = pending + completed
+
+    for index, alert_row in enumerate(ordered_alerts):
         if limit is not None and index >= limit:
             break
         scenario_id = alert_row.get("scenario_id")
@@ -140,7 +183,7 @@ def run_strategy(
         started = time.perf_counter()
         try:
             result = strategy.map_alert(alert_row["input"], scenario_id=scenario_id).to_dict()
-        except QuotaExhausted as exc:
+        except QUOTA_EXHAUSTED_TYPES as exc:
             result = {
                 "schema_version": "1.0.0",
                 "strategy": getattr(strategy, "name", "unknown"),
@@ -240,28 +283,27 @@ def run_comparison(
     repeats_override: int | None = None,
     include_archived_hybrid: bool = True,
     resume: bool = True,
-    gemini_model_override: str | None = None,
-    gemini_arm_name: str = "gemini_only",
-    gemini_api_key_env: str | None = None,
-    gemini_thinking_budget: int | None = None,
+    llm_model_override: str | None = None,
+    llm_api_key_env: str | None = None,
+    llm_thinking_budget: int | None = None,
     load_only_arms: list[str] | None = None,
+    prioritize_pending: bool = True,
 ) -> dict[str, Any]:
     project_root = Path(project_root)
     dataset_dir = Path(dataset_dir)
     output_dir = Path(output_dir)
     config_path = Path(config_path) if config_path else project_root / "configs" / "baselines.json"
     config = read_json(config_path) if config_path.is_file() else {}
-    strategy_names = strategy_names or ["bm25_only", "gemini_only"]
+    strategy_names = strategy_names or ["bm25_only", "deepseek_only"]
 
     alerts, ground_truth, dataset_manifest = load_dataset(dataset_dir)
     parent_map = load_parent_map(project_root / "artifacts" / "attack" / "attack_final.mapping.json")
     strategies = build_strategies(
         project_root, strategy_names, config,
         dry_run=dry_run, repeats_override=repeats_override,
-        gemini_model_override=gemini_model_override,
-        gemini_arm_name=gemini_arm_name,
-        gemini_api_key_env=gemini_api_key_env,
-        gemini_thinking_budget=gemini_thinking_budget,
+        llm_model_override=llm_model_override,
+        llm_api_key_env=llm_api_key_env,
+        llm_thinking_budget=llm_thinking_budget,
     )
 
     raw_results: dict[str, dict[str, dict[str, Any]]] = {}
@@ -272,12 +314,15 @@ def run_comparison(
             limit=limit,
             checkpoint_path=checkpoint_dir / f"{name}.jsonl",
             resume=resume,
+            prioritize_pending=prioritize_pending,
         )
         raw_results[name] = result_map
-        if isinstance(strategy, GeminiOnlyStrategy) and getattr(strategy, "repeats", 1) > 1:
+        if isinstance(strategy, (DeepSeekOnlyStrategy, GeminiOnlyStrategy)) and getattr(
+            strategy, "repeats", 1
+        ) > 1:
             extra = consensus_results(result_map, strategy.name_by_id, arm_name=name)
             if extra:
-                raw_results["gemini_only_consensus"] = extra
+                raw_results[f"{name}_consensus"] = extra
 
     if include_archived_hybrid:
         hybrid = load_archived_hybrid(dataset_dir / "archived_hybrid_results.jsonl")

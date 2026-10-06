@@ -11,6 +11,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+ARCHIVE_ROOT = ROOT.parents[1] / "reports" / "baseline-comparison" / "archive"
 sys.path.insert(0, str(ROOT / "src"))
 
 from mitre_mapper.database import read_jsonl, write_json, write_jsonl  # noqa: E402
@@ -50,11 +51,11 @@ def main() -> int:
     parser = argparse.ArgumentParser(
         description="Archive every Gemini baseline attempt into one self-contained snapshot",
     )
-    parser.add_argument("--run-dir", type=Path, default=ROOT / "reports" / "baselines")
+    parser.add_argument("--run-dir", type=Path, default=ARCHIVE_ROOT / "baselines")
     parser.add_argument(
         "--output-dir",
         type=Path,
-        default=ROOT / "reports" / "baselines" / "snapshots" / "gemini_attempts_20261005",
+        default=ARCHIVE_ROOT / "gemini_attempts_20261005",
     )
     args = parser.parse_args()
 

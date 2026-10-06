@@ -8,6 +8,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+ARCHIVE_ROOT = ROOT.parents[1] / "reports" / "baseline-comparison" / "archive"
 sys.path.insert(0, str(ROOT / "src"))
 
 from mitre_mapper.baselines.base import load_parent_map  # noqa: E402
@@ -42,12 +43,12 @@ def main() -> int:
         description="Snapshot successful baseline runs and score the completed subset",
     )
     parser.add_argument("--dataset-dir", type=Path, default=ROOT / "benchmark")
-    parser.add_argument("--run-dir", type=Path, default=ROOT / "reports" / "baselines")
+    parser.add_argument("--run-dir", type=Path, default=ARCHIVE_ROOT / "baselines")
     parser.add_argument("--arm", default="gemini_only")
     parser.add_argument(
         "--snapshot-dir",
         type=Path,
-        default=ROOT / "reports" / "baselines" / "snapshots" / "gemini_only_2.5_flash_partial",
+        default=ARCHIVE_ROOT / "snapshots" / "gemini_only_2.5_flash_partial",
     )
     args = parser.parse_args()
 
